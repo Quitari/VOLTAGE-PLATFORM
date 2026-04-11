@@ -1,0 +1,8 @@
+localhost {
+    reverse_proxy /api/* backend:8000
+    reverse_proxy /admin/* backend:8000
+
+    handle {
+        respond "Voltage Platform — coming soon" 200
+    }
+}

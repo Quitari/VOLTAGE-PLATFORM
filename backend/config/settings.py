@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
+    #'allauth.socialaccount',
     'drf_spectacular',
     'apps.users',
     'apps.giveaways',
@@ -108,3 +108,4 @@ LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_TZ = True
+AUTH_USER_MODEL = 'users.User'

@@ -371,9 +371,6 @@ async def qg_got_platform(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == 'qg_confirm')
 async def qg_confirm(callback: CallbackQuery, state: FSMContext):
-    import logging
-    log = logging.getLogger(__name__)
-
     data = await state.get_data()
     await state.clear()
 
@@ -385,27 +382,16 @@ async def qg_confirm(callback: CallbackQuery, state: FSMContext):
         'draw_manually': True,
     })
 
-    log.error(f'CREATE GIVEAWAY: status={status}, result={result}')
-
     if status != 201:
         await callback.message.edit_text(
-            f'❌ Ошибка создания {status}: {result}',
+            f'❌ Ошибка создания розыгрыша. Попробуй ещё раз.',
             reply_markup=back_to_admin_keyboard()
         )
         await callback.answer()
         return
 
     giveaway_id = result.get('id')
-    activate_result, activate_status = await api_post(f'/giveaways/{giveaway_id}/activate/')
-    log.error(f'ACTIVATE: status={activate_status}, result={activate_result}')
-
-    if activate_status != 200:
-        await callback.message.edit_text(
-            f'✅ Розыгрыш создан но не запущен.\nОшибка активации {activate_status}: {activate_result}',
-            reply_markup=back_to_admin_keyboard()
-        )
-        await callback.answer()
-        return
+    await api_post(f'/giveaways/{giveaway_id}/activate/')
 
     await callback.message.edit_text(
         f'✅ <b>Розыгрыш запущен!</b>\n\n🎁 {data["title"]}\n\nУчастники могут регистрироваться.',

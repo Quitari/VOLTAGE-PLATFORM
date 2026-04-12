@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/giveaways/',  include('apps.giveaways.urls')),
     path('api/moderation/', include('apps.moderation.urls')),
     path('api/prizes/',     include('apps.prizes.urls')),
+    path('api/bots/', include('apps.bots.urls')),
 ]

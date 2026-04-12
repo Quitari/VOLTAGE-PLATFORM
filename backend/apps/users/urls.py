@@ -19,4 +19,6 @@ urlpatterns = [
     path('telegram/user/<int:telegram_id>/', views.telegram_get_user, name='telegram-get-user'),
     path('steam/link/',               views.steam_link,        name='steam-link'),
     path('twitch/link/', views.twitch_link, name='twitch-link'),
+
+    path('list/', views.user_list, name='user-list'),
 ]

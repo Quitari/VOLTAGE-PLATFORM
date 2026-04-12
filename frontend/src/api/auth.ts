@@ -18,4 +18,7 @@ export const authApi = {
 
   updateProfile: (data: Partial<User>) =>
     client.patch<{ user: User; message: string }>("/auth/profile/", data),
+
+  userList: (params?: { search?: string; status?: string }) =>
+    client.get<User[]>("/auth/list/", { params }),
 };

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Управление розыгрышами - Admin Voltage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#00530e",
+                      "surface-container-highest": "#353534",
+                      "primary-container": "#ffe100",
+                      "error": "#ffb4ab",
+                      "background": "#131313",
+                      "surface-container": "#201f1f",
+                      "inverse-primary": "#6c5e00",
+                      "on-secondary": "#003907",
+                      "primary-fixed": "#ffe330",
+                      "on-surface": "#e5e2e1",
+                      "on-secondary-container": "#007117",
+                      "on-primary-fixed": "#211c00",
+                      "surface-dim": "#131313",
+                      "outline": "#979177",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "inverse-on-surface": "#313030",
+                      "tertiary-fixed": "#e2e2e2",
+                      "tertiary-container": "#e1e1e1",
+                      "surface-container-lowest": "#0e0e0e",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-fixed-dim": "#00e639",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-tint": "#e1c700",
+                      "secondary-container": "#13ff43",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "tertiary": "#fdfdfd",
+                      "on-tertiary": "#2f3131",
+                      "secondary-fixed": "#72ff70",
+                      "on-tertiary-container": "#626464",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "secondary": "#ecffe3",
+                      "primary": "#fffdff",
+                      "on-background": "#e5e2e1",
+                      "on-surface-variant": "#cec6aa",
+                      "surface-bright": "#3a3939",
+                      "outline-variant": "#4c4732",
+                      "on-primary": "#383000",
+                      "surface": "#131313",
+                      "error-container": "#93000a",
+                      "on-primary-fixed-variant": "#514700",
+                      "primary-fixed-dim": "#e1c700",
+                      "on-secondary-fixed": "#002203",
+                      "on-error": "#690005",
+                      "on-primary-container": "#726300",
+                      "surface-variant": "#353534",
+                      "surface-container-low": "#1c1b1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Manrope"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0A0A0A; color: #e5e2e1; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<button id="sidebar-toggle" class="w-8 h-8 flex items-center justify-center bg-[#0E0E0E] border border-white/10 rounded-lg text-white/40 hover:text-white hover:bg-[#1C1B1B] transition-all">
+  <span class="material-symbols-outlined text-lg">menu</span>
+</button>
+<!-- Top Navigation Bar -->
+
+<!-- Side Navigation Bar -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50" style="width:256px">
+<div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
+  <span class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sb-text">VOLTAGE</span>
+  <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 sb-text overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-3 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-0.5 pb-2">
+<div class="sidebar-accordion">
+<button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+  <span>ОСНОВНОЕ</span>
+  <span class="material-symbols-outlined text-sm transition-transform duration-200" style="transform:rotate(0deg)">chevron_right</span>
+</button>
+<div class="sidebar-acc-body space-y-0.5 hidden">
+  <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Дашборд"><span class="material-symbols-outlined text-xl">dashboard</span><span class="flex-1">Дашборд</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Пользователи"><span class="material-symbols-outlined text-xl">group</span><span class="flex-1">Пользователи</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Журнал аудита"><span class="material-symbols-outlined text-xl">history</span><span class="flex-1">Журнал аудита</span></a>
+</div>
+</div>
+<div class="sidebar-accordion">
+<button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+  <span>КОНТЕНТ</span>
+  <span class="material-symbols-outlined text-sm transition-transform duration-200" style="transform:rotate(90deg)">chevron_right</span>
+</button>
+<div class="sidebar-acc-body space-y-0.5">
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#FFE100] border-l-2 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#" data-label="Розыгрыши"><span class="material-symbols-outlined text-xl">redeem</span><span class="flex-1">Розыгрыши</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Призы и доставка"><span class="material-symbols-outlined text-xl">inventory</span><span class="flex-1">Призы и доставка</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Расписание"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="flex-1">Расписание</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Шаблоны"><span class="material-symbols-outlined text-xl">edit_note</span><span class="flex-1">Шаблоны</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Команды Twitch"><span class="material-symbols-outlined text-xl">terminal</span><span class="flex-1">Команды Twitch</span></a>
+</div>
+</div>
+<div class="sidebar-accordion">
+<button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+  <span>МОДЕРАЦИЯ</span>
+  <span class="material-symbols-outlined text-sm transition-transform duration-200" style="transform:rotate(0deg)">chevron_right</span>
+</button>
+<div class="sidebar-acc-body space-y-0.5 hidden">
+  <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Наказания"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Апелляции"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Тикеты"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+</div>
+</div>
+<div class="sidebar-accordion">
+<button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+  <span>ПЛАТФОРМА</span>
+  <span class="material-symbols-outlined text-sm transition-transform duration-200" style="transform:rotate(0deg)">chevron_right</span>
+</button>
+<div class="sidebar-acc-body space-y-0.5 hidden">
+  <a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Настройки"><span class="material-symbols-outlined text-xl">settings</span><span class="flex-1">Настройки</span></a><a class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#" data-label="Роли и права"><span class="material-symbols-outlined text-xl">shield</span><span class="flex-1">Роли и права</span></a>
+</div>
+</div>
+</nav>
+<div class="px-4 py-3 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-3 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sb-text">Выйти</span>
+  </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="page-main  pt-24 px-8 pb-12">
+<!-- Header & Action Row -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="text-4xl font-black font-headline uppercase tracking-tight text-white mb-2">Управление розыгрышами</h1>
+<p class="text-on-surface-variant font-medium">Контроль и создание активных событий платформы</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 border-1.5 border-white text-white font-headline font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                    Быстрый розыгрыш
+                </button>
+<button class="px-6 py-3 bg-primary-container text-on-primary-fixed font-headline font-bold text-xs uppercase tracking-widest hover:bg-primary-fixed transition-all">
+                    Создать розыгрыш
+                </button>
+</div>
+</div>
+<!-- Filters / Tabs -->
+<div class="flex items-center gap-8 mb-10 border-b border-outline-variant/10">
+<button class="pb-4 text-primary-container font-headline font-bold text-sm uppercase tracking-wider border-b-2 border-primary-container">
+                Активные (3)
+            </button>
+<button class="pb-4 text-white/40 font-headline font-bold text-sm uppercase tracking-wider hover:text-white/70 transition-colors">
+                Завершённые
+            </button>
+<button class="pb-4 text-white/40 font-headline font-bold text-sm uppercase tracking-wider hover:text-white/70 transition-colors">
+                Все
+            </button>
+</div>
+<!-- Active Giveaways Grid -->
+<section class="mb-16">
+<h2 class="text-sm font-headline font-bold text-white/40 uppercase tracking-[0.3em] mb-6">Активные розыгрыши</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-low border-l-4 border-primary-container p-6 flex flex-col gap-6 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="bg-surface-container-highest px-2 py-1 text-[10px] font-bold text-white/70 rounded">TG</span>
+<span class="bg-secondary-container/10 text-secondary-container px-2 py-1 text-[10px] font-bold rounded">LIVE</span>
+</div>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+<span class="text-xs font-headline font-bold uppercase">02:14:55</span>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-black font-headline uppercase leading-tight group-hover:text-primary-container transition-colors">Dragon Lore | Factory New</h3>
+<p class="text-on-surface-variant text-sm mt-2 font-medium">Global Elite Collection</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold uppercase text-white/40">Участники</span>
+<span class="text-sm font-headline font-bold text-white">1,420 / 2,000</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-[71%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-4">
+<button class="bg-primary-container text-on-primary-fixed py-2 text-[10px] font-black font-headline uppercase tracking-widest">Подвести итоги</button>
+<button class="bg-surface-container-high text-white py-2 text-[10px] font-black font-headline uppercase tracking-widest">Редактировать</button>
+<button class="col-span-2 border border-error/30 text-error py-2 text-[10px] font-black font-headline uppercase tracking-widest hover:bg-error/10">Отменить</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low border-l-4 border-primary-container p-6 flex flex-col gap-6 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="bg-surface-container-highest px-2 py-1 text-[10px] font-bold text-white/70 rounded">TWITCH</span>
+<span class="bg-secondary-container/10 text-secondary-container px-2 py-1 text-[10px] font-bold rounded">LIVE</span>
+</div>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+<span class="text-xs font-headline font-bold uppercase">00:45:12</span>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-black font-headline uppercase leading-tight group-hover:text-primary-container transition-colors">RTX 4090 ROG STRIX</h3>
+<p class="text-on-surface-variant text-sm mt-2 font-medium">Hardware Drop #4</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold uppercase text-white/40">Участники</span>
+<span class="text-sm font-headline font-bold text-white">8,912 / 10,000</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-[89%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-4">
+<button class="bg-primary-container text-on-primary-fixed py-2 text-[10px] font-black font-headline uppercase tracking-widest">Подвести итоги</button>
+<button class="bg-surface-container-high text-white py-2 text-[10px] font-black font-headline uppercase tracking-widest">Редактировать</button>
+<button class="col-span-2 border border-error/30 text-error py-2 text-[10px] font-black font-headline uppercase tracking-widest hover:bg-error/10">Отменить</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low border-l-4 border-primary-container p-6 flex flex-col gap-6 hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="bg-surface-container-highest px-2 py-1 text-[10px] font-bold text-white/70 rounded">CS2</span>
+<span class="bg-secondary-container/10 text-secondary-container px-2 py-1 text-[10px] font-bold rounded">LIVE</span>
+</div>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+<span class="text-xs font-headline font-bold uppercase">14:22:01</span>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-black font-headline uppercase leading-tight group-hover:text-primary-container transition-colors">10,000 ARENA POINTS</h3>
+<p class="text-on-surface-variant text-sm mt-2 font-medium">Currency Event</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-xs font-bold uppercase text-white/40">Участники</span>
+<span class="text-sm font-headline font-bold text-white">451 / 5,000</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-[9%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-4">
+<button class="bg-primary-container text-on-primary-fixed py-2 text-[10px] font-black font-headline uppercase tracking-widest">Подвести итоги</button>
+<button class="bg-surface-container-high text-white py-2 text-[10px] font-black font-headline uppercase tracking-widest">Редактировать</button>
+<button class="col-span-2 border border-error/30 text-error py-2 text-[10px] font-black font-headline uppercase tracking-widest hover:bg-error/10">Отменить</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Finished Giveaways -->
+<section>
+<h2 class="text-sm font-headline font-bold text-white/40 uppercase tracking-[0.3em] mb-6">Завершённые</h2>
+<div class="space-y-2">
+<!-- Completed Item 1 -->
+<div class="bg-surface-container-low px-6 py-4 flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-8 flex-1">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="w-64">
+<h4 class="font-headline font-bold text-white uppercase text-sm">Butterfly Knife | Marble Fade</h4>
+<p class="text-[10px] text-white/30 uppercase mt-1 tracking-wider">12 Июня 2024</p>
+</div>
+<div class="w-48">
+<span class="text-[10px] text-white/30 uppercase block mb-1">Победитель</span>
+<span class="text-primary-container text-sm font-bold">@alex_cyber</span>
+</div>
+<div>
+<span class="text-[10px] text-white/30 uppercase block mb-1">Статус</span>
+<span class="text-secondary-container text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Доставлено
+                            </span>
+</div>
+</div>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Completed Item 2 -->
+<div class="bg-surface-container-low px-6 py-4 flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-8 flex-1">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="w-64">
+<h4 class="font-headline font-bold text-white uppercase text-sm">Keychron K2 Mechanical Keyboard</h4>
+<p class="text-[10px] text-white/30 uppercase mt-1 tracking-wider">10 Июня 2024</p>
+</div>
+<div class="w-48">
+<span class="text-[10px] text-white/30 uppercase block mb-1">Победитель</span>
+<span class="text-primary-container text-sm font-bold">@dimka_pro</span>
+</div>
+<div>
+<span class="text-[10px] text-white/30 uppercase block mb-1">Статус</span>
+<span class="text-primary-container text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span> В пути
+                            </span>
+</div>
+</div>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Completed Item 3 -->
+<div class="bg-surface-container-low px-6 py-4 flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-8 flex-1">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="w-64">
+<h4 class="font-headline font-bold text-white uppercase text-sm">Steam Deck OLED 512GB</h4>
+<p class="text-[10px] text-white/30 uppercase mt-1 tracking-wider">08 Июня 2024</p>
+</div>
+<div class="w-48">
+<span class="text-[10px] text-white/30 uppercase block mb-1">Победитель</span>
+<span class="text-primary-container text-sm font-bold">@margo_win</span>
+</div>
+<div>
+<span class="text-[10px] text-white/30 uppercase block mb-1">Статус</span>
+<span class="text-secondary-container text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Доставлено
+                            </span>
+</div>
+</div>
+<button class="text-white/40 hover:text-white">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+
+
+
+<div id="global-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeConfirm()">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div id="gcm-icon-wrap" class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span id="gcm-icon" class="material-symbols-outlined text-xl"></span>
+      </div>
+      <h3 id="gcm-title" class="text-lg font-black text-white font-headline uppercase"></h3>
+    </div>
+    <p id="gcm-body" class="text-sm text-white/50 mb-5"></p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button id="gcm-confirm-btn" class="flex-1 py-2.5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all"></button>
+    </div>
+  </div>
+</div>
+<script id="global-confirm-script">
+function showConfirm(opts) {
+  var m = document.getElementById('global-confirm-modal');
+  document.getElementById('gcm-title').textContent = opts.title || 'Подтвердите действие';
+  document.getElementById('gcm-body').textContent = opts.body || 'Это действие нельзя отменить.';
+  var icon = document.getElementById('gcm-icon');
+  var wrap = document.getElementById('gcm-icon-wrap');
+  var btn  = document.getElementById('gcm-confirm-btn');
+  if (opts.danger) {
+    wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
+    btn.style.background = '#EF4444'; btn.style.color = '#fff';
+  } else {
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
+    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+  }
+  btn.textContent = opts.confirmLabel || 'Подтвердить';
+  btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };
+  m.style.display = 'flex';
+}
+function closeConfirm() { document.getElementById('global-confirm-modal').style.display = 'none'; }
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body></html>

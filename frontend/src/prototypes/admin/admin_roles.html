@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "secondary-container": "#13ff43",
+                        "on-secondary-container": "#007117",
+                        "tertiary": "#fdfdfd",
+                        "on-primary-fixed-variant": "#514700",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#e1c700",
+                        "surface-container-highest": "#353534",
+                        "surface": "#131313",
+                        "background": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary": "#383000",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#00e639",
+                        "secondary-fixed": "#72ff70",
+                        "on-tertiary-container": "#626464",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353534",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "on-surface-variant": "#cec6aa",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "outline-variant": "#4c4732",
+                        "on-primary-fixed": "#211c00",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-container": "#e1e1e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary": "#ecffe3",
+                        "on-primary-container": "#726300",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary": "#2f3131",
+                        "primary-container": "#ffe100",
+                        "on-secondary": "#003907",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#e1c700",
+                        "primary-fixed": "#ffe330",
+                        "outline": "#979177",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed": "#002203",
+                        "on-background": "#e5e2e1",
+                        "primary": "#fffdff",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#00530e",
+                        "inverse-primary": "#6c5e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden" style="width:256px">
+<div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
+  <span class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sb-text">VOLTAGE</span>
+  <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 sb-text overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-3 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-0.5 pb-2 sb-nav">
+  <div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="flex-1">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="flex-1">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="flex-1">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="flex-1">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="flex-1">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="flex-1">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="flex-1">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="flex-1">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90" style="transform:rotate(90deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5">
+    <a data-label="Настройки" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="flex-1">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#FFE100] border-l-2 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="flex-1">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-3 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-3 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sb-text">Выйти</span>
+  </button>
+</div>
+</aside>
+<!-- SideNavBar -->
+<nav class="bg-[#0E0E0E] h-screen w-72 flex flex-col fixed left-0 top-0 py-6 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold tracking-tighter text-[#FFE100] font-['Space_Grotesk'] uppercase">STRM ADMIN</span>
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest mt-1">Панель управления</p>
+</div>
+<div class="flex flex-col gap-1 overflow-y-auto pr-2">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="font-body text-sm font-medium">Дашборд</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="font-body text-sm font-medium">Пользователи</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">history_edu</span>
+<span class="font-body text-sm font-medium">Аудит</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">redeem</span>
+<span class="font-body text-sm font-medium">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">military_tech</span>
+<span class="font-body text-sm font-medium">Призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">calendar_today</span>
+<span class="font-body text-sm font-medium">Расписание</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="font-body text-sm font-medium">Шаблоны</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">gavel</span>
+<span class="font-body text-sm font-medium">Наказания</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">assignment_return</span>
+<span class="font-body text-sm font-medium">Апелляции</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+<span class="font-body text-sm font-medium">Тикеты</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-md text-[#979177] hover:text-white hover:bg-[#201F1F] transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-body text-sm font-medium">Настройки</span>
+</a>
+<!-- Active State Logic Applied -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all duration-200 scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+<span class="font-body text-sm">Роли и права</span>
+</a>
+</div>
+<div class="mt-auto pt-6 flex items-center gap-3 border-t border-[#4C4732]/15 px-4">
+<div class="w-10 h-10 bg-surface-container-high rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional male profile photo with intense gaze against a dark industrial background with neon light accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqeFNEKFwgvgLI_vdqVKWC9uNZuXFjSS8c-8eE741gnRS_hOQk9FtFm22k5jCNUSYoMGrWQqfPTylO-eV37rwe0PtRp0KpiPwOZe50azH9Up-Ozf46SBYFdcX3agAqruq03Q_VqKIYR9ORi6YjuGpxzJHZIA9vDunwoAbsSrujMu1t7PF3PmcIqkzy0M5goAEW8fo8Qy5Xhb92Vl1bt4NXqzFof75cbil_i0QdXBYTp4Kk5NfXic62QKEZiMxVV5opwETHaB1do_jm"/>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Админ Профиль</p>
+<p class="text-[10px] text-primary-container uppercase font-bold tracking-widest">Root Access</p>
+</div>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class=" bg-[#0A0A0A]/70 backdrop-blur-md sticky top-0 z-40 border-b border-[#4C4732]/15 flex justify-between items-center h-16 px-8">
+<h1 class="text-xl font-bold uppercase font-['Space_Grotesk'] text-[#FFE100]">Управление ролями</h1>
+<div class="flex items-center gap-6">
+<div class="relative">
+<input class="bg-surface-container-lowest border-none border-b-2 border-outline-variant text-sm px-4 py-2 w-64 focus:ring-0 focus:border-primary-container transition-all" placeholder="Поиск прав..." type="text"/>
+<span class="material-symbols-outlined absolute right-2 top-2 text-outline text-lg">search</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-white hover:bg-[#2A2A2A] p-2 rounded-md transition-all active:opacity-80">notifications</button>
+<button class="material-symbols-outlined text-white hover:bg-[#2A2A2A] p-2 rounded-md transition-all active:opacity-80">account_circle</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="page-main  p-8">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl font-bold font-headline uppercase tracking-tight text-white">Уровни доступа</h2>
+<p class="text-outline text-sm font-medium mt-1">Конфигурация иерархии и системных привилегий</p>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-primary-fixed transition-colors active:scale-95 shadow-lg shadow-primary-container/10">
+<span class="material-symbols-outlined">add</span>
+                Создать роль
+            </button>
+</div>
+<!-- Metrics Bento Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-surface-container-low p-6 flex items-center justify-between group hover:bg-surface-container-high transition-all">
+<div>
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest mb-1">Всего ролей</p>
+<h3 class="text-4xl font-bold font-headline text-white">5</h3>
+</div>
+<div class="p-3 bg-primary-container/10 rounded-lg text-primary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 flex items-center justify-between group hover:bg-surface-container-high transition-all">
+<div>
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest mb-1">Активных</p>
+<h3 class="text-4xl font-bold font-headline text-white">5</h3>
+</div>
+<div class="p-3 bg-secondary-container/10 rounded-lg text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">sensors</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 flex items-center justify-between group hover:bg-surface-container-high transition-all">
+<div>
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest mb-1">Системных</p>
+<h3 class="text-4xl font-bold font-headline text-white">5</h3>
+</div>
+<div class="p-3 bg-surface-container-highest/50 rounded-lg text-outline group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+</div>
+</div>
+<!-- Role List (Asymmetric Grid) -->
+<section class="mb-12">
+<h3 class="text-xs font-bold uppercase tracking-widest text-outline mb-6">Действующие роли</h3>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Role Card 1: Owner -->
+<div class="bg-[#111111] overflow-hidden relative border-l-4 border-[#ff4d4d] group hover:bg-surface-container transition-all p-6">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-error-container/20 text-[#ffb4ab] text-[10px] px-2 py-0.5 font-bold uppercase tracking-widest border border-error-container/30">Системная</span>
+<span class="text-outline text-xs font-bold">LVL 999</span>
+</div>
+<h4 class="text-3xl font-bold font-headline text-white mb-2">Owner</h4>
+<p class="text-outline text-sm max-w-md">Полный доступ ко всем аспектам системы, включая управление платежами и критическими настройками сервера.</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-surface-container-high text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Редактировать</button>
+<button class="text-error text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-all text-right pr-2">Удалить</button>
+</div>
+</div>
+<div class="mt-8 flex gap-8 items-center border-t border-white/5 pt-4">
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пользователей</p>
+<p class="text-xl font-bold text-white">1</p>
+</div>
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пермишенов</p>
+<p class="text-xl font-bold text-white">ALL</p>
+</div>
+</div>
+</div>
+<!-- Role Card 2: Admin -->
+<div class="bg-[#111111] overflow-hidden relative border-l-4 border-[#ff9100] group hover:bg-surface-container transition-all p-6">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-surface-container-highest/50 text-outline text-[10px] px-2 py-0.5 font-bold uppercase tracking-widest border border-outline-variant/30">Системная</span>
+<span class="text-outline text-xs font-bold">LVL 100</span>
+</div>
+<h4 class="text-3xl font-bold font-headline text-white mb-2">Admin</h4>
+<p class="text-outline text-sm max-w-md">Управление персоналом, тикетами и контентом. Ограничен только финансовыми модулями.</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-surface-container-high text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Редактировать</button>
+<button class="text-error text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-all text-right pr-2">Удалить</button>
+</div>
+</div>
+<div class="mt-8 flex gap-8 items-center border-t border-white/5 pt-4">
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пользователей</p>
+<p class="text-xl font-bold text-white">4</p>
+</div>
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пермишенов</p>
+<p class="text-xl font-bold text-white">142</p>
+</div>
+</div>
+</div>
+<!-- Role Card 3: Super Moderator -->
+<div class="bg-[#111111] overflow-hidden relative border-l-4 border-[#FFE100] group hover:bg-surface-container transition-all p-6">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-primary-container/10 text-primary-container text-[10px] px-2 py-0.5 font-bold uppercase tracking-widest border border-primary-container/30">Системная</span>
+<span class="text-outline text-xs font-bold">LVL 75</span>
+</div>
+<h4 class="text-3xl font-bold font-headline text-white mb-2">Super Moderator</h4>
+<p class="text-outline text-sm max-w-md">Старший модераторский состав с правами на выдачу временных банов и разбор апелляций.</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-surface-container-high text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Редактировать</button>
+<button class="text-error text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-all text-right pr-2">Удалить</button>
+</div>
+</div>
+<div class="mt-8 flex gap-8 items-center border-t border-white/5 pt-4">
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пользователей</p>
+<p class="text-xl font-bold text-white">12</p>
+</div>
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пермишенов</p>
+<p class="text-xl font-bold text-white">88</p>
+</div>
+</div>
+</div>
+<!-- Role Card 4: Moderator -->
+<div class="bg-[#111111] overflow-hidden relative border-l-4 border-[#3399ff] group hover:bg-surface-container transition-all p-6">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-surface-container-highest/50 text-outline text-[10px] px-2 py-0.5 font-bold uppercase tracking-widest border border-outline-variant/30">Системная</span>
+<span class="text-outline text-xs font-bold">LVL 50</span>
+</div>
+<h4 class="text-3xl font-bold font-headline text-white mb-2">Moderator</h4>
+<p class="text-outline text-sm max-w-md">Модерация чатов и игровых сессий. Права на мут и кик пользователей.</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-surface-container-high text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Редактировать</button>
+<button class="text-error text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-all text-right pr-2">Удалить</button>
+</div>
+</div>
+<div class="mt-8 flex gap-8 items-center border-t border-white/5 pt-4">
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пользователей</p>
+<p class="text-xl font-bold text-white">45</p>
+</div>
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пермишенов</p>
+<p class="text-xl font-bold text-white">42</p>
+</div>
+</div>
+</div>
+<!-- Role Card 5: Streamer -->
+<div class="bg-[#111111] overflow-hidden relative border-l-4 border-[#13FF43] group hover:bg-surface-container transition-all p-6 xl:col-span-2">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-secondary-container/10 text-secondary-container text-[10px] px-2 py-0.5 font-bold uppercase tracking-widest border border-secondary-container/30">Системная</span>
+<span class="text-outline text-xs font-bold">LVL 30</span>
+</div>
+<h4 class="text-3xl font-bold font-headline text-white mb-2">Streamer</h4>
+<p class="text-outline text-sm max-w-md">Участники партнерской программы. Доступ к панели вещания и инструментам взаимодействия с аудиторией.</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-surface-container-high text-white px-4 py-1.5 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Редактировать</button>
+<button class="text-error text-xs font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition-all text-right pr-2">Удалить</button>
+</div>
+</div>
+<div class="mt-8 flex gap-8 items-center border-t border-white/5 pt-4">
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пользователей</p>
+<p class="text-xl font-bold text-white">218</p>
+</div>
+<div>
+<p class="text-xs font-bold text-outline uppercase">Пермишенов</p>
+<p class="text-xl font-bold text-white">15</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Role Assignment Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Assignment Form -->
+<div class="lg:col-span-1">
+<div class="bg-surface-container-low p-8 h-full">
+<h3 class="text-lg font-bold font-headline uppercase tracking-wide text-white mb-6">Назначение роли</h3>
+<form class="space-y-6">
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Поиск пользователя</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant text-white px-4 py-3 focus:ring-0 focus:border-primary-container" placeholder="Введите ник или ID..." type="text"/>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Выбор роли</label>
+<select class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant text-white px-4 py-3 focus:ring-0 focus:border-primary-container appearance-none">
+<option>Moderator</option>
+<option>Super Moderator</option>
+<option>Admin</option>
+<option>Streamer</option>
+</select>
+</div>
+<div>
+<label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Срок действия (опционально)</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant text-white px-4 py-3 focus:ring-0 focus:border-primary-container" type="date"/>
+</div>
+<button class="w-full bg-primary-container text-on-primary-fixed py-4 font-bold uppercase tracking-widest hover:bg-primary-fixed transition-colors mt-4" type="submit">Назначить</button>
+</form>
+</div>
+</div>
+<!-- Assignments Table -->
+<div class="lg:col-span-2">
+<div class="bg-surface-container-low p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold font-headline uppercase tracking-wide text-white">Текущие назначения</h3>
+<button class="text-primary-container text-xs font-bold uppercase tracking-widest hover:underline">Экспорт логов</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] uppercase tracking-widest text-outline">
+<th class="pb-4 font-bold">Пользователь</th>
+<th class="pb-4 font-bold">Роль</th>
+<th class="pb-4 font-bold">Кем выдано</th>
+<th class="pb-4 font-bold">Дата</th>
+<th class="pb-4 font-bold">Истекает</th>
+<th class="pb-4 font-bold text-right">Действия</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="py-4 font-bold text-white">v0ltage_king</td>
+<td class="py-4">
+<span class="bg-[#ff4d4d]/10 text-[#ff4d4d] px-2 py-0.5 text-[10px] font-bold uppercase border border-[#ff4d4d]/20">Owner</span>
+</td>
+<td class="py-4 text-outline">SYSTEM</td>
+<td class="py-4 text-outline">01.01.2024</td>
+<td class="py-4 text-outline">—</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-white transition-colors">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="py-4 font-bold text-white">cyber_ghost</td>
+<td class="py-4">
+<span class="bg-[#FFE100]/10 text-[#FFE100] px-2 py-0.5 text-[10px] font-bold uppercase border border-[#FFE100]/20">Super Mod</span>
+</td>
+<td class="py-4 text-outline">Admin_Profile</td>
+<td class="py-4 text-outline">12.05.2024</td>
+<td class="py-4 text-error font-medium">12.06.2024</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-white transition-colors">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="py-4 font-bold text-white">neon_ninja</td>
+<td class="py-4">
+<span class="bg-[#13FF43]/10 text-[#13FF43] px-2 py-0.5 text-[10px] font-bold uppercase border border-[#13FF43]/20">Streamer</span>
+</td>
+<td class="py-4 text-outline">v0ltage_king</td>
+<td class="py-4 text-outline">20.05.2024</td>
+<td class="py-4 text-outline">—</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-white transition-colors">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="py-4 font-bold text-white">pixel_warrior</td>
+<td class="py-4">
+<span class="bg-[#3399ff]/10 text-[#3399ff] px-2 py-0.5 text-[10px] font-bold uppercase border border-[#3399ff]/20">Moderator</span>
+</td>
+<td class="py-4 text-outline">Admin_Profile</td>
+<td class="py-4 text-outline">22.05.2024</td>
+<td class="py-4 text-outline">22.11.2024</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-white transition-colors">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+
+
+<div id="global-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeConfirm()">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div id="gcm-icon-wrap" class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span id="gcm-icon" class="material-symbols-outlined text-xl"></span>
+      </div>
+      <h3 id="gcm-title" class="text-lg font-black text-white font-headline uppercase"></h3>
+    </div>
+    <p id="gcm-body" class="text-sm text-white/50 mb-5"></p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button id="gcm-confirm-btn" class="flex-1 py-2.5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all"></button>
+    </div>
+  </div>
+</div>
+<script id="global-confirm-script">
+function showConfirm(opts) {
+  var m = document.getElementById('global-confirm-modal');
+  document.getElementById('gcm-title').textContent = opts.title || 'Подтвердите действие';
+  document.getElementById('gcm-body').textContent = opts.body || 'Это действие нельзя отменить.';
+  var icon = document.getElementById('gcm-icon');
+  var wrap = document.getElementById('gcm-icon-wrap');
+  var btn  = document.getElementById('gcm-confirm-btn');
+  if (opts.danger) {
+    wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
+    btn.style.background = '#EF4444'; btn.style.color = '#fff';
+  } else {
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
+    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+  }
+  btn.textContent = opts.confirmLabel || 'Подтвердить';
+  btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };
+  m.style.display = 'flex';
+}
+function closeConfirm() { document.getElementById('global-confirm-modal').style.display = 'none'; }
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body></html>

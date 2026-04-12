@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#72ff70",
+                        "secondary": "#ecffe3",
+                        "surface-variant": "#353534",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#383000",
+                        "on-tertiary-container": "#626464",
+                        "on-primary-fixed-variant": "#514700",
+                        "error": "#ffb4ab",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-highest": "#353534",
+                        "on-primary-container": "#726300",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#00e639",
+                        "primary-container": "#ffe100",
+                        "background": "#131313",
+                        "outline": "#979177",
+                        "surface": "#131313",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-container": "#007117",
+                        "inverse-primary": "#6c5e00",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f1f",
+                        "on-secondary": "#003907",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#211c00",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#00530e",
+                        "tertiary": "#fdfdfd",
+                        "surface-tint": "#e1c700",
+                        "secondary-container": "#13ff43",
+                        "primary-fixed-dim": "#e1c700",
+                        "on-secondary-fixed": "#002203",
+                        "tertiary-container": "#e1e1e1",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#4c4732",
+                        "surface-container-high": "#2a2a2a",
+                        "on-background": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#fffdff",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#ffe330",
+                        "on-surface-variant": "#cec6aa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0A0A0A; color: #e5e2e1; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hud-blur { backdrop-filter: blur(12px); }
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-[#0E0E0E]/70 backdrop-blur-md flex justify-between items-center px-6 py-4 w-full h-16">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#FFE100] tracking-tighter font-['Space_Grotesk'] uppercase">ARENA</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/50 text-sm">search</span>
+<input class="bg-surface-container-lowest border-none border-b-2 border-outline-variant text-sm py-2 pl-10 pr-4 w-64 focus:ring-0 focus:border-primary-container transition-all" placeholder="ПОИСК ПРИЗОВ" type="text"/>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-[#3A3939]/60 transition-colors text-white/70 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-[#3A3939]/60 transition-colors text-white/70 active:scale-95">
+<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
+</button>
+<div class="w-10 h-10 overflow-hidden border border-outline-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Cyberpunk style male avatar with neon lighting effects and digital glitches" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-BvKHtgXBi8-Spe85eUHmzZp0pMdwcJsMdOSz1KUtP50osAlDuTWQCrg2Na2dkEjZLPsjLOeHeQ5wpvJtxhdyf3TosjWoXX2ExrivR63uHtvCMTBKYheVigX9VQL47rdkZxWwUvMeaSebL3KNynLFNB6muJS-wtrT2PwAcqwhCFXZXf4qdB2o0Eat2pcPy3TdUG5IUBKXrqta3NaIZ5wq4bT6uxOpu5ciezwEZ6ZWf6ygTbxLpuSMnc6J7DaYFCuLXMIXECprUa6e"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-10 bg-[#0A0A0A]">
+<header class="mb-10">
+<h1 class="text-6xl font-black font-headline uppercase tracking-tighter text-on-surface">МОИ ПРИЗЫ</h1>
+</header>
+<!-- Filters & Search -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+<div class="flex gap-1 bg-surface-container-low p-1">
+<button class="px-8 py-3 text-sm font-headline font-bold uppercase tracking-widest bg-surface-container-high text-primary-container">Все</button>
+<button class="px-8 py-3 text-sm font-headline font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors flex items-center gap-2">
+                        Активные <span class="bg-primary-container text-on-primary-fixed text-[10px] px-1.5 py-0.5 leading-none">1</span>
+</button>
+<button class="px-8 py-3 text-sm font-headline font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">История</button>
+</div>
+<div class="w-full md:w-80 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/40">search</span>
+<input class="w-full bg-surface-container border-none border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 py-3 pl-12 pr-4 text-sm font-headline uppercase tracking-widest" placeholder="НАЗВАНИЕ ПРИЗА..." type="text"/>
+</div>
+</div>
+<!-- Prize List -->
+<div class="space-y-6">
+<!-- Card 1: Waiting -->
+<div class="bg-surface-container-low group hover:bg-surface-container transition-all flex flex-col lg:flex-row overflow-hidden relative">
+<div class="lg:w-72 aspect-video lg:aspect-auto bg-[#0E0E0E] flex items-center justify-center p-6 relative overflow-hidden">
+<img alt="AWP Азимов" class="max-w-full h-auto object-contain z-10 group-hover:scale-105 transition-transform duration-500" data-alt="High-detail 3D render of a futuristic sniper rifle with orange and white geometric camouflage on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJNk9aydK6kG952QFI-iKZU_0v4pQSieoaDlEHdekf_3CeJY6ydOvW18PY12KspQMixdMKmNdvIMf0t4zF1IGV0bLjJzJmydz5-EwFPlVLEcpSPOd-rIUZm8sg9LwY--LAOsuQMStP4HN6JsDNfN-Pk2i1LEOEiOc1qoXCGRPVRT6_qeUGaiae_QzPlskdA47BuTvIjU8ul8wSuTXqJNQBtFqsYRMHp4Dq5hDLwlIXq82beKiblaxSz38D3i1WzWRsCqxnlWGqHWzs"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container/5 to-transparent"></div>
+</div>
+<div class="flex-1 p-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="inline-block px-3 py-1 bg-primary-container text-on-primary-fixed font-headline font-black text-[10px] uppercase tracking-tighter mb-2">Ожидает получения</div>
+<h3 class="text-2xl font-headline font-black uppercase leading-none tracking-tight">AWP Азимов FT</h3>
+<p class="text-white/40 text-xs font-bold uppercase tracking-widest mt-2">Twitch розыгрыш • 12.10.2023</p>
+</div>
+<button class="border border-outline-variant/30 px-6 py-2 text-[10px] font-headline font-black uppercase tracking-widest hover:bg-white/5 transition-colors">Подробнее</button>
+</div>
+<!-- Progress Bar -->
+<div class="mt-8">
+<div class="flex justify-between text-[10px] font-headline font-bold uppercase tracking-widest text-white/30 mb-4 px-1">
+<span class="text-primary-container">Оформлено</span>
+<span class="text-primary-container">В обработке</span>
+<span class="text-primary-container">Отправлено</span>
+<span>Получено</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest flex relative">
+<div class="h-full w-2/3 bg-primary-container relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary-container border-4 border-surface-container-low rounded-full shadow-[0_0_15px_rgba(255,225,0,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Received -->
+<div class="bg-surface-container-low group hover:bg-surface-container transition-all flex flex-col lg:flex-row overflow-hidden">
+<div class="lg:w-72 aspect-video lg:aspect-auto bg-[#0E0E0E] flex items-center justify-center p-6 relative">
+<img alt="Logitech G Pro X" class="max-w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Professional wireless gaming mouse on a dark textured surface with subtle green ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBptcx_xoWeZ49Y6LNcLwAlsDHXDaLTAubrf4xy-JXg2EDj9nG5XMkNja5SfGOv1-6alOSp8O_-5YxCkHzMtVwaUilBKJOTBEcekyB5EUXdDzj2-8nJT4XtnPfvQyyl8OsAaKGozpZ5DKQShx0MljXoGESdQEv7OtUcstFy21XdB9ksW_Zjgp6BoJI2Gy7peQ3HoyyKBuBQK8qoSoCu0upg1WTPq3ZsNrTG1P0hMEgQzE6_LjMOvOtpbq4A5nQG6v3yt069wVxQH47i"/>
+</div>
+<div class="flex-1 p-8">
+<div class="flex justify-between items-start mb-6">
+<div>
+<div class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-fixed font-headline font-black text-[10px] uppercase tracking-tighter mb-2">Получен</div>
+<h3 class="text-2xl font-headline font-black uppercase leading-none tracking-tight">Logitech G Pro X Superlight</h3>
+<p class="text-white/40 text-xs font-bold uppercase tracking-widest mt-2">Ежемесячный турнир • 05.09.2023</p>
+</div>
+</div>
+<div class="mt-8">
+<div class="h-1.5 w-full bg-secondary-container opacity-30 relative">
+<div class="h-full w-full bg-secondary-container"></div>
+</div>
+<p class="text-[10px] font-headline font-bold uppercase tracking-widest text-secondary-container mt-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Доставлено и подтверждено
+                            </p>
+</div>
+</div>
+</div>
+<!-- Card 3: Canceled -->
+<div class="bg-surface-container-low group hover:bg-surface-container transition-all flex flex-col lg:flex-row overflow-hidden grayscale opacity-80">
+<div class="lg:w-72 aspect-video lg:aspect-auto bg-[#0E0E0E] flex items-center justify-center p-6 grayscale">
+<img alt="Skin" class="max-w-full h-auto object-contain" data-alt="Stylized virtual item skin for a video game with intricate patterns, presented as a digital collectible" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJQ3OCYIugo13qRPOA5GOqMUHZHoJT0x2vHoCESgp1fWKyNvt3zu49LPm9bbs6a-UCuNej4s1QYqFwwXNyf2pvUTkGplvqrS2vHtr-IFYK7Zw0hOviFVEfysXSEHwdzat0fxl-psoq0QZoEDC7YE-PXxd6u1PFiX3gE8XiU4hBnGYUdC_5N1kSTDBFoR1qhp2QCCVj7o6KqAwHfSXF3rNyxcv4mQ-n7oluwl-f_zCLmBadU4Upvf_G06kSYdZO1hWzDGOrfhLCQEA6"/>
+</div>
+<div class="flex-1 p-8">
+<div class="flex justify-between items-start mb-6">
+<div class="flex-1">
+<div class="inline-block px-3 py-1 bg-error-container text-on-error-container font-headline font-black text-[10px] uppercase tracking-tighter mb-2">Отменён</div>
+<h3 class="text-2xl font-headline font-black uppercase leading-none tracking-tight">Glock-18 | Fade</h3>
+<div class="mt-4 p-4 bg-error-container/10 border-l-4 border-error text-error text-[11px] font-bold uppercase tracking-widest leading-relaxed">
+                                    Причина: Трейд-ссылка недействительна. Пожалуйста, обновите данные в настройках.
+                                </div>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-6 py-3 text-[10px] font-headline font-black uppercase tracking-widest whitespace-nowrap ml-6 active:scale-95 transition-transform grayscale-0">Обновить Steam ссылку</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Received Small -->
+<div class="bg-surface-container-low group hover:bg-surface-container transition-all flex flex-col lg:flex-row overflow-hidden border-l-2 border-transparent hover:border-secondary-container/50">
+<div class="lg:w-72 aspect-video lg:aspect-auto bg-[#0E0E0E] flex items-center justify-center p-6">
+<img alt="Skin" class="max-w-full h-auto object-contain opacity-60" data-alt="Sleek gaming equipment accessories displayed on a dark surface with sharp shadows and minimalistic vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFqIAQdiIeeO-gwU10K_eeauYVbkLNen1SLYDYK4E_w8WPKMlJJ0d3DvUDZqlfBIYjdcNjqrzoh0NUziRpg3ByGhyddciK0aeDOYZphCBoURqZmumvWygc76l3Oof63wqfxjRRCiZig_H8hKeyNNiFGPVifnSaPqsCdzVDAJc00kh6vSHmEWX-xK37jDanQfkAA65mq1DTYISyr5bQL-YWGBY1PikzP_sKgJLcYaJhAByYfwOdFOLB3ENVOmeqj-Rka8YV0bBV59f0"/>
+</div>
+<div class="flex-1 p-8">
+<div class="flex justify-between items-start">
+<div>
+<div class="inline-block px-2 py-0.5 bg-surface-container-high text-white/50 font-headline font-bold text-[10px] uppercase tracking-tighter mb-2">Получен</div>
+<h3 class="text-xl font-headline font-black uppercase leading-none tracking-tight text-white/60">M4A4 | Howl Sticker Collection</h3>
+<p class="text-white/30 text-[10px] font-bold uppercase tracking-widest mt-2">Еженедельный квест • 28.08.2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Support -->
+<footer class="mt-16 pb-10 border-t border-outline-variant/10 pt-10 flex flex-col items-center">
+<a class="group flex items-center gap-3 text-white/40 hover:text-primary-container transition-colors font-headline font-bold text-xs uppercase tracking-[0.2em]" href="#">
+<span class="material-symbols-outlined text-lg">support_agent</span>
+                    Проблема с призом? Написать в поддержку
+                </a>
+</footer>
+</main>
+</div>
+<!-- Floating Action Element (Hidden as per Contextual Suppression rules for Details/Settings/Profile screens, but available for interaction) -->
+<div class="fixed bottom-8 right-8 z-50 flex flex-col gap-4">
+<button class="w-14 h-14 bg-surface-bright/60 hud-blur flex items-center justify-center text-white hover:bg-primary-container hover:text-on-primary-fixed transition-all group shadow-2xl">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="chat_bubble">chat_bubble</span>
+</button>
+</div>
+</body></html>

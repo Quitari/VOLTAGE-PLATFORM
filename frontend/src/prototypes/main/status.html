@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VOLTAGE | SYSTEM STATUS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface-container": "#201f1f",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed": "#72ff70",
+                    "background": "#131313",
+                    "primary-fixed": "#ffe330",
+                    "on-surface-variant": "#cec6aa",
+                    "surface-variant": "#353534",
+                    "outline-variant": "#4c4732",
+                    "on-primary-fixed-variant": "#514700",
+                    "on-primary": "#383000",
+                    "primary-container": "#ffe100",
+                    "on-error-container": "#ffdad6",
+                    "surface-bright": "#3a3939",
+                    "surface": "#131313",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "secondary": "#ecffe3",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed": "#211c00",
+                    "tertiary-container": "#e1e1e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary": "#2f3131",
+                    "on-secondary-fixed": "#002203",
+                    "secondary-fixed-dim": "#00e639",
+                    "inverse-primary": "#6c5e00",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-container": "#007117",
+                    "on-secondary": "#003907",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-dim": "#131313",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "surface-tint": "#e1c700",
+                    "on-background": "#e5e2e1",
+                    "primary": "#fffdff",
+                    "on-tertiary-container": "#626464",
+                    "secondary-container": "#13ff43",
+                    "tertiary": "#fdfdfd",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed-dim": "#e1c700",
+                    "on-primary-container": "#726300",
+                    "surface-container-high": "#2a2a2a",
+                    "outline": "#979177"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #0A0A0A; color: #e5e2e1; font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .success-accent { color: #24d66e; }
+        .success-bg { background-color: #24d66e; }
+        .sparkline { height: 32px; width: 100px; display: flex; align-items: flex-end; gap: 2px; }
+        .sparkline-bar { width: 4px; background-color: #13FF43; opacity: 0.4; }
+        .sparkline-bar.active { opacity: 1; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0E0E0E]/70 backdrop-blur-xl h-20 px-10 flex justify-between items-center max-w-[1920px] mx-auto border-none">
+<div class="text-2xl font-black italic text-[#FFE100] tracking-widest font-headline">VOLTAGE</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-headline uppercase tracking-tighter font-bold text-white/60 hover:text-white transition-colors" href="#">ГЛАВНАЯ</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-white/60 hover:text-white transition-colors" href="#">РАСПИСАНИЕ</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-white/60 hover:text-white transition-colors" href="#">МОМЕНТЫ</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-white/60 hover:text-white transition-colors" href="#">ПРАВИЛА</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-[#FFE100] border-b-4 border-[#FFE100] pb-2 transition-all" href="#">СТАТУС</a>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-white/60 hover:text-[#FFE100] cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-white/60 hover:text-[#FFE100] cursor-pointer transition-colors" data-icon="person">person</span>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow pt-32 pb-20 px-6 md:px-10 max-w-[1440px] mx-auto w-full">
+<!-- Overall Status Header -->
+<section class="mb-12">
+<div class="bg-surface-container-low p-10 md:p-16 flex flex-col md:flex-row items-center gap-8 border-none relative overflow-hidden group">
+<div class="success-bg text-on-secondary-fixed w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-none shrink-0">
+<span class="material-symbols-outlined text-5xl md:text-6xl" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h1 class="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter mb-2 leading-none">Все системы работают нормально</h1>
+<p class="text-on-surface-variant font-body text-lg md:text-xl max-w-2xl">Мониторинг в реальном времени. Все узлы и сервисы платформы VOLTAGE функционируют без задержек.</p>
+</div>
+<!-- Technical Aesthetic Element -->
+<div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none select-none">
+<span class="material-symbols-outlined text-[240px]" data-icon="hub">hub</span>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="mb-16">
+<div class="flex justify-between items-end mb-8">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-widest text-primary-fixed">ОСНОВНЫЕ СЕРВИСЫ</h2>
+<div class="text-xs font-mono text-outline uppercase tracking-widest opacity-60">Обновлено: 2 минуты назад</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20">
+<!-- Telegram Bot -->
+<div class="bg-[#111111] p-8 hover:bg-surface-container transition-all group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-1.5 h-10 bg-secondary-container"></div>
+<div>
+<h3 class="font-headline text-xl font-bold text-white">Telegram бот</h3>
+<span class="text-xs uppercase font-bold tracking-widest text-secondary-container flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+                                    Работает
+                                </span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-headline font-black text-white">99.9%</div>
+<div class="text-[10px] uppercase font-bold text-outline">UPTIME (24H)</div>
+</div>
+</div>
+<div class="flex items-end justify-between">
+<div class="sparkline">
+<div class="sparkline-bar h-[40%]"></div>
+<div class="sparkline-bar h-[60%]"></div>
+<div class="sparkline-bar h-[50%]"></div>
+<div class="sparkline-bar h-[80%]"></div>
+<div class="sparkline-bar h-[70%]"></div>
+<div class="sparkline-bar h-[90%] active"></div>
+<div class="sparkline-bar h-[85%] active"></div>
+<div class="sparkline-bar h-[100%] active"></div>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary-fixed transition-colors" data-icon="bolt">bolt</span>
+</div>
+</div>
+<!-- Twitch Bot -->
+<div class="bg-[#111111] p-8 hover:bg-surface-container transition-all group border-l border-outline-variant/10">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-1.5 h-10 bg-secondary-container"></div>
+<div>
+<h3 class="font-headline text-xl font-bold text-white">Twitch бот</h3>
+<span class="text-xs uppercase font-bold tracking-widest text-secondary-container flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+                                    Работает
+                                </span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-headline font-black text-white">99.8%</div>
+<div class="text-[10px] uppercase font-bold text-outline">UPTIME (24H)</div>
+</div>
+</div>
+<div class="flex items-end justify-between">
+<div class="sparkline">
+<div class="sparkline-bar h-[90%]"></div>
+<div class="sparkline-bar h-[80%]"></div>
+<div class="sparkline-bar h-[95%]"></div>
+<div class="sparkline-bar h-[70%]"></div>
+<div class="sparkline-bar h-[85%]"></div>
+<div class="sparkline-bar h-[90%] active"></div>
+<div class="sparkline-bar h-[95%] active"></div>
+<div class="sparkline-bar h-[92%] active"></div>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary-fixed transition-colors" data-icon="vibration">vibration</span>
+</div>
+</div>
+<!-- API Platform -->
+<div class="bg-[#111111] p-8 hover:bg-surface-container transition-all group border-t border-outline-variant/10">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-1.5 h-10 bg-secondary-container"></div>
+<div>
+<h3 class="font-headline text-xl font-bold text-white">API платформы</h3>
+<span class="text-xs uppercase font-bold tracking-widest text-secondary-container flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+                                    Работает
+                                </span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-headline font-black text-white">45мс</div>
+<div class="text-[10px] uppercase font-bold text-outline">LATENCY</div>
+</div>
+</div>
+<div class="flex items-end justify-between">
+<div class="sparkline">
+<div class="sparkline-bar h-[30%]"></div>
+<div class="sparkline-bar h-[35%]"></div>
+<div class="sparkline-bar h-[25%]"></div>
+<div class="sparkline-bar h-[40%]"></div>
+<div class="sparkline-bar h-[30%]"></div>
+<div class="sparkline-bar h-[28%] active"></div>
+<div class="sparkline-bar h-[32%] active"></div>
+<div class="sparkline-bar h-[30%] active"></div>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary-fixed transition-colors" data-icon="api">api</span>
+</div>
+</div>
+<!-- Prize Delivery -->
+<div class="bg-[#111111] p-8 hover:bg-surface-container transition-all group border-t border-l border-outline-variant/10">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-1.5 h-10 bg-secondary-container"></div>
+<div>
+<h3 class="font-headline text-xl font-bold text-white">Доставка призов</h3>
+<span class="text-xs uppercase font-bold tracking-widest text-secondary-container flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+                                    Работает
+                                </span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-headline font-black text-white">99.5%</div>
+<div class="text-[10px] uppercase font-bold text-outline">UPTIME (24H)</div>
+</div>
+</div>
+<div class="flex items-end justify-between">
+<div class="sparkline">
+<div class="sparkline-bar h-[60%]"></div>
+<div class="sparkline-bar h-[55%]"></div>
+<div class="sparkline-bar h-[65%]"></div>
+<div class="sparkline-bar h-[50%]"></div>
+<div class="sparkline-bar h-[75%]"></div>
+<div class="sparkline-bar h-[80%] active"></div>
+<div class="sparkline-bar h-[70%] active"></div>
+<div class="sparkline-bar h-[85%] active"></div>
+</div>
+<span class="material-symbols-outlined text-white/20 group-hover:text-primary-fixed transition-colors" data-icon="redeem">redeem</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Incident History -->
+<section class="mb-16">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-widest text-primary-fixed mb-8">ИСТОРИЯ ИНЦИДЕНТОВ</h2>
+<div class="space-y-4">
+<!-- Incident 1 -->
+<div class="bg-surface-container-low p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-12 relative overflow-hidden">
+<div class="md:w-48 shrink-0">
+<div class="text-on-surface-variant font-headline font-bold text-lg mb-1">12 НОЯБРЯ 2024</div>
+<div class="text-[10px] uppercase tracking-widest text-outline">14:20 MSK</div>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<h4 class="font-headline text-xl font-bold text-white uppercase">Задержка синхронизации Twitch API</h4>
+<span class="px-3 py-1 bg-secondary-container/10 border border-secondary-container/20 text-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-none">Решено</span>
+</div>
+<p class="text-on-surface-variant text-sm max-w-3xl leading-relaxed">Наблюдались кратковременные задержки в обработке команд Twitch бота. Команда инженеров оптимизировала очереди сообщений. На данный момент сервис полностью восстановлен.</p>
+</div>
+</div>
+<!-- Incident 2 -->
+<div class="bg-surface-container-low p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-12 relative overflow-hidden">
+<div class="md:w-48 shrink-0">
+<div class="text-on-surface-variant font-headline font-bold text-lg mb-1">08 НОЯБРЯ 2024</div>
+<div class="text-[10px] uppercase tracking-widest text-outline">03:15 MSK</div>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<h4 class="font-headline text-xl font-bold text-white uppercase">Плановые технические работы</h4>
+<span class="px-3 py-1 bg-secondary-container/10 border border-secondary-container/20 text-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-none">Решено</span>
+</div>
+<p class="text-on-surface-variant text-sm max-w-3xl leading-relaxed">Успешное обновление серверной архитектуры базы данных. Простоев в работе платформы не зафиксировано. Стабильность системы повышена на 15%.</p>
+</div>
+</div>
+<!-- Incident 3 -->
+<div class="bg-surface-container-low p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-12 relative overflow-hidden opacity-80">
+<div class="md:w-48 shrink-0">
+<div class="text-on-surface-variant font-headline font-bold text-lg mb-1">01 НОЯБРЯ 2024</div>
+<div class="text-[10px] uppercase tracking-widest text-outline">10:00 MSK</div>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<h4 class="font-headline text-xl font-bold text-white uppercase">Сбой модуля доставки уведомлений</h4>
+<span class="px-3 py-1 bg-secondary-container/10 border border-secondary-container/20 text-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-none">Решено</span>
+</div>
+<p class="text-on-surface-variant text-sm max-w-3xl leading-relaxed">Ошибка в провайдере доставки сообщений Telegram. Мы переключились на резервный шлюз. Проблема полностью локализована и устранена.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Subscription Section -->
+<section class="max-w-4xl mx-auto">
+<div class="bg-primary-container p-1 md:p-2">
+<div class="bg-[#0A0A0A] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="md:w-1/2 text-center md:text-left">
+<h2 class="font-headline text-3xl font-black uppercase tracking-tighter text-white mb-2 leading-none">БУДЬТЕ В КУРСЕ</h2>
+<p class="text-on-surface-variant text-sm uppercase tracking-widest font-bold">Подпишитесь на уведомления о статусе систем</p>
+</div>
+<div class="md:w-1/2 w-full">
+<form class="flex flex-col gap-4">
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-white font-headline tracking-widest px-0 py-3 placeholder:text-outline/40" placeholder="ВАШ EMAIL" type="email"/>
+<span class="absolute right-0 bottom-3 material-symbols-outlined text-outline/40" data-icon="alternate_email">alternate_email</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary-fixed font-headline font-black uppercase tracking-widest py-4 hover:bg-primary-fixed transition-colors active:scale-[0.97] duration-150" type="submit">
+                                Подписаться на обновления
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-10 mt-auto bg-[#0A0A0A] border-t border-[#4C4732]/20 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-[#FFE100] font-bold text-lg font-headline tracking-widest">VOLTAGE STREAM</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Manrope'] text-xs font-medium uppercase tracking-widest text-white/40 hover:text-[#FFE100] transition-colors" href="#">ПОДДЕРЖКА</a>
+<a class="font-['Manrope'] text-xs font-medium uppercase tracking-widest text-white/40 hover:text-[#FFE100] transition-colors" href="#">API</a>
+<a class="font-['Manrope'] text-xs font-medium uppercase tracking-widest text-white/40 hover:text-[#FFE100] transition-colors" href="#">КОНФИДЕНЦИАЛЬНОСТЬ</a>
+<a class="font-['Manrope'] text-xs font-medium uppercase tracking-widest text-white/40 hover:text-[#FFE100] transition-colors" href="#">ВАКАНСИИ</a>
+</div>
+<div class="font-['Manrope'] text-xs font-medium uppercase tracking-widest text-white/40 text-center md:text-right">
+            © 2024 VOLTAGE STREAM. KINETIC PRECISION UI.
+        </div>
+</footer>
+</body></html>

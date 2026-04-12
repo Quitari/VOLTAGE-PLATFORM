@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#e1c700",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#ffe330",
+                    "outline": "#979177",
+                    "on-secondary-fixed": "#002203",
+                    "on-background": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "inverse-primary": "#6c5e00",
+                    "primary": "#fffdff",
+                    "on-error": "#690005",
+                    "surface-dim": "#131313",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#211c00",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "outline-variant": "#4c4732",
+                    "on-tertiary": "#2f3131",
+                    "tertiary-container": "#e1e1e1",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary": "#ecffe3",
+                    "on-primary-container": "#726300",
+                    "inverse-on-surface": "#313030",
+                    "primary-container": "#ffe100",
+                    "on-secondary": "#003907",
+                    "secondary-fixed-dim": "#00e639",
+                    "on-surface": "#e5e2e1",
+                    "secondary-fixed": "#72ff70",
+                    "on-tertiary-container": "#626464",
+                    "surface-variant": "#353534",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#3a3939",
+                    "on-surface-variant": "#cec6aa",
+                    "on-error-container": "#ffdad6",
+                    "error-container": "#93000a",
+                    "secondary-container": "#13ff43",
+                    "tertiary": "#fdfdfd",
+                    "on-secondary-container": "#007117",
+                    "surface-container-highest": "#353534",
+                    "surface": "#131313",
+                    "on-primary-fixed-variant": "#514700",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary-fixed-dim": "#e1c700",
+                    "on-primary": "#383000",
+                    "background": "#131313",
+                    "surface-container-high": "#2a2a2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Space Grotesk"
+                    ],
+                    "body": [
+                            "Manrope"
+                    ],
+                    "label": [
+                            "Space Grotesk"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .headline-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        /* Custom scrollbar for a gamer aesthetic */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0E0E0E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFE100;
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 h-20 bg-[#131313] flex justify-between items-center px-10 backdrop-blur-md">
+<div class="text-3xl font-black text-[#FFE100] italic headline-font">KINETIC</div>
+<div class="hidden md:flex items-center space-x-8 h-full">
+<a class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-white/70 hover:text-white transition-colors duration-200" href="#">ГЛАВНАЯ</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-white/70 hover:text-white transition-colors duration-200" href="#">РАСПИСАНИЕ</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-white/70 hover:text-white transition-colors duration-200" href="#">МОМЕНТЫ</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-[#FFE100] border-b-4 border-[#FFE100] pb-2" href="#">ПРАВИЛА</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tight font-bold text-white/70 hover:text-white transition-colors duration-200" href="#">СТАТУС</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="material-symbols-outlined text-white/70 hover:text-white active:scale-90 transition-all" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-white/70 hover:text-white active:scale-90 transition-all" data-icon="person">person</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] w-64 bg-[#0E0E0E] flex flex-col py-8 hidden md:flex">
+<div class="px-6 mb-8">
+<h3 class="font-['Space_Grotesk'] uppercase text-xs font-bold text-[#FFE100] tracking-widest">КАТЕГОРИИ</h3>
+<p class="font-['Space_Grotesk'] uppercase text-[10px] font-bold text-white/40">РЕГЛАМЕНТ ПЛАТФОРМЫ</p>
+</div>
+<div class="flex flex-col space-y-1">
+<a class="flex items-center px-6 py-4 bg-[#FFE100] text-[#211C00] font-['Space_Grotesk'] uppercase text-sm font-bold transition-transform" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+                ЧАТ
+            </a>
+<a class="flex items-center px-6 py-4 text-white/60 hover:text-white hover:bg-[#1C1B1B] font-['Space_Grotesk'] uppercase text-sm font-bold transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="redeem">redeem</span>
+                РОЗЫГРЫШИ
+            </a>
+<a class="flex items-center px-6 py-4 text-white/60 hover:text-white hover:bg-[#1C1B1B] font-['Space_Grotesk'] uppercase text-sm font-bold transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="gavel">gavel</span>
+                НАКАЗАНИЯ
+            </a>
+<a class="flex items-center px-6 py-4 text-white/60 hover:text-white hover:bg-[#1C1B1B] font-['Space_Grotesk'] uppercase text-sm font-bold transition-transform hover:translate-x-1" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="description">description</span>
+                АПЕЛЛЯЦИИ
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:ml-64 px-6 md:px-12">
+<div class="max-w-6xl mx-auto space-y-16">
+<!-- Hero Section / Header -->
+<section class="space-y-4">
+<h1 class="text-6xl md:text-8xl font-black headline-font uppercase tracking-tighter text-white">
+                    ПРАВИЛА <span class="text-[#FFE100]">СООБЩЕСТВА</span>
+</h1>
+<p class="text-lg text-white/60 max-w-2xl font-body">
+                    Соблюдение этих правил обеспечивает здоровую и честную игровую атмосферу для всех участников Kinetic. Незнание правил не освобождает от ответственности.
+                </p>
+</section>
+<!-- Rules Grid: Bento Style -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Section: Chat Rules -->
+<div class="md:col-span-8 bg-[#1C1B1B] p-8 space-y-8">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-[#FFE100] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#211C00]" data-icon="chat">chat</span>
+</div>
+<h2 class="text-2xl font-bold headline-font uppercase">Правила чата (Telegram &amp; Twitch)</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">01</span>
+<p class="text-white/80 text-sm">Проявляйте уважение ко всем участникам сообщества и стримеру.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">02</span>
+<p class="text-white/80 text-sm">Запрещен спам, флуд и злоупотребление CAPS LOCK.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">03</span>
+<p class="text-white/80 text-sm">Любая реклама сторонних ресурсов и услуг строго запрещена.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">04</span>
+<p class="text-white/80 text-sm">Запрещено разжигание ненависти, дискриминация и токсичное поведение.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">05</span>
+<p class="text-white/80 text-sm">Споры с модераторами в общем чате недопустимы.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">06</span>
+<p class="text-white/80 text-sm">Запрещена публикация личной информации других пользователей (Doxing).</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">07</span>
+<p class="text-white/80 text-sm">Не допускается обсуждение политики и религии в агрессивной форме.</p>
+</div>
+<div class="flex space-x-4">
+<span class="text-[#FFE100] headline-font font-bold text-xl italic">08</span>
+<p class="text-white/80 text-sm">Придерживайтесь тематики трансляции и заданных категорий.</p>
+</div>
+</div>
+</div>
+<!-- Section: Giveaway Rules -->
+<div class="md:col-span-4 bg-[#2A2A2A] p-8 flex flex-col justify-between">
+<div class="space-y-6">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-[#FFE100] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#211C00]" data-icon="redeem">redeem</span>
+</div>
+<h2 class="text-2xl font-bold headline-font uppercase leading-none">Правила розыгрышей</h2>
+</div>
+<ul class="space-y-4 text-sm text-white/80">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-[#FFE100] text-lg mr-2" data-icon="check_circle">check_circle</span>
+                                Один аккаунт на одного реального пользователя.
+                            </li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-[#FFE100] text-lg mr-2" data-icon="check_circle">check_circle</span>
+                                Использование ботов ведет к перманентному бану.
+                            </li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-[#FFE100] text-lg mr-2" data-icon="check_circle">check_circle</span>
+                                Призы выдаются только при выполнении всех условий.
+                            </li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-[#FFE100] text-lg mr-2" data-icon="check_circle">check_circle</span>
+                                Fair Play: любые манипуляции результатом запрещены.
+                            </li>
+</ul>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10 italic text-xs text-white/40">
+                        Администрация оставляет за собой право пересмотреть итоги в случае подозрений в обмане.
+                    </div>
+</div>
+</div>
+<!-- Punishment System Table -->
+<section class="space-y-6">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-[#FFE100] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#211C00]" data-icon="gavel">gavel</span>
+</div>
+<h2 class="text-3xl font-bold headline-font uppercase">Система наказаний</h2>
+</div>
+<div class="overflow-x-auto bg-[#1C1B1B]">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#0E0E0E]">
+<th class="p-6 headline-font uppercase text-sm tracking-wider text-[#FFE100]">Нарушение</th>
+<th class="p-6 headline-font uppercase text-sm tracking-wider text-[#FFE100]">Наказание</th>
+<th class="p-6 headline-font uppercase text-sm tracking-wider text-[#FFE100]">Срок</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-[#201F1F] transition-colors">
+<td class="p-6 text-sm font-medium">Мелкий флуд, спам символами</td>
+<td class="p-6">
+<span class="px-3 py-1 bg-[#FFE100] text-[#211C00] text-[10px] font-black uppercase rounded-sm">Warning</span>
+</td>
+<td class="p-6 text-sm text-white/60">Предупреждение</td>
+</tr>
+<tr class="hover:bg-[#201F1F] transition-colors">
+<td class="p-6 text-sm font-medium">Оскорбление участников сообщества</td>
+<td class="p-6">
+<span class="px-3 py-1 bg-orange-500 text-black text-[10px] font-black uppercase rounded-sm">Mute</span>
+</td>
+<td class="p-6 text-sm text-white/60">от 1 часа до 24 часов</td>
+</tr>
+<tr class="hover:bg-[#201F1F] transition-colors">
+<td class="p-6 text-sm font-medium">Реклама, ссылки на вредоносное ПО</td>
+<td class="p-6">
+<span class="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-sm">Ban</span>
+</td>
+<td class="p-6 text-sm text-white/60">Перманентно</td>
+</tr>
+<tr class="hover:bg-[#201F1F] transition-colors">
+<td class="p-6 text-sm font-medium">Разжигание межнациональной розни</td>
+<td class="p-6">
+<span class="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-sm">Ban</span>
+</td>
+<td class="p-6 text-sm text-white/60">от 7 дней до Перманентно</td>
+</tr>
+<tr class="hover:bg-[#201F1F] transition-colors">
+<td class="p-6 text-sm font-medium">Обход системы наказаний (мультиакк)</td>
+<td class="p-6">
+<span class="px-3 py-1 bg-red-600 text-white text-[10px] font-black uppercase rounded-sm">Ban</span>
+</td>
+<td class="p-6 text-sm text-white/60">Перманентно всех аккаунтов</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Appeals Section -->
+<section class="bg-[#FFE100] p-10 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+<div class="space-y-2 md:max-w-2xl">
+<h2 class="text-4xl font-black headline-font uppercase text-[#211C00] leading-none">Апелляции</h2>
+<p class="text-[#211C00] font-medium">
+                        Если вы считаете, что наказание было выдано по ошибке, вы можете подать запрос на пересмотр дела. Модераторы рассмотрят вашу заявку в течение 48 часов.
+                    </p>
+</div>
+<button class="bg-[#211C00] text-[#FFE100] px-8 py-4 headline-font font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-95 flex items-center">
+                    ПОДАТЬ АПЕЛЛЯЦИЮ
+                    <span class="material-symbols-outlined ml-2" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</section>
+<!-- Footer-like Brand Stamp -->
+<footer class="pt-10 opacity-20 flex justify-between items-center">
+<div class="text-4xl font-black headline-font italic">KINETIC</div>
+<div class="text-[10px] headline-font font-bold uppercase tracking-[0.5em]">2024 PRECISION GAMING SYSTEM</div>
+</footer>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full h-16 bg-[#131313] md:hidden flex justify-around items-center px-4 border-t border-white/5 z-50">
+<button class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</button>
+<button class="flex flex-col items-center text-[#FFE100]">
+<span class="material-symbols-outlined" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</button>
+<button class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+</button>
+<button class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</nav>
+</body></html>

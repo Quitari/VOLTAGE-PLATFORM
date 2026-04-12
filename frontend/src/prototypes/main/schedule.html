@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#ecffe3",
+                    "secondary-fixed-dim": "#00e639",
+                    "outline-variant": "#4c4732",
+                    "tertiary-container": "#e1e1e1",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#313030",
+                    "primary-fixed": "#ffe330",
+                    "primary": "#fffdff",
+                    "secondary-fixed": "#72ff70",
+                    "background": "#131313",
+                    "on-tertiary": "#2f3131",
+                    "surface-container-high": "#2a2a2a",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "on-secondary": "#003907",
+                    "on-primary-fixed": "#211c00",
+                    "surface": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary": "#383000",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#002203",
+                    "inverse-primary": "#6c5e00",
+                    "surface-variant": "#353534",
+                    "tertiary": "#fdfdfd",
+                    "surface-container": "#201f1f",
+                    "surface-bright": "#3a3939",
+                    "on-tertiary-container": "#626464",
+                    "surface-dim": "#131313",
+                    "on-background": "#e5e2e1",
+                    "surface-tint": "#e1c700",
+                    "primary-fixed-dim": "#e1c700",
+                    "on-primary-fixed-variant": "#514700",
+                    "outline": "#979177",
+                    "on-secondary-container": "#007117",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-container": "#13ff43",
+                    "on-surface-variant": "#cec6aa",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#726300",
+                    "primary-container": "#ffe100",
+                    "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            font-family: 'Manrope', sans-serif;
+            color: #e5e2e1;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#0E0E0E]/70 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-12">
+<div class="text-2xl font-black text-[#FFE100] tracking-tighter heading-font">KINETIC</div>
+<div class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] font-bold uppercase tracking-tight">
+<a class="text-white/60 hover:text-white transition-colors" href="#">ГЛАВНАЯ</a>
+<a class="text-[#FFE100] border-b-2 border-[#FFE100] pb-1" href="#">РАСПИСАНИЕ</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">МОМЕНТЫ</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">ПРАВИЛА</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">СТАТУС</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary-container text-on-primary-fixed px-6 py-2 font-bold heading-font uppercase text-sm rounded-md hover:bg-primary-fixed transition-all scale-95 active:duration-100">
+                ВОЙТИ
+            </button>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-6 max-w-7xl mx-auto space-y-20">
+<!-- Hero Section: Next Stream -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-low min-h-[500px] flex items-center p-8 md:p-16">
+<div class="absolute inset-0 z-0">
+<img alt="" class="w-full h-full object-cover opacity-30 mix-blend-luminosity" data-alt="futuristic neon-lit gaming room with high-end PC setup and cinematic atmospheric smoke in dark obsidian tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbJOBLIlBVKcVlZBonXDVjKUZh8n6h1PFZycBTePFIs9vrFxXoOA0FJbW_NMfHkUVRZDyEGNqhUzmNTo3iKXPUfdGSqkm-MlZQu006pK82pmjiTUHUfMPzBFub1UrldJqGU7_zOj66uykMs9hXzUbXPRhfI0jxGPt54hxNdItWixiekbkfcidieNAkqvo3FQz2jyzOfqrTCydVZE6C5sTQIInyUe03qmijpwFcrWDQGz_jSumUG8uE6k_oyPV1dvX3Y1fWeBaxjKAD"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest via-surface-container-lowest/80 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full lg:w-2/3">
+<div class="flex items-center gap-3 mb-6">
+<span class="bg-secondary-container text-on-secondary-fixed px-3 py-1 text-xs font-black heading-font flex items-center gap-2 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-on-secondary-fixed animate-pulse"></span>
+                        СКОРО В ЭФИРЕ
+                    </span>
+<span class="text-primary-fixed font-bold heading-font uppercase tracking-widest text-sm">СЕГОДНЯ, 20:00</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-black heading-font uppercase tracking-tighter mb-8 leading-[0.9]">
+                    ФИНАЛ СЕЗОНА:<br/><span class="text-primary-container">КИБЕРПАНК</span>
+</h1>
+<div class="grid grid-cols-4 gap-4 mb-10 max-w-md">
+<div class="bg-surface-container p-4 rounded-lg flex flex-col items-center">
+<span class="text-4xl font-black heading-font text-white">00</span>
+<span class="text-[10px] text-white/40 uppercase tracking-widest">дней</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg flex flex-col items-center">
+<span class="text-4xl font-black heading-font text-white">04</span>
+<span class="text-[10px] text-white/40 uppercase tracking-widest">часа</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg flex flex-col items-center">
+<span class="text-4xl font-black heading-font text-white">22</span>
+<span class="text-[10px] text-white/40 uppercase tracking-widest">мин</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg flex flex-col items-center border-t-2 border-primary-container">
+<span class="text-4xl font-black heading-font text-primary-container">15</span>
+<span class="text-[10px] text-primary-container/60 uppercase tracking-widest font-bold">сек</span>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-10 py-4 font-black heading-font uppercase tracking-tight flex items-center gap-3 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">notifications_active</span>
+                    УВЕДОМИТЬ МЕНЯ
+                </button>
+</div>
+</section>
+<!-- Weekly Schedule Section -->
+<section>
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-3xl md:text-5xl font-black heading-font uppercase tracking-tighter">ГРАФИК ТРАНСЛЯЦИЙ</h2>
+<p class="text-white/40 font-medium mt-2">ОБНОВЛЯЕТСЯ КАЖДУЮ НЕДЕЛЮ ПО ПОНЕДЕЛЬНИКАМ</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-7 gap-1">
+<!-- ПН -->
+<div class="bg-surface-container-low p-6 min-h-[280px] group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-12">
+<span class="text-4xl font-black heading-font text-white/10 group-hover:text-primary-container/20 transition-colors">ПН</span>
+<span class="text-xs font-bold text-primary-container bg-primary-container/10 px-2 py-1">18:00</span>
+</div>
+<div class="relative z-10">
+<div class="text-xs font-bold text-white/40 mb-1 heading-font">Dead by Daylight</div>
+<h3 class="text-lg font-black heading-font leading-tight uppercase">МАРАФОН ХОРРОРОВ</h3>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl text-white/5 group-hover:scale-110 transition-transform">skull</span>
+</div>
+<!-- ВТ -->
+<div class="bg-surface-container-lowest/50 p-6 min-h-[280px] flex flex-col items-center justify-center opacity-50 grayscale border border-white/5">
+<span class="text-4xl font-black heading-font text-white/10 mb-4">ВТ</span>
+<span class="text-sm font-bold text-white/40 heading-font uppercase tracking-widest">ВЫХОДНОЙ</span>
+</div>
+<!-- СР -->
+<div class="bg-surface-container-low p-6 min-h-[280px] group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-12">
+<span class="text-4xl font-black heading-font text-white/10 group-hover:text-primary-container/20">СР</span>
+<span class="text-xs font-bold text-primary-container bg-primary-container/10 px-2 py-1">20:00</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white/40 mb-1 heading-font">Cyberpunk 2077</div>
+<h3 class="text-lg font-black heading-font leading-tight uppercase">ПУТЬ НИДЗЯ</h3>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl text-white/5 group-hover:scale-110 transition-transform">sports_kabaddi</span>
+</div>
+<!-- ЧТ -->
+<div class="bg-surface-container-low p-6 min-h-[280px] group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-12">
+<span class="text-4xl font-black heading-font text-white/10 group-hover:text-primary-container/20">ЧТ</span>
+<span class="text-xs font-bold text-primary-container bg-primary-container/10 px-2 py-1">19:30</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white/40 mb-1 heading-font">Just Chatting</div>
+<h3 class="text-lg font-black heading-font leading-tight uppercase">СМОТРИМ МЕМЫ</h3>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl text-white/5 group-hover:scale-110 transition-transform">forum</span>
+</div>
+<!-- ПТ -->
+<div class="bg-surface-container-low p-6 min-h-[280px] group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-12">
+<span class="text-4xl font-black heading-font text-white/10 group-hover:text-primary-container/20">ПТ</span>
+<span class="text-xs font-bold text-primary-container bg-primary-container/10 px-2 py-1">21:00</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white/40 mb-1 heading-font">CS2</div>
+<h3 class="text-lg font-black heading-font leading-tight uppercase">РЕЙТИНГОВЫЙ ГРИНД</h3>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl text-white/5 group-hover:scale-110 transition-transform">target</span>
+</div>
+<!-- СБ -->
+<div class="bg-surface-container-low p-6 min-h-[280px] group hover:bg-surface-container transition-colors relative overflow-hidden ring-1 ring-primary-container/30">
+<div class="flex justify-between items-start mb-12">
+<span class="text-4xl font-black heading-font text-primary-container/20">СБ</span>
+<span class="text-xs font-bold bg-primary-container text-black px-2 py-1">20:00</span>
+</div>
+<div>
+<div class="text-xs font-bold text-primary-container mb-1 heading-font uppercase">Main Event</div>
+<h3 class="text-lg font-black heading-font leading-tight uppercase">ФИНАЛ СЕЗОНА</h3>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl text-primary-container/10 group-hover:scale-110 transition-transform">trophy</span>
+</div>
+<!-- ВС -->
+<div class="bg-surface-container-lowest/50 p-6 min-h-[280px] flex flex-col items-center justify-center opacity-50 grayscale border border-white/5">
+<span class="text-4xl font-black heading-font text-white/10 mb-4">ВС</span>
+<span class="text-sm font-bold text-white/40 heading-font uppercase tracking-widest">ВЫХОДНОЙ</span>
+</div>
+</div>
+</section>
+<!-- Past Streams Section -->
+<section class="space-y-6">
+<h2 class="text-2xl font-black heading-font uppercase tracking-tight flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">history</span>
+                ПРОШЕДШИЕ СТРИМЫ
+            </h2>
+<div class="space-y-1">
+<!-- Item 1 -->
+<div class="bg-surface-container-low hover:bg-surface-container flex flex-col md:row items-center p-4 md:px-8 md:py-6 gap-6 md:grid md:grid-cols-[120px_1fr_150px_200px] transition-colors">
+<div class="text-white/40 font-bold heading-font uppercase">15 ИЮНЯ</div>
+<div>
+<h4 class="text-lg font-bold uppercase heading-font">ТУРНИР 2Х2 ПО VALORANT</h4>
+<p class="text-sm text-white/30">С участием топовых игроков сообщества</p>
+</div>
+<div class="flex items-center gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">4ч 15м</span>
+</div>
+<button class="w-full md:w-auto border border-white/10 px-6 py-2 text-xs font-black heading-font uppercase tracking-widest hover:bg-white/5 transition-colors">СМОТРЕТЬ ЗАПИСЬ</button>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low hover:bg-surface-container flex flex-col md:row items-center p-4 md:px-8 md:py-6 gap-6 md:grid md:grid-cols-[120px_1fr_150px_200px] transition-colors">
+<div class="text-white/40 font-bold heading-font uppercase">12 ИЮНЯ</div>
+<div>
+<h4 class="text-lg font-bold uppercase heading-font">ОБЗОР НОВИНОК STEAM</h4>
+<p class="text-sm text-white/30">Ищем скрытые алмазы среди инди-игр</p>
+</div>
+<div class="flex items-center gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">3ч 40м</span>
+</div>
+<button class="w-full md:w-auto border border-white/10 px-6 py-2 text-xs font-black heading-font uppercase tracking-widest hover:bg-white/5 transition-colors">СМОТРЕТЬ ЗАПИСЬ</button>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-low hover:bg-surface-container flex flex-col md:row items-center p-4 md:px-8 md:py-6 gap-6 md:grid md:grid-cols-[120px_1fr_150px_200px] transition-colors">
+<div class="text-white/40 font-bold heading-font uppercase">10 ИЮНЯ</div>
+<div>
+<h4 class="text-lg font-bold uppercase heading-font">НОЧНОЙ ELDEN RING</h4>
+<p class="text-sm text-white/30">Прохождение боссов без урона</p>
+</div>
+<div class="flex items-center gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">6ч 12м</span>
+</div>
+<button class="w-full md:w-auto border border-white/10 px-6 py-2 text-xs font-black heading-font uppercase tracking-widest hover:bg-white/5 transition-colors">СМОТРЕТЬ ЗАПИСЬ</button>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-low hover:bg-surface-container flex flex-col md:row items-center p-4 md:px-8 md:py-6 gap-6 md:grid md:grid-cols-[120px_1fr_150px_200px] transition-colors">
+<div class="text-white/40 font-bold heading-font uppercase">08 ИЮНЯ</div>
+<div>
+<h4 class="text-lg font-bold uppercase heading-font">ASMR РАСПАКОВКА</h4>
+<p class="text-sm text-white/30">Тестируем новую периферию Kinetic</p>
+</div>
+<div class="flex items-center gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">2ч 05м</span>
+</div>
+<button class="w-full md:w-auto border border-white/10 px-6 py-2 text-xs font-black heading-font uppercase tracking-widest hover:bg-white/5 transition-colors">СМОТРЕТЬ ЗАПИСЬ</button>
+</div>
+<!-- Item 5 -->
+<div class="bg-surface-container-low hover:bg-surface-container flex flex-col md:row items-center p-4 md:px-8 md:py-6 gap-6 md:grid md:grid-cols-[120px_1fr_150px_200px] transition-colors">
+<div class="text-white/40 font-bold heading-font uppercase">05 ИЮНЯ</div>
+<div>
+<h4 class="text-lg font-bold uppercase heading-font">ПОДКАСТ #42: БУДУЩЕЕ ИГР</h4>
+<p class="text-sm text-white/30">Обсуждаем нейросети и геймдев</p>
+</div>
+<div class="flex items-center gap-2 text-white/60">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">5ч 50м</span>
+</div>
+<button class="w-full md:w-auto border border-white/10 px-6 py-2 text-xs font-black heading-font uppercase tracking-widest hover:bg-white/5 transition-colors">СМОТРЕТЬ ЗАПИСЬ</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-12 px-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 font-['Manrope'] text-xs uppercase tracking-widest">
+<div class="text-[#FFE100] font-black heading-font text-xl">KINETIC</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-white/30 hover:text-[#FFE100] transition-colors" href="#">ПОДДЕРЖКА</a>
+<a class="text-white/30 hover:text-[#FFE100] transition-colors" href="#">КОНФИДЕНЦИАЛЬНОСТЬ</a>
+<a class="text-white/30 hover:text-[#FFE100] transition-colors" href="#">ПРАВИЛА</a>
+<a class="text-white/30 hover:text-[#FFE100] transition-colors" href="#">API</a>
+</div>
+<div class="text-white/30 text-center md:text-right">
+            © 2024 KINETIC STREAMING. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
+        </div>
+</footer>
+</body></html>

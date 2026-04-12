@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Команды Twitch | Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary-container": "#ffe100",
+        "on-primary-fixed": "#211c00",
+        "surface-container-lowest": "#0e0e0e",
+        "surface-container-low": "#1c1b1b",
+        "surface-container": "#201f1f",
+        "surface-container-high": "#2a2a2a",
+        "on-surface": "#e5e2e1",
+        "on-surface-variant": "#cec6aa",
+        "outline-variant": "#4c4732",
+      },
+      fontFamily: {
+        "headline": ["Space Grotesk", "sans-serif"],
+        "body": ["Manrope", "sans-serif"],
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Manrope', sans-serif; background: #0A0A0A; color: #e5e2e1; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.row-hover:hover { background: rgba(255,255,255,0.02); }
+.var-tag { background: rgba(255,225,0,0.1); color: #FFE100; border: 1px solid rgba(255,225,0,0.2); font-family: monospace; font-size: 11px; padding: 2px 7px; border-radius: 4px; cursor: pointer; transition: all 0.15s; }
+.var-tag:hover { background: rgba(255,225,0,0.2); }
+.perm-btn { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid transparent; transition: all 0.15s; cursor: pointer; }
+.perm-btn.active-all  { background: rgba(255,225,0,0.15); color: #FFE100; border-color: rgba(255,225,0,0.2); }
+.perm-btn.active-sub  { background: rgba(145,70,255,0.15); color: #9146FF; border-color: rgba(145,70,255,0.2); }
+.perm-btn.active-mod  { background: rgba(34,197,94,0.15); color: #4ADE80; border-color: rgba(34,197,94,0.2); }
+.perm-btn.inactive    { background: transparent; color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.08); }
+.toggle { width: 36px; height: 20px; border-radius: 10px; position: relative; cursor: pointer; transition: background 0.2s; }
+.toggle.on  { background: rgba(255,225,0,0.8); }
+.toggle.off { background: #2A2A2A; }
+.toggle-thumb { position: absolute; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: white; transition: left 0.2s; }
+.toggle.on  .toggle-thumb { left: 18px; }
+.toggle.off .toggle-thumb { left: 2px; }
+.cmd-type-btn { padding: 8px 16px; border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
+.cmd-type-btn.active { background: #FFE100; color: #211C00; }
+.cmd-type-btn.inactive { background: #1C1B1B; color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.05); }
+.cmd-type-btn.inactive:hover { color: white; background: #2A2A2A; }
+.modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:999; align-items:center; justify-content:center; }
+.modal-bg.open { display:flex; }
+</style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- SIDEBAR -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
+<div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+  <h1 class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-4 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-1 pb-4">
+  <div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#FFE100] border-l-4 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Настройки" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="text-sm">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="text-sm">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-4 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sidebar-text">Выйти</span>
+  </button>
+</div>
+</aside>
+
+<!-- MAIN -->
+<main class="page-main min-h-screen p-8">
+  <div class="max-w-5xl">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-white/30 font-bold uppercase tracking-widest mb-6">
+      <a href="#" class="hover:text-white transition-colors">Админ</a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <a href="#" class="hover:text-white transition-colors">Контент</a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-[#FFE100]">Команды Twitch</span>
+    </nav>
+
+    <!-- Page header -->
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-black text-white font-headline uppercase tracking-tight">Команды Twitch</h1>
+        <p class="text-white/40 text-sm mt-1">Настройка ответов бота на команды в чате канала</p>
+      </div>
+      <button onclick="openModal()" class="flex items-center gap-2 px-5 py-3 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#FFE330] transition-all active:scale-95">
+        <span class="material-symbols-outlined text-lg">add</span>
+        Создать команду
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-8">
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Всего команд</div>
+        <div class="text-3xl font-black text-white font-headline">8</div>
+      </div>
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Активных</div>
+        <div class="text-3xl font-black text-[#FFE100] font-headline">6</div>
+      </div>
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Использований сегодня</div>
+        <div class="text-3xl font-black text-white font-headline">247</div>
+      </div>
+    </div>
+
+    <!-- Commands table -->
+    <div class="bg-[#111] border border-white/5 rounded-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/5">
+        <div class="flex gap-1">
+          <button class="px-3 py-1.5 bg-[#FFE100] text-[#211C00] text-[10px] font-black uppercase tracking-widest rounded-lg">Все</button>
+          <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Активные</button>
+          <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Системные</button>
+          <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Кастомные</button>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-base">search</span>
+          <input class="bg-[#1C1B1B] border border-white/5 text-white text-xs py-2 pl-9 pr-4 rounded-lg focus:outline-none w-48" placeholder="Поиск команды..."/>
+        </div>
+      </div>
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/5">
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Команда</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Ответ / Действие</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Права</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Кулдаун</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Исп. сег.</th>
+            <th class="px-5 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Вкл</th>
+            <th class="px-5 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5" id="commands-table">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+      <div class="px-5 py-3 border-t border-white/5 text-xs text-white/25 font-bold uppercase tracking-widest">
+        8 команд · 6 активных
+      </div>
+    </div>
+
+    <!-- Variables reference -->
+    <div class="bg-[#111] border border-white/5 rounded-2xl p-6 mt-6">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-[#FFE100]">code</span>
+        <h3 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Доступные переменные</h3>
+      </div>
+      <p class="text-xs text-white/40 mb-4">Нажмите на переменную чтобы скопировать. Используйте в тексте ответа бота.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="var-tag" onclick="copyVar(this)">{user}</span>
+        <span class="var-tag" onclick="copyVar(this)">{viewers}</span>
+        <span class="var-tag" onclick="copyVar(this)">{uptime}</span>
+        <span class="var-tag" onclick="copyVar(this)">{random}</span>
+        <span class="var-tag" onclick="copyVar(this)">{game}</span>
+        <span class="var-tag" onclick="copyVar(this)">{title}</span>
+        <span class="var-tag" onclick="copyVar(this)">{channel}</span>
+        <span class="var-tag" onclick="copyVar(this)">{count}</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-4 text-xs text-white/40">
+        <div><span class="var-tag mr-2">{user}</span>Никнейм того кто написал команду</div>
+        <div><span class="var-tag mr-2">{viewers}</span>Текущее число зрителей</div>
+        <div><span class="var-tag mr-2">{uptime}</span>Время с начала стрима</div>
+        <div><span class="var-tag mr-2">{random}</span>Случайный зритель из чата</div>
+        <div><span class="var-tag mr-2">{game}</span>Текущая игра на стриме</div>
+        <div><span class="var-tag mr-2">{count}</span>Счётчик использований команды</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CREATE / EDIT MODAL -->
+<div id="cmd-modal" class="modal-bg">
+  <div class="bg-[#111] border border-white/10 rounded-2xl w-full max-w-2xl mx-4 overflow-hidden">
+    <div class="flex items-center justify-between px-6 py-5 border-b border-white/5">
+      <h3 class="text-lg font-black text-white font-headline uppercase" id="modal-title">Создать команду</h3>
+      <button onclick="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#2A2A2A] text-white/40 hover:text-white transition-all">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+    <div class="p-6 space-y-5">
+
+      <!-- Command name -->
+      <div>
+        <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Команда</label>
+        <div class="relative">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#FFE100] font-black font-mono text-lg">!</span>
+          <input id="cmd-name" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 pl-9 pr-4 rounded-xl focus:outline-none focus:border-[#FFE100]/40 font-mono" placeholder="roll" type="text"/>
+        </div>
+        <p class="text-[10px] text-white/25 mt-1">Зрители пишут !roll в чате. Без пробелов и спецсимволов.</p>
+      </div>
+
+      <!-- Command type -->
+      <div>
+        <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Тип команды</label>
+        <div class="flex gap-2">
+          <button class="cmd-type-btn active" onclick="setType(this,'text')">
+            <span class="material-symbols-outlined text-base align-middle mr-1">chat</span>Текстовый ответ
+          </button>
+          <button class="cmd-type-btn inactive" onclick="setType(this,'action')">
+            <span class="material-symbols-outlined text-base align-middle mr-1">bolt</span>Действие бота
+          </button>
+          <button class="cmd-type-btn inactive" onclick="setType(this,'giveaway')">
+            <span class="material-symbols-outlined text-base align-middle mr-1">redeem</span>Участие в розыгрыше
+          </button>
+        </div>
+      </div>
+
+      <!-- Response -->
+      <div id="response-block">
+        <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Ответ бота</label>
+        <div class="relative">
+          <textarea id="cmd-response" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 px-4 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none h-24" placeholder="Например: {user}, ты участвуешь в розыгрыше! Осталось {viewers} зрителей."></textarea>
+          <div class="absolute bottom-3 right-3 flex gap-1">
+            <button onclick="insertVar('{user}')" class="var-tag">{user}</button>
+            <button onclick="insertVar('{viewers}')" class="var-tag">{viewers}</button>
+            <button onclick="insertVar('{random}')" class="var-tag">{random}</button>
+          </div>
+        </div>
+        <!-- Live preview -->
+        <div class="mt-3 bg-[#0A0A0A] rounded-xl p-4 border border-white/5">
+          <div class="text-[10px] font-bold text-white/25 uppercase tracking-widest mb-2">Предпросмотр</div>
+          <div class="flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-[#9146FF]/30 flex items-center justify-center flex-shrink-0">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#9146FF"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-[#9146FF]">StreamBot</span>
+              <p class="text-sm text-white/70 mt-0.5" id="preview-text">Введите ответ выше чтобы увидеть предпросмотр</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action type block (hidden by default) -->
+      <div id="action-block" class="hidden">
+        <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Действие</label>
+        <select class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 px-4 rounded-xl focus:outline-none">
+          <option>Запустить розыгрыш</option>
+          <option>Показать топ активных</option>
+          <option>Объявить победителя</option>
+          <option>Включить/выключить режим подписчиков</option>
+        </select>
+      </div>
+
+      <!-- Giveaway params (shown when type=giveaway) -->
+      <div id="giveaway-params-block" class="hidden bg-[#1C1B1B] border border-[#FFE100]/20 rounded-xl p-5 space-y-4">
+        <div class="text-[10px] font-bold text-[#FFE100] uppercase tracking-widest">⚡ Параметры розыгрыша</div>
+        <div>
+          <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Действие розыгрыша</label>
+          <select class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#FFE100]/40">
+            <option>Зарегистрировать участника (написал ключевое слово)</option>
+            <option>Запустить новый розыгрыш</option>
+            <option>Показать текущих участников</option>
+            <option>Объявить победителя вручную</option>
+          </select>
+        </div>
+        <div id="keyword-row">
+          <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Ключевое слово для регистрации</label>
+          <input class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#FFE100]/40 font-mono" placeholder="Например: 1  (зрители пишут 1 чтобы участвовать)"/>
+        </div>
+        <div class="text-[10px] text-white/30 leading-relaxed">
+          Бот будет отслеживать написавших это слово и добавлять их в список участников текущего розыгрыша.
+        </div>
+      </div>
+
+      <!-- Settings row -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Кулдаун</label>
+          <div class="flex items-center gap-3">
+            <input id="cmd-cooldown" class="w-20 bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-3 rounded-xl focus:outline-none text-center font-mono" type="number" value="30" min="0"/>
+            <span class="text-xs text-white/30">секунд</span>
+          </div>
+        </div>
+        <div>
+          <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Кто может использовать</label>
+          <div class="flex gap-1">
+            <button class="perm-btn active-all" onclick="setPerm(this,'all')">Все</button>
+            <button class="perm-btn inactive" onclick="setPerm(this,'sub')">Подписчики</button>
+            <button class="perm-btn inactive" onclick="setPerm(this,'mod')">Модераторы</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aliases -->
+      <div>
+        <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Псевдонимы (необязательно)</label>
+        <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-xs py-2.5 px-4 rounded-xl focus:outline-none font-mono" placeholder="!r, !ролл — через запятую"/>
+      </div>
+
+    </div>
+    <div class="flex gap-3 px-6 py-5 border-t border-white/5 bg-[#0A0A0A]">
+      <button onclick="closeModal()" class="flex-1 py-3 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl transition-all">Отмена</button>
+      <button class="flex-2 px-8 py-3 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#FFE330] transition-all active:scale-95">Сохранить команду</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm -->
+<div id="delete-modal" class="modal-bg">
+  <div class="bg-[#111] border border-red-500/20 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h3 class="text-lg font-black text-white font-headline uppercase mb-2">Удалить команду</h3>
+    <p class="text-sm text-white/50 mb-5">Команда <span id="delete-cmd-name" class="text-white font-mono font-bold"></span> будет удалена безвозвратно.</p>
+    <div class="flex gap-3">
+      <button onclick="closeDeleteModal()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button class="flex-1 py-2.5 bg-red-500 hover:bg-red-400 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all">Удалить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const COMMANDS = [
+  { name:'!roll',    type:'action',  response:'Выбираю победителя среди активных зрителей...', perm:'all',  cd:30,  uses:87,  on:true,  system:false },
+  { name:'!winner',  type:'action',  response:'Объявляю победителя розыгрыша!',                perm:'mod',  cd:0,   uses:12,  on:true,  system:false },
+  { name:'!uptime',  type:'text',    response:'Стрим идёт уже {uptime}!',                      perm:'all',  cd:10,  uses:43,  on:true,  system:false },
+  { name:'!viewers', type:'text',    response:'Сейчас на стриме {viewers} зрителей!',           perm:'all',  cd:15,  uses:31,  on:true,  system:false },
+  { name:'!game',    type:'text',    response:'Сейчас играем в {game}',                         perm:'all',  cd:10,  uses:18,  on:true,  system:false },
+  { name:'!socials', type:'text',    response:'TG: t.me/channel | Сайт: example.com',           perm:'all',  cd:60,  uses:9,   on:true,  system:false },
+  { name:'!ban',     type:'action',  response:'Модераторская команда бана',                     perm:'mod',  cd:0,   uses:4,   on:false, system:true  },
+  { name:'!help',    type:'text',    response:'Команды: !roll !uptime !viewers !game !socials',  perm:'all',  cd:20,  uses:15,  on:false, system:false },
+];
+
+const PERM_LABEL = { all: 'Все', sub: 'Подписчики', mod: 'Модераторы' };
+const PERM_CLASS = { all: 'bg-[#FFE100]/10 text-[#FFE100]', sub: 'bg-[#9146FF]/10 text-[#9146FF]', mod: 'bg-green-500/10 text-green-400' };
+const TYPE_ICON  = { action: 'bolt', text: 'chat', giveaway: 'redeem' };
+
+function renderTable() {
+  const tb = document.getElementById('commands-table');
+  tb.innerHTML = COMMANDS.map((c, i) => `
+    <tr class="row-hover transition-all ${c.on ? '' : 'opacity-50'}">
+      <td class="px-5 py-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-base text-white/30">${TYPE_ICON[c.type]}</span>
+          <span class="font-mono font-bold text-white text-sm">${c.name}</span>
+          ${c.system ? '<span class="bg-white/5 text-white/30 text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest">sys</span>' : ''}
+        </div>
+      </td>
+      <td class="px-5 py-4 max-w-xs">
+        <span class="text-xs text-white/50 truncate block">${c.response}</span>
+      </td>
+      <td class="px-5 py-4">
+        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full ${PERM_CLASS[c.perm]}">${PERM_LABEL[c.perm]}</span>
+      </td>
+      <td class="px-5 py-4 text-xs text-white/40 font-mono">${c.cd > 0 ? c.cd + 'с' : '—'}</td>
+      <td class="px-5 py-4 text-xs text-white/40 font-mono">${c.uses}</td>
+      <td class="px-5 py-4">
+        <div class="toggle ${c.on ? 'on' : 'off'}" onclick="toggleCmd(${i})">
+          <div class="toggle-thumb"></div>
+        </div>
+      </td>
+      <td class="px-5 py-4">
+        <div class="flex items-center gap-1">
+          <button onclick="editCmd(${i})" class="p-1.5 rounded-lg hover:bg-[#2A2A2A] text-white/30 hover:text-white transition-all">
+            <span class="material-symbols-outlined text-base">edit</span>
+          </button>
+          ${c.system ? '<span class="p-1.5 text-white/10 cursor-not-allowed"><span class="material-symbols-outlined text-base">lock</span></span>' : `<button onclick="confirmDelete(${i})" class="p-1.5 rounded-lg hover:bg-red-500/10 text-white/30 hover:text-red-400 transition-all"><span class="material-symbols-outlined text-base">delete</span></button>`}
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function toggleCmd(i) {
+  COMMANDS[i].on = !COMMANDS[i].on;
+  renderTable();
+}
+
+function editCmd(i) {
+  const c = COMMANDS[i];
+  document.getElementById('modal-title').textContent = 'Редактировать команду';
+  document.getElementById('cmd-name').value = c.name.replace('!', '');
+  document.getElementById('cmd-response').value = c.response;
+  document.getElementById('cmd-cooldown').value = c.cd;
+  updatePreview();
+  openModal();
+}
+
+function confirmDelete(i) {
+  document.getElementById('delete-cmd-name').textContent = COMMANDS[i].name;
+  document.getElementById('delete-modal').classList.add('open');
+}
+function closeDeleteModal() {
+  document.getElementById('delete-modal').classList.remove('open');
+}
+
+function openModal() { document.getElementById('cmd-modal').classList.add('open'); }
+function closeModal() { document.getElementById('cmd-modal').classList.remove('open'); document.getElementById('modal-title').textContent = 'Создать команду'; }
+
+document.querySelectorAll('.modal-bg').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+function setType(btn, type) {
+  document.querySelectorAll('.cmd-type-btn').forEach(b => { b.classList.remove('active'); b.classList.add('inactive'); });
+  btn.classList.add('active'); btn.classList.remove('inactive');
+  document.getElementById('response-block').classList.toggle('hidden', type !== 'text' && type !== 'giveaway');
+  document.getElementById('action-block').classList.toggle('hidden', type !== 'action');
+  document.getElementById('giveaway-params-block').classList.toggle('hidden', type !== 'giveaway');
+  document.getElementById('response-block').classList.toggle('hidden', type === 'action');
+}
+
+function setPerm(btn, type) {
+  document.querySelectorAll('.perm-btn').forEach(b => { b.className = 'perm-btn inactive'; });
+  btn.className = `perm-btn active-${type}`;
+}
+
+function insertVar(v) {
+  const ta = document.getElementById('cmd-response');
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  ta.value = ta.value.substring(0,s) + v + ta.value.substring(e);
+  ta.focus(); ta.selectionStart = ta.selectionEnd = s + v.length;
+  updatePreview();
+}
+
+function updatePreview() {
+  const val = document.getElementById('cmd-response').value;
+  const preview = val
+    .replace(/{user}/g, '<span class="text-[#FFE100]">CyberVova_99</span>')
+    .replace(/{viewers}/g, '<span class="text-white">12 430</span>')
+    .replace(/{random}/g, '<span class="text-[#9146FF]">@random_user</span>')
+    .replace(/{uptime}/g, '<span class="text-white">2ч 14мин</span>')
+    .replace(/{game}/g, '<span class="text-white">Counter-Strike 2</span>')
+    .replace(/{channel}/g, '<span class="text-[#9146FF]">zhenyalarkin</span>')
+    .replace(/{count}/g, '<span class="text-white">42</span>');
+  document.getElementById('preview-text').innerHTML = preview || 'Введите ответ выше...';
+}
+
+function copyVar(el) {
+  navigator.clipboard.writeText(el.textContent);
+  const orig = el.textContent;
+  el.textContent = 'скопировано!';
+  setTimeout(() => { el.textContent = orig; }, 1200);
+}
+
+document.getElementById('cmd-response').addEventListener('input', updatePreview);
+
+renderTable();
+</script>
+
+
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body>
+</html>

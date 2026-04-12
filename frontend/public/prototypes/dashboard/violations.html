@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#383000",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "secondary-fixed": "#72ff70",
+                    "secondary": "#ecffe3",
+                    "on-error-container": "#ffdad6",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-error": "#690005",
+                    "on-primary-fixed-variant": "#514700",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#626464",
+                    "secondary-fixed-dim": "#00e639",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary-container": "#726300",
+                    "surface-container-highest": "#353534",
+                    "surface": "#131313",
+                    "outline": "#979177",
+                    "background": "#131313",
+                    "primary-container": "#ffe100",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container": "#201f1f",
+                    "on-secondary": "#003907",
+                    "inverse-primary": "#6c5e00",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#007117",
+                    "surface-bright": "#3a3939",
+                    "surface-tint": "#e1c700",
+                    "tertiary": "#fdfdfd",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#211c00",
+                    "surface-container-high": "#2a2a2a",
+                    "on-background": "#e5e2e1",
+                    "outline-variant": "#4c4732",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#e1e1e1",
+                    "primary-fixed-dim": "#e1c700",
+                    "on-secondary-fixed": "#002203",
+                    "secondary-container": "#13ff43",
+                    "primary-fixed": "#ffe330",
+                    "on-surface-variant": "#cec6aa",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary": "#2f3131",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary": "#fffdff",
+                    "surface-dim": "#131313"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-[#0E0E0E]/70 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#FFE100] italic font-['Space_Grotesk'] uppercase tracking-tighter">KINETIC</span>
+<div class="hidden md:flex bg-[#1C1B1B] items-center px-4 py-2 rounded-lg group">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-headline uppercase tracking-wider w-64 placeholder:text-on-surface-variant/50" placeholder="ПОИСК КОНТЕНТА..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#2A2A2A] transition-colors active:scale-95 duration-150 rounded-lg">
+<span class="material-symbols-outlined text-[#FFFDFF]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#2A2A2A] transition-colors active:scale-95 duration-150 rounded-lg">
+<span class="material-symbols-outlined text-[#FFFDFF]">person</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-8 px-6 pb-12 min-h-screen">
+<div class="max-w-6xl mx-auto space-y-12">
+<!-- Section Header -->
+<header>
+<h1 class="text-4xl font-headline font-bold uppercase tracking-tight text-[#FFFDFF]">НАРУШЕНИЯ И АПЕЛЛЯЦИИ</h1>
+<p class="text-on-surface-variant font-medium mt-2">Центр управления состоянием аккаунта и историей дисциплинарных мер.</p>
+</header>
+<!-- Grid Layout for Dynamic Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Active & New Appeal Form -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Section: Active Punishments -->
+<section class="space-y-4">
+<h2 class="text-xl font-headline font-bold uppercase tracking-wide text-secondary-container flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                            ТЕКУЩИЕ ОГРАНИЧЕНИЯ
+                        </h2>
+<!-- State B: Information (Active Mute) -->
+<div class="bg-[#1C1B1B] p-6 rounded-lg relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-6">
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error text-3xl">volume_off</span>
+<div>
+<h3 class="text-xl font-headline font-bold uppercase text-error">Блокировка чата (24ч)</h3>
+<p class="text-xs text-on-surface-variant font-headline uppercase tracking-widest">ВЫДАНО: 22.05.2024 • MOD_ALPHA</p>
+</div>
+</div>
+<div class="bg-[#0E0E0E] p-4 rounded-md">
+<p class="text-sm font-medium text-[#FFFDFF]/80 italic">Причина: "Неоднократный спам рекламными ссылками в общем чате трансляции."</p>
+</div>
+</div>
+<div class="w-full md:w-auto flex flex-col items-end gap-4">
+<div class="text-right">
+<p class="text-[0.65rem] font-headline font-bold uppercase text-on-surface-variant tracking-widest">ОСТАЛОСЬ ВРЕМЕНИ</p>
+<p class="text-3xl font-headline font-bold text-error tracking-tighter">18:42:05</p>
+</div>
+<button class="w-full md:w-auto bg-primary-container text-on-primary-fixed px-6 py-3 font-headline font-bold uppercase text-sm rounded-lg hover:bg-primary-fixed transition-colors active:scale-95 duration-150">
+                                        ОБЖАЛОВАТЬ
+                                    </button>
+</div>
+</div>
+</div>
+<!-- State A: Positive (Decorative illustration of what no violations looks like) -->
+<div class="bg-[#1C1B1B]/40 p-6 rounded-lg flex items-center gap-6 opacity-60">
+<span class="material-symbols-outlined text-secondary-container text-4xl">verified_user</span>
+<div class="font-headline">
+<p class="text-secondary-container font-bold uppercase text-lg">Нарушений не обнаружено</p>
+<p class="text-sm text-on-surface-variant">Ваша репутация безупречна. Продолжайте в том же духе!</p>
+</div>
+</div>
+</section>
+<!-- Section: New Appeal Form -->
+<section class="space-y-4">
+<div class="bg-surface-container p-8 rounded-lg">
+<h2 class="text-xl font-headline font-bold uppercase mb-6 text-[#FFFDFF]">НОВАЯ АПЕЛЛЯЦИЯ</h2>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-headline font-bold uppercase text-on-surface-variant tracking-widest">ОПИШИТЕ СИТУАЦИЮ</label>
+<textarea class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary-container text-on-surface rounded-lg p-4 font-body placeholder:text-on-surface-variant/30" placeholder="Укажите детали, почему вы считаете наказание несправедливым..." rows="4"></textarea>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary-container text-on-primary-fixed px-10 py-3 font-headline font-bold uppercase text-sm rounded-lg hover:bg-primary-fixed transition-all flex items-center gap-2" type="submit">
+                                        ОТПРАВИТЬ <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</form>
+</div>
+</section>
+</div>
+<!-- Right Column: My Appeals -->
+<div class="lg:col-span-1 space-y-8">
+<section class="space-y-4">
+<h2 class="text-xl font-headline font-bold uppercase tracking-wide text-[#FFFDFF]">МОИ АПЕЛЛЯЦИИ</h2>
+<div class="space-y-4">
+<!-- Appeal Card: Under Review -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-4">
+<div class="flex justify-between items-start">
+<span class="text-[0.65rem] font-headline font-bold text-on-surface-variant uppercase">ID: #88219 • 20.05.24</span>
+<span class="px-2 py-1 bg-primary-container text-on-primary-fixed text-[10px] font-headline font-bold uppercase rounded">На рассмотрении</span>
+</div>
+<p class="text-sm line-clamp-2 text-on-surface-variant">"Я случайно вставил ссылку, которую скопировал для друга..."</p>
+</div>
+<!-- Appeal Card: Approved -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-4">
+<div class="flex justify-between items-start">
+<span class="text-[0.65rem] font-headline font-bold text-on-surface-variant uppercase">ID: #87902 • 15.05.24</span>
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-fixed text-[10px] font-headline font-bold uppercase rounded">Одобрено</span>
+</div>
+<div class="space-y-2">
+<p class="text-sm text-on-surface-variant italic">"Ваше наказание было аннулировано после пересмотра логов. Приносим извинения."</p>
+<p class="text-[10px] font-headline font-bold uppercase text-secondary-container">— MOD_OMEGA</p>
+</div>
+</div>
+<!-- Appeal Card: Rejected -->
+<div class="bg-surface-container-low p-5 rounded-lg space-y-4">
+<div class="flex justify-between items-start">
+<span class="text-[0.65rem] font-headline font-bold text-on-surface-variant uppercase">ID: #87001 • 01.05.24</span>
+<span class="px-2 py-1 bg-error text-on-error text-[10px] font-headline font-bold uppercase rounded">Отклонено</span>
+</div>
+<div class="space-y-2">
+<p class="text-sm text-on-surface-variant italic">"Нарушение подтверждено. Повторные нарушения приведут к перманентному бану."</p>
+<p class="text-[10px] font-headline font-bold uppercase text-error">— SYSTEM_BOT</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Bottom Section: Violation History Table -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="text-2xl font-headline font-bold uppercase tracking-wide text-[#FFFDFF]">ИСТОРИЯ НАРУШЕНИЙ</h2>
+<p class="text-xs font-headline font-bold text-on-surface-variant uppercase tracking-widest">ПОКАЗАНО: ПОСЛЕДНИЕ 5 ЗАПИСЕЙ</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-headline font-bold text-xs uppercase text-on-surface-variant tracking-widest">
+<th class="px-6 py-4">Дата</th>
+<th class="px-6 py-4">Тип</th>
+<th class="px-6 py-4">Причина</th>
+<th class="px-6 py-4">Кем выдано</th>
+<th class="px-6 py-4">Статус</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#2A2A2A]">
+<tr class="text-on-surface-variant/40 hover:bg-[#1C1B1B] transition-colors">
+<td class="px-6 py-4 text-sm">12.04.2024</td>
+<td class="px-6 py-4 font-headline text-sm font-bold uppercase">Варн</td>
+<td class="px-6 py-4 text-sm italic">Использование капса</td>
+<td class="px-6 py-4 text-xs font-headline uppercase">MOD_BETA</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-headline font-bold uppercase border border-on-surface-variant/20 px-2 py-1 rounded">Истекло</span>
+</td>
+</tr>
+<tr class="text-on-surface-variant/40 hover:bg-[#1C1B1B] transition-colors">
+<td class="px-6 py-4 text-sm">01.03.2024</td>
+<td class="px-6 py-4 font-headline text-sm font-bold uppercase">Мут (1ч)</td>
+<td class="px-6 py-4 text-sm italic">Флуд смайлами</td>
+<td class="px-6 py-4 text-xs font-headline uppercase">AUTO_MOD</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-headline font-bold uppercase border border-on-surface-variant/20 px-2 py-1 rounded">Истекло</span>
+</td>
+</tr>
+<tr class="text-on-surface-variant/40 hover:bg-[#1C1B1B] transition-colors">
+<td class="px-6 py-4 text-sm">15.01.2024</td>
+<td class="px-6 py-4 font-headline text-sm font-bold uppercase">Варн</td>
+<td class="px-6 py-4 text-sm italic">Спойлеры в чате</td>
+<td class="px-6 py-4 text-xs font-headline uppercase">MOD_GAMMA</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-headline font-bold uppercase border border-on-surface-variant/20 px-2 py-1 rounded">Аннулировано</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Nav Bar (Shared Component) -->
+
+</body></html>

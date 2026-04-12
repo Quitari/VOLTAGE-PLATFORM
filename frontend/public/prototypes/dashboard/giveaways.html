@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#211c00",
+                      "tertiary-container": "#e1e1e1",
+                      "surface-container-low": "#1c1b1b",
+                      "on-tertiary": "#2f3131",
+                      "on-secondary-fixed": "#002203",
+                      "secondary": "#ecffe3",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-surface": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#3a3939",
+                      "surface": "#131313",
+                      "surface-variant": "#353534",
+                      "outline-variant": "#4c4732",
+                      "on-primary-fixed-variant": "#514700",
+                      "on-primary": "#383000",
+                      "primary-container": "#ffe100",
+                      "on-error-container": "#ffdad6",
+                      "background": "#131313",
+                      "primary-fixed": "#ffe330",
+                      "on-surface-variant": "#cec6aa",
+                      "inverse-on-surface": "#313030",
+                      "secondary-fixed": "#72ff70",
+                      "inverse-surface": "#e5e2e1",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-container": "#201f1f",
+                      "outline": "#979177",
+                      "on-primary-container": "#726300",
+                      "surface-container-high": "#2a2a2a",
+                      "primary": "#fffdff",
+                      "on-tertiary-container": "#626464",
+                      "secondary-container": "#13ff43",
+                      "tertiary": "#fdfdfd",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed-dim": "#e1c700",
+                      "surface-tint": "#e1c700",
+                      "on-background": "#e5e2e1",
+                      "surface-dim": "#131313",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-secondary-fixed-variant": "#00530e",
+                      "on-secondary": "#003907",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "surface-container-highest": "#353534",
+                      "on-secondary-container": "#007117",
+                      "secondary-fixed-dim": "#00e639",
+                      "inverse-primary": "#6c5e00",
+                      "on-error": "#690005"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Manrope"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0A0A0A; color: #E5E2E1; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .participation-badge { clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0E0E0E; }
+        ::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFE100; }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-xl border-b border-[#4C4732]/15 flex justify-between items-center h-16 px-6">
+<div class="text-2xl font-bold tracking-tighter text-[#FFE100] font-['Space_Grotesk'] uppercase">
+            CYBERSTREAM
+        </div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-white/70 hover:text-[#FFE100] transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Стримы</a>
+<a class="text-white/70 hover:text-[#FFE100] transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Игры</a>
+<a class="text-[#FFE100] font-bold font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Розыгрыши</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/70 hover:text-[#FFE100] cursor-pointer transition-colors" data-icon="search">search</span>
+<span class="material-symbols-outlined text-white/70 hover:text-[#FFE100] cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant/30">
+<img alt="User profile" data-alt="close-up portrait of a professional gamer with neon lighting highlights on face and futuristic headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8ExrZy2cgqDLZMwWwuKYM4bxXFtzwIgtCDA_r_KCoXpQ1NigqFnbZV-6L-bs0r0ltDL5Zr3_CYZQoOPWRbYBEDHJ4X1PUvtYhfMuEWu2h94FDECg80SVDQRDyhX4aple4g14xYd6PBdH8eoevGZ4LIhDyM6e-VSHTJ8oP91pa6HeEEa9gNWId0zLaaIf7fx_SlGBAN09P7EmdMEJezNEbkatAPwBxuzMzwU6M6CAajYvRB41cKtyaxldoUzorKFlGiauZtWvqqwLm"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-10 min-h-screen bg-[#0A0A0A]">
+<div class="max-w-6xl mx-auto">
+<header class="mb-12">
+<h1 class="text-5xl font-bold tracking-tighter uppercase text-primary mb-2">Розыгрыши</h1>
+<div class="h-1 w-24 bg-primary-container"></div>
+</header>
+<!-- Section: Participating Now -->
+<section class="mb-16">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold uppercase tracking-widest text-on-surface flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                            Участвую сейчас
+                        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Prize Card 1 -->
+<div class="group relative bg-surface-container-low overflow-hidden transition-all duration-500 hover:bg-surface-container border-l-2 border-transparent hover:border-primary-container">
+<div class="relative h-64 overflow-hidden">
+<img alt="RTX 4090 GPU" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="ultra-realistic close-up of a high-end graphics card with glowing RGB lighting in a dark futuristic computer case environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW5tysqYsXD1jmKf8W7IE3oG3W62vsFZHDuNNhNfbBHCPRfLl1Z5j4j6KtokUhnkg6U6BSX6u3tHZYjjFpioYCm9bgIQd3xtUGVePBX4OL9Pe7mzieydCeGXMRSwAeADvla4zieVj9I8ZH6OC4Nc3w5z3b70Zwivxzfh5lNnRIvL7dvKvwiynhBvJaiiuNHdw8CEKAjUwr2jt_QlM_0diZc8T7sqz2Xny4c4kN04SMiXqhgD043Fj7ntXYB2s0toODcADItmjC1opU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-[#24A1DE] text-white text-[10px] font-bold uppercase tracking-widest rounded-sm">Telegram</span>
+<span class="px-3 py-1 bg-primary-container text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest rounded-sm">УЧАСТВУЮ</span>
+</div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-2xl font-bold text-white uppercase tracking-tight leading-none mb-1">NVIDIA RTX 4090 FE</h3>
+<p class="text-white/60 text-xs font-medium uppercase">Флагманская видеокарта</p>
+</div>
+</div>
+<div class="p-6 flex justify-between items-center bg-surface-container-low">
+<div class="flex items-center gap-6">
+<div>
+<div class="text-[10px] text-white/40 uppercase tracking-tighter mb-1">Участников</div>
+<div class="flex items-center gap-1 text-white font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="groups">groups</span>
+                                            12,482
+                                        </div>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/20"></div>
+<div>
+<div class="text-[10px] text-white/40 uppercase tracking-tighter mb-1">Осталось</div>
+<div class="flex items-center gap-1 text-[#FFE100] font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+                                            02:14:55
+                                        </div>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-white/60 hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<!-- Prize Card 2 -->
+<div class="group relative bg-surface-container-low overflow-hidden transition-all duration-500 hover:bg-surface-container border-l-2 border-transparent hover:border-primary-container">
+<div class="relative h-64 overflow-hidden">
+<img alt="Gaming Console" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="minimalist studio shot of a modern gaming console and controller with sharp shadows and vibrant lime green accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0uxMaMqiJRhhNlc5zSa_PHK94443T56luuRfV5uvJz7fRbKewN0-oKuyk2U3BbG_2IClUaudmvLbg7wyngP_Y0CwUMTP2RuvBtHzFBOm_kdscoaFzJQqzKjLzFKjpFc0nWzZ0L-fDBWb5rxr3KpqBlafT3v4a2jmkIbygrQjcrW3H-KfpmTg3CFEYD4_vWP3uBI9JLKqVNUYZAcb2SBwIi9Aln-n227oLVtjqXozUP2qfcjzvu330fEy7M8HAfaz6DPztozQQ6KhP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-[#9146FF] text-white text-[10px] font-bold uppercase tracking-widest rounded-sm">Twitch</span>
+<span class="px-3 py-1 bg-primary-container text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest rounded-sm">УЧАСТВУЮ</span>
+</div>
+<div class="absolute bottom-4 left-6">
+<h3 class="text-2xl font-bold text-white uppercase tracking-tight leading-none mb-1">PlayStation 5 Pro</h3>
+<p class="text-white/60 text-xs font-medium uppercase">Игровая консоль нового поколения</p>
+</div>
+</div>
+<div class="p-6 flex justify-between items-center bg-surface-container-low">
+<div class="flex items-center gap-6">
+<div>
+<div class="text-[10px] text-white/40 uppercase tracking-tighter mb-1">Участников</div>
+<div class="flex items-center gap-1 text-white font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="groups">groups</span>
+                                            4,210
+                                        </div>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/20"></div>
+<div>
+<div class="text-[10px] text-white/40 uppercase tracking-tighter mb-1">Осталось</div>
+<div class="flex items-center gap-1 text-[#FFE100] font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+                                            14:42:10
+                                        </div>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-white/60 hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Participation History -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-xl font-bold uppercase tracking-widest text-on-surface">История участий</h2>
+<div class="flex gap-2">
+<div class="px-4 py-2 bg-surface-container-lowest text-xs text-white/60 font-bold uppercase tracking-widest border-b border-outline-variant cursor-pointer hover:text-white transition-colors">Все</div>
+<div class="px-4 py-2 text-xs text-white/30 font-bold uppercase tracking-widest cursor-pointer hover:text-white transition-colors">Победы</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#1C1B1B] text-[10px] uppercase tracking-widest text-white/40">
+<th class="px-8 py-4 font-bold">Дата</th>
+<th class="px-8 py-4 font-bold">Приз</th>
+<th class="px-8 py-4 font-bold">Платформа</th>
+<th class="px-8 py-4 font-bold">Участников</th>
+<th class="px-8 py-4 font-bold text-right">Результат</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="bg-surface-container-lowest hover:bg-[#1C1B1B] transition-colors group">
+<td class="px-8 py-5 text-white/60 font-medium">12.05.2024</td>
+<td class="px-8 py-5 font-bold text-white uppercase tracking-tight">Logitech G Pro X Superlight</td>
+<td class="px-8 py-5">
+<span class="flex items-center gap-2 text-white/60">
+<span class="w-2 h-2 rounded-full bg-[#9146FF]"></span> Twitch
+                                        </span>
+</td>
+<td class="px-8 py-5 text-white/60">15,200</td>
+<td class="px-8 py-5 text-right">
+<span class="inline-block px-3 py-1 bg-secondary-container/10 text-secondary-container text-[10px] font-bold uppercase tracking-widest border border-secondary-container/30">Победил</span>
+</td>
+</tr>
+<tr class="bg-[#131313] hover:bg-[#1C1B1B] transition-colors group">
+<td class="px-8 py-5 text-white/60 font-medium">08.05.2024</td>
+<td class="px-8 py-5 font-bold text-white uppercase tracking-tight">Steam Gift Card $50</td>
+<td class="px-8 py-5">
+<span class="flex items-center gap-2 text-white/60">
+<span class="w-2 h-2 rounded-full bg-[#24A1DE]"></span> Telegram
+                                        </span>
+</td>
+<td class="px-8 py-5 text-white/60">8,450</td>
+<td class="px-8 py-5 text-right">
+<span class="inline-block px-3 py-1 bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-widest border border-white/10">Не победил</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-[#1C1B1B] transition-colors group">
+<td class="px-8 py-5 text-white/60 font-medium">01.05.2024</td>
+<td class="px-8 py-5 font-bold text-white uppercase tracking-tight">Secretlab Titan EVO 2022</td>
+<td class="px-8 py-5">
+<span class="flex items-center gap-2 text-white/60">
+<span class="w-2 h-2 rounded-full bg-[#9146FF]"></span> Twitch
+                                        </span>
+</td>
+<td class="px-8 py-5 text-white/60">22,100</td>
+<td class="px-8 py-5 text-right">
+<span class="inline-block px-3 py-1 bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-widest border border-white/10">Не победил</span>
+</td>
+</tr>
+<tr class="bg-[#131313] hover:bg-[#1C1B1B] transition-colors group">
+<td class="px-8 py-5 text-white/60 font-medium">25.04.2024</td>
+<td class="px-8 py-5 font-bold text-white uppercase tracking-tight">Awp | Dragon Lore (FT)</td>
+<td class="px-8 py-5">
+<span class="flex items-center gap-2 text-white/60">
+<span class="w-2 h-2 rounded-full bg-[#24A1DE]"></span> Telegram
+                                        </span>
+</td>
+<td class="px-8 py-5 text-white/60">45,000</td>
+<td class="px-8 py-5 text-right">
+<span class="inline-block px-3 py-1 bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-widest border border-white/10">Не победил</span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-[#1C1B1B] transition-colors group">
+<td class="px-8 py-5 text-white/60 font-medium">20.04.2024</td>
+<td class="px-8 py-5 font-bold text-white uppercase tracking-tight">Keychron Q1 Mechanical Keyboard</td>
+<td class="px-8 py-5">
+<span class="flex items-center gap-2 text-white/60">
+<span class="w-2 h-2 rounded-full bg-[#9146FF]"></span> Twitch
+                                        </span>
+</td>
+<td class="px-8 py-5 text-white/60">3,120</td>
+<td class="px-8 py-5 text-right">
+<span class="inline-block px-3 py-1 bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-widest border border-white/10">Не победил</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex justify-between items-center px-4">
+<div class="text-[10px] uppercase font-bold tracking-widest text-white/20">Показано 5 из 24 записей</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:border-primary-container hover:text-primary-container transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary-container text-on-primary-fixed font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 text-white/60 font-bold text-xs hover:border-primary-container transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 text-white/60 font-bold text-xs hover:border-primary-container transition-all">3</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 text-white/60 font-bold text-xs hover:border-primary-container transition-all">4</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:border-primary-container hover:text-primary-container transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile BottomNavBar -->
+
+</body></html>

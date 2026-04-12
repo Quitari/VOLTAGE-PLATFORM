@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CYBERSTREAM - Регистрация</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#ffe100",
+                        "on-primary-container": "#726300",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353534",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-container": "#13ff43",
+                        "on-surface-variant": "#cec6aa",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#007117",
+                        "outline": "#979177",
+                        "on-primary-fixed-variant": "#514700",
+                        "primary-fixed-dim": "#e1c700",
+                        "surface-tint": "#e1c700",
+                        "on-background": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "tertiary": "#fdfdfd",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-container": "#626464",
+                        "surface-variant": "#353534",
+                        "inverse-primary": "#6c5e00",
+                        "on-secondary-fixed": "#002203",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary": "#383000",
+                        "inverse-surface": "#e5e2e1",
+                        "surface": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-fixed-variant": "#00530e",
+                        "on-secondary": "#003907",
+                        "on-primary-fixed": "#211c00",
+                        "on-tertiary": "#2f3131",
+                        "background": "#131313",
+                        "secondary-fixed": "#72ff70",
+                        "primary-fixed": "#ffe330",
+                        "primary": "#fffdff",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#e1e1e1",
+                        "secondary-fixed-dim": "#00e639",
+                        "outline-variant": "#4c4732",
+                        "secondary": "#ecffe3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .kinetic-bg {
+            background: radial-gradient(circle at 20% 30%, rgba(255, 225, 0, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(19, 255, 67, 0.03) 0%, transparent 40%);
+        }
+    </style>
+</head>
+<body class="kinetic-bg min-h-screen">
+<!-- TopAppBar Shell (Immutable Identity) -->
+<header class="fixed top-0 w-full z-50 bg-[#0A0A0A]/70 backdrop-blur-xl flex justify-between items-center px-8 h-20 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-[#FFE100] uppercase font-['Space_Grotesk']">CYBERSTREAM</span>
+<nav class="hidden md:flex gap-6">
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-[#FFE100] border-b-2 border-[#FFE100] pb-1" href="#">ГЛАВНАЯ</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-white/60 hover:text-white transition-colors" href="#">СТРИМЫ</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-white/60 hover:text-white transition-colors" href="#">ТУРНИРЫ</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-fixed px-6 py-2 font-bold rounded-lg hover:bg-primary-fixed transition-all font-['Space_Grotesk'] uppercase">ВОЙТИ</button>
+</div>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Progress Stepper -->
+<div class="flex justify-center mb-12">
+<div class="flex items-center w-full max-w-md">
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-fixed font-bold font-headline mb-2">1</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary-container font-headline">Account</span>
+</div>
+<div class="h-[2px] flex-1 bg-outline-variant/30 mb-6"></div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-white/40 font-bold font-headline mb-2">2</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-white/40 font-headline">Telegram</span>
+</div>
+</div>
+</div>
+<!-- Registration Layout (Asymmetric demo) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+<!-- Step 1 Card: Account Creation -->
+<section class="bg-[#111111] p-8 lg:p-12 rounded-xl shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<h1 class="text-4xl font-bold font-headline uppercase tracking-tighter mb-8">Создать аккаунт</h1>
+<form class="space-y-6">
+<div class="space-y-1">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline">ЭЛЕКТРОННАЯ ПОЧТА</label>
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface py-4 placeholder:text-white/20" placeholder="email@example.com" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline">ПАРОЛЬ</label>
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface py-4 placeholder:text-white/20" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] font-bold uppercase tracking-widest text-outline">ПОДТВЕРДИТЕ ПАРОЛЬ</label>
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-on-surface py-4 placeholder:text-white/20" placeholder="••••••••" type="password"/>
+</div>
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center pt-1">
+<input class="peer h-5 w-5 rounded bg-surface-container-highest border-0 checked:bg-primary-container focus:ring-0" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-[16px] text-on-primary-fixed opacity-0 peer-checked:opacity-100 left-0.5" data-icon="check">check</span>
+</div>
+<span class="text-xs text-white/60 font-body leading-relaxed">
+                            Я принимаю <a class="text-primary-container hover:underline" href="#">Правила</a> и <a class="text-primary-container hover:underline" href="#">Политику конфиденциальности</a>
+</span>
+</label>
+<button class="w-full bg-primary-container text-on-primary-fixed py-4 rounded-lg font-bold font-headline uppercase tracking-tight hover:bg-primary-fixed transition-all active:scale-[0.98]">
+                        Продолжить
+                    </button>
+<div class="relative flex items-center justify-center py-4">
+<div class="w-full h-px bg-outline-variant/30"></div>
+<span class="absolute bg-[#111111] px-4 text-[10px] font-bold text-white/30 uppercase tracking-widest">или</span>
+</div>
+<button class="w-full bg-[#229ED9] text-white py-4 rounded-lg font-bold font-headline uppercase tracking-tight flex items-center justify-center gap-3 hover:opacity-90 transition-all active:scale-[0.98]">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.36-.49.99-.75 3.89-1.69 6.48-2.81 7.78-3.36 3.69-1.56 4.46-1.83 4.96-1.84.11 0 .35.03.5.16.13.1.17.24.18.33.02.06.03.19.02.26z"></path>
+</svg>
+                        Зарегистрироваться через Telegram
+                    </button>
+<p class="text-center text-sm font-body text-white/40 pt-4">
+                        Уже есть аккаунт? <a class="text-primary-container font-bold hover:underline" href="#">Войти</a>
+</p>
+</form>
+</section>
+<!-- Step 2 Card: Telegram Linking -->
+<section class="bg-[#111111] p-8 lg:p-12 rounded-xl shadow-2xl relative overflow-hidden self-stretch flex flex-col justify-center">
+<div class="absolute top-0 right-0 w-1 h-full bg-[#229ED9]"></div>
+<div class="text-center">
+<div class="relative inline-block mb-8">
+<div class="w-24 h-24 bg-surface-container rounded-full flex items-center justify-center text-[#229ED9]">
+<svg class="w-14 h-14" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.36-.49.99-.75 3.89-1.69 6.48-2.81 7.78-3.36 3.69-1.56 4.46-1.83 4.96-1.84.11 0 .35.03.5.16.13.1.17.24.18.33.02.06.03.19.02.26z"></path>
+</svg>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-secondary-container rounded-full p-1 ring-4 ring-[#111111]">
+<span class="material-symbols-outlined text-on-secondary-fixed text-lg font-bold" data-icon="check">check</span>
+</div>
+</div>
+<h2 class="text-4xl font-bold font-headline uppercase tracking-tighter mb-4">Привяжи Telegram</h2>
+<p class="text-on-surface-variant font-body mb-10 max-w-sm mx-auto leading-relaxed">
+                        Привязка Telegram позволит мгновенно входить в аккаунт, получать уведомления о стримах и участвовать в эксклюзивных розыгрышах призов.
+                    </p>
+<div class="space-y-6">
+<button class="w-full bg-[#229ED9] text-white py-4 rounded-lg font-bold font-headline uppercase tracking-tight flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-lg shadow-[#229ED9]/10">
+                            Привязать Telegram
+                        </button>
+<a class="inline-block text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-white transition-colors" href="#">
+                            Пропустить пока
+                        </a>
+</div>
+</div>
+<!-- Decorative Kinetic Element -->
+<div class="absolute -bottom-20 -right-20 w-48 h-48 bg-[#FFE100]/5 rounded-full blur-3xl pointer-events-none"></div>
+</section>
+</div>
+<!-- Featured Visual Support -->
+<div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+<div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="cinematic shot of high-end custom gaming pc with glowing yellow internal lights and liquid cooling tubes in dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASuuvPjTvJkHI7b8FAMUJbpc5v3DRuvHXavicx0ui7kC8nGG9-3VSuvmHZzwVNRHRIvYJXlJKzdYkDhXHH-pCujTQmLcMXZc9aAK7IQ3Jd6hBam55qIqwdvVZjlFSZTKfriXr0pDd4kAPbBIC-M69wL3Qrj50BJluqbyhMAXH473m7AH8oln2UcCUf5lOnWpD6Ll6q2SLk0auvLFRrKqRUk-jNbhUAJ0j3blvH3RVGOlsoI2ETAAg3-YiuOXBnAzx396GFokTeqqan"/>
+</div>
+<div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up of mechanical keyboard with bright green neon lighting on keys against dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7dKII9vWaZAoRcxSA1k-SRk0g8k5H7_Ow8J25JJjNxQC4vzF8EG2-5imL7XT6pjkKLx956LO0w-ROFAdphyQxLxT3rmzWsbLkBSMCzLcqysp2be2MPCW3jhnzurgbb_PLVkCYrivGH-tht3l3yP9d1UeTonIIrKYjHrKOMYprEnGbidmfCwVnOMGnP38r-Su9zm-x_TOnhrWX7PGVnl3E-Zn7Vc6UNSDKPf5W00S-SsjqOS83czHuGRIvT7xDbnuXyYiGK_O3ObWi"/>
+</div>
+<div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="futuristic technology background with abstract glowing circuits and geometric lines in shades of black and yellow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdPSVH5i1vk5CUU9kXvip6kPANYzzlHMA4g1bGvtRzY_JGkUgPS78FevcrBMtmUOUtkK1fGGEWu8AmV2M0xBh_0Irwpr7FrjLneSSqMJMBBOxGSjPAA9kOKrYL9z8bHK-vw_8RfvYUdeHsPT4t_o52l8R7a9rLfAvJa3JdIv9dCOWxStLYqcfwLMHEhUAmhiw9YCnzb9dbxYc_SzvoprRHYpvVXYLtw_DTZ8oYq7xD3fYO7Js1D2HyswY1Kl8m2WePm4Fz89eaI4QD"/>
+</div>
+<div class="aspect-video bg-surface-container rounded-lg overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="abstract professional e-sports stadium arena with focused stage lighting and empty gamer chairs in silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl6e1iG0eCdvBb7zYuPuITi_z8MBZtGYPkzLY0YAlsabwZt02qrsw9H-byxwKLcvfgRLTmv3a369FulniYR13KRtX7xW7vqr0DAlyvPSflK1V6nrakqo1ZmxOoo2w9_5lVyEuRmLz5eml2jwuOH_qoV9GnklCJ2XJJ1yVF7FfCHXIun2Nz5RBxIjVekJc0ic5-wm1UrQl0vP2DWzPdop47Z126H0B98o_-9spW47kN935RiCqozRQkvrbSQDLAE9IHNyRQyghZYytg"/>
+</div>
+</div>
+</main>
+<!-- Bottom Nav (Mobile Only Visibility Rule) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-[#0E0E0E]/80 backdrop-blur-lg border-t border-[#4C4732]/15 flex justify-around items-center h-16 px-4 shadow-2xl">
+<div class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase">ГЛАВНАЯ</span>
+</div>
+<div class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase">ПОИСК</span>
+</div>
+<div class="flex flex-col items-center text-white/40">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase">УВЕДОМЛЕНИЯ</span>
+</div>
+<div class="flex flex-col items-center text-[#FFE100] scale-110">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Manrope'] text-[10px] font-bold uppercase">ПРОФИЛЬ</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#2f3131",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-secondary-fixed": "#002203",
+                    "secondary-container": "#13ff43",
+                    "primary-container": "#ffe100",
+                    "surface-container": "#201f1f",
+                    "secondary-fixed-dim": "#00e639",
+                    "on-secondary": "#003907",
+                    "on-background": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "background": "#131313",
+                    "primary": "#fffdff",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#e1c700",
+                    "outline": "#979177",
+                    "on-secondary-container": "#007117",
+                    "on-primary-fixed-variant": "#514700",
+                    "on-tertiary-container": "#626464",
+                    "surface-variant": "#353534",
+                    "on-surface": "#e5e2e1",
+                    "secondary-fixed": "#72ff70",
+                    "tertiary-container": "#e1e1e1",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-on-surface": "#313030",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface-variant": "#cec6aa",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "surface-container-highest": "#353534",
+                    "on-primary-fixed": "#211c00",
+                    "surface-dim": "#131313",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary-fixed": "#ffe330",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#726300",
+                    "surface": "#131313",
+                    "secondary": "#ecffe3",
+                    "on-primary": "#383000",
+                    "tertiary": "#fdfdfd",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed-dim": "#e1c700",
+                    "inverse-primary": "#6c5e00",
+                    "surface-container-high": "#2a2a2a",
+                    "outline-variant": "#4c4732"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0A0A0A; color: #E5E2E1; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface-dim">
+<!-- SideNavBar -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0A0A0A]/70 backdrop-blur-xl flex justify-between items-center px-8 w-full">
+<div class="flex items-center gap-4">
+<span class="text-white font-black text-xl font-headline">KINETIC_UI</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white/70 hover:text-[#FFE100] transition-colors cursor-pointer">account_balance_wallet</span>
+<span class="material-symbols-outlined text-white/70 hover:text-[#FFE100] transition-colors cursor-pointer">chat_bubble</span>
+</div>
+<div class="w-8 h-8 rounded bg-surface-container-high overflow-hidden">
+<img alt="Профиль" class="w-full h-full object-cover" data-alt="Small profile avatar thumbnail for a gaming user interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn85i7rsqgJ3sguiSF3vIOoYrJjVhxMjJqZkzH0QDFZ4TN8-jtcTZFJs6CLkGUxOr1gNoLvDH9HB999ElQhLbTpiCjykk2QKd8LRi_4dXPK04VIoORkCAYvTvkPstxIR0JHJhdoG7mN_jQ7M4r3R-yTCiY9AcJohPQb5Dl4X8FRTazOVRNV42SIi-EQwZmL3xECxUD7NKpwN2zk6sv-khk4K2gvHwta3HvvzdVf3TRT3u6c7m_SFSZZMj3t99edni7oS57kxRXQZUN"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="pt-24 px-12 pb-20">
+<!-- Header Section -->
+<div class="mb-12">
+<h1 class="text-5xl font-bold font-headline text-white tracking-tight uppercase mb-2">Привязанные аккаунты</h1>
+<p class="text-white/40 max-w-2xl font-body">Управляйте подключениями ваших социальных сетей и игровых платформ для синхронизации прогресса и получения наград.</p>
+</div>
+<!-- Bento Grid Services -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+<!-- Telegram -->
+<div class="bg-[#111111] p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-blue-500/20 flex items-center justify-center rounded-lg text-blue-400">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.35-.99.53-1.41.52-.46-.01-1.34-.26-1.99-.47-.8-.26-1.44-.4-1.39-.85.03-.24.36-.48.99-.74 3.86-1.68 6.44-2.78 7.74-3.31 3.67-1.48 4.44-1.74 4.94-1.75.11 0 .35.03.5.15.13.11.17.26.18.37z"></path></svg>
+</div>
+<span class="bg-secondary-container text-on-secondary-fixed text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-on-secondary-fixed rounded-full animate-pulse"></span>
+                                Привязан
+                            </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-1 uppercase tracking-tight">Telegram</h3>
+<p class="text-white/40 font-body text-sm mb-8">@username</p>
+</div>
+<button class="w-fit text-xs font-bold font-headline text-white/30 hover:text-error transition-colors uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">link_off</span>
+                        Отвязать
+                    </button>
+</div>
+<!-- Twitch -->
+<div class="bg-[#111111] p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-container transition-all">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-purple-600/20 flex items-center justify-center rounded-lg text-purple-400">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"></path></svg>
+</div>
+<span class="bg-secondary-container text-on-secondary-fixed text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-on-secondary-fixed rounded-full animate-pulse"></span>
+                                Привязан
+                            </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-1 uppercase tracking-tight">Twitch</h3>
+<p class="text-white/40 font-body text-sm mb-8">twitchuser</p>
+</div>
+<button class="w-fit text-xs font-bold font-headline text-white/30 hover:text-error transition-colors uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">link_off</span>
+                        Отвязать
+                    </button>
+</div>
+<!-- Steam -->
+<div class="bg-[#111111] p-8 rounded-xl flex flex-col justify-between border border-transparent hover:border-primary-container/20 transition-all">
+<div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 bg-white/5 flex items-center justify-center rounded-lg text-white/20">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.513 2.692a3.751 3.751 0 0 1 4.14-.148l3.161-4.544c-.012-.132-.02-.266-.02-.402 0-2.316 1.878-4.194 4.194-4.194 2.316 0 4.193 1.878 4.193 4.194 0 2.317-1.877 4.194-4.193 4.194-.32 0-.63-.038-.928-.108l-4.437 3.238c.01.127.02.256.02.385 0 2.155-1.53 3.948-3.568 4.331L6.721 24c5.783 0 10.601-4.298 11.484-9.927l3.722-2.716c.928.612 2.03.974 3.217.974 3.235 0 5.856-2.622 5.856-5.857C23.999 3.239 21.378.618 18.143.618a5.836 5.836 0 0 0-4.053 1.637l-3.327-1.375C10.743.327 10.718.327 10.69.327zm3.971 6.84c.834 0 1.511.677 1.511 1.512s-.677 1.511-1.511 1.511-1.512-.677-1.512-1.511.678-1.512 1.512-1.512z"></path></svg>
+</div>
+<span class="bg-surface-container-highest text-white/40 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">
+                                Не привязан
+                            </span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-1 uppercase tracking-tight">Steam</h3>
+<p class="text-white/40 font-body text-xs mb-8">Нужна трейд-ссылка для получения скинов</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary-fixed py-3 rounded-lg font-headline font-bold uppercase text-xs tracking-widest hover:bg-primary-fixed active:scale-95 transition-all">
+                        Привязать Steam
+                    </button>
+</div>
+</div>
+<!-- Steam Trade Link Section -->
+<section class="mb-16">
+<div class="bg-surface-container-low p-10 rounded-xl">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-[#FFE100]">swap_horiz</span>
+<h2 class="text-2xl font-bold font-headline text-white uppercase tracking-tight">Steam трейд-ссылка</h2>
+</div>
+<div class="max-w-3xl">
+<div class="flex gap-4">
+<div class="flex-1">
+<input class="w-full bg-surface-container-lowest border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-[#FFE100] text-white py-4 px-0 transition-colors font-body" placeholder="https://steamcommunity.com/tradeoffer/new/..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-10 rounded-md font-headline font-bold uppercase text-xs tracking-widest hover:bg-primary-fixed transition-all active:scale-95">
+                                Сохранить
+                            </button>
+</div>
+<p class="mt-6 text-sm text-white/40 font-body">
+                            Трейд-ссылка необходима для автоматической отправки выигранных предметов. 
+                            <a class="text-[#FFE100] hover:underline ml-1" href="#">Где найти мою ссылку?</a>
+</p>
+</div>
+</div>
+</section>
+<!-- Security Section -->
+<section>
+<div class="bg-surface-container-low p-10 rounded-xl">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-[#FFE100]">security</span>
+<h2 class="text-2xl font-bold font-headline text-white uppercase tracking-tight">Безопасность</h2>
+</div>
+<div class="space-y-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-outline-variant/10">
+<div>
+<p class="text-[10px] font-headline font-bold text-white/40 uppercase tracking-widest mb-1">Email адрес</p>
+<p class="text-lg text-white font-body"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96e3e5f3e4b8fdfff8f3e2fff5d6f3eef7fbe6faf3b8f5f9fb">[email&#160;protected]</a></p>
+</div>
+<button class="mt-4 md:mt-0 px-6 py-2 border-1.5 border-outline/30 text-white font-headline text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors border-2">
+                                Сменить email
+                            </button>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-outline-variant/10">
+<div>
+<p class="text-[10px] font-headline font-bold text-white/40 uppercase tracking-widest mb-1">Пароль</p>
+<p class="text-lg text-white font-body">••••••••••••••••</p>
+</div>
+<button class="mt-4 md:mt-0 px-6 py-2 border-1.5 border-outline/30 text-white font-headline text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors border-2">
+                                Сменить пароль
+                            </button>
+</div>
+<div class="pt-4">
+<button class="text-error/60 hover:text-error text-xs font-bold font-headline uppercase tracking-widest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">delete_forever</span>
+                                У

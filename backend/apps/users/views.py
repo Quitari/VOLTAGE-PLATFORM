@@ -129,3 +129,108 @@ def update_profile(request):
         serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
+
+from .permissions import require_permission, require_level, get_user_level
+from .models import Role, UserRole
+from .serializers import RoleSerializer
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_roles(request):
+    """
+    GET /api/auth/roles/
+    Список всех ролей — доступен всем авторизованным
+    """
+    roles = Role.objects.all().order_by('-level')
+    serializer = RoleSerializer(roles, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def assign_role(request):
+    """
+    POST /api/auth/assign-role/
+    Назначить роль пользователю — только Admin+
+    """
+    if get_user_level(request.user) < 100:
+        return Response(
+            {'error': 'Недостаточно прав'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    user_id = request.data.get('user_id')
+    role_codename = request.data.get('role')
+    expires_at = request.data.get('expires_at')
+
+    if not user_id or not role_codename:
+        return Response(
+            {'error': 'Укажи user_id и role'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        target_user = User.objects.get(id=user_id)
+        role = Role.objects.get(codename=role_codename)
+    except User.DoesNotExist:
+        return Response(
+            {'error': 'Пользователь не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    except Role.DoesNotExist:
+        return Response(
+            {'error': 'Роль не найдена'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    # Нельзя назначить роль выше своей
+    if role.level >= get_user_level(request.user):
+        return Response(
+            {'error': 'Нельзя назначить роль выше своей'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    user_role, created = UserRole.objects.get_or_create(
+        user=target_user,
+        role=role,
+        defaults={
+            'assigned_by': request.user,
+            'expires_at': expires_at,
+        }
+    )
+
+    if not created:
+        user_role.is_active = True
+        user_role.expires_at = expires_at
+        user_role.save()
+
+    return Response({
+        'message': f'Роль {role.name} назначена пользователю {target_user.username}',
+        'user': UserSerializer(target_user).data
+    })
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_permission(request):
+    """
+    GET /api/auth/check-permission/?codename=moderation.punish
+    Проверить есть ли у текущего пользователя конкретное разрешение
+    """
+    from .permissions import _user_has_permission
+    codename = request.query_params.get('codename')
+    if not codename:
+        return Response(
+            {'error': 'Укажи codename'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    has_perm = _user_has_permission(request.user, codename)
+    level = get_user_level(request.user)
+
+    return Response({
+        'codename': codename,
+        'has_permission': has_perm,
+        'user_level': level,
+    })

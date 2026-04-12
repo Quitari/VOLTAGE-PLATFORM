@@ -9,6 +9,9 @@ export default function DashboardPage() {
   const navigate = useNavigate();
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
   const [loading, setLoading] = useState(true);
+  const [joining, setJoining] = useState<string | null>(null);
+  const [joined, setJoined] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     giveawaysApi
@@ -21,6 +24,20 @@ export default function DashboardPage() {
   const handleLogout = async () => {
     await logout();
     navigate("/login");
+  };
+
+  const handleJoin = async (id: string) => {
+    setJoining(id);
+    setError(null);
+    try {
+      await giveawaysApi.join(id);
+      setJoined((prev) => [...prev, id]);
+    } catch (err: any) {
+      setError(err.response?.data?.error || "Ошибка");
+      setTimeout(() => setError(null), 4000);
+    } finally {
+      setJoining(null);
+    }
   };
 
   const initials = user?.username?.slice(0, 2).toUpperCase() || "??";
@@ -108,6 +125,13 @@ export default function DashboardPage() {
             Активные розыгрыши
           </h2>
 
+          {/* Ошибка */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl mb-4">
+              ⚠️ {error}
+            </div>
+          )}
+
           {loading ? (
             <p className="text-white/40 text-sm">Загрузка...</p>
           ) : giveaways.length === 0 ? (
@@ -138,10 +162,15 @@ export default function DashboardPage() {
                       Активен
                     </span>
                     <button
-                      onClick={() => giveawaysApi.join(g.id).catch(() => {})}
-                      className="px-4 py-2 bg-[#FFE100] text-[#211C00] text-xs font-bold rounded-xl uppercase tracking-widest hover:bg-[#FFE330] transition-colors"
+                      onClick={() => handleJoin(g.id)}
+                      disabled={joining === g.id || joined.includes(g.id)}
+                      className="px-4 py-2 bg-[#FFE100] text-[#211C00] text-xs font-bold rounded-xl uppercase tracking-widest hover:bg-[#FFE330] transition-colors disabled:opacity-50"
                     >
-                      Участвовать
+                      {joining === g.id
+                        ? "..."
+                        : joined.includes(g.id)
+                          ? "✅ Участвуешь"
+                          : "Участвовать"}
                     </button>
                   </div>
                 </div>
@@ -167,6 +196,7 @@ export default function DashboardPage() {
           ].map((item) => (
             <button
               key={item.path}
+              onClick={() => navigate(item.path)}
               className="bg-[#111] border border-white/5 rounded-2xl p-5 flex flex-col items-center gap-2 hover:bg-[#1C1B1B] transition-colors"
             >
               <span className="material-symbols-outlined text-2xl text-white/40">

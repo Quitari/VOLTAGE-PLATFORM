@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voltage Admin - Призы и доставка</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#00e639",
+                        "on-primary-fixed": "#211c00",
+                        "tertiary-container": "#e1e1e1",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#726300",
+                        "surface-variant": "#353534",
+                        "on-tertiary-container": "#626464",
+                        "on-secondary": "#003907",
+                        "on-secondary-fixed-variant": "#00530e",
+                        "on-secondary-fixed": "#002203",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "tertiary": "#fdfdfd",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-tint": "#e1c700",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-container-highest": "#353534",
+                        "error": "#ffb4ab",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#13ff43",
+                        "on-secondary-container": "#007117",
+                        "surface": "#131313",
+                        "on-tertiary": "#2f3131",
+                        "outline": "#979177",
+                        "outline-variant": "#4c4732",
+                        "on-surface-variant": "#cec6aa",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-surface": "#e5e2e1",
+                        "on-primary": "#383000",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#6c5e00",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-container": "#ffe100",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#ecffe3",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed": "#ffe330",
+                        "primary": "#fffdff",
+                        "on-primary-fixed-variant": "#514700",
+                        "secondary-fixed": "#72ff70",
+                        "primary-fixed-dim": "#e1c700"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Authority Source: Shared Components JSON) -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
+<div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+  <h1 class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-4 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-1 pb-4">
+  <div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#FFE100] border-l-4 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Настройки" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="text-sm">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="text-sm">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-4 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sidebar-text">Выйти</span>
+  </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="page-main w-full flex flex-col min-h-screen">
+<!-- TopNavBar (Authority Source: Shared Components JSON) -->
+
+<!-- Canvas Area -->
+<div class="pt-8 px-8 pb-12 flex-1">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex gap-2 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white/30 mb-2">
+<span>Console</span>
+<span>/</span>
+<span class="text-[#FFE100]">Prizes and Delivery</span>
+</nav>
+<h2 class="text-5xl font-headline font-extrabold uppercase tracking-tighter text-white">
+                        Призы и доставка
+<div class="flex gap-1 mt-4 mb-4">
+  <button class="px-4 py-2 bg-[#FFE100] text-[#211C00] text-xs font-bold uppercase tracking-widest rounded">Все</button>
+  <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded">Ожидают <span class="ml-1 bg-white/10 px-1.5 py-0.5 rounded text-[10px]">3</span></button>
+  <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded">Ошибки <span class="ml-1 bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded text-[10px]">2</span></button>
+</div>
+                    </h2>
+</div>
+<button class="bg-primary-container text-on-primary-fixed px-6 py-3 font-headline font-bold uppercase text-xs tracking-widest flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Экспорт отчета
+                </button>
+</div>
+<!-- Bento Metrics Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<!-- Metric 1 -->
+<div class="bg-surface-container-low p-6 flex flex-col justify-between group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white/40 font-headline font-bold uppercase text-[10px] tracking-widest">Ожидают отправки</span>
+<span class="material-symbols-outlined text-primary-container/40">hourglass_top</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-black text-white">3</span>
+<span class="text-[10px] text-primary-container uppercase font-bold tracking-tighter">На очереди</span>
+</div>
+<div class="absolute bottom-0 left-0 h-[2px] w-full bg-surface-variant group-hover:bg-primary-container transition-all"></div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-low p-6 flex flex-col justify-between group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white/40 font-headline font-bold uppercase text-[10px] tracking-widest">Отправлены</span>
+<span class="material-symbols-outlined text-white/20">local_shipping</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-black text-white">47</span>
+<span class="text-[10px] text-white/30 uppercase font-bold tracking-tighter">В пути</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-low p-6 flex flex-col justify-between group hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white/40 font-headline font-bold uppercase text-[10px] tracking-widest">Получены</span>
+<span class="material-symbols-outlined text-secondary-container/40">verified</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-black text-white">44</span>
+<span class="text-[10px] text-secondary-container uppercase font-bold tracking-tighter">Завершено</span>
+</div>
+</div>
+<!-- Metric 4 (Error) -->
+<div class="bg-surface-container-low p-6 flex flex-col justify-between group hover:bg-surface-container transition-colors relative overflow-hidden border-r-4 border-error/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-white/40 font-headline font-bold uppercase text-[10px] tracking-widest">Ошибки доставки</span>
+<span class="material-symbols-outlined text-error/60">error</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-black text-error">2</span>
+<span class="text-[10px] text-error/60 uppercase font-bold tracking-tighter">Требуют внимания</span>
+</div>
+</div>
+</div>
+<!-- Content Area: Tabs and Table -->
+<div class="bg-surface-container-low overflow-hidden">
+<!-- Custom Tabs -->
+<div class="flex border-b border-outline-variant/10 px-8">
+<button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-[#FFE100] border-b-2 border-[#FFE100] -mb-[2px]">
+                        Все призы
+                    </button>
+<button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors">
+                        Ожидают
+                    </button>
+<button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-error flex items-center gap-2">
+                        Ошибки (2)
+                        <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+</button>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest/50">
+<th class="py-4 px-8 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30">Победитель</th>
+<th class="py-4 px-4 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30">Приз</th>
+<th class="py-4 px-4 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30">Розыгрыш</th>
+<th class="py-4 px-4 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30 text-center">Steam ссылка</th>
+<th class="py-4 px-4 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30">Статус</th>
+<th class="py-4 px-4 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30">Дата</th>
+<th class="py-4 px-8 text-[10px] font-headline font-bold uppercase tracking-widest text-white/30 text-right">Действия</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Normal Row: Received -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="py-5 px-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young gamer with headphones, soft blue and purple neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxZyKeLd7sDkmWbDvNMNHC6eAuDT3ybC_-ItUCwoTV7cWrUziColbKr2HSjGAVX0_cp0V51M1irWMXvCnC1fpQ_Tqv_Rr7lQCsLqb8-P2i5FaJaku_BU_KojMq_6TeBJEjCaSq3CVFNtWhFZMMHkrgWqZSTQGvhKLDg4MVWd1c0MHEzb3uAqNEpFEPMI2U07w93i8S0m-ykSnxrgNcUqBHPQK0G2mUtmKgIeq5NV9t0QznH7GvHuTe6MLKqU9LOK0LLx_O2F2T_40h"/>
+</div>
+<span class="text-sm font-bold font-headline uppercase">X_Shadow_X</span>
+</div>
+</td>
+<td class="py-5 px-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">AWP | Dragon Lore</span>
+<span class="text-[10px] text-white/40 uppercase">Factory New</span>
+</div>
+</td>
+<td class="py-5 px-4 text-xs font-medium text-white/60">Major Finals 2024</td>
+<td class="py-5 px-4 text-center">
+<span class="material-symbols-outlined text-secondary-container text-lg">check_circle</span>
+</td>
+<td class="py-5 px-4">
+<span class="inline-flex items-center px-3 py-1 bg-secondary-container/10 text-secondary-container text-[9px] font-bold font-headline uppercase tracking-widest rounded-sm border border-secondary-container/20">
+                                        Получен
+                                    </span>
+</td>
+<td class="py-5 px-4 text-xs font-headline text-white/40 uppercase">12.10.2024</td>
+<td class="py-5 px-8 text-right">
+<button class="p-2 hover:bg-surface-bright rounded transition-colors text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Error Row -->
+<tr class="bg-error-container/10 border-l-4 border-error/40 group hover:bg-error-container/20 transition-all">
+<td class="py-5 px-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden border border-error/30">
+<img class="w-full h-full object-cover" data-alt="Profile photo of a person looking focused in front of a computer screen, dramatic high-contrast lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu68Oaws3JfuEqfrnsS8F0GKJEZa_X8bkWu-HNPFZxr3gMiIR-Jng08xk-1chn2vqaJiWMZxj450rPmkplxPMxmLAA7IAZREIPb8AWiK2hc3yKk8wlcqXnY-J-NYqFVPepueNrcd97su37SSX4nmdduQrXZ51VrBbNdhDp0w3iFA2uZYVOZrg5UoIdbEcksvvL58K7n96OPmavcuCLTUJAt9QLux9yECdpHwDqPCl75ECPVJTmbellGNZfg5Iil2rArBTDBJM1SSu0"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold font-headline uppercase text-error">CyberPunk_99</span>
+<span class="text-[9px] font-headline text-error/60 uppercase font-bold">Invalid Profile</span>
+</div>
+</div>
+</td>
+<td class="py-5 px-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">M4A4 | Howl</span>
+<span class="text-[10px] text-white/40 uppercase">Minimal Wear</span>
+</div>
+</td>
+<td class="py-5 px-4 text-xs font-medium text-white/60">Season 5 Kickoff</td>
+<td class="py-5 px-4 text-center">
+<span class="text-error text-[10px] font-bold font-headline uppercase">Нет</span>
+</td>
+<td class="py-5 px-4">
+<span class="inline-flex items-center px-3 py-1 bg-error text-on-error text-[9px] font-bold font-headline uppercase tracking-widest rounded-sm">
+                                        Ошибка
+                                    </span>
+</td>
+<td class="py-5 px-4 text-xs font-headline text-white/40 uppercase">14.10.2024</td>
+<td class="py-5 px-8 text-right">
+<div class="flex justify-end gap-2 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-primary-container text-on-primary-fixed px-3 py-1.5 text-[9px] font-bold font-headline uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all">
+                                            Повторить
+                                        </button>
+<button class="bg-surface-bright text-white px-3 py-1.5 text-[9px] font-bold font-headline uppercase tracking-wider hover:bg-white/20 active:scale-95 transition-all">
+                                            Изменить ссылку
+                                        </button>
+<button class="text-error/60 hover:text-error p-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">cancel</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Waiting Row -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="py-5 px-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Creative female streamer profile, vibrant colorful lighting, looking at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDtx7_o7UC_sCv3y6_YbVDlTIpJRJ1TPJzEfWnuKIwThc4CQSXx4AZ_KFwmfOOJtg6FKHsveO8jReizZc5BxJCrNvH-_HhjE5cUAIdnwKXKnZGU8zZVW6YlSbamshJ_vjNoxMtl7ZHKx_MaSd30Ysj9tDjkUnQpf-qKR5ryId_okBX7p89BW_G5zchbK3PTC8v1nV6z2d12jQ978DMydFf_7eHpKojzfQHjHi_B6BGxvUyvTQsrO0kZDsQei1LuXT92Ishubjjhjb6"/>
+</div>
+<span class="text-sm font-bold font-headline uppercase">Luna_Vibe</span>
+</div>
+</td>
+<td class="py-5 px-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Butterfly Knife</span>
+<span class="text-[10px] text-white/40 uppercase">Fade</span>
+</div>
+</td>
+<td class="py-5 px-4 text-xs font-medium text-white/60">Streamer Invitational</td>
+<td class="py-5 px-4 text-center">
+<span class="material-symbols-outlined text-secondary-container text-lg">check_circle</span>
+</td>
+<td class="py-5 px-4">
+<span class="inline-flex items-center px-3 py-1 bg-primary-container/10 text-primary-container text-[9px] font-bold font-headline uppercase tracking-widest rounded-sm border border-primary-container/20">
+                                        Ожидает
+                                    </span>
+</td>
+<td class="py-5 px-4 text-xs font-headline text-white/40 uppercase">15.10.2024</td>
+<td class="py-5 px-8 text-right">
+<button class="p-2 hover:bg-surface-bright rounded transition-colors text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Sent Row -->
+<tr class="hover:bg-surface-bright/20 transition-colors">
+<td class="py-5 px-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="Portrait of a modern gamer, professional lighting, urban aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLkY9g1uOk0ly-IWjq99td1pM9SlukRw00IwQsBTSLLZDwYShSuQPJIh3MhFcxlBUeQd-de5nsB0l3s7FxQhf7Q-fFcJt6R7urV8kE1Z9ZhExsAuAVnKul7UaF1F5-7J2sPwpNReUo-1l1EW_GRltICv7cBSuHU3DQz8rqMxYUyJzEAnF48I97xeVufPLT4A1JmdQPTdYwRDcvEB8vfeUVvqAwgO1SAVeotZE_OOXm3Ozfmfp-KBAy7mK7b-200pP_Jo4tncKtGWR8"/>
+</div>
+<span class="text-sm font-bold font-headline uppercase">Ghost_Rider</span>
+</div>
+</td>
+<td class="py-5 px-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Glock-18 | Fade</span>
+<span class="text-[10px] text-white/40 uppercase">Factory New</span>
+</div>
+</td>
+<td class="py-5 px-4 text-xs font-medium text-white/60">Midnight Duel</td>
+<td class="py-5 px-4 text-center">
+<span class="material-symbols-outlined text-secondary-container text-lg">check_circle</span>
+</td>
+<td class="py-5 px-4">
+<span class="inline-flex items-center px-3 py-1 bg-blue-500/10 text-blue-400 text-[9px] font-bold font-headline uppercase tracking-widest rounded-sm border border-blue-400/20">
+                                        Отправлен
+                                    </span>
+</td>
+<td class="py-5 px-4 text-xs font-headline text-white/40 uppercase">14.10.2024</td>
+<td class="py-5 px-8 text-right">
+<button class="p-2 hover:bg-surface-bright rounded transition-colors text-white/40 hover:text-white">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface-container-lowest/50 px-8 py-4 flex justify-between items-center">
+<span class="text-[10px] font-headline font-bold uppercase tracking-widest text-white/20">Showing 1-4 of 96 items</span>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#FFE100] transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-[#FFE100] text-[#211C00] font-headline font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#FFE100] transition-colors font-headline font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#FFE100] transition-colors font-headline font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#FFE100] transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Helper Card -->
+<div class="mt-8 bg-surface-container-low p-8 flex items-center gap-8 relative overflow-hidden group">
+<div class="relative z-10 max-w-lg">
+<h3 class="text-xl font-headline font-bold uppercase tracking-tight text-[#FFE100] mb-2">Автоматизация доставки</h3>
+<p class="text-sm text-white/60 leading-relaxed mb-4">Система автоматически проверяет Steam Trade Link перед отправкой. Если статус помечается ошибкой, пожалуйста, свяжитесь с пользователем через раздел "Тикеты" или обновите ссылку вручную.</p>
+<div class="flex gap-4">
+<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#FFE100] transition-colors underline decoration-outline-variant" href="/docs">Инструкция по API</a>
+<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#FFE100] transition-colors underline decoration-outline-variant" href="/docs">Настройка уведомлений</a>
+</div>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/3 opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity">
+<div class="w-full h-full bg-gradient-to-l from-primary-container/20 to-transparent"></div>
+<span class="material-symbols-outlined absolute right-8 top-1/2 -translate-y-1/2 text-9xl text-primary-container/10 rotate-12">auto_fix_high</span>
+</div>
+</div>
+</div>
+</main>
+
+
+
+<div id="global-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeConfirm()">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div id="gcm-icon-wrap" class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span id="gcm-icon" class="material-symbols-outlined text-xl"></span>
+      </div>
+      <h3 id="gcm-title" class="text-lg font-black text-white font-headline uppercase"></h3>
+    </div>
+    <p id="gcm-body" class="text-sm text-white/50 mb-5"></p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button id="gcm-confirm-btn" class="flex-1 py-2.5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all"></button>
+    </div>
+  </div>
+</div>
+<script id="global-confirm-script">
+function showConfirm(opts) {
+  var m = document.getElementById('global-confirm-modal');
+  document.getElementById('gcm-title').textContent = opts.title || 'Подтвердите действие';
+  document.getElementById('gcm-body').textContent = opts.body || 'Это действие нельзя отменить.';
+  var icon = document.getElementById('gcm-icon');
+  var wrap = document.getElementById('gcm-icon-wrap');
+  var btn  = document.getElementById('gcm-confirm-btn');
+  if (opts.danger) {
+    wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
+    btn.style.background = '#EF4444'; btn.style.color = '#fff';
+  } else {
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
+    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+  }
+  btn.textContent = opts.confirmLabel || 'Подтвердить';
+  btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };
+  m.style.display = 'flex';
+}
+function closeConfirm() { document.getElementById('global-confirm-modal').style.display = 'none'; }
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body></html>

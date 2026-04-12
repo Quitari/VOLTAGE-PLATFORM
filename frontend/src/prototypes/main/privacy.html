@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC PRECISION - Стриминговая Платформа</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#353534",
+                        "on-tertiary": "#2f3131",
+                        "on-secondary-container": "#007117",
+                        "surface-dim": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "background": "#131313",
+                        "secondary-fixed": "#72ff70",
+                        "on-primary-fixed": "#211c00",
+                        "outline-variant": "#4c4732",
+                        "primary": "#fffdff",
+                        "on-secondary-fixed-variant": "#00530e",
+                        "on-tertiary-container": "#626464",
+                        "surface-bright": "#3a3939",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container": "#201f1f",
+                        "inverse-primary": "#6c5e00",
+                        "surface": "#131313",
+                        "primary-container": "#ffe100",
+                        "error": "#ffb4ab",
+                        "outline": "#979177",
+                        "on-background": "#e5e2e1",
+                        "on-primary-container": "#726300",
+                        "tertiary-container": "#e1e1e1",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed": "#ffe330",
+                        "secondary-fixed-dim": "#00e639",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#e1c700",
+                        "on-primary-fixed-variant": "#514700",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary": "#ecffe3",
+                        "on-surface": "#e5e2e1",
+                        "secondary-container": "#13ff43",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "on-secondary": "#003907",
+                        "surface-tint": "#e1c700",
+                        "on-surface-variant": "#cec6aa",
+                        "on-secondary-fixed": "#002203",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary": "#383000",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary": "#fdfdfd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: white;
+            font-family: 'Manrope', sans-serif;
+        }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* No-border tonal layering implementation */
+        .tonal-card {
+            background-color: #1C1B1B;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .tonal-card:hover {
+            background-color: #2A2A2A;
+            transform: scale(1.02);
+        }
+        .live-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-[#0E0E0E]/70 backdrop-blur-md text-[#FFE100] docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-8 py-4">
+<div class="text-2xl font-black tracking-tighter text-[#FFE100] uppercase font-space">
+            KINETIC
+        </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#FFE100] border-b-2 border-[#FFE100] pb-1 font-space font-bold uppercase text-sm" href="#">ГЛАВНАЯ</a>
+<a class="text-white/70 hover:text-white transition-colors font-space font-bold uppercase text-sm" href="#">РАСПИСАНИЕ</a>
+<a class="text-white/70 hover:text-white transition-colors font-space font-bold uppercase text-sm" href="#">МОМЕНТЫ</a>
+<a class="text-white/70 hover:text-white transition-colors font-space font-bold uppercase text-sm" href="#">ПРАВИЛА</a>
+<a class="text-white/70 hover:text-white transition-colors font-space font-bold uppercase text-sm" href="#">СТАТУС</a>
+</div>
+<button class="bg-[#FFE100] text-[#211C00] px-6 py-2 rounded-lg font-bold font-space text-sm active:scale-95 duration-150">
+            ВOЙТИ
+        </button>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full h-[921px] flex items-end pb-24 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="" class="w-full h-full object-cover grayscale opacity-40" data-alt="Cinematic shot of a professional gamer in a dark room with dramatic neon yellow lighting from the screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoQouTS3h4_hWbChtCi1V6ed-98BpwyC52fZHFKFL87l3Yop05uVeIZbRukVXlcWkPYn5dGodkXfGZd220GknT43NFB8JkKNI_pQ6Lw9QM7a5fDkabRw-Sy9jQVjOmgiKZuUn6kliUd94W45S_Nnqi5PvXLTwJ5mZ2jOGaKvIez4f5qAa10MHLWfhfjTx-nsjqP9XXe82SiBx_htnM-muXMSk9fHuSCsFl4RNDtcmjqHD7HphdnoBDwDUbLch60VT7f9aBR-FQ_kGV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent"></div>
+</div>
+<div class="container mx-auto px-8 relative z-10 flex flex-col items-start gap-6">
+<div class="flex items-center gap-3 bg-secondary-container text-on-secondary-fixed px-3 py-1 rounded-sm font-bold text-xs uppercase font-space">
+<span class="w-2 h-2 bg-on-secondary-fixed rounded-full live-pulse"></span>
+                В ЭФИРЕ: 12,430 зрителей
+            </div>
+<h1 class="text-7xl md:text-9xl font-black font-space tracking-tighter uppercase text-white leading-none">
+                ALEX<span class="text-primary-container">KINETIC</span>
+</h1>
+<p class="max-w-2xl text-lg text-white/70 font-medium leading-relaxed">
+                Профессиональный геймплей, ежедневные розыгрыши и эксклюзивный контент. Присоединяйся к самому техничному комьюнити в СНГ.
+            </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="bg-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold font-space uppercase flex items-center gap-2 hover:bg-primary-fixed transition-colors">
+                    Зарегистрироваться
+                </button>
+<button class="bg-surface-container-high/60 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold font-space uppercase border border-outline/20 hover:bg-surface-bright transition-colors">
+                    Twitch
+                </button>
+<button class="bg-surface-container-high/60 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold font-space uppercase border border-outline/20 hover:bg-surface-bright transition-colors">
+                    Telegram
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content Grid -->
+<main class="container mx-auto px-8 py-24 space-y-32">
+<!-- Active Giveaways -->
+<section>
+<div class="flex justify-between items-end mb-12">
+<h2 class="text-4xl font-black font-space uppercase tracking-tight">Активные <span class="text-primary-container">розыгрыши</span></h2>
+<div class="h-1 w-24 bg-primary-container"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="tonal-card p-6 rounded-xl flex flex-col gap-4">
+<div class="relative rounded-lg overflow-hidden h-48 bg-surface-container-lowest">
+<img alt="" class="w-full h-full object-contain p-4" data-alt="Modern high-performance gaming mouse with yellow LED accents on a dark minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbZkqX46pDqtDxCjARv9tJ5nI27hQ5pO8mXjzirKzu79qx_CbnICvvmho9Rn7Cp5qM8qQ9QKEIEZ3SK0bz5B6sBOd8LKWLh65m7pQxH70mBYnu7sUjuB7hhsY6Wp71UMU9hbPbN3hmclzYK18C1JE0b1d304w93aGX1c31kLEexc2HnuqNT5cO75GQIYznu5AcTWQiXytyavuPxyl0ijQEPE31MBmH3_zv63dxPORbhfZyhqiTscSN0Xp49omylcIdrG8quv0SSMZy"/>
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded-sm font-bold text-[10px] uppercase font-space">
+                            АКТИВНЫЙ
+                        </div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-xl font-bold font-space uppercase tracking-tight">Logitech G Pro X Superlight</h3>
+<div class="flex justify-between text-sm text-white/50 mt-2">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">group</span> 2,450 участников</span>
+<span class="flex items-center gap-1 text-primary-container"><span class="material-symbols-outlined text-sm">timer</span> 14:05:22</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="tonal-card p-6 rounded-xl flex flex-col gap-4">
+<div class="relative rounded-lg overflow-hidden h-48 bg-surface-container-lowest">
+<img alt="" class="w-full h-full object-contain p-4" data-alt="High-end curved gaming monitor displaying a futuristic yellow interface in a dark setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCLIIcQjKlSDU2kO37y4c-rB-7hFW6imoSelYVkEo3kqml9kqL_QjknRCcGJds7DWYxMhg682a23F6B7fmbeXWoHRQ60Zgg4pYfeaabS58bbKSvtD3YRyZ_4JKQuJV_XWiTIIQ-NPGBw5j7xvwnRaaSak13t9qmTkzIgHV_2REXwfB6eUeql63W8HJ59wYXSbj00k4UPR4_Zb8cGNhkPJF4FwrHAkvl1fBU6kfsCUU7BDiTAJMa_PDWwTXqT8tI_YWBhbqp6hOiHWH"/>
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded-sm font-bold text-[10px] uppercase font-space">
+                            АКТИВНЫЙ
+                        </div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-xl font-bold font-space uppercase tracking-tight">Samsung Odyssey G7 240Hz</h3>
+<div class="flex justify-between text-sm text-white/50 mt-2">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">group</span> 5,820 участников</span>
+<span class="flex items-center gap-1 text-primary-container"><span class="material-symbols-outlined text-sm">timer</span> 02:11:45</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="tonal-card p-6 rounded-xl flex flex-col gap-4">
+<div class="relative rounded-lg overflow-hidden h-48 bg-surface-container-lowest">
+<img alt="" class="w-full h-full object-contain p-4" data-alt="Mechanical gaming keyboard with custom yellow keycaps and RGB backlighting in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi-nynraKbFBJZSstuKegzsl3VMhN9stWIFrVUs0B_ChlwV3sSvZTfsf8MnvKH83FI07BRPswngYIv09BAGuiWNBdW9D6PhZgBFkoKL-UoRjDxlQxipJ4FwGYGmnpBCO0b1Ief1ywWqqmYJUkUcYgLmAcpH_GjR51cMqTcf2Od0qrJF_-VGYLpQUm6tl2m3eMDXYjsp-meHpKp-gzyEho7jA5LLYeVeZppxUI5ZIA9kwXE0ep9th1OtbHf_2ILD6JtmbfjOE20FbAY"/>
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded-sm font-bold text-[10px] uppercase font-space">
+                            АКТИВНЫЙ
+                        </div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-xl font-bold font-space uppercase tracking-tight">Custom Mechanical Keyboard</h3>
+<div class="flex justify-between text-sm text-white/50 mt-2">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">group</span> 1,120 участников</span>
+<span class="flex items-center gap-1 text-primary-container"><span class="material-symbols-outlined text-sm">timer</span> 48:00:00</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Winners & Moments Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+<!-- Recent Winners -->
+<section class="lg:col-span-1">
+<h2 class="text-2xl font-black font-space uppercase tracking-tight mb-8">Последние <span class="text-primary-container">победители</span></h2>
+<div class="space-y-4">
+<!-- Winner 1 -->
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<img alt="" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait avatar of a young gamer with a focused expression and blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0fUK7yAgDbtpgO9o0VMhnX56SAhDxIQcRVEIh1d9I72kciHNFZryeYUS1IsBBrGMOTi2O6tzFJhxbnnxAyj6mYwC4NygLalBSCLIg3RcJtdA0Fk0uyu3osMDmCPP32PWnAEgsUWrlhOXWBdGS9EZEVkLvHYKjIfh5dk7LLCG4kcYeUaWLq-MvS_aOBgtxKqnU_2Bvvf5MW_o_Nc2YRjLSQNYbStxp3Q42okFd-vLxIJJuKIOMA0F9nzBui-huzSaIyNd9w8I746B7"/>
+<div class="flex flex-col flex-1">
+<span class="font-bold text-white uppercase font-space text-sm">CyberVova_99</span>
+<span class="text-xs text-white/50">SteelSeries Arctis Nova</span>
+</div>
+<span class="text-[10px] text-white/30 uppercase font-space">2 часа назад</span>
+</div>
+<!-- Winner 2 -->
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<img alt="" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait avatar of a person in a grey hoodie with a soft neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARXzzWYCnXaMbjSlfepz4BNIGuiQK-i5RODef6J1_3v--hLX7zwvMl-BApzT4RWUTUCPTw4MsEko7n5u8LB3uRkavl2xy5eM2zFhY3P5t355CYQz07PgurBlEXjK3yrgNdwftcntVRFiqDhw5Uv9qK25JjEMFbayyXO9QUDvXHHR7Rtsa9GbjECDsVCdxJnAyDvsXRnx1Ey0_t2wFjOTwc-khR2_ajO34w7-wjfqs9pVFz48ZdeflJZpU9Y7028YKutqSSq6_Qo5GG"/>
+<div class="flex flex-col flex-1">
+<span class="font-bold text-white uppercase font-space text-sm">Katya_Stream</span>
+<span class="text-xs text-white/50">Gift Card $50</span>
+</div>
+<span class="text-[10px] text-white/30 uppercase font-space">5 часов назад</span>
+</div>
+<!-- Winner 3 -->
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<img alt="" class="w-12 h-12 rounded-full object-cover" data-alt="Close-up portrait of a man wearing glasses in an urban environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJOCTZrXJkDi1KyWcjIYI-ncx5l6RL0ihmDG4B4LfUKvrJjlXpcG3KngFIXroz3ga-TkywzwrEY05rgcWK0x7GoKws5D-bMjWc0ZNtNHEITGlHQruABibXBllgX137VDSUb5c8H1Ds61kC2kJWzGFuFZ-SOxUKhaRMqi081mT3TpG2QMfu60g2-UrxqQNKP1jcDnnCCxX39nGrMOKYLCzWLgZoFExHzP7kJTd_NAaKQfgLfBBuCJUVEm9VgbVQCVriVKA1tqKD7wc3"/>
+<div class="flex flex-col flex-1">
+<span class="font-bold text-white uppercase font-space text-sm">Dmitry_X</span>
+<span class="text-xs text-white/50">RTX 4080 Super</span>
+</div>
+<span class="text-[10px] text-white/30 uppercase font-space">1 день назад</span>
+</div>
+</div>
+</section>
+<!-- Best Moments -->
+<section class="lg:col-span-2">
+<h2 class="text-2xl font-black font-space uppercase tracking-tight mb-8">Лучшие <span class="text-primary-container">моменты</span></h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Clip 1 -->
+<div class="group relative rounded-xl overflow-hidden aspect-video bg-surface-container">
+<img alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Epic screen capture of an action-packed shooter game with explosions and high-intensity motion blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyREF37OrAnFz_ZXbc29KBgPvMnW7fX-fXaSW-X5hrHl-ULGw0vprwf9c4UIhKbID5EJ0k79qdSKWHjDclzJiHp8VmRhGyiXTa7F6YTYORrVaWEmjnJi4YF8R1Nm_eEkcdYizZDWMFdiuaVG2YaVOVH83ADIzuPy18bSMUCVlg7mWkHBRQ-c1_35tn0Ohg4EExP5BIxxCWed06O8aR10nB6eZ5-4qgqg2mWrZm0OdMZo8yRBcPIBaObi55ceRk-vYuo193cazhJjQM"/>
+<div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold font-space">0:45</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+<p class="text-sm font-bold uppercase font-space">Минус 5 в финале турнира!</p>
+</div>
+</div>
+<!-- Clip 2 -->
+<div class="group relative rounded-xl overflow-hidden aspect-video bg-surface-container">
+<img alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Close-up of a fantasy landscape in a video game with glowing neon flora and magical effects" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbMesFY5ul2EKF6ajt0uxy6AzX1gOO15I9CzuVzKoFNdRzwLJpTb7OXNkLD3A43qv4It6HQeGrRebpMMFm75K2iyWlwfZdJ4VGF4XmzEFJhgG1-Q1XDbk5hKJN-CL9URf7mVRdAbCEKp9HqvkzlIUCdI7X1LbIMybpkKxH9DHSopmAfVknTJfB3LAX-Ue0vFX173RJXEQzQEy4_GYOXEOjlsY1ynr6Zv4vCVLGn0bMwKlUch_1U2X6gvt1wUGn51AOC4yDAQHM7g9y"/>
+<div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold font-space">1:12</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+<p class="text-sm font-bold uppercase font-space">Невероятный лак с гранатой</p>
+</div>
+</div>
+<!-- Clip 3 -->
+<div class="group relative rounded-xl overflow-hidden aspect-video bg-surface-container">
+<img alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Top-down view of a strategy game map with complex unit positioning and tactical icons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClglooA-WePETzvN3AX0NpcU6RHshK8VNtrVhz7wXZZVNdSPZ_1N7_ekYN0ajIlVN770K21YLeEZQ8O4q8Dl60F4L9h9h3A2v7F4IHRU3XJ2b24_7zAUOvacjrU4Vb9ch5kKiWdiMnbJ9e6dXqX9T6wu_iMD8wbH7PslqUyv04PKDJP6EnIjZoe8eOnVyvoaEczq1pS6A__nUNxlcIE3s7RcdiYQIHQHuXi6l0vPWl8cNJsKvZ8j2fy6WSFKDtZxbSJQGsgCfLW6Y-"/>
+<div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold font-space">0:28</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+<p class="text-sm font-bold uppercase font-space">Смешной момент с чатом</p>
+</div>
+</div>
+<!-- Clip 4 -->
+<div class="group relative rounded-xl overflow-hidden aspect-video bg-surface-container">
+<img alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Dynamic shot of a racing game car drifting around a sharp turn with tire smoke" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS82TNHe_H4W2LpnL_HACRWGlfawAk1umTJg88TbOKkwETuuzBvpatT4NJrtL4oW9WERinPo9zn6Up9Etqf4moyhdoCjZOJTGYTob6cj-nbOae4rpyWb6OonH98SNKL88qeJF7IgfL5I0zSZ9qaMlZgMqk0WXkik4hJXRLrDcJfB_YUVoQ5GwUS75qIp7K2LOVdBLmDaXedldTwBhtzgCyZ-GbjmNwC4lruIczh_xGiSWFupfN4RECe_qLXR4GRvmt4AG6cfrAcB0D"/>
+<div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold font-space">2:04</div>
+<div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+<p class="text-sm font-bold uppercase font-space">Обзор новой карты 2024</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] full-width py-12 border-t border-white/5 mt-32">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="text-xl font-black text-[#FFE100] uppercase font-space">KINETIC PRECISION</div>
+<p class="text-white/50 text-xs font-medium max-w-xs text-center md:text-left">
+                    © 2024 KINETIC PRECISION. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
+                </p>
+</div>
+<div class="flex gap-12">
+<div class="flex flex-col gap-3">
+<span class="text-[10px] uppercase font-space font-bold text-white/30 tracking-widest">ИНФО</span>
+<a class="text-white/50 hover:text-[#FFE100] transition-opacity text-sm font-medium" href="#">ПРАВИЛА</a>
+<a class="text-white/50 hover:text-[#FFE100] transition-opacity text-sm font-medium" href="#">ПОЛИТИКА</a>
+<a class="text-white/50 hover:text-[#FFE100] transition-opacity text-sm font-medium" href="#">СТАТУС</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-[10px] uppercase font-space font-bold text-white/30 tracking-widest">СОЦСЕТИ</span>
+<a class="text-white/50 hover:text-[#FFE100] transition-opacity text-sm font-medium flex items-center gap-2" href="#">TWITCH</a>
+<a class="text-white/50 hover:text-[#FFE100] transition-opacity text-sm font-medium flex items-center gap-2" href="#">TELEGRAM</a>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center hover:text-[#FFE100] cursor-pointer">
+<span class="material-symbols-outlined">video_library</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center hover:text-[#FFE100] cursor-pointer">
+<span class="material-symbols-outlined">send</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

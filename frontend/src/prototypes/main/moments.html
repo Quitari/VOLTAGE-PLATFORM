@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC - МОМЕНТЫ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#201f1f",
+                    "secondary": "#ecffe3",
+                    "on-secondary-container": "#007117",
+                    "surface-container-highest": "#353534",
+                    "on-error": "#690005",
+                    "tertiary": "#fdfdfd",
+                    "surface-tint": "#e1c700",
+                    "outline-variant": "#4c4732",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface": "#131313",
+                    "secondary-fixed": "#72ff70",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-secondary": "#003907",
+                    "on-primary-fixed": "#211c00",
+                    "primary": "#fffdff",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary": "#2f3131",
+                    "on-tertiary-container": "#626464",
+                    "on-surface-variant": "#cec6aa",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "surface-container-low": "#1c1b1b",
+                    "on-background": "#e5e2e1",
+                    "inverse-primary": "#6c5e00",
+                    "secondary-fixed-dim": "#00e639",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed": "#002203",
+                    "secondary-container": "#13ff43",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-dim": "#131313",
+                    "on-primary-fixed-variant": "#514700",
+                    "primary-fixed-dim": "#e1c700",
+                    "primary-container": "#ffe100",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-primary": "#383000",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffe330",
+                    "tertiary-container": "#e1e1e1",
+                    "error-container": "#93000a",
+                    "outline": "#979177",
+                    "on-primary-container": "#726300",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#3a3939",
+                    "background": "#131313"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Manrope', sans-serif;
+        }
+        h1, h2, h3, .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0A0A]/70 backdrop-blur-md">
+<div class="flex justify-between items-center w-full px-8 py-4">
+<!-- Brand Logo -->
+<div class="text-2xl font-black italic tracking-tighter text-[#FFE100]">KINETIC</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center space-x-8 font-['Space_Grotesk'] uppercase tracking-tighter font-bold text-sm">
+<a class="text-white/60 hover:text-white transition-colors" href="#">ГЛАВНАЯ</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">РАСПИСАНИЕ</a>
+<!-- Active Tab: МОМЕНТЫ -->
+<a class="text-[#FFE100] border-b-2 border-[#FFE100] pb-1" href="#">МОМЕНТЫ</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">ПРАВИЛА</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">СТАТУС</a>
+</div>
+<!-- Primary Action -->
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-white/60 hover:text-[#FFE100] transition-colors">search</button>
+<button class="bg-[#FFE100] text-[#211C00] font-['Space_Grotesk'] font-bold text-sm px-6 py-2 rounded-md hover:bg-[#FFE330] transition-all duration-200 active:scale-90 uppercase">ВОЙТИ</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 pb-20 px-8 max-w-[1600px] mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter mb-4 text-white">МОМЕНТЫ</h1>
+<p class="text-on-surface-variant font-medium max-w-2xl">Лучшие игровые клипы, эпические победы и самые смешные фейлы нашей команды в одном месте.</p>
+</header>
+<!-- Filters Bar -->
+<section class="mb-10 flex flex-wrap items-center gap-4 bg-surface-container-low p-4 rounded-xl">
+<div class="flex flex-wrap gap-4 flex-grow">
+<!-- Game Filter -->
+<div class="relative group">
+<button class="flex items-center gap-2 bg-surface-container px-4 py-2.5 rounded-lg border-b-2 border-outline-variant hover:border-primary-container transition-all">
+<span class="text-xs uppercase font-bold tracking-widest text-on-surface-variant">Игра:</span>
+<span class="text-sm font-semibold">Все игры</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<!-- Period Filter -->
+<div class="relative group">
+<button class="flex items-center gap-2 bg-surface-container px-4 py-2.5 rounded-lg border-b-2 border-outline-variant hover:border-primary-container transition-all">
+<span class="text-xs uppercase font-bold tracking-widest text-on-surface-variant">Период:</span>
+<span class="text-sm font-semibold">Всё время</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<!-- Search Input -->
+<div class="relative flex-grow max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant focus:border-primary-container focus:ring-0 text-sm py-2.5 pl-10 pr-4 rounded-lg transition-all" placeholder="Поиск по названию клипа..." type="text"/>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-2">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Сортировка:</span>
+<button class="material-symbols-outlined p-2 text-primary-container">grid_view</button>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-white">view_stream</button>
+</div>
+</section>
+<!-- Clips Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+<!-- Card 1 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Cyberpunk 2077 night city skyline with neon lights and flying vehicles cinematic gaming screenshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXW8KWr-AKuWdJFETsyFsNriEVknw1aR6-Nv8QcT-Qzdzj8kN7fkqrIymEn_Vj_XpcgVvQdmrquCTFDWthVmSX2ybEKZJAb6kzhZ0CREkmiS0SbAQq_cxKUDJKdsfh_0xMEX_5CWi0WcewR3JN5Gt7ueGfegzK6zLV-4d-8fOySa4dQ7NLCNn-ZkMI0x8x8Ym7TzCcvKmczbcvFvTyyrrHMMPZ1qvjWQWYZFyTUb5e4OhM3gnDZag42W3T30dMnVOVSnFCuWNtylYe"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">0:45</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Безумный дрифт по Найт-Сити</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>12 июня</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Cyberpunk 2077</span>
+</div>
+<div class="text-xs text-on-surface-variant">12.5K просмотров</div>
+</article>
+<!-- Card 2 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close up of a professional gaming controller with focused mechanical buttons and soft glowing lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQD5xcSOWglLM-JlBXne-xzb0PF1WgvFxEIIJjjxULAaCxgBKudB2Y2ttOXWXOec9R-uiy2rtOeRgnWhEGyotT0ZhrNVfvjX-0E90USHQnpP21C46Qz5lX5_u1uOcxXTPGOclGQ1of0BB6skxnU_yLtBBppXxVRrzs1ZfE4_5aJxwAsxTV5hh0kP187pRTQ7WqyoxpLtP5Jrz-76DR1KO9aqQmxxuFn4XsHKXuojrLd9Q-LWfq__B7nmlS4fwF_83fAj2ztNcQuH8S"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">1:20</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Эпичный клатч 1 против 5</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>10 июня</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Counter-Strike 2</span>
+</div>
+<div class="text-xs text-on-surface-variant">45.2K просмотров</div>
+</article>
+<!-- Card 3 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Fantasy landscape from an open world RPG game with massive mountains and magical glowing particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV3IhFWIJj3_RLQG2ZtYTIkbUW6AM9hoCA8QygudFsmVwdNrzflF54xonGOS6nvET2H5BtW-GVhOSAE3k0thCUer9R308mZnoKzCSW80oteODEFQ7osDUzBA4b_pjaEJCZDJVcTzKoZH1nuTUYx-OZ955b6hi8ayng-EihDEizlv8wuTfEQjzWetIr5MtnIPqHOmjeKhwaGr5ZR0Ql1jd_4DeU8_16-W_sp5Cb_PDMcr05G8VfShQAZNoJbbc_2EkDEYd_Pawd3vOM"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">0:30</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Секретная локация найдена!</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>8 июня</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Elden Ring</span>
+</div>
+<div class="text-xs text-on-surface-variant">8.9K просмотров</div>
+</article>
+<!-- Card 4 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="High tech gaming pc interior with neon pink and blue cooling pipes and circuit boards" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA07YIj-u1rcI3zAyoNQFIA1FplHvAp02OtC2o9_21l1tLRtfL7er_tHMh5TWlVzIAFZCv2dJWB0d2JJge2BbdEieZ8wIYYHk2wXJ1ZlhnusgtBdbAqKT22pzDTiA0iUn4eEqNc4Ge1_bZsTYhkH0btJ3kzEy82SigOvJkkfojdwwfldgz9tTOyrocIEAtPQ6XypsM_LKHRTyfenFYB71nyB6yYWtPhAHScmagjoBNCtU8J1mT2ycC8mYQYv91dh21f-PrWGGjJy2Zb"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">2:15</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Обзор нового сетапа стримера</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>5 июня</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>IRL</span>
+</div>
+<div class="text-xs text-on-surface-variant">102K просмотров</div>
+</article>
+<!-- Row 2 Card 5 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Intense action scene from a space shooter game with laser beams and explosions in deep space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUSo2HlBHE4cRKJjxb-6670cs1zPCHtJAtpDWjEWo6uL_Gv1vsQMjS1MxO8M1IRnurkASAjzOvC9B5tu4SvJikoAV6EI2RKTN-Lpzz9CuoS1BWPRYo8JEgMUy3Fkd5OKYi1wCTbErcQ4zEpYBerFHcc8cVHXzRWGlTOB9QqqJyNHHy6D5u2uTfziU-eo5-Xgg-wwEulE0wq8Uu70QPJxxT1Eu48fYIp4XUMxa6_XpfOI6dVZfuItBM8NARfd3RzuY3Ya5I5S42pfi2"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">0:58</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Невероятный побег от погони</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>1 июня</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Starfield</span>
+</div>
+<div class="text-xs text-on-surface-variant">15.1K просмотров</div>
+</article>
+<!-- Card 6 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dark eerie hallway from a horror game with flickering lights and fog" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3vIdoXkxgAeetn5lB08hs86VUk52p1c_257ThLL8GGJ-nf_-YcRc5pOtmy7Cvm__HNa9kzO-rvqGlyEzifH8pTOf5GOTJMZFdL97B0L9mE_WNSFTegdcElBqIzO5VTjzEBFmI6vdtxtunnqGlJLrEkKd79zAhI8mu1nxcD2szC86goBHHxIeub1FNsWxN1eRlTRKh8l_gg2f2sL35yBU6CraELTDS4ro4Ecdj7YT9MTRM2AHRs-g8AUz21QvmWixw2UXMXdRnWUe"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">0:15</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Скример года! Осторожно звук</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>28 мая</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Amnesia</span>
+</div>
+<div class="text-xs text-on-surface-variant">56.7K просмотров</div>
+</article>
+<!-- Card 7 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Retro game collection with colorful cartridges and vintage consoles on a shelf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU_mdCpZMml8j0ez9tbQkkL5AniVwNmeY-fXsyst9SgJp66CDT-rXNyZfifUDmgSZPGDsK6buuktS8xvI7GJdae2HqF4tYFBr1Us4dLzL7dM4guHsYhfAZW_i8NeeKgUvplbaNfUCjCg9m43YZmYZLIFaIsisGMAqUX46Xg89T0W9Lw0YmmEnhrnx-fNiSRvbosqAtECpbZssP_hn9pUkyW1AmGMOfDGpd5EnaTWPfsYiRmBlzABC8yH-iNaa0UqGe2YMOp_6DIG87"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">12:00</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Ретро марафон начался</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>25 мая</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Retro Lounge</span>
+</div>
+<div class="text-xs text-on-surface-variant">3.4K просмотров</div>
+</article>
+<!-- Card 8 -->
+<article class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="High performance racing car dashboard with glowing speedometer and digital gauges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7npBfGCx8UunS7aG9uv46lnWkn42wrBuLWh3lqQKQmx_8czFxsaef9FI46wdjBq51fc6QJL11v3fAb6wOwiP5uuoq604kPQJ97WAtYnElgQVPLssooIeMAT3n_m1fXz2zp7yuUiYxcupFLBAMY5GQ-FDxkmPHYe94VNtEXTJK2ENmOUJqfxW8D4-N7ENNI1U02RMY7GkzwVMqtywj8Wi_DCkr3ekiJ6KXhsxtVNmH_-TatqHj3b9zfdmvkxS1zjS7jIpoKKksvi6K"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-primary-container text-on-primary-fixed w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-[#0A0A0A]/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold tracking-tighter text-white">3:40</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary-container transition-colors">Финальный круг чемпионата</h3>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1">
+<span>20 мая</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>F1 24</span>
+</div>
+<div class="text-xs text-on-surface-variant">22.8K просмотров</div>
+</article>
+</div>
+<!-- Load More Button -->
+<div class="mt-20 flex justify-center">
+<button class="bg-surface-container-high hover:bg-surface-bright text-white font-['Space_Grotesk'] font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-lg transition-all flex items-center gap-3 active:scale-95 group">
+                Загрузить ещё
+                <span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500">expand_more</span>
+</button>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 mt-auto bg-[#0E0E0E]">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-2">
+<div class="text-lg font-bold text-white uppercase tracking-tighter italic">KINETIC <span class="text-[#FFE100]">PRECISION</span></div>
+<div class="font-['Manrope'] font-medium text-[10px] uppercase tracking-widest text-white/40">© 2024 KINETIC PRECISION. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</div>
+</div>
+<div class="flex items-center gap-8 font-['Manrope'] font-medium text-xs uppercase tracking-widest">
+<a class="text-white/40 hover:text-[#FFE100] transition-colors" href="#">ПОДДЕРЖКА</a>
+<a class="text-white/40 hover:text-[#FFE100] transition-colors" href="#">КОНФИДЕНЦИАЛЬНОСТЬ</a>
+<a class="text-white/40 hover:text-[#FFE100] transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">video_library</span> Twitch
+                </a>
+<a class="text-white/40 hover:text-[#FFE100] transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">send</span> Telegram
+                </a>
+</div>
+</div>
+</footer>
+<!-- HUD Style Background Accents -->
+<div class="fixed top-0 right-0 w-1/3 h-full bg-primary-container/5 blur-[120px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 w-1/4 h-1/2 bg-secondary-container/5 blur-[100px] -z-10 pointer-events-none"></div>
+</body></html>

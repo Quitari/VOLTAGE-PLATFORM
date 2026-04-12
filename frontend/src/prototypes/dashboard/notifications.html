@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed": "#211c00",
+                    "on-primary-container": "#726300",
+                    "secondary": "#ecffe3",
+                    "on-secondary-fixed": "#002203",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-background": "#e5e2e1",
+                    "on-tertiary-container": "#626464",
+                    "tertiary-fixed": "#e2e2e2",
+                    "background": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary": "#2f3131",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#13ff43",
+                    "tertiary": "#fdfdfd",
+                    "tertiary-container": "#e1e1e1",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#383000",
+                    "surface-variant": "#353534",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed-dim": "#00e639",
+                    "surface-dim": "#131313",
+                    "surface-container": "#201f1f",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-container-low": "#1c1b1b",
+                    "surface": "#131313",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "surface-bright": "#3a3939",
+                    "surface-container-lowest": "#0e0e0e",
+                    "outline-variant": "#4c4732",
+                    "on-secondary": "#003907",
+                    "on-primary-fixed-variant": "#514700",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "primary-fixed": "#ffe330",
+                    "secondary-fixed": "#72ff70",
+                    "primary-fixed-dim": "#e1c700",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#007117",
+                    "primary-container": "#ffe100",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "outline": "#979177",
+                    "on-surface-variant": "#cec6aa",
+                    "primary": "#fffdff",
+                    "surface-tint": "#e1c700",
+                    "inverse-primary": "#6c5e00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body { background-color: #0e0e0e; color: #e5e2e1; font-family: 'Manrope', sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .toggle-active { background-color: #ffe100; }
+      .toggle-dot-active { transform: translateX(1.25rem); background-color: #211c00; }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-neutral-950/70 backdrop-blur-xl flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-8">
+<div class="text-2xl font-bold italic text-yellow-400 font-['Space_Grotesk'] uppercase tracking-tighter">KINETIC</div>
+<div class="hidden md:flex items-center bg-neutral-900 px-4 py-2 rounded-lg gap-3">
+<span class="material-symbols-outlined text-neutral-500 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-neutral-300" placeholder="Поиск..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-neutral-500 hover:text-yellow-300 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-neutral-500 hover:text-yellow-300 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Layout Container -->
+<div class="flex pt-16 min-h-screen">
+<!-- SideNavBar -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 bg-surface-container-lowest min-h-screen p-6 md:p-12">
+<div class="max-w-4xl mx-auto">
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-headline text-4xl md:text-5xl font-bold uppercase tracking-tighter text-white mb-2">Настройки уведомлений</h1>
+<p class="text-on-surface-variant font-body">Управляйте тем, как и где вы получаете обновления от Voltage Stream.</p>
+</header>
+<!-- Section 1: Telegram -->
+<section class="mb-12">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">send</span>
+<h2 class="font-headline text-xl font-bold uppercase tracking-widest text-white">Уведомления в Telegram</h2>
+</div>
+<div class="space-y-4">
+<!-- Toggle Items -->
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Уведомить о начале стрима</h3>
+<p class="text-sm text-on-surface-variant">Получайте пуши когда стрим выходит в эфир</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Результаты розыгрышей</h3>
+<p class="text-sm text-on-surface-variant">Узнавайте первыми кто победил</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Я выиграл приз</h3>
+<p class="text-sm text-on-surface-variant">Мгновенное уведомление о вашей победе</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Изменение статуса доставки</h3>
+<p class="text-sm text-on-surface-variant">Трекинг ваших физических призов</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Новое наказание</h3>
+<p class="text-sm text-on-surface-variant">Информация о мутах или предупреждениях</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between group hover:bg-surface-container-high transition-colors">
+<div class="flex-1 pr-4">
+<h3 class="text-white font-medium mb-1">Ответ на апелляцию</h3>
+<p class="text-sm text-on-surface-variant">Уведомление о решении по вашей заявке</p>
+</div>
+<div class="w-12 h-6 rounded-full bg-primary-container relative flex items-center cursor-pointer">
+<div class="w-5 h-5 bg-on-primary-fixed rounded-full absolute left-6 transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Browser Push -->
+<section class="mb-12">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">laptop_mac</span>
+<h2 class="font-headline text-xl font-bold uppercase tracking-widest text-white">Push-уведомления в браузере</h2>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg mb-6 text-center border border-outline-variant/10">
+<button class="bg-primary-container text-on-primary-fixed font-headline font-bold uppercase py-4 px-8 rounded-lg tracking-widest hover:bg-primary-fixed transition-all active:scale-95 mb-6">
+                            Разрешить уведомления в браузере
+                        </button>
+<p class="text-sm text-on-surface-variant">Вы сможете получать уведомления даже если вкладка сайта закрыта</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between">
+<span class="text-white font-medium">Начало стрима</span>
+<div class="w-10 h-5 rounded-full bg-surface-container-highest relative flex items-center cursor-pointer">
+<div class="w-4 h-4 bg-on-surface-variant rounded-full absolute left-0.5 transition-all"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-lg flex items-center justify-between">
+<span class="text-white font-medium">Важные объявления</span>
+<div class="w-10 h-5 rounded-full bg-surface-container-highest relative flex items-center cursor-pointer">
+<div class="w-4 h-4 bg-on-surface-variant rounded-full absolute left-0.5 transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Note -->
+<footer class="bg-surface-container-high/30 p-6 rounded-lg border-l-4 border-primary-container">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container">info</span>
+<p class="text-on-surface leading-relaxed">
+                            Уведомления в Telegram требуют привязки аккаунта. 
+                            <a class="text-primary-container font-bold hover:underline" href="#">Привязать аккаунт</a>
+</p>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+
+</body></html>

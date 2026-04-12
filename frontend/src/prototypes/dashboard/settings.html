@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voltage Stream - Настройки Профиля</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#979177",
+                    "on-surface-variant": "#cec6aa",
+                    "surface-container": "#201f1f",
+                    "on-tertiary": "#2f3131",
+                    "secondary-container": "#13ff43",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-container": "#626464",
+                    "on-primary-fixed": "#211c00",
+                    "on-primary": "#383000",
+                    "secondary-fixed": "#72ff70",
+                    "surface-container-highest": "#353534",
+                    "on-error": "#690005",
+                    "on-background": "#e5e2e1",
+                    "on-primary-fixed-variant": "#514700",
+                    "outline-variant": "#4c4732",
+                    "surface-variant": "#353534",
+                    "on-secondary-container": "#007117",
+                    "on-secondary": "#003907",
+                    "inverse-primary": "#6c5e00",
+                    "primary-fixed": "#ffe330",
+                    "surface-dim": "#131313",
+                    "primary-container": "#ffe100",
+                    "surface-tint": "#e1c700",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "background": "#131313",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "tertiary-container": "#e1e1e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed-dim": "#00e639",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#726300",
+                    "primary": "#fffdff",
+                    "on-secondary-fixed-variant": "#00530e",
+                    "surface": "#131313",
+                    "error": "#ffb4ab",
+                    "tertiary": "#fdfdfd",
+                    "on-surface": "#e5e2e1",
+                    "secondary": "#ecffe3",
+                    "primary-fixed-dim": "#e1c700",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-high": "#2a2a2a",
+                    "on-secondary-fixed": "#002203",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        input:focus {
+            outline: none;
+            border-color: #FFE100 !important;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0E0E0E;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4C4732;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+
+<!-- SideNavBar -->
+<aside class="bg-[#0E0E0E] h-screen w-64 fixed left-0 top-0 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-2xl font-bold text-[#FFE100] tracking-tighter font-headline">VOLTAGE</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-lg font-headline">АВ</div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-[#13ff43] rounded-full border-2 border-[#0E0E0E]"></div>
+</div>
+<div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">ИГРОК_01</div>
+<div class="text-xs text-zinc-500 font-medium uppercase tracking-wider">Участник</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Обзор</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="text-sm">Мои призы</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="text-sm">Розыгрыши</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">link</span>
+<span class="text-sm">Привязки</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Уведомления</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-zinc-400 font-medium hover:bg-[#201F1F] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm">Нарушения</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FFE100] font-bold border-l-4 border-[#FFE100] bg-[#1C1B1B] transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Настройки</span>
+</a>
+</nav>
+<button class="mt-auto flex items-center gap-3 px-4 py-3 text-zinc-400 font-medium hover:text-red-400 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm uppercase font-headline">Выйти</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 pt-8 min-h-screen custom-scrollbar overflow-y-auto">
+<div class="max-w-5xl mx-auto p-6 md:p-12 pb-32">
+<header class="mb-12">
+<h1 class="text-4xl md:text-5xl font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-primary">Настройки аккаунта</h1>
+<p class="text-on-surface-variant mt-2 font-medium tracking-tight">Управляйте своим присутствием в системе Voltage Stream</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Profile & Privacy -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Profile Section -->
+<section class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/5 rounded-full -translate-y-16 translate-x-16 blur-3xl"></div>
+<div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+<div class="relative group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-2 border-primary-container p-1 bg-surface-container-lowest shadow-2xl shadow-primary-container/10">
+<img alt="Avatar" class="w-full h-full object-cover rounded-full scale-100 group-hover:scale-110 transition-transform duration-500" data-alt="high detail portrait photo of a stylish man in a dark environment with blue and yellow edge lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ESrbnuPhliXeJO6PL8ak-0CS_OnjSwgCXSoVHWU_16UokD8bklXHkFXwQTCmGv-P3d4A25R6NItzuDWtBHJDTIAEOuuQFqL4jNS3Hg8ywlMAHiySirB0aRo1joF1i7UKwMI2OeiTYX2mikg4uBfZZwJZSwgIVI6b3E1xm5C5dgpJ7ejchosZ-jVd7wlOYzr0ukEp9dp9BOLHE96cx9iHNuvawLKkQxU7jpYTg10rBzFJhh_OA3LX_h66ezd1cRlMAoevFavCzUZ4"/>
+</div>
+<div class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary-container">photo_camera</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<button class="bg-surface-container-high hover:bg-surface-bright text-primary px-6 py-2.5 rounded-lg text-sm font-bold uppercase tracking-widest transition-all duration-200 border-b-2 border-outline-variant/30">
+                                    Изменить фото
+                                </button>
+<p class="text-xs text-white/40 mt-3 uppercase tracking-widest">JPG, PNG или GIF. Макс 2MB.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-primary-container">Отображаемое имя</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant py-3 px-4 text-on-surface focus:border-primary-container transition-all" type="text" value="PLAYER_ONE"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-primary-container">Email адрес</label>
+<div class="flex gap-4">
+<input class="flex-1 bg-surface-container-lowest border-none border-b-2 border-outline-variant py-3 px-4 text-on-surface focus:border-primary-container transition-all" type="email" value="player.one@voltage.io"/>
+<button class="bg-surface-container-high hover:bg-surface-bright text-white/80 px-4 py-2 rounded-lg text-xs font-bold uppercase transition-all">Изменить</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-primary-container">Язык интерфейса</label>
+<div class="flex bg-surface-container-lowest p-1 rounded-lg w-fit border border-outline-variant/20">
+<button class="px-6 py-1.5 rounded-md bg-primary-container text-on-primary-fixed text-xs font-bold transition-all">RU</button>
+<button class="px-6 py-1.5 rounded-md hover:bg-surface-container-high text-white/40 text-xs font-bold transition-all">EN</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy Section -->
+<section class="bg-surface-container-low p-8 rounded-xl">
+<h2 class="text-xl font-['Space_Grotesk'] font-bold uppercase tracking-tight text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">security</span> Приватность
+                        </h2>
+<div class="space-y-6">
+<div class="flex items-center justify-between group">
+<div>
+<p class="text-sm font-bold uppercase tracking-wide">Публично показывать мои победы</p>
+<p class="text-xs text-on-surface-variant mt-1">Другие пользователи увидят вашу статистику в профиле</p>
+</div>
+<button class="w-12 h-6 bg-secondary-container rounded-full relative transition-colors duration-300">
+<span class="absolute right-1 top-1 w-4 h-4 bg-on-secondary-fixed rounded-full"></span>
+</button>
+</div>
+<div class="flex items-center justify-between group">
+<div>
+<p class="text-sm font-bold uppercase tracking-wide">Никнейм в ленте победителей</p>
+<p class="text-xs text-on-surface-variant mt-1">Отображать ваше имя при выигрыше в конкурсах</p>
+</div>
+<button class="w-12 h-6 bg-secondary-container rounded-full relative transition-colors duration-300">
+<span class="absolute right-1 top-1 w-4 h-4 bg-on-secondary-fixed rounded-full"></span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Password & Danger Zone -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Password Section -->
+<section class="bg-surface-container-low p-8 rounded-xl border-t-4 border-primary-container/20">
+<h2 class="text-xl font-['Space_Grotesk'] font-bold uppercase tracking-tight text-primary mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">lock</span> Безопасность
+                        </h2>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Текущий пароль</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant py-2.5 px-4 text-on-surface text-sm" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Новый пароль</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant py-2.5 px-4 text-on-surface text-sm" placeholder="Мин. 8 символов" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Подтверждение пароля</label>
+<input class="w-full bg-surface-container-lowest border-none border-b-2 border-outline-variant py-2.5 px-4 text-on-surface text-sm" placeholder="Повторите пароль" type="password"/>
+</div>
+<button class="w-full mt-4 bg-surface-container-highest hover:bg-surface-bright text-white font-bold py-3 rounded-lg text-xs uppercase tracking-widest transition-all">
+                                Обновить пароль
+                            </button>
+</div>
+</section>
+<!-- Danger Zone -->
+<section class="p-8 rounded-xl border-2 border-error/20 bg-error/5 group">
+<div class="flex items-center gap-3 text-error mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h2 class="text-sm font-['Space_Grotesk'] font-bold uppercase tracking-widest">Опасная зона</h2>
+</div>
+<p class="text-xs text-on-surface-variant mb-6 leading-relaxed">
+                            Удаление аккаунта необратимо. Все ваши достижения, подписки и валюта будут безвозвратно удалены из системы.
+                        </p>
+<button class="w-full border-2 border-error/40 hover:bg-error hover:text-on-error text-error py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300">
+                            Удалить аккаунт
+                        </button>
+</section>
+</div>
+</div>
+<!-- Global Action Bar -->
+<div class="fixed bottom-0 left-0 md:left-64 right-0 p-6 bg-[#0A0A0A]/90 backdrop-blur-md z-40 border-t border-outline-variant/10">
+<div class="max-w-5xl mx-auto">
+<button class="w-full bg-primary-container hover:bg-primary-fixed text-on-primary-fixed font-['Space_Grotesk'] font-bold py-4 rounded-lg uppercase tracking-widest text-sm transition-all shadow-xl shadow-primary-container/20 active:scale-[0.98]">
+                        Сохранить все изменения
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation (Bottom Bar) -->
+
+</body></html>

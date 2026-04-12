@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Профиль пользователя | Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary-container": "#ffe100",
+        "on-primary-fixed": "#211c00",
+        "surface-container-lowest": "#0e0e0e",
+        "surface-container-low": "#1c1b1b",
+        "surface-container": "#201f1f",
+        "surface-container-high": "#2a2a2a",
+        "on-surface": "#e5e2e1",
+        "on-surface-variant": "#cec6aa",
+        "outline-variant": "#4c4732",
+        "error": "#ffb4ab",
+        "error-container": "#93000a",
+        "secondary-container": "#13ff43",
+      },
+      fontFamily: {
+        "headline": ["Space Grotesk", "sans-serif"],
+        "body": ["Manrope", "sans-serif"],
+      }
+    }
+  }
+}
+</script>
+<style>
+body { font-family: 'Manrope', sans-serif; background: #0A0A0A; color: #e5e2e1; }
+.font-headline { font-family: 'Space Grotesk', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.tab-btn.active { color: #FFE100; border-bottom: 2px solid #FFE100; }
+.tab-btn { border-bottom: 2px solid transparent; }
+.stat-card { background: #111; border: 0.5px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; }
+.badge-warn  { background: rgba(255,183,0,0.15); color: #FFB700; border: 1px solid rgba(255,183,0,0.2); }
+.badge-ban   { background: rgba(239,68,68,0.15);  color: #F87171; border: 1px solid rgba(239,68,68,0.2); }
+.badge-ok    { background: rgba(34,197,94,0.15);  color: #4ADE80; border: 1px solid rgba(34,197,94,0.2); }
+.badge-mute  { background: rgba(251,146,60,0.15); color: #FB923C; border: 1px solid rgba(251,146,60,0.2); }
+.badge-tg    { background: rgba(36,161,222,0.15); color: #24A1DE; }
+.badge-tw    { background: rgba(145,70,255,0.15); color: #9146FF; }
+.badge-cs    { background: rgba(255,225,0,0.12);  color: #FFE100; }
+.row-hover:hover { background: rgba(255,255,255,0.02); }
+.confirm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center; }
+.confirm-modal.open { display:flex; }
+</style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="min-h-screen" style="min-width:900px">
+
+<!-- SIDEBAR -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
+<div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+  <h1 class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-4 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-1 pb-4">
+  <div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Настройки" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="text-sm">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="text-sm">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-4 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sidebar-text">Выйти</span>
+  </button>
+</div>
+</aside>
+
+<!-- MAIN -->
+<main class="page-main min-h-screen" style="min-width:0">
+  <div class="p-8" style="max-width:1100px;min-width:600px">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-white/30 font-bold uppercase tracking-widest mb-6">
+      <a href="#" class="hover:text-white transition-colors">Админ</a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <a href="#" class="hover:text-white transition-colors">Пользователи</a>
+      <span class="material-symbols-outlined text-sm">chevron_right</span>
+      <span class="text-[#FFE100]">CyberVova_99</span>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="bg-[#111] border border-white/5 rounded-2xl p-6 mb-6">
+      <div class="flex items-start justify-between gap-6">
+        <div class="flex items-center gap-5">
+          <div class="relative">
+            <div class="w-20 h-20 rounded-2xl bg-[#1C1B1B] flex items-center justify-center text-2xl font-black text-[#FFE100] font-headline">CV</div>
+            <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-2 border-[#111] rounded-full"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <h1 class="text-2xl font-black text-white font-headline uppercase tracking-tight">CyberVova_99</h1>
+              <span class="badge-ok text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full cursor-help" title="Автоматически: заходил менее 7 дней назад. Переключить вручную можно во вкладке Настройки профиля">Активен ⓘ</span>
+            </div>
+            <div class="text-sm text-white/40 mb-3"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d7b627b6c4d68756c607d6168236e6260">[email&#160;protected]</a> · ID: 88291034 · Зарегистрирован 12 марта 2024</div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="badge-tg text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15l4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/></svg>
+                @vova_tg
+              </span>
+              <span class="badge-tw text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                cybervova
+              </span>
+              <span class="bg-white/5 text-white/40 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.718L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0z"/></svg>
+                Steam не привязан
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Action buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button onclick="openModal('warn')" class="flex items-center gap-2 px-4 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/70 hover:text-[#FFE100] text-xs font-bold uppercase tracking-widest rounded-lg transition-all">
+            <span class="material-symbols-outlined text-base">warning</span> Предупредить
+          </button>
+          <button onclick="openModal('mute')" class="flex items-center gap-2 px-4 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/70 hover:text-orange-400 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">
+            <span class="material-symbols-outlined text-base">mic_off</span> Мут
+          </button>
+          <button onclick="openModal('ban')" class="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">
+            <span class="material-symbols-outlined text-base">block</span> Бан
+          </button>
+          <div class="relative" id="more-menu-wrap">
+            <button onclick="document.getElementById('more-menu').classList.toggle('hidden')" class="flex items-center gap-2 px-4 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all" title="Дополнительные действия">
+              <span class="material-symbols-outlined text-base">more_horiz</span>
+            </button>
+            <div id="more-menu" class="hidden absolute right-0 top-full mt-1 bg-[#1C1B1B] border border-white/10 rounded-xl shadow-xl z-50 w-52 py-1">
+              <button class="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left"><span class="material-symbols-outlined text-base">lock_reset</span> Сбросить пароль</button>
+              <button class="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left"><span class="material-symbols-outlined text-base">notifications</span> Отправить уведомление</button>
+              <button class="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left"><span class="material-symbols-outlined text-base">download</span> Экспорт данных</button>
+              <div class="border-t border-white/5 my-1"></div>
+              <button class="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-red-400 hover:bg-red-500/10 transition-all text-left"><span class="material-symbols-outlined text-base">delete</span> Удалить аккаунт</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="stat-card">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Участий в розыгрышах</div>
+        <div class="text-3xl font-black text-white font-headline">47</div>
+        <div class="text-xs text-white/30 mt-1">за всё время</div>
+      </div>
+      <div class="stat-card">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Побед</div>
+        <div class="text-3xl font-black text-[#FFE100] font-headline">3</div>
+        <div class="text-xs text-white/30 mt-1">получено призов</div>
+      </div>
+      <div class="stat-card">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Сообщений</div>
+        <div class="text-3xl font-black text-white font-headline">1.2K</div>
+        <div class="text-xs text-white/30 mt-1">в чате Telegram</div>
+      </div>
+      <div class="stat-card">
+        <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Нарушений</div>
+        <div class="text-3xl font-black text-orange-400 font-headline">2</div>
+        <div class="text-xs text-white/30 mt-1">1 активное</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex gap-6 border-b border-white/5 mb-6">
+      <button class="tab-btn active text-sm font-bold uppercase tracking-widest pb-3 transition-colors" onclick="switchTab(this,'prizes')">Розыгрыши и призы</button>
+      <button class="tab-btn text-sm font-bold uppercase tracking-widest text-white/40 pb-3 transition-colors hover:text-white" onclick="switchTab(this,'violations')">Нарушения</button>
+      <button class="tab-btn text-sm font-bold uppercase tracking-widest text-white/40 pb-3 transition-colors hover:text-white" onclick="switchTab(this,'activity')">Активность</button>
+      <button class="tab-btn text-sm font-bold uppercase tracking-widest text-white/40 pb-3 transition-colors hover:text-white" onclick="switchTab(this,'settings')">Настройки профиля</button>
+    </div>
+
+    <!-- TAB: Розыгрыши и призы -->
+    <div id="tab-prizes" class="tab-content space-y-3">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-xs text-white/30 font-bold uppercase tracking-widest">47 участий · 3 победы</span>
+        <select class="bg-[#111] border border-white/5 text-white/50 text-xs px-3 py-1.5 rounded-lg focus:outline-none">
+          <option>Все</option><option>Победы</option><option>Не победил</option>
+        </select>
+      </div>
+      <!-- Prize row 1 -->
+      <div class="bg-[#111] border border-white/5 rounded-xl p-4 flex items-center gap-4 row-hover transition-all">
+        <div class="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[#FFE100]">emoji_events</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="text-sm font-bold text-white">SteelSeries Arctis Nova</span>
+            <span class="badge-ok text-[10px] font-bold px-2 py-0.5 rounded-full">Получен</span>
+            <span class="badge-tg text-[10px] font-bold px-2 py-0.5 rounded-full">Telegram</span>
+          </div>
+          <span class="text-xs text-white/30">Выиграл 15 окт 2024 · Роз. #TG-4421</span>
+        </div>
+        <button class="text-xs text-white/30 hover:text-white transition-colors font-bold uppercase tracking-widest">Детали</button>
+      </div>
+      <!-- Prize row 2 -->
+      <div class="bg-[#111] border border-white/5 rounded-xl p-4 flex items-center gap-4 row-hover transition-all">
+        <div class="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-[#FFE100]">emoji_events</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="text-sm font-bold text-white">AWP | Азимов FT</span>
+            <span class="badge-warn text-[10px] font-bold px-2 py-0.5 rounded-full">Ожидает</span>
+            <span class="badge-tw text-[10px] font-bold px-2 py-0.5 rounded-full">Twitch</span>
+          </div>
+          <span class="text-xs text-white/30">Выиграл 2 дня назад · Steam ссылка не привязана</span>
+        </div>
+        <button class="text-xs text-[#FFE100] hover:text-yellow-300 transition-colors font-bold uppercase tracking-widest">Напомнить</button>
+      </div>
+      <!-- Prize row 3 -->
+      <div class="bg-[#111] border border-white/5 rounded-xl p-4 flex items-center gap-4 row-hover transition-all opacity-60">
+        <div class="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-white/20">close</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5">
+            <span class="text-sm font-bold text-white">Gift Card $50</span>
+            <span class="badge-ban text-[10px] font-bold px-2 py-0.5 rounded-full">Отменён</span>
+          </div>
+          <span class="text-xs text-white/30">5 окт 2024 · Причина: не ответил за 1 минуту</span>
+        </div>
+        <button class="text-xs text-white/30 hover:text-white transition-colors font-bold uppercase tracking-widest">Детали</button>
+      </div>
+      <!-- Participation rows -->
+      <div class="mt-4 text-[10px] font-bold text-white/25 uppercase tracking-widest mb-2">Последние участия (не победил)</div>
+      <div class="bg-[#111] border border-white/5 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-white/5">
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Розыгрыш</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Платформа</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Участников</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Дата</th>
+          </tr></thead>
+          <tbody>
+            <tr class="border-b border-white/5 row-hover"><td class="px-4 py-3 text-white/70">RTX 4080 Super</td><td class="px-4 py-3"><span class="badge-tg text-[10px] font-bold px-2 py-0.5 rounded-full">TG</span></td><td class="px-4 py-3 text-white/40">14 820</td><td class="px-4 py-3 text-white/40">1 окт 2024</td></tr>
+            <tr class="border-b border-white/5 row-hover"><td class="px-4 py-3 text-white/70">Logitech G Pro X</td><td class="px-4 py-3"><span class="badge-tw text-[10px] font-bold px-2 py-0.5 rounded-full">TW</span></td><td class="px-4 py-3 text-white/40">2 450</td><td class="px-4 py-3 text-white/40">25 сен 2024</td></tr>
+            <tr class="row-hover"><td class="px-4 py-3 text-white/70">AK-47 | Вулкан</td><td class="px-4 py-3"><span class="badge-cs text-[10px] font-bold px-2 py-0.5 rounded-full">CS2</span></td><td class="px-4 py-3 text-white/40">847</td><td class="px-4 py-3 text-white/40">10 сен 2024</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: Нарушения -->
+    <div id="tab-violations" class="tab-content hidden space-y-4">
+      <!-- Active punishment -->
+      <div class="bg-[#111] border border-orange-500/20 rounded-xl p-5">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <span class="badge-mute text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest">Мут 24ч · Активный</span>
+          </div>
+          <span class="text-xs text-white/30">Истекает через 12ч 30мин</span>
+        </div>
+        <div class="text-sm text-white mb-2">Причина: <span class="text-white/70">Спам одинаковыми сообщениями в чате</span></div>
+        <div class="text-xs text-white/30">Выдал: <span class="text-white/60">w1zer</span> · 14 окт 2024 в 16:30</div>
+        <div class="flex gap-2 mt-4">
+          <button onclick="openModal('revoke')" class="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">Отменить наказание</button>
+          <button class="px-4 py-2 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">История апелляций</button>
+        </div>
+      </div>
+      <!-- History -->
+      <div class="text-[10px] font-bold text-white/25 uppercase tracking-widest mt-2 mb-2">История наказаний</div>
+      <div class="bg-[#111] border border-white/5 rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead><tr class="border-b border-white/5">
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Тип</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Причина</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Модератор</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Дата</th>
+            <th class="px-4 py-3 text-left text-[10px] font-bold text-white/30 uppercase tracking-widest">Статус</th>
+          </tr></thead>
+          <tbody>
+            <tr class="border-b border-white/5 row-hover">
+              <td class="px-4 py-3"><span class="badge-mute text-[10px] font-bold px-2 py-0.5 rounded-full">Мут 24ч</span></td>
+              <td class="px-4 py-3 text-white/60">Спам</td>
+              <td class="px-4 py-3 text-white/60">w1zer</td>
+              <td class="px-4 py-3 text-white/40">14 окт 2024</td>
+              <td class="px-4 py-3"><span class="badge-warn text-[10px] font-bold px-2 py-0.5 rounded-full">Активный</span></td>
+            </tr>
+            <tr class="row-hover">
+              <td class="px-4 py-3"><span class="badge-warn text-[10px] font-bold px-2 py-0.5 rounded-full">Предупреждение</span></td>
+              <td class="px-4 py-3 text-white/60">Флуд в чате</td>
+              <td class="px-4 py-3 text-white/60">System</td>
+              <td class="px-4 py-3 text-white/40">2 сен 2024</td>
+              <td class="px-4 py-3"><span class="badge-ok text-[10px] font-bold px-2 py-0.5 rounded-full">Истекло</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Quick punish form -->
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5">
+        <div class="text-xs font-bold text-white/40 uppercase tracking-widest mb-4">Выдать наказание</div>
+        <div class="flex gap-3 items-end">
+          <div class="flex gap-1 bg-[#1C1B1B] p-1 rounded-lg">
+            <button class="px-3 py-2 bg-[#FFE100] text-[#211C00] text-[10px] font-black uppercase tracking-widest rounded">Предупреждение</button>
+            <button class="px-3 py-2 text-white/40 hover:text-white text-[10px] font-black uppercase tracking-widest rounded transition-all">Мут</button>
+            <button class="px-3 py-2 text-white/40 hover:text-white text-[10px] font-black uppercase tracking-widest rounded transition-all">Бан</button>
+          </div>
+          <input class="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-xs px-4 py-2.5 rounded-lg focus:outline-none focus:border-[#FFE100]/40" placeholder="Причина наказания..." type="text"/>
+          <button onclick="openModal('punish')" class="px-5 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#FFE330] transition-all active:scale-95">Выдать</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Активность -->
+    <div id="tab-activity" class="tab-content hidden space-y-3">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-xs text-white/30 font-bold uppercase tracking-widest">Последние действия пользователя</span>
+        <select class="bg-[#111] border border-white/5 text-white/50 text-xs px-3 py-1.5 rounded-lg focus:outline-none">
+          <option>Все события</option><option>Сообщения</option><option>Розыгрыши</option><option>Авторизация</option>
+        </select>
+      </div>
+      <!-- Activity items -->
+      <div class="bg-[#111] border border-white/5 rounded-xl overflow-hidden divide-y divide-white/5">
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-[#FFE100]/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[#FFE100] text-base">emoji_events</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Участие в розыгрыше <span class="text-white font-bold">RTX 4080 Super</span></div><div class="text-xs text-white/30 mt-0.5">Telegram · 1 окт 2024 в 14:32</div></div>
+        </div>
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-blue-400 text-base">chat</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Сообщений в TG за месяц: <span class="text-white font-bold">142</span></div><div class="text-xs text-white/30 mt-0.5">Telegram · Статистика за октябрь</div></div>
+        </div>
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-orange-400 text-base">mic_off</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Получил наказание: <span class="text-orange-400 font-bold">Мут 24ч</span></div><div class="text-xs text-white/30 mt-0.5">Выдал w1zer · 14 окт 2024 в 16:30</div></div>
+        </div>
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-green-400 text-base">login</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Вход в аккаунт</div><div class="text-xs text-white/30 mt-0.5">IP: 85.141.x.x · 10 окт 2024 в 09:15</div></div>
+        </div>
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-[#FFE100]/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[#FFE100] text-base">emoji_events</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Победа в розыгрыше <span class="text-white font-bold">SteelSeries Arctis Nova</span></div><div class="text-xs text-white/30 mt-0.5">Telegram · 15 окт 2024 · Приз доставлен</div></div>
+        </div>
+        <div class="flex items-center gap-4 px-4 py-3 row-hover">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-purple-400 text-base">person_add</span></div>
+          <div class="flex-1"><div class="text-sm text-white/80">Регистрация на платформе</div><div class="text-xs text-white/30 mt-0.5">12 марта 2024 · через Telegram</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Настройки профиля -->
+    <div id="tab-settings" class="tab-content hidden max-w-xl space-y-5">
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5 space-y-4">
+        <div class="text-xs font-bold text-white/40 uppercase tracking-widest">Основные данные</div>
+        <div><label class="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5">Никнейм</label>
+          <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/40" value="CyberVova_99"/></div>
+        <div><label class="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5">Email</label>
+          <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/40" value="vova@example.com"/></div>
+        <div><label class="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5">Роль</label>
+          <select class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/40">
+            <option>Участник</option><option>Moderator</option><option>Super Moderator</option><option>Streamer</option>
+          </select></div>
+      </div>
+      <div class="bg-[#111] border border-white/5 rounded-xl p-5 space-y-3">
+        <div class="text-xs font-bold text-white/40 uppercase tracking-widest">Steam трейд-ссылка</div>
+        <input class="w-full bg-[#1C1B1B] border border-white/5 text-white/50 text-xs py-2.5 px-4 rounded-lg focus:outline-none font-mono" placeholder="https://steamcommunity.com/tradeoffer/new/?partner=..."/>
+        <p class="text-[10px] text-white/25">Редактирование трейд-ссылки от имени администратора</p>
+      </div>
+      <div class="flex gap-3">
+        <button class="px-6 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+        <button onclick="openModal('ban')" class="px-6 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">Заблокировать аккаунт</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CONFIRM MODALS -->
+<div id="modal-warn" class="confirm-modal">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h3 class="text-lg font-black text-white font-headline uppercase mb-2">Предупредить пользователя</h3>
+    <p class="text-sm text-white/50 mb-4">CyberVova_99 получит уведомление о предупреждении.</p>
+    <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none mb-4" placeholder="Причина предупреждения..."/>
+    <div class="flex gap-3">
+      <button onclick="closeModal('warn')" class="flex-1 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg transition-all">Отмена</button>
+      <button class="flex-1 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#FFE330] transition-all">Выдать</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-mute" class="confirm-modal">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h3 class="text-lg font-black text-white font-headline uppercase mb-2">Мут пользователя</h3>
+    <p class="text-sm text-white/50 mb-4">CyberVova_99 не сможет писать в чат.</p>
+    <div class="grid grid-cols-4 gap-2 mb-4">
+      <button class="py-2 bg-[#FFE100] text-[#211C00] text-[10px] font-black uppercase rounded-lg">1ч</button>
+      <button class="py-2 bg-[#1C1B1B] text-white/50 hover:bg-[#2A2A2A] text-[10px] font-black uppercase rounded-lg transition-all">6ч</button>
+      <button class="py-2 bg-[#1C1B1B] text-white/50 hover:bg-[#2A2A2A] text-[10px] font-black uppercase rounded-lg transition-all">24ч</button>
+      <button class="py-2 bg-[#1C1B1B] text-white/50 hover:bg-[#2A2A2A] text-[10px] font-black uppercase rounded-lg transition-all">7д</button>
+    </div>
+    <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none mb-4" placeholder="Причина..."/>
+    <div class="flex gap-3">
+      <button onclick="closeModal('mute')" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg">Отмена</button>
+      <button class="flex-1 py-2.5 bg-orange-500 text-white font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-orange-400 transition-all">Применить мут</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-ban" class="confirm-modal">
+  <div class="bg-[#111] border border-red-500/20 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><span class="material-symbols-outlined text-red-400 text-xl">warning</span></div>
+      <h3 class="text-lg font-black text-white font-headline uppercase">Заблокировать аккаунт</h3>
+    </div>
+    <p class="text-sm text-white/50 mb-4">Пользователь <span class="text-white font-bold">CyberVova_99</span> потеряет доступ к платформе. Это действие можно отменить.</p>
+    <input class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-lg focus:outline-none mb-4" placeholder="Причина блокировки..."/>
+    <div class="flex gap-3">
+      <button onclick="closeModal('ban')" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg">Отмена</button>
+      <button class="flex-1 py-2.5 bg-red-500 hover:bg-red-400 text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all">Заблокировать</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-revoke" class="confirm-modal">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h3 class="text-lg font-black text-white font-headline uppercase mb-2">Отменить наказание</h3>
+    <p class="text-sm text-white/50 mb-4">Мут будет снят досрочно. Пользователь получит уведомление.</p>
+    <div class="flex gap-3">
+      <button onclick="closeModal('revoke')" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg">Отмена</button>
+      <button class="flex-1 py-2.5 bg-green-500 hover:bg-green-400 text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all">Снять наказание</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-punish" class="confirm-modal">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h3 class="text-lg font-black text-white font-headline uppercase mb-2">Подтвердить действие</h3>
+    <p class="text-sm text-white/50 mb-4">Вы уверены что хотите выдать наказание пользователю <span class="text-white font-bold">CyberVova_99</span>?</p>
+    <div class="flex gap-3">
+      <button onclick="closeModal('punish')" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-lg">Отмена</button>
+      <button class="flex-1 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest rounded-lg transition-all">Подтвердить</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.classList.add('text-white/40');
+    b.classList.remove('text-[#FFE100]');
+  });
+  btn.classList.add('active');
+  btn.classList.remove('text-white/40');
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+  document.getElementById('tab-' + id).classList.remove('hidden');
+}
+function openModal(name) {
+  document.getElementById('modal-' + name).classList.add('open');
+}
+function closeModal(name) {
+  document.getElementById('modal-' + name).classList.remove('open');
+}
+document.querySelectorAll('.confirm-modal').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>

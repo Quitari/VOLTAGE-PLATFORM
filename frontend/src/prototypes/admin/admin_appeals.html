@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#13ff43",
+                        "on-primary-fixed": "#211c00",
+                        "on-primary": "#383000",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-container": "#626464",
+                        "secondary-fixed": "#72ff70",
+                        "outline": "#979177",
+                        "on-surface-variant": "#cec6aa",
+                        "on-tertiary": "#2f3131",
+                        "surface-container": "#201f1f",
+                        "primary-fixed": "#ffe330",
+                        "surface-dim": "#131313",
+                        "surface-tint": "#e1c700",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-container": "#ffe100",
+                        "on-error": "#690005",
+                        "on-background": "#e5e2e1",
+                        "surface-container-highest": "#353534",
+                        "outline-variant": "#4c4732",
+                        "on-primary-fixed-variant": "#514700",
+                        "inverse-primary": "#6c5e00",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#007117",
+                        "on-secondary": "#003907",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-container": "#e1e1e1",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "tertiary-fixed": "#e2e2e2",
+                        "background": "#131313",
+                        "tertiary": "#fdfdfd",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-fixed": "#002203",
+                        "secondary": "#ecffe3",
+                        "primary-fixed-dim": "#e1c700",
+                        "inverse-on-surface": "#313030",
+                        "surface-bright": "#3a3939",
+                        "secondary-fixed-dim": "#00e639",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-container": "#726300",
+                        "surface": "#131313",
+                        "error": "#ffb4ab",
+                        "primary": "#fffdff",
+                        "on-secondary-fixed-variant": "#00530e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0A0A0A; color: #E5E2E1; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="bg-surface-container-lowest min-h-screen">
+<!-- TopNavBar -->
+
+<!-- SideNavBar -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden" style="width:256px">
+<div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
+  <span class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sb-text">VOLTAGE</span>
+  <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 sb-text overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-3 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-0.5 pb-2 sb-nav">
+  <div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="flex-1">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="flex-1">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="flex-1">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="flex-1">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="flex-1">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="flex-1">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="flex-1">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="flex-1">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90" style="transform:rotate(90deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5">
+    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#FFE100] border-l-2 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-accordion">
+  <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
+  </button>
+  <div class="sidebar-acc-body space-y-0.5 hidden">
+    <a data-label="Настройки" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="flex-1">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="flex-1">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-3 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-3 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sb-text">Выйти</span>
+  </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="page-main  pt-8 min-h-screen">
+<div class="max-w-7xl mx-auto p-8">
+<!-- Page Header -->
+<div class="flex items-end justify-between mb-12">
+<div>
+<h1 class="text-5xl font-headline font-bold uppercase tracking-tighter mb-2">АПЕЛЛЯЦИИ</h1>
+<div class="flex gap-1 mt-6 mb-6">
+  <button class="px-4 py-2 bg-[#FFE100] text-[#211C00] text-xs font-bold uppercase tracking-widest rounded transition-all">На рассмотрении <span class="ml-1 bg-[#211C00]/20 px-1.5 py-0.5 rounded text-[10px]">5</span></button>
+  <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded transition-all">Одобрены</button>
+  <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded transition-all">Отклонены</button>
+  <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded transition-all">Все</button>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-[2px] w-12 bg-primary-container"></div>
+<span class="text-outline text-xs uppercase font-headline tracking-widest">УПРАВЛЕНИЕ ЖАЛОБАМИ</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1 bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/20">
+<span class="text-xs font-headline font-bold uppercase text-white/50">ВСЕГО:</span>
+<span class="text-xs font-headline font-bold text-primary-container">1,402</span>
+</div>
+</div>
+</div>
+<!-- Bento Tabs & Filter -->
+<div class="flex items-center gap-8 mb-10 overflow-x-auto no-scrollbar">
+<button class="relative py-2 px-1 group">
+<span class="font-headline font-bold uppercase text-sm tracking-widest text-primary-container">НА РАССМОТРЕНИИ</span>
+<span class="ml-2 bg-primary-container text-on-primary-fixed px-1.5 py-0.5 text-[10px] rounded leading-none align-middle">5</span>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-primary-container"></div>
+</button>
+<button class="relative py-2 px-1 group text-white/40 hover:text-white transition-colors">
+<span class="font-headline font-bold uppercase text-sm tracking-widest">ОДОБРЕНЫ</span>
+</button>
+<button class="relative py-2 px-1 group text-white/40 hover:text-white transition-colors">
+<span class="font-headline font-bold uppercase text-sm tracking-widest">ОТКЛОНЕНЫ</span>
+</button>
+<button class="relative py-2 px-1 group text-white/40 hover:text-white transition-colors">
+<span class="font-headline font-bold uppercase text-sm tracking-widest">ВСЕ</span>
+</button>
+</div>
+<!-- Appeals Content (Asymmetric List) -->
+<div class="space-y-8">
+<!-- Card 1: Pending (Highlight Item) -->
+<article class="bg-surface-container-low border-l-4 border-primary-container overflow-hidden group hover:bg-surface-container transition-all duration-300">
+<div class="p-6 md:p-8">
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Left: User Identity -->
+<div class="md:w-1/4">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-16 h-16 rounded-xl bg-surface-container-highest overflow-hidden p-0.5">
+<img alt="User Nickname" class="w-full h-full object-cover rounded-lg" data-alt="professional esports player headshot with futuristic lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD09RfJP1ZgmhRBsq59yrMv68rXE69q_N2rpIsuBhE4pYXXCNn0eVBL45mDwBLHOmnMDKJ-KOoy5K2bug1jkydXRVsPuSPMVEHSgXc06IOa3EUiFWKoylxeHjtLviSDkniieNZHDNneG90niv-3xxxc_oK3-7JdGgx-EkgW8ZXmktf3MiUTjQbiNeuQVy-kBGJS5v8VwXTa6ojaedved1adnI8PilIyZCiZI6Ulgoz3v1Tr75X42v9XyZgOi4OoIxraBXk8FtCUcVEo"/>
+</div>
+<div>
+<h3 class="font-headline font-bold text-white uppercase text-lg leading-tight">Nightmare_X</h3>
+<p class="text-[10px] font-headline text-outline uppercase tracking-wider">ID: 8904125</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex flex-col">
+<span class="text-[10px] font-headline text-outline uppercase">Дата подачи</span>
+<span class="text-xs font-bold text-white/80">14.10.2023 15:42</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-headline text-outline uppercase">Тип нарушения</span>
+<span class="text-xs font-bold text-error uppercase">MUTE 24H</span>
+</div>
+</div>
+</div>
+<!-- Middle: Context -->
+<div class="flex-1 space-y-6">
+<div>
+<span class="text-[10px] font-headline text-primary-container uppercase font-bold tracking-widest mb-2 block">ПРИЧИНА НАКАЗАНИЯ</span>
+<p class="text-sm font-medium text-white/90">Оскорбление участников сообщества, использование ненормативной лексики в глобальном чате (рецидив).</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border-l-2 border-outline-variant/30">
+<span class="text-[10px] font-headline text-outline uppercase font-bold tracking-widest mb-3 block">ТЕКСТ АПЕЛЛЯЦИИ</span>
+<blockquote class="text-sm text-on-surface italic leading-relaxed">
+                                        "Я признаю свою ошибку, но модератор не учел, что меня спровоцировали. В логах чата видно, что игрок 'User123' начал первый. Прошу сократить срок мута, так как сегодня важный турнир и мне нужно координировать команду."
+                                    </blockquote>
+</div>
+<div class="flex items-center gap-2 py-2 px-3 bg-surface-container-high/50 rounded inline-flex">
+<span class="material-symbols-outlined text-xs text-outline">shield</span>
+<span class="text-[10px] font-headline text-outline uppercase">Выдано модератором:</span>
+<span class="text-[10px] font-headline text-white font-bold uppercase tracking-wider">MOD_STRIKER</span>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="md:w-64 flex flex-col gap-3 justify-center">
+<button class="w-full py-3 bg-secondary-container text-on-secondary-fixed font-headline font-bold uppercase text-xs tracking-widest rounded transition-transform active:scale-95 hover:bg-secondary-fixed">
+                                    ОДОБРИТЬ
+                                </button>
+<button class="w-full py-3 border-1.5 border-error/50 hover:border-error text-error font-headline font-bold uppercase text-xs tracking-widest rounded transition-colors active:scale-95">
+                                    ОТКЛОНИТЬ
+                                </button>
+<button class="w-full py-3 bg-surface-container-highest text-white/60 hover:text-white font-headline font-bold uppercase text-xs tracking-widest rounded transition-colors active:scale-95">
+                                    ЗАПРОСИТЬ УТОЧНЕНИЕ
+                                </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Approved -->
+<article class="bg-surface-container-low border-l-4 border-secondary-container opacity-90 hover:opacity-100 transition-opacity">
+<div class="p-6">
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Left: User Identity -->
+<div class="md:w-1/4">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest overflow-hidden">
+<img alt="User Nickname" class="w-full h-full object-cover" data-alt="vibrant abstract avatar representing a gaming profile with high-speed motion blur effect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKCFlE0jNii3bCOPbeShtqDjrKV8x9dBVdhpyfnFV0frKHKF2HvnDx9BMfHEFuE8xi-bC9olfxxJFMgG0LzNOMp1lx7MUQt9Fn9zY59rl8FRn9ixhG90lOvqt-EzKGzYWtfe16H2h1N8kOfExjzV6jL1fmBy0bg6Lg6upponfdftpGF41ouVO1u_le-rzZMgXOrslH7dJTQUX_ustkkZAEk2cjY8aUO63_2aEZAprJWTaA7v-0_dPPeWkVBHIB74iXCkT9tFDes2Z5"/>
+</div>
+<div>
+<h3 class="font-headline font-bold text-white/70 uppercase text-base">Kiber_Punk</h3>
+<span class="text-[10px] font-headline text-secondary-container uppercase font-bold tracking-widest">ОДОБРЕНА</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex flex-col">
+<span class="text-[10px] font-headline text-outline uppercase">Решение от</span>
+<span class="text-xs font-bold text-white/50">13.10.2023 21:10</span>
+</div>
+</div>
+</div>
+<!-- Middle: Admin Response -->
+<div class="flex-1 bg-[#1A1A1A] p-4 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-4xl">check_circle</span>
+</div>
+<span class="text-[10px] font-headline text-outline uppercase font-bold tracking-widest mb-2 block">ОТВЕТ МОДЕРАТОРА (SYS_ADMIN)</span>
+<p class="text-sm text-white/70 leading-relaxed">
+                                    Апелляция удовлетворена. После проверки полных логов чата было подтверждено нарушение со стороны оппонента. Наказание снято досрочно. Приятной игры.
+                                </p>
+</div>
+<!-- Right: Status Detail -->
+<div class="md:w-48 flex items-center justify-center">
+<div class="text-center">
+<span class="material-symbols-outlined text-secondary-container text-3xl mb-1">verified</span>
+<p class="text-[10px] font-headline text-outline uppercase font-bold">АРХИВИРОВАНО</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Grid Style Section for smaller entries -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-6 flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-error/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">block</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-white uppercase tracking-tight">Vulkan_User</h4>
+<p class="text-[10px] font-headline text-outline uppercase">Бан за читы • 12.10.2023</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-2 py-0.5 bg-error/10 text-error text-[10px] font-bold font-headline uppercase rounded">ОТКЛОНЕНО</span>
+<span class="material-symbols-outlined text-outline group-hover:text-white transition-colors">chevron_right</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 flex items-center justify-between group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-white uppercase tracking-tight">Ghost_Rider</h4>
+<p class="text-[10px] font-headline text-outline uppercase">Флуд в чате • Ожидание: 2ч</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-2 py-0.5 bg-primary-container/10 text-primary-container text-[10px] font-bold font-headline uppercase rounded">НОВАЯ</span>
+<span class="material-symbols-outlined text-outline group-hover:text-white transition-colors">chevron_right</span>
+
+<div class="flex gap-3 mt-4 pt-4 border-t border-white/5">
+  <button class="flex-1 bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/20 text-xs font-bold uppercase tracking-widest py-2.5 rounded-lg transition-all">Одобрить</button>
+  <button class="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-bold uppercase tracking-widest py-2.5 rounded-lg transition-all">Отклонить</button>
+  <button class="flex-1 bg-[#1C1B1B] hover:bg-[#2A2A2A] text-white/50 text-xs font-bold uppercase tracking-widest py-2.5 rounded-lg transition-all">Уточнить</button>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression Rule Active: No FAB on management pages -->
+
+
+
+<div id="global-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeConfirm()">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div id="gcm-icon-wrap" class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span id="gcm-icon" class="material-symbols-outlined text-xl"></span>
+      </div>
+      <h3 id="gcm-title" class="text-lg font-black text-white font-headline uppercase"></h3>
+    </div>
+    <p id="gcm-body" class="text-sm text-white/50 mb-5"></p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button id="gcm-confirm-btn" class="flex-1 py-2.5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all"></button>
+    </div>
+  </div>
+</div>
+<script id="global-confirm-script">
+function showConfirm(opts) {
+  var m = document.getElementById('global-confirm-modal');
+  document.getElementById('gcm-title').textContent = opts.title || 'Подтвердите действие';
+  document.getElementById('gcm-body').textContent = opts.body || 'Это действие нельзя отменить.';
+  var icon = document.getElementById('gcm-icon');
+  var wrap = document.getElementById('gcm-icon-wrap');
+  var btn  = document.getElementById('gcm-confirm-btn');
+  if (opts.danger) {
+    wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
+    btn.style.background = '#EF4444'; btn.style.color = '#fff';
+  } else {
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
+    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+  }
+  btn.textContent = opts.confirmLabel || 'Подтвердить';
+  btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };
+  m.style.display = 'flex';
+}
+function closeConfirm() { document.getElementById('global-confirm-modal').style.display = 'none'; }
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body></html>

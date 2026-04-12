@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voltage Stream Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary-container": "#ffe100",
+                "on-primary-fixed": "#211c00",
+                "on-tertiary-container": "#626464",
+                "on-secondary-fixed-variant": "#00530e",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "on-primary": "#383000",
+                "surface-dim": "#131313",
+                "primary-fixed-dim": "#e1c700",
+                "surface-container": "#201f1f",
+                "on-tertiary-fixed": "#1a1c1c",
+                "on-primary-fixed-variant": "#514700",
+                "secondary": "#ecffe3",
+                "surface-tint": "#e1c700",
+                "secondary-container": "#13ff43",
+                "on-surface-variant": "#cec6aa",
+                "background": "#131313",
+                "on-primary-container": "#726300",
+                "tertiary-fixed": "#e2e2e2",
+                "on-error": "#690005",
+                "primary": "#fffdff",
+                "tertiary-container": "#e1e1e1",
+                "surface-container-highest": "#353534",
+                "primary-fixed": "#ffe330",
+                "surface-bright": "#3a3939",
+                "tertiary": "#fdfdfd",
+                "outline": "#979177",
+                "inverse-surface": "#e5e2e1",
+                "error": "#ffb4ab",
+                "on-error-container": "#ffdad6",
+                "on-surface": "#e5e2e1",
+                "on-secondary-fixed": "#002203",
+                "on-tertiary": "#2f3131",
+                "surface-variant": "#353534",
+                "on-background": "#e5e2e1",
+                "surface": "#131313",
+                "error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#454747",
+                "surface-container-low": "#1c1b1b",
+                "surface-container-high": "#2a2a2a",
+                "secondary-fixed-dim": "#00e639",
+                "outline-variant": "#4c4732",
+                "secondary-fixed": "#72ff70",
+                "on-secondary": "#003907",
+                "inverse-primary": "#6c5e00",
+                "on-secondary-container": "#007117",
+                "inverse-on-surface": "#313030",
+                "surface-container-lowest": "#0e0e0e"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "fontFamily": {
+                "headline": ["Space Grotesk", "sans-serif"],
+                "body": ["Manrope", "sans-serif"],
+                "label": ["Space Grotesk", "sans-serif"]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+
+
+
+
+<style id="sb-final">
+/* --- Base sidebar --- */
+#main-sidebar {
+  transition: width 0.22s ease;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+/* Width from inline style (256px) or w-64 class */
+#main-sidebar.collapsed { width: 60px !important; }
+
+/* --- Hide text in collapsed state --- */
+#main-sidebar.collapsed .sb-text,
+#main-sidebar.collapsed .sidebar-text { display: none !important; }
+
+/* --- Accordion group headers --- */
+/* Version A: sidebar-acc-btn */
+#main-sidebar.collapsed .sidebar-acc-btn > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-acc-btn { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-acc-body { display: none !important; }
+/* Version B: sidebar-group-header */
+#main-sidebar.collapsed .sidebar-group-header > span:first-child { display: none !important; }
+#main-sidebar.collapsed .sidebar-group-header { justify-content: center !important; padding: 8px 0 !important; }
+#main-sidebar.collapsed .sidebar-group-items { display: none !important; }
+
+/* --- Nav links in collapsed state --- */
+#main-sidebar.collapsed nav a .flex-1,
+#main-sidebar.collapsed nav a .text-sm { display: none !important; }
+#main-sidebar.collapsed nav a .ml-auto { display: none !important; }
+#main-sidebar.collapsed nav a,
+#main-sidebar.collapsed nav button {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Keep active indicator visible */
+#main-sidebar.collapsed .border-l-2,
+#main-sidebar.collapsed .border-l-4 {
+  border-left: 2px solid #FFE100 !important;
+}
+/* Show tooltip on hover when collapsed */
+#main-sidebar.collapsed nav a {
+  position: relative;
+}
+#main-sidebar.collapsed nav a::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 68px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1C1B1B;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#main-sidebar.collapsed nav a:hover::after { opacity: 1; }
+
+/* --- Accordion hidden bodies --- */
+.sidebar-acc-body.hidden,
+.sidebar-group-items.hidden { display: none !important; }
+
+/* --- Main content offset --- */
+.page-main {
+  margin-left: 256px;
+  transition: margin-left 0.22s ease;
+  min-width: 0;
+}
+body.sb-collapsed .page-main { margin-left: 60px; }
+
+/* --- Global box fix --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 860px; }
+</style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface selection:bg-primary-container selection:text-on-primary-fixed">
+<!-- SideNavBar (Shared Component Authority) -->
+<aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
+<div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+  <h1 class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
+    <span class="material-symbols-outlined text-lg">menu</span>
+  </button>
+</div>
+<div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="flex flex-col min-w-0 overflow-hidden">
+    <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
+    <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
+  </div>
+</div>
+<div class="mx-4 mb-4 border-t border-white/5 flex-shrink-0"></div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-1 pb-4">
+  <div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ОСНОВНОЕ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5">
+    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#FFE100] border-l-4 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>КОНТЕНТ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>МОДЕРАЦИЯ</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+  </div>
+</div><div class="sidebar-group">
+  <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
+    <span>ПЛАТФОРМА</span>
+    <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
+  </button>
+  <div class="sidebar-group-items space-y-0.5 hidden">
+    <a data-label="Настройки" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="text-sm">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="text-sm">Роли и права</span></a>
+  </div>
+</div>
+</nav>
+<div class="px-4 py-4 border-t border-white/5 flex-shrink-0">
+  <button class="w-full flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:text-red-400 transition-colors text-xs font-bold uppercase rounded-lg hover:bg-[#1C1B1B]">
+    <span class="material-symbols-outlined text-lg">logout</span>
+    <span class="sidebar-text">Выйти</span>
+  </button>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component Authority) -->
+<header class="fixed top-0 right-0 w-[calc(100%-256px)] z-50 bg-[#0A0A0A]/70 backdrop-blur-xl border-b border-[#4C4732]/15 flex justify-between items-center h-16 px-8">
+<div class="flex items-center gap-8">
+<h2 class="text-xl font-black text-[#FFE100] uppercase font-headline">Панель управления</h2>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#FFE100] font-bold text-xs font-headline uppercase tracking-widest" href="#">LIVE STATUS</a>
+<a class="text-white/60 font-bold text-xs font-headline uppercase tracking-widest hover:text-[#FFE100] transition-opacity" href="#">BOT ACTIVE</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined text-white/60 cursor-pointer hover:text-[#FFE100]" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-[#FFE100] rounded-full"></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white/60" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-bold font-headline text-white/80">ADMIN</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="page-main pt-24 px-8 pb-12 bg-[#0A0A0A] min-h-screen">
+<!-- Top Row Status Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- Live Status Card -->
+<div class="bg-surface-container-low p-6 rounded-xl relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-secondary-container px-3 py-1 rounded-md">
+<div class="w-2 h-2 bg-on-secondary-fixed rounded-full animate-pulse"></div>
+<span class="text-[10px] font-bold text-on-secondary-fixed font-headline uppercase">В ЭФИРЕ</span>
+</div>
+<h3 class="text-lg font-bold font-headline uppercase tracking-tight">Counter-Strike 2</h3>
+</div>
+<span class="text-gray-400 text-xs font-medium">онлайн 2ч 14мин</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-4xl font-black font-headline text-primary-container">12 430</p>
+<p class="text-xs text-gray-500 font-bold uppercase tracking-widest">Зрителей сейчас</p>
+</div>
+<div class="flex -space-x-3">
+<img alt="Viewer 1" class="w-10 h-10 rounded-full border-2 border-surface-container-low" data-alt="Portrait of a young gamer with purple neon backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk78rd6EhEcsijtVe3RZUAAtaDCEORxZk_2zVMjOkUSsE0un49FxA9E4FOdmHAK35EZDVI3humNDmLuvWXZrgs5ESkrzhSHJXhXPdbcnFcQFjlAvgBMdotJAAoxsE-_IaavQtEFTT0UqWo23SVYtENO2ixU9YUtZNCSlHuj4xvu-Co7unS8AarN9hhOfxoYA0pQbEmrPt_cX4Lo1_timTvYam_DjligxZDq7D0iJzAqSrmnZB73At1MUHq8zHX11Tt0pDXGB3qENRp"/>
+<img alt="Viewer 2" class="w-10 h-10 rounded-full border-2 border-surface-container-low" data-alt="Close up of a stylized anime avatar for a gamer profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh8l-RVbimeQvh5nrQP3UvyCr4caHp0J3pga4Qd1J2QHKyPpb1YiE0NE3_t3CJhLRpI-9n55aiGZNQkCQnV5WmOBbKv8O-1ls_-udOmhJCHNLKnZxFuM27SVgfo17d368mpSqzfBpvXbhAZlnFD-mlKl4KhMuaKsHmListMHHnGeFVc6So5uwOMVHxqqp70rcFCfV_uue8H7ceWZO0MibspkLOf22px5F4f5BWU1pyplzr-gKVNSoBH8zxl2lYXa_rGM6O_utSqLZ2"/>
+<img alt="Viewer 3" class="w-10 h-10 rounded-full border-2 border-surface-container-low" data-alt="Vibrant digital illustration of a pro esports player profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDCU-YvMPRpSqv-eYp7OBPEc0S0frFyznRFMzF-ZoVY3KgQQkf9KrL8aoxojaYhy5u074Y4wTxKi9z2enZnCaozM9JX5qxjlKiML6LCDM3UTs_lt12qftIcWMjLA9t5tJSbbdw7ocu_JuTdp4vTlHKHkud4APLhekGqlphc5NCjn36cvfroaAQe9CCCyMDHryaIRKyCSKv7XULbzEiBMoHPWP2CEsYJj3dOJMjtHPhjm1spepYvHJquvRmLKBmCzX8tYZS0cmS4XYX"/>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border-2 border-surface-container-low flex items-center justify-center text-[10px] font-bold">+12k</div>
+</div>
+</div>
+</div>
+<!-- Bot Status Card -->
+<div class="bg-surface-container-low p-6 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold font-headline uppercase tracking-tight">Статус Ботов</h3>
+<div class="flex items-center gap-2 text-secondary-container">
+<span class="material-symbols-outlined text-sm" data-icon="cloud_done">cloud_done</span>
+<span class="text-[10px] font-bold font-headline uppercase">Все системы активны</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container px-4 py-3 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary-container mb-1" data-icon="send">send</span>
+<span class="text-[10px] font-bold text-gray-400 uppercase mb-1">Telegram</span>
+<span class="text-xs font-black text-white">ONLINE</span>
+</div>
+<div class="bg-surface-container px-4 py-3 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary-container mb-1" data-icon="smart_toy">smart_toy</span>
+<span class="text-[10px] font-bold text-gray-400 uppercase mb-1">Twitch</span>
+<span class="text-xs font-black text-white">ONLINE</span>
+</div>
+<div class="bg-surface-container px-4 py-3 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary-container mb-1" data-icon="terminal">terminal</span>
+<span class="text-[10px] font-bold text-gray-400 uppercase mb-1">API Latency</span>
+<span class="text-xs font-black text-white">45ms</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-surface-container p-6 rounded-xl border-l-4 border-primary-container">
+<p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Новых пользователей сегодня</p>
+<div class="flex items-baseline gap-3">
+<span class="text-3xl font-black font-headline text-white">47</span>
+<span class="text-xs font-bold text-secondary-container">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container p-6 rounded-xl">
+<p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Активных розыгрышей</p>
+<span class="text-3xl font-black font-headline text-white">3</span>
+</div>
+<div class="bg-surface-container p-6 rounded-xl">
+<p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Призов выдано сегодня</p>
+<span class="text-3xl font-black font-headline text-white">8</span>
+</div>
+<div class="bg-surface-container p-6 rounded-xl">
+<p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Открытых тикетов</p>
+<span class="text-3xl font-black font-headline text-error">2</span>
+</div>
+</div>
+<!-- Bottom Two-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Active Giveaways (Left Column - 2/3) -->
+<div class="lg:col-span-2">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-black font-headline uppercase tracking-tight text-white">Активные розыгрыши</h2>
+<button class="text-xs font-bold text-primary-container font-headline uppercase hover:underline">Все розыгрыши</button>
+</div>
+<div class="space-y-4">
+<!-- Row 1 -->
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Prize Image" class="w-full h-full object-cover" data-alt="Sleek high-end mechanical gaming keyboard with RGB lighting on a clean dark desk setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaaOsO1fy9p8iosSAot5Rd2iXNmLsVHgRW3XZvmncl8kXGsEBLHKW_9GLObTtalv4X2xXWed1CKGUZ6OXyzp81_R0y4yWZ1FVUKI-KCbfRoSiqd3_Uz705Xz_ruc2wtTk7k_MCy8xIkWBeVZwdSJ64IogLp46Ek5rmQH6qt0ZovxgD4LVYSX3noM8bZArT8Ph-fZuaivWvH0Ck99TC4s58vq-1HfI1Oy3crTfLw1onOq3bk1GgExvEU50_qtbfLQ9Aug0MAdqKIupg"/>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Logitech G915 TKL</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-[#0088cc] text-white">Telegram</span>
+<span class="text-[10px] text-gray-500 font-medium">1,240 участников</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end gap-2">
+<span class="text-xs font-bold text-white font-headline">02:14:55</span>
+<button class="bg-primary-container text-on-primary-fixed px-4 py-2 rounded-lg text-[10px] font-black uppercase font-headline hover:bg-primary-fixed transition-all">Подвести итоги</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Prize Image" class="w-full h-full object-cover" data-alt="Professional wireless gaming mouse on a high-speed mousepad, sharp focus, technical lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGgypR1qsmaYYO-oxbdgiL00uypY8BXNyZ_oYoZ72qEdFbOoZql0kr-QCqtDw1Oj4OOJ_RPhinpD36xMrOX5VMFfK7clFtys1hinwFg0eiqDTyofr8MbcimwMlr98z7Jamg_-0Ev_gcBte81MSDUGOveU-w4wnzYHrEGkhxYo4too3slHyLw5Svxfs1eCoiLxvA0NDkMM-XS0bvXrymxlgeSxh5AR94fG7wJdZzRlIu2mcgUta8VUVnQTEFnhjkUkK9iWU9z6P6xoJ"/>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Razer DeathAdder V3</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-[#6441a5] text-white">Twitch</span>
+<span class="text-[10px] text-gray-500 font-medium">4,812 участников</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end gap-2">
+<span class="text-xs font-bold text-white font-headline">14:22:01</span>
+<button class="bg-primary-container text-on-primary-fixed px-4 py-2 rounded-lg text-[10px] font-black uppercase font-headline hover:bg-primary-fixed transition-all">Подвести итоги</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface-container-low p-4 rounded-xl flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-container-high">
+<img alt="Prize Image" class="w-full h-full object-cover" data-alt="High fidelity studio gaming headset with plush earcups and carbon fiber accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJis3jomE21-EpNHvwEfkLD74M3hxlpiXgRmQHSIQfNyBgRu6fHMPI5WwAiDCgcN4rzi7e81-OGkVd7QAEy7X3OXRu2WauR6bj7S34nyBM_73MK9u-pOz9D_ZjgHXa5DGVEVjHKZeQtpYuQFvV6bfmU89x0xv5POKjOMJCGamgUa3-IxV3Y7FNScPzHFjH5dnZzL6l5uSAPrxVVKWVpom2mOZ5rT-u2YwwFpMfkhT-ZDxpFAMJgH3dt7tZu8d6ubpxkhEZIgGFoXO2"/>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">HyperX Cloud II</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[9px] font-black uppercase bg-[#0088cc] text-white">Telegram</span>
+<span class="text-[10px] text-gray-500 font-medium">890 участников</span>
+</div>
+</div>
+</div>
+<div class="text-right flex flex-col items-end gap-2">
+<span class="text-xs font-bold text-white font-headline">01:05:30</span>
+<button class="bg-primary-container text-on-primary-fixed px-4 py-2 rounded-lg text-[10px] font-black uppercase font-headline hover:bg-primary-fixed transition-all">Подвести итоги</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Feed (Right Column - 1/3) -->
+<div class="lg:col-span-1">
+<h2 class="text-xl font-black font-headline uppercase tracking-tight text-white mb-6">Последние действия</h2>
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="divide-y divide-white/5">
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod w1zer" class="w-8 h-8 rounded-lg shrink-0" data-alt="Stylized edgy moderator avatar with a neon mask" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB58uq_riSbMtkq5U7FRNMswdm7W6lYLUdWSMzl-Vqr-FbdcRk8bVcjTXYviNuaLhBtFAEGxK5nTfU5FDNBZjwvcfnNCQViO9iJVtHQBMTaHsAzCvpeXMDPJxnTeOHwWnTc-a-5xID9WUh7bghgWx9cEQxRy5pnQnEAk9M7zQbTn66yFhBqH6yGLdX8uoGuDKm9a-t67Da-9DUhgZnYSIcqau6vEgXB59QDza2FlNXxAkNntgGFxdNE9FIHIrlP4EkXnGPQ6hJaY6I"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">w1zer</span> выдал мут <span class="text-white/80">@shroud_fan</span></p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">2 мин. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod k1ng" class="w-8 h-8 rounded-lg shrink-0" data-alt="Digital art portrait of a pro moderator with cybernetic eye" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT3CHvc83DSe6qE7RMD0vKVjd4-1rkcqQPLH9GbAbcvPSi9lPKgPXOxRi2myA8aLkWQZuxHKowkKEGyJE3BOgtu873djr1aWF7uuZh4BaeFBSw70Sj3fuEGbVUzoebpK0WnYTx_0D_-zLd95ZHmCs3wRUXD1al0IfrJHROP08bS7l9IQoy2q3P6qrkma9Bu1Q_xM8m36fAsvXii1OalB_ngkNKZma5CGJvMli-tfFFL8Nf028YwRDfmmvdBMfLwAsHGTo41xR8STcX"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">k1ng</span> одобрил апелляцию <span class="text-white/80">#1245</span></p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">15 мин. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod z0ne" class="w-8 h-8 rounded-lg shrink-0" data-alt="Anime style moderator portrait with dark hoodie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV-tU3uAkA9NrA61D0Vg3o0G1lA-U5FY9EeseknQDMgTv_kVgphCvmv1ptwNTfbMxOISYnVmPMI1KchPUiYMreKtsPVNb33JQuzF6eEsLMvEI4DkuwQWIICrLw5VcGHsXtjSw_cAjMqif-KzW5MxSyuTEqS_5mqjKDpWS_6u0GpfXvOxq4mctFkJew0rj8C6RZNNDU0WxBmAD4YTXV-STqeMu5If3vhUsoI7nKApX8MRYSShfnt05ZWtjmQfzdLA4UZmYlkL6wDWKG"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">z0ne</span> закрыл тикет <span class="text-white/80">@support_2</span></p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">42 мин. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod w1zer" class="w-8 h-8 rounded-lg shrink-0" data-alt="Stylized edgy moderator avatar with a neon mask" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfj6H5kfhcL_0a0a4dzUoPQDmgRP11U7jQrMDQHh8OCl_cZyisgbiFUwBEX_ztgPXJ1sJXH3unrdmpBZtMbzrlp5xazUogikrgKSWBTA3-8q0EH-_o4dOJEZoalcMDPHys2nhKbWJHHZuIXACQnG_AZsjO3R9iCBq8VziqgavyjUhIO7mm0YZp6WP-4SvyE4SGJioxcT6gsSZNTzH7sIbRX1M-C6dlIJK6fmCAK0rLUwqOmA8PikX8f81OIKVoBWbHL-te57FmJaWc"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">w1zer</span> обновил расписание</p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">1 ч. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod flux" class="w-8 h-8 rounded-lg shrink-0" data-alt="Minimalist geometric avatar of a moderator with high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGrWM6_pdJcwZz63keEwmRTNoREeMEQi7ivocQZX57GdX_1klUpEF4ioWNO94xfs-RcemtV75vZ913I9V-Xn3VpJY7IfLunCjfyFd2nWEjbcAeHaqLj_A89PV4AwD16g-ZZhlzW_i06X9DwkrL-Q4J9Jw1qrWQYdVhLYo1DHZHH_IKJg-nUdiEgLoY01KJMrrAxK6wJdQME3ERXNhea4NitC5uIDYG3dGLuvjSVvHSw90uQelj-Z5Lt5WhNDhboHuw6ykc6LOXgatz"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">flux</span> выдал бан <span class="text-white/80">@troll_master</span></p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">2 ч. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod k1ng" class="w-8 h-8 rounded-lg shrink-0" data-alt="Digital art portrait of a pro moderator with cybernetic eye" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF5APxPMKg7zGOVmaGhjxZ5m-sRQCiJ4rHMt944QLVn-3xUR_i-mGt4KbLLrsGvP122zS0s2E69kw9qCTwq_Zp__dyq5eMaKNVWPdj25WeUt5yge5i8lq1SKiTVnDsz5pnnPmWxXK2O5nJaN7Ps2PviiolCdYlhpqPMwwDLuEbqILPwiia7xoGhqDsgnOB0FeATWoAGMSwZn2XHULTFMl4qEF2RE3dNbQwfbfDvUh8EwxLmG7ijDePNLb3Edh8nVJK0NVBYigYYyD_"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">k1ng</span> изменил роль <span class="text-white/80">@helper_1</span></p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">3 ч. назад</span>
+</div>
+</div>
+<div class="p-4 flex gap-3 items-start">
+<img alt="Mod z0ne" class="w-8 h-8 rounded-lg shrink-0" data-alt="Anime style moderator portrait with dark hoodie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmb_irBUQjtWDBqEy_6vZFJdjn9tEepcl_bWA_AJkD6dvxXOzSBcu_F-mW_iKAwknhE3FUX6dfTG9OkFQ70EvrqktLEFuA7FESDktq6Gwtaq14YT4v63IR_Du_Aw7zCkjGAGilu5L59sp2fa4SYRwcwodYpftasUIL9c1E6vL6FZ1ySQUoQvFbSrW3rsALlWwIj-0wq8kiwSXYzLEzEHMtCvfDIXWH_o13KERiIov7H59yWaRzwx84E34nuAo4M6Id-pOXRA47sQOF"/>
+<div>
+<p class="text-xs leading-relaxed"><span class="font-black text-primary-container">z0ne</span> добавил новый приз</p>
+<span class="text-[10px] text-gray-500 font-bold uppercase mt-1 block">5 ч. назад</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+
+<div id="global-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeConfirm()">
+  <div class="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div id="gcm-icon-wrap" class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span id="gcm-icon" class="material-symbols-outlined text-xl"></span>
+      </div>
+      <h3 id="gcm-title" class="text-lg font-black text-white font-headline uppercase"></h3>
+    </div>
+    <p id="gcm-body" class="text-sm text-white/50 mb-5"></p>
+    <div class="flex gap-3">
+      <button onclick="closeConfirm()" class="flex-1 py-2.5 bg-[#1C1B1B] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl">Отмена</button>
+      <button id="gcm-confirm-btn" class="flex-1 py-2.5 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all"></button>
+    </div>
+  </div>
+</div>
+<script id="global-confirm-script">
+function showConfirm(opts) {
+  var m = document.getElementById('global-confirm-modal');
+  document.getElementById('gcm-title').textContent = opts.title || 'Подтвердите действие';
+  document.getElementById('gcm-body').textContent = opts.body || 'Это действие нельзя отменить.';
+  var icon = document.getElementById('gcm-icon');
+  var wrap = document.getElementById('gcm-icon-wrap');
+  var btn  = document.getElementById('gcm-confirm-btn');
+  if (opts.danger) {
+    wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
+    btn.style.background = '#EF4444'; btn.style.color = '#fff';
+  } else {
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
+    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+  }
+  btn.textContent = opts.confirmLabel || 'Подтвердить';
+  btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };
+  m.style.display = 'flex';
+}
+function closeConfirm() { document.getElementById('global-confirm-modal').style.display = 'none'; }
+</script>
+
+
+<script id="sb-final-js">
+// Accordion: works for both sidebar-acc-btn and sidebar-group-header
+function sidebarToggle(btn) {
+  var body = btn.nextElementSibling;
+  var icon = btn.querySelector('.material-symbols-outlined');
+  if (!body) return;
+  var isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  if (icon) icon.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+// Alias for old naming convention
+function toggleGroup(btn) { sidebarToggle(btn); }
+
+// Collapse/expand sidebar
+function sidebarCollapse() {
+  var s = document.getElementById('main-sidebar');
+  if (!s) return;
+  var nowCollapsed = s.classList.toggle('collapsed');
+  document.body.classList.toggle('sb-collapsed', nowCollapsed);
+  localStorage.setItem('sb_state', nowCollapsed ? '1' : '0');
+}
+// Alias for old naming convention
+function toggleSidebar() { sidebarCollapse(); }
+
+// Restore state on load
+(function() {
+  if (localStorage.getItem('sb_state') === '1') {
+    var s = document.getElementById('main-sidebar');
+    if (s) {
+      s.classList.add('collapsed');
+      document.body.classList.add('sb-collapsed');
+    }
+  }
+})();
+</script>
+</body></html>

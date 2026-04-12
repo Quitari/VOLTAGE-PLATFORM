@@ -40,7 +40,11 @@ export default function GiveawaysPage() {
     try {
       await giveawaysApi.draw(id);
       load(statusFilter);
-    } catch {}
+      alert("Победитель выбран!");
+    } catch (err: any) {
+      const error = err.response?.data?.error || "Ошибка";
+      alert(error);
+    }
   };
 
   const handleActivate = async (id: string) => {

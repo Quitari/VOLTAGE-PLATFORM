@@ -1,39 +1,31 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/auth";
-
-const ADMIN_PAGES = [
-  { path: "dashboard", label: "Дашборд", file: "admin_dashboard.html" },
-  { path: "users", label: "Пользователи", file: "admin_users.html" },
-  { path: "giveaways", label: "Розыгрыши", file: "admin_giveaways.html" },
-  { path: "moderation", label: "Модерация", file: "admin_moderation.html" },
-  { path: "appeals", label: "Апелляции", file: "admin_appeals.html" },
-  { path: "tickets", label: "Тикеты", file: "admin_tickets.html" },
-  { path: "prizes", label: "Призы", file: "admin_prizes.html" },
-  { path: "settings", label: "Настройки", file: "admin_settings.html" },
-  { path: "logs", label: "Журнал", file: "admin_logs.html" },
-  { path: "roles", label: "Роли", file: "admin_roles.html" },
-];
+import { Routes, Route } from 'react-router-dom'
+import AdminLayout from '../../components/admin/AdminLayout'
+import DashboardHome from '../../components/admin/pages/DashboardHome'
+import UsersPage from '../../components/admin/pages/UsersPage'
+import GiveawaysPage from '../../components/admin/pages/GiveawaysPage'
+import ModerationPage from '../../components/admin/pages/ModerationPage'
+import TicketsPage from '../../components/admin/pages/TicketsPage'
+import AppealsPage from '../../components/admin/pages/AppealsPage'
+import LogsPage from '../../components/admin/pages/LogsPage'
+import RolesPage from '../../components/admin/pages/RolesPage'
+import SettingsPage from '../../components/admin/pages/SettingsPage'
+import PrizesPage from '../../components/admin/pages/PrizesPage'
 
 export default function AdminDashboardPage() {
-  const [activePage, setActivePage] = useState("dashboard");
-  const navigate = useNavigate();
-  const { logout } = useAuthStore();
-
-  const current = ADMIN_PAGES.find((p) => p.path === activePage);
-
   return (
-    <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
-      <iframe
-        key={activePage}
-        src={`/prototypes/admin/${current?.file}`}
-        style={{
-          width: "100%",
-          height: "100%",
-          border: "none",
-        }}
-        title={current?.label}
-      />
-    </div>
-  );
+    <AdminLayout>
+      <Routes>
+        <Route index element={<DashboardHome />} />
+        <Route path="users" element={<UsersPage />} />
+        <Route path="giveaways" element={<GiveawaysPage />} />
+        <Route path="moderation" element={<ModerationPage />} />
+        <Route path="tickets" element={<TicketsPage />} />
+        <Route path="appeals" element={<AppealsPage />} />
+        <Route path="logs" element={<LogsPage />} />
+        <Route path="roles" element={<RolesPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="prizes" element={<PrizesPage />} />
+      </Routes>
+    </AdminLayout>
+  )
 }

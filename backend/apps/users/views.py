@@ -1,8 +1,9 @@
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.authentication import BasicAuthentication
 from .models import User
 from .serializers import (
     RegisterSerializer,
@@ -234,3 +235,133 @@ def check_permission(request):
         'has_permission': has_perm,
         'user_level': level,
     })
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def telegram_link(request):
+    telegram_id = request.data.get('telegram_id')
+    telegram_username = request.data.get('telegram_username') or ''
+
+    if not telegram_id:
+        return Response(
+            {'error': 'telegram_id обязателен'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Ищем существующего пользователя
+    try:
+        user = User.objects.get(telegram_id=telegram_id)
+        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        pass
+
+    # Генерируем уникальный username
+    if telegram_username:
+        base_username = f'tg_{telegram_username}'
+    else:
+        base_username = f'tg_{telegram_id}'
+
+    username = base_username
+    counter = 1
+    while User.objects.filter(username=username).exists():
+        username = f'{base_username}_{counter}'
+        counter += 1
+
+    # Создаём пользователя
+    import uuid as uuid_lib
+    user = User(
+        username=username,
+        telegram_id=telegram_id,
+        telegram_username=telegram_username,
+        email=None,
+    )
+    user.set_password(str(uuid_lib.uuid4()))
+    user.set_unusable_password()
+    user.save()
+
+    # Назначаем роль Участник
+    try:
+        from apps.users.models import Role, UserRole
+        member_role = Role.objects.get(codename='member')
+        UserRole.objects.create(user=user, role=member_role)
+    except Role.DoesNotExist:
+        pass
+
+    return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def telegram_get_user(request, telegram_id):
+    """
+    GET /api/auth/telegram/user/<telegram_id>/
+    """
+    try:
+        user = User.objects.get(telegram_id=telegram_id)
+        return Response(UserSerializer(user).data)
+    except User.DoesNotExist:
+        return Response(
+            {'error': 'Пользователь не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def steam_link(request):
+    """
+    POST /api/auth/steam/link/
+    """
+    telegram_id = request.data.get('telegram_id')
+    steam_trade_url = request.data.get('steam_trade_url')
+
+    if not telegram_id or not steam_trade_url:
+        return Response(
+            {'error': 'Укажи telegram_id и steam_trade_url'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        user = User.objects.get(telegram_id=telegram_id)
+    except User.DoesNotExist:
+        return Response(
+            {'error': 'Пользователь не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    user.steam_trade_url = steam_trade_url
+    user.save(update_fields=['steam_trade_url'])
+    return Response({'message': 'Steam привязан'})
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def twitch_link(request):
+    """
+    POST /api/auth/twitch/link/
+    Привязать Twitch через бота
+    """
+    telegram_id = request.data.get('telegram_id')
+    twitch_username = request.data.get('twitch_username', '').strip()
+
+    if not telegram_id or not twitch_username:
+        return Response(
+            {'error': 'Укажи telegram_id и twitch_username'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        user = User.objects.get(telegram_id=telegram_id)
+    except User.DoesNotExist:
+        return Response(
+            {'error': 'Пользователь не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    user.twitch_username = twitch_username
+    user.save(update_fields=['twitch_username'])
+
+    return Response({'message': 'Twitch привязан'})

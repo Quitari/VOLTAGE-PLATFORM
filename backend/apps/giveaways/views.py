@@ -420,3 +420,65 @@ def giveaway_participants(request, pk):
         'count': participants.count(),
         'participants': serializer.data
     })
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def join_giveaway_telegram(request, pk):
+    """
+    POST /api/giveaways/<id>/join/telegram/
+    Участие через Telegram бота по telegram_id
+    """
+    telegram_id = request.data.get('telegram_id')
+
+    if not telegram_id:
+        return Response(
+            {'error': 'telegram_id обязателен'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        from apps.users.models import User
+        user = User.objects.get(telegram_id=telegram_id)
+    except User.DoesNotExist:
+        return Response(
+            {'error': 'Пользователь не найден. Напиши /start боту'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    try:
+        giveaway = Giveaway.objects.get(id=pk)
+    except Giveaway.DoesNotExist:
+        return Response(
+            {'error': 'Розыгрыш не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if not giveaway.can_participate:
+        return Response(
+            {'error': 'Розыгрыш недоступен'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if giveaway.prize_type == Giveaway.PrizeType.SKIN:
+        if not user.has_steam:
+            return Response(
+                {'error': 'Привяжи Steam аккаунт и трейд-ссылку'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+    if Participant.objects.filter(giveaway=giveaway, user=user).exists():
+        return Response(
+            {'error': 'Ты уже участвуешь в этом розыгрыше'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    Participant.objects.create(
+        giveaway=giveaway,
+        user=user,
+        source=Participant.Source.TELEGRAM
+    )
+
+    return Response({
+        'message': 'Ты в розыгрыше!',
+        'participants_count': giveaway.participants_count
+    }, status=status.HTTP_201_CREATED)

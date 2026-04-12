@@ -56,6 +56,18 @@ services:
       - redis
     command: celery -A config worker --loglevel=info
 
+  telegram_bot:
+    build: ./backend
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - redis
+    command: python -m apps.bots.telegram.bot
+
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped

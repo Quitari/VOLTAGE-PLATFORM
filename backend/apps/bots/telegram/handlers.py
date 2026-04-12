@@ -270,6 +270,8 @@ async def cb_admin_create_giveaway(callback: CallbackQuery, state: FSMContext):
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
     await state.set_state(QuickGiveaway.waiting_title)
+    # Сохраняем message_id чтобы потом редактировать
+    await state.update_data(bot_message_id=callback.message.message_id)
     await callback.message.edit_text(
         '🎁 <b>Быстрый розыгрыш</b>\n\n'
         'Шаг 1/3: Напиши название приза\n\n'
@@ -283,16 +285,31 @@ async def cb_admin_create_giveaway(callback: CallbackQuery, state: FSMContext):
 @router.message(QuickGiveaway.waiting_title)
 async def qg_got_title(message: Message, state: FSMContext):
     title = message.text.strip()
+    data = await state.get_data()
     await state.update_data(title=title)
+
+    # Удаляем сообщение пользователя
     try:
         await message.delete()
     except Exception:
         pass
-    await message.answer(
-        f'✅ Приз: <b>{title}</b>\n\nШаг 2/3: Выбери тип приза:',
-        parse_mode='HTML',
-        reply_markup=quick_giveaway_keyboard()
-    )
+
+    # Редактируем предыдущее сообщение бота
+    try:
+        await message.bot.edit_message_text(
+            chat_id=message.chat.id,
+            message_id=data.get('bot_message_id'),
+            text=f'✅ Приз: <b>{title}</b>\n\nШаг 2/3: Выбери тип приза:',
+            parse_mode='HTML',
+            reply_markup=quick_giveaway_keyboard()
+        )
+    except Exception:
+        await message.answer(
+            f'✅ Приз: <b>{title}</b>\n\nШаг 2/3: Выбери тип приза:',
+            parse_mode='HTML',
+            reply_markup=quick_giveaway_keyboard()
+        )
+
     await state.set_state(QuickGiveaway.waiting_type)
 
 

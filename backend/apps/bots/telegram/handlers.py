@@ -30,8 +30,6 @@ from .api_client import (
 router = Router()
 
 
-# ─── FSM состояния ────────────────────────────────────────────────────────
-
 class LinkSteam(StatesGroup):
     waiting_trade_url = State()
 
@@ -47,46 +45,33 @@ class QuickGiveaway(StatesGroup):
     confirm = State()
 
 
-# ─── Команды ──────────────────────────────────────────────────────────────
-
 @router.message(CommandStart())
 async def cmd_start(message: Message, state: FSMContext):
     await state.clear()
     telegram_id = message.from_user.id
     username = message.from_user.username or ''
-
     data, status = await register_user(telegram_id, username)
-
     if status not in [200, 201]:
-        await message.answer(
-            '⚠️ Произошла ошибка при регистрации. '
-            'Попробуй ещё раз: /start'
-        )
+        await message.answer('⚠️ Ошибка при регистрации. Попробуй ещё раз: /start')
         return
-
     is_new = status == 201
     name = message.from_user.first_name or username or str(telegram_id)
     level = await get_user_level(telegram_id)
-
     settings = await get_bot_settings()
-
     if is_new:
         template = settings.get(
             'welcome_new',
             '👋 Добро пожаловать! <b>{name}</b>\n\n'
-            '🎮 <b>VOLTAGE Platform</b> — розыгрыши скинов CS2 '
-            'и других призов.\n\nВыбери что тебя интересует:'
+            '🎮 <b>VOLTAGE Platform</b> — розыгрыши скинов CS2 и других призов.\n\n'
+            'Выбери что тебя интересует:'
         )
     else:
         template = settings.get(
             'welcome_back',
             '👋 С возвращением! <b>{name}</b>\n\nВыбери раздел:'
         )
-
-    text = template.format(name=name)
-
     await message.answer(
-        text,
+        template.format(name=name),
         parse_mode='HTML',
         reply_markup=main_menu_keyboard(level)
     )
@@ -101,9 +86,7 @@ async def cmd_help(message: Message):
         '/profile — мой профиль\n'
         '/prizes — мои призы\n'
         '/admin — панель управления\n'
-        '/help — эта справка\n\n'
-        '❓ Если что-то не работает — '
-        'напиши в поддержку через сайт.',
+        '/help — эта справка',
         parse_mode='HTML'
     )
 
@@ -123,9 +106,7 @@ async def cmd_prizes(message: Message):
     data, status = await api_get(f'/prizes/my/{message.from_user.id}/')
     if status != 200 or not data:
         await message.answer(
-            '🏆 <b>Мои призы</b>\n\n'
-            'У тебя пока нет призов.\n'
-            'Участвуй в розыгрышах! 🎯',
+            '🏆 <b>Мои призы</b>\n\nУ тебя пока нет призов. 🎯',
             parse_mode='HTML',
             reply_markup=back_to_menu_keyboard()
         )
@@ -144,15 +125,11 @@ async def cmd_admin(message: Message):
         await message.answer('❌ Нет доступа.')
         return
     await message.answer(
-        f'⚙️ <b>Панель управления</b>\n\n'
-        f'Твой уровень доступа: <b>{level}</b>\n\n'
-        f'Выбери действие:',
+        f'⚙️ <b>Панель управления</b>\n\nУровень доступа: <b>{level}</b>\n\nВыбери действие:',
         parse_mode='HTML',
         reply_markup=admin_panel_keyboard(level)
     )
 
-
-# ─── Главное меню ─────────────────────────────────────────────────────────
 
 @router.callback_query(F.data == 'main_menu')
 async def cb_main_menu(callback: CallbackQuery, state: FSMContext):
@@ -166,8 +143,6 @@ async def cb_main_menu(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
 
 
-# ─── Админ панель ─────────────────────────────────────────────────────────
-
 @router.callback_query(F.data == 'admin_panel')
 async def cb_admin_panel(callback: CallbackQuery, state: FSMContext):
     await state.clear()
@@ -176,9 +151,7 @@ async def cb_admin_panel(callback: CallbackQuery, state: FSMContext):
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
     await callback.message.edit_text(
-        f'⚙️ <b>Панель управления</b>\n\n'
-        f'Уровень доступа: <b>{level}</b>\n\n'
-        f'Выбери действие:',
+        f'⚙️ <b>Панель управления</b>\n\nУровень доступа: <b>{level}</b>\n\nВыбери действие:',
         parse_mode='HTML',
         reply_markup=admin_panel_keyboard(level)
     )
@@ -188,17 +161,14 @@ async def cb_admin_panel(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(F.data == 'admin_stats')
 async def cb_admin_stats(callback: CallbackQuery):
     await callback.answer('Загружаю...')
-
-    giveaways, _ = await api_get('/giveaways/?status=active')
+    giveaways, _ = await api_get('/giveaways/', {'status': 'active'})
     active_count = len(giveaways) if isinstance(giveaways, list) else 0
-
-    all_giveaways, _ = await api_get('/giveaways/?status=all')
+    all_giveaways, _ = await api_get('/giveaways/', {'status': 'all'})
     total_count = len(all_giveaways) if isinstance(all_giveaways, list) else 0
-
     await callback.message.edit_text(
         f'📊 <b>Статистика платформы</b>\n\n'
         f'🎁 Активных розыгрышей: <b>{active_count}</b>\n'
-        f'📦 Всего розыгрышей: <b>{total_count}</b>\n',
+        f'📦 Всего розыгрышей: <b>{total_count}</b>',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
@@ -212,7 +182,7 @@ async def cb_admin_status(callback: CallbackQuery):
         '✅ Telegram бот — онлайн\n'
         '✅ Django API — работает\n'
         '✅ База данных — подключена\n'
-        '✅ Redis — подключен\n',
+        '✅ Redis — подключен',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
@@ -224,10 +194,8 @@ async def cb_admin_punishments(callback: CallbackQuery):
     if level < 50:
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
-
     await callback.answer('Загружаю...')
-    data, status = await api_get('/moderation/punishments/?status=active')
-
+    data, status = await api_get('/moderation/punishments/', {'status': 'active'})
     if not data or status != 200:
         await callback.message.edit_text(
             '⚠️ <b>Активные наказания</b>\n\nНет активных наказаний.',
@@ -235,7 +203,6 @@ async def cb_admin_punishments(callback: CallbackQuery):
             reply_markup=back_to_admin_keyboard()
         )
         return
-
     text = '⚠️ <b>Последние наказания:</b>\n\n'
     for p in data[:5]:
         text += (
@@ -243,12 +210,7 @@ async def cb_admin_punishments(callback: CallbackQuery):
             f"{p.get('punishment_type', '?')}\n"
             f"  {p.get('reason', '')[:50]}\n\n"
         )
-
-    await callback.message.edit_text(
-        text,
-        parse_mode='HTML',
-        reply_markup=back_to_admin_keyboard()
-    )
+    await callback.message.edit_text(text, parse_mode='HTML', reply_markup=back_to_admin_keyboard())
 
 
 @router.callback_query(F.data == 'admin_tickets')
@@ -257,16 +219,11 @@ async def cb_admin_tickets(callback: CallbackQuery):
     if level < 50:
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
-
     await callback.answer('Загружаю...')
-    data, status = await api_get('/moderation/tickets/?status=open')
-
+    data, status = await api_get('/moderation/tickets/', {'status': 'open'})
     count = len(data) if isinstance(data, list) and status == 200 else 0
-
     await callback.message.edit_text(
-        f'📋 <b>Открытые тикеты: {count}</b>\n\n'
-        f'Для работы с тикетами используй '
-        f'веб-панель: admin.example.com',
+        f'📋 <b>Открытые тикеты: {count}</b>\n\nДля работы с тикетами используй веб-панель.',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
@@ -279,9 +236,7 @@ async def cb_admin_users(callback: CallbackQuery):
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
     await callback.message.edit_text(
-        '👥 <b>Управление пользователями</b>\n\n'
-        'Для управления пользователями используй '
-        'веб-панель: admin.example.com',
+        '👥 <b>Управление пользователями</b>\n\nДля управления пользователями используй веб-панель.',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
@@ -293,10 +248,8 @@ async def cb_admin_audit(callback: CallbackQuery):
     if level < 100:
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
-
     await callback.answer('Загружаю...')
     data, status = await api_get('/moderation/audit/')
-
     if not data or status != 200:
         await callback.message.edit_text(
             '📜 <b>Журнал аудита</b>\n\nНет записей.',
@@ -304,22 +257,11 @@ async def cb_admin_audit(callback: CallbackQuery):
             reply_markup=back_to_admin_keyboard()
         )
         return
-
     text = '📜 <b>Последние действия:</b>\n\n'
     for log in data[:5]:
-        text += (
-            f"• <b>{log.get('actor', {}).get('username', '?')}</b> — "
-            f"{log.get('action', '?')}\n"
-        )
+        text += f"• <b>{log.get('actor', {}).get('username', '?')}</b> — {log.get('action', '?')}\n"
+    await callback.message.edit_text(text, parse_mode='HTML', reply_markup=back_to_admin_keyboard())
 
-    await callback.message.edit_text(
-        text,
-        parse_mode='HTML',
-        reply_markup=back_to_admin_keyboard()
-    )
-
-
-# ─── Быстрый розыгрыш ────────────────────────────────────────────────────
 
 @router.callback_query(F.data == 'admin_create_giveaway')
 async def cb_admin_create_giveaway(callback: CallbackQuery, state: FSMContext):
@@ -327,7 +269,6 @@ async def cb_admin_create_giveaway(callback: CallbackQuery, state: FSMContext):
     if level < 30:
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
-
     await state.set_state(QuickGiveaway.waiting_title)
     await callback.message.edit_text(
         '🎁 <b>Быстрый розыгрыш</b>\n\n'
@@ -341,10 +282,14 @@ async def cb_admin_create_giveaway(callback: CallbackQuery, state: FSMContext):
 
 @router.message(QuickGiveaway.waiting_title)
 async def qg_got_title(message: Message, state: FSMContext):
-    await state.update_data(title=message.text.strip())
+    title = message.text.strip()
+    await state.update_data(title=title)
+    try:
+        await message.delete()
+    except Exception:
+        pass
     await message.answer(
-        f'✅ Приз: <b>{message.text.strip()}</b>\n\n'
-        f'Шаг 2/3: Выбери тип приза:',
+        f'✅ Приз: <b>{title}</b>\n\nШаг 2/3: Выбери тип приза:',
         parse_mode='HTML',
         reply_markup=quick_giveaway_keyboard()
     )
@@ -354,9 +299,19 @@ async def qg_got_title(message: Message, state: FSMContext):
 @router.callback_query(F.data.startswith('qg_type_'))
 async def qg_got_type(callback: CallbackQuery, state: FSMContext):
     prize_type = callback.data.replace('qg_type_', '')
-    await state.update_data(prize_type=prize_type)
-
     data = await state.get_data()
+
+    # Если state пустой (после перезапуска бота) — начинаем заново
+    if not data.get('title'):
+        await state.clear()
+        await callback.message.edit_text(
+            '⚠️ Сессия истекла. Начни заново.',
+            reply_markup=back_to_admin_keyboard()
+        )
+        await callback.answer()
+        return
+
+    await state.update_data(prize_type=prize_type)
     await callback.message.edit_text(
         f'✅ Приз: <b>{data["title"]}</b>\n'
         f'✅ Тип: <b>{"Скин CS2" if prize_type == "skin" else "Другое"}</b>\n\n'
@@ -371,17 +326,21 @@ async def qg_got_type(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(F.data.startswith('qg_platform_'))
 async def qg_got_platform(callback: CallbackQuery, state: FSMContext):
     platform = callback.data.replace('qg_platform_', '')
-    await state.update_data(platform=platform)
-
     data = await state.get_data()
-    platform_names = {
-        'telegram': 'Telegram',
-        'twitch': 'Twitch',
-        'both': 'Telegram + Twitch'
-    }
 
+    if not data.get('title') or not data.get('prize_type'):
+        await state.clear()
+        await callback.message.edit_text(
+            '⚠️ Сессия истекла. Начни заново.',
+            reply_markup=back_to_admin_keyboard()
+        )
+        await callback.answer()
+        return
+
+    await state.update_data(platform=platform)
+    platform_names = {'telegram': 'Telegram', 'twitch': 'Twitch', 'both': 'Telegram + Twitch'}
     await callback.message.edit_text(
-        f'📋 <b>Проверь данные розыгрыша:</b>\n\n'
+        f'📋 <b>Проверь данные:</b>\n\n'
         f'🎁 Приз: <b>{data["title"]}</b>\n'
         f'🔧 Тип: <b>{"Скин CS2" if data["prize_type"] == "skin" else "Другое"}</b>\n'
         f'📱 Платформа: <b>{platform_names.get(platform, platform)}</b>\n\n'
@@ -395,10 +354,12 @@ async def qg_got_platform(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == 'qg_confirm')
 async def qg_confirm(callback: CallbackQuery, state: FSMContext):
+    import logging
+    log = logging.getLogger(__name__)
+
     data = await state.get_data()
     await state.clear()
 
-    # Создаём розыгрыш через API
     result, status = await api_post('/giveaways/create/', {
         'title': data['title'],
         'prize_type': data['prize_type'],
@@ -407,23 +368,30 @@ async def qg_confirm(callback: CallbackQuery, state: FSMContext):
         'draw_manually': True,
     })
 
+    log.error(f'CREATE GIVEAWAY: status={status}, result={result}')
+
     if status != 201:
         await callback.message.edit_text(
-            '❌ Ошибка создания розыгрыша. Попробуй ещё раз.',
+            f'❌ Ошибка создания {status}: {result}',
             reply_markup=back_to_admin_keyboard()
         )
         await callback.answer()
         return
 
     giveaway_id = result.get('id')
+    activate_result, activate_status = await api_post(f'/giveaways/{giveaway_id}/activate/')
+    log.error(f'ACTIVATE: status={activate_status}, result={activate_result}')
 
-    # Сразу активируем
-    await api_post(f'/giveaways/{giveaway_id}/activate/')
+    if activate_status != 200:
+        await callback.message.edit_text(
+            f'✅ Розыгрыш создан но не запущен.\nОшибка активации {activate_status}: {activate_result}',
+            reply_markup=back_to_admin_keyboard()
+        )
+        await callback.answer()
+        return
 
     await callback.message.edit_text(
-        f'✅ <b>Розыгрыш запущен!</b>\n\n'
-        f'🎁 {data["title"]}\n\n'
-        f'Участники могут регистрироваться.',
+        f'✅ <b>Розыгрыш запущен!</b>\n\n🎁 {data["title"]}\n\nУчастники могут регистрироваться.',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
@@ -436,10 +404,8 @@ async def cb_admin_draw(callback: CallbackQuery):
     if level < 30:
         await callback.answer('❌ Нет доступа', show_alert=True)
         return
-
     await callback.answer('Загружаю...')
     giveaways = await get_active_giveaways()
-
     if not giveaways:
         await callback.message.edit_text(
             '🏆 <b>Подвести итоги</b>\n\nНет активных розыгрышей.',
@@ -447,7 +413,6 @@ async def cb_admin_draw(callback: CallbackQuery):
             reply_markup=back_to_admin_keyboard()
         )
         return
-
     await callback.message.edit_text(
         '🏆 <b>Выбери розыгрыш для подведения итогов:</b>',
         parse_mode='HTML',
@@ -459,80 +424,53 @@ async def cb_admin_draw(callback: CallbackQuery):
 async def cb_draw_giveaway(callback: CallbackQuery):
     giveaway_id = callback.data.replace('draw_', '')
     await callback.answer('Выбираю победителя...')
-
     result, status = await api_post(f'/giveaways/{giveaway_id}/draw/')
-
     if status != 200:
         error = result.get('error', 'Ошибка') if isinstance(result, dict) else 'Ошибка'
-        await callback.message.edit_text(
-            f'❌ {error}',
-            reply_markup=back_to_admin_keyboard()
-        )
+        await callback.message.edit_text(f'❌ {error}', reply_markup=back_to_admin_keyboard())
         return
-
     winner = result.get('winner', {})
     winner_name = winner.get('user', {}).get('username', '?')
     total = result.get('total_participants', '?')
-
     await callback.message.edit_text(
         f'🏆 <b>Победитель выбран!</b>\n\n'
         f'👤 Победитель: <b>{winner_name}</b>\n'
-        f'👥 Всего участников: <b>{total}</b>\n\n'
-        f'Ожидаем подтверждения...',
+        f'👥 Всего участников: <b>{total}</b>\n\nОжидаем подтверждения...',
         parse_mode='HTML',
         reply_markup=back_to_admin_keyboard()
     )
 
 
-# ─── Розыгрыши (публичные) ────────────────────────────────────────────────
-
 @router.callback_query(F.data == 'giveaways_list')
 async def cb_giveaways_list(callback: CallbackQuery):
     await callback.answer('Загружаю...')
     giveaways = await get_active_giveaways()
-
     if not giveaways:
         await callback.message.edit_text(
-            '😔 Сейчас нет активных розыгрышей.\n\n'
-            'Следи за анонсами — скоро будет!',
+            '😔 Сейчас нет активных розыгрышей.\n\nСледи за анонсами — скоро будет!',
             reply_markup=back_to_menu_keyboard()
         )
         return
-
     text = '🎁 <b>Активные розыгрыши:</b>\n\n'
     for g in giveaways[:5]:
         text += f"• <b>{g['title']}</b>\n"
         if g.get('skin_name'):
             text += f"  Скин: {g['skin_name']}\n"
         text += f"  Участников: {g['participants_count']}\n\n"
-
-    await callback.message.edit_text(
-        text,
-        parse_mode='HTML',
-        reply_markup=giveaway_list_keyboard(giveaways[:5])
-    )
+    await callback.message.edit_text(text, parse_mode='HTML', reply_markup=giveaway_list_keyboard(giveaways[:5]))
 
 
 @router.callback_query(F.data.startswith('giveaway_'))
 async def cb_giveaway_detail(callback: CallbackQuery):
     giveaway_id = callback.data.replace('giveaway_', '')
     await callback.answer('Загружаю...')
-
     giveaways = await get_active_giveaways()
-    giveaway = next(
-        (g for g in giveaways if str(g['id']) == giveaway_id), None
-    )
-
+    giveaway = next((g for g in giveaways if str(g['id']) == giveaway_id), None)
     if not giveaway:
-        await callback.message.edit_text(
-            '❌ Розыгрыш не найден или уже завершён.',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await callback.message.edit_text('❌ Розыгрыш не найден.', reply_markup=back_to_menu_keyboard())
         return
-
     settings = await get_bot_settings()
     join_text = settings.get('join_button_text', '🎯 Участвовать')
-
     conditions = []
     if giveaway.get('require_telegram'):
         conditions.append('✅ Нажать кнопку "Участвовать"')
@@ -540,29 +478,18 @@ async def cb_giveaway_detail(callback: CallbackQuery):
         conditions.append('📺 Быть на стриме Twitch')
     if giveaway.get('twitch_keyword'):
         conditions.append(f"💬 Написать в чат: {giveaway['twitch_keyword']}")
-
-    conditions_text = '\n'.join(conditions) if conditions else 'Без условий'
     skin_text = f"🔫 Скин: {giveaway['skin_name']}\n" if giveaway.get('skin_name') else ''
-    ends_text = ''
-    if giveaway.get('ends_at'):
-        ends_text = f"\n⏰ Итоги: {giveaway['ends_at'][:16].replace('T', ' ')}"
-
+    ends_text = f"\n⏰ Итоги: {giveaway['ends_at'][:16].replace('T', ' ')}" if giveaway.get('ends_at') else ''
     text = (
         f"🎁 <b>{giveaway['title']}</b>\n\n"
         f"{skin_text}"
         f"👥 Участников: {giveaway['participants_count']}"
         f"{ends_text}\n\n"
-        f"📋 <b>Условия:</b>\n{conditions_text}"
+        f"📋 <b>Условия:</b>\n{chr(10).join(conditions) if conditions else 'Без условий'}"
     )
-
     await callback.message.edit_text(
-        text,
-        parse_mode='HTML',
-        reply_markup=join_giveaway_keyboard(
-            giveaway_id,
-            giveaway['participants_count'],
-            join_text
-        )
+        text, parse_mode='HTML',
+        reply_markup=join_giveaway_keyboard(giveaway_id, giveaway['participants_count'], join_text)
     )
 
 
@@ -570,17 +497,12 @@ async def cb_giveaway_detail(callback: CallbackQuery):
 async def cb_join_giveaway(callback: CallbackQuery):
     giveaway_id = callback.data.replace('join_', '')
     await callback.answer('Регистрирую участие...')
-
     data, status = await join_giveaway(giveaway_id, callback.from_user.id)
-
     if status == 201:
         await callback.message.edit_text(
-            f"✅ <b>Ты в розыгрыше!</b>\n\n"
-            f"Участников: {data.get('participants_count', '?')}\n\n"
-            f"Ожидай результатов. Если выиграешь — "
-            f"я напишу тебе в личку! 🏆",
-            parse_mode='HTML',
-            reply_markup=back_to_menu_keyboard()
+            f"✅ <b>Ты в розыгрыше!</b>\n\nУчастников: {data.get('participants_count', '?')}\n\n"
+            f"Ожидай результатов. Если выиграешь — я напишу тебе в личку! 🏆",
+            parse_mode='HTML', reply_markup=back_to_menu_keyboard()
         )
     elif status == 400:
         error = data.get('error', 'Ошибка') if isinstance(data, dict) else 'Ошибка'
@@ -588,10 +510,8 @@ async def cb_join_giveaway(callback: CallbackQuery):
             await callback.answer('✅ Ты уже участвуешь!', show_alert=True)
         elif 'Steam' in error:
             await callback.message.edit_text(
-                '⚠️ <b>Нужен Steam аккаунт</b>\n\n'
-                'Привяжи Steam и укажи трейд-ссылку.',
-                parse_mode='HTML',
-                reply_markup=profile_keyboard(False, True)
+                '⚠️ <b>Нужен Steam аккаунт</b>\n\nПривяжи Steam и укажи трейд-ссылку.',
+                parse_mode='HTML', reply_markup=profile_keyboard(False, True)
             )
         else:
             await callback.answer(f'❌ {error}', show_alert=True)
@@ -599,23 +519,15 @@ async def cb_join_giveaway(callback: CallbackQuery):
         await callback.answer('❌ Ошибка. Попробуй позже.', show_alert=True)
 
 
-# ─── Профиль и привязки ───────────────────────────────────────────────────
-
 @router.callback_query(F.data == 'my_profile')
 async def cb_my_profile(callback: CallbackQuery):
     await callback.answer('Загружаю...')
     user = await get_user_info(callback.from_user.id)
-
     if not user:
-        await callback.message.edit_text(
-            '❌ Профиль не найден. Напиши /start',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await callback.message.edit_text('❌ Профиль не найден. Напиши /start', reply_markup=back_to_menu_keyboard())
         return
-
     roles = user.get('roles', [])
     role_names = [r['role']['name'] for r in roles] if roles else ['Участник']
-
     await callback.message.edit_text(
         f"👤 <b>Профиль</b>\n\n"
         f"Ник: <b>{user['username']}</b>\n"
@@ -624,10 +536,7 @@ async def cb_my_profile(callback: CallbackQuery):
         f"📺 Twitch: {'✅ Привязан' if user.get('has_twitch') else '❌ Не привязан'}\n\n"
         f"Зарегистрирован: {user['created_at'][:10]}",
         parse_mode='HTML',
-        reply_markup=profile_keyboard(
-            user.get('has_steam', False),
-            user.get('has_twitch', False)
-        )
+        reply_markup=profile_keyboard(user.get('has_steam', False), user.get('has_twitch', False))
     )
 
 
@@ -641,10 +550,8 @@ async def cb_link_steam(callback: CallbackQuery, state: FSMContext):
         '1. Открой Steam → Инвентарь\n'
         '2. Нажми "Обмен" → "Создать ссылку для обмена"\n'
         '3. Скопируй ссылку и отправь сюда\n\n'
-        'Формат:\n'
-        '<code>https://steamcommunity.com/tradeoffer/new/?partner=...&token=...</code>',
-        parse_mode='HTML',
-        reply_markup=back_to_menu_keyboard()
+        'Формат:\n<code>https://steamcommunity.com/tradeoffer/new/?partner=...&token=...</code>',
+        parse_mode='HTML', reply_markup=back_to_menu_keyboard()
     )
     await callback.answer()
 
@@ -652,41 +559,30 @@ async def cb_link_steam(callback: CallbackQuery, state: FSMContext):
 @router.message(LinkSteam.waiting_trade_url)
 async def process_steam_url(message: Message, state: FSMContext):
     url = message.text.strip()
+    try:
+        await message.delete()
+    except Exception:
+        pass
     if 'steamcommunity.com/tradeoffer' not in url:
-        await message.answer(
-            '❌ Неверный формат ссылки.',
-            parse_mode='HTML'
-        )
+        await message.answer('❌ Неверный формат ссылки.', parse_mode='HTML')
         return
-
     data, status = await api_post('/auth/steam/link/', {
         'telegram_id': message.from_user.id,
         'steam_trade_url': url,
     })
     await state.clear()
-
     if status == 200:
-        await message.answer(
-            '✅ <b>Steam привязан!</b>',
-            parse_mode='HTML',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await message.answer('✅ <b>Steam привязан!</b>', parse_mode='HTML', reply_markup=back_to_menu_keyboard())
     else:
-        await message.answer(
-            '❌ Ошибка привязки.',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await message.answer('❌ Ошибка привязки.', reply_markup=back_to_menu_keyboard())
 
 
 @router.callback_query(F.data == 'link_twitch')
 async def cb_link_twitch(callback: CallbackQuery, state: FSMContext):
     await state.set_state(LinkTwitch.waiting_username)
     await callback.message.edit_text(
-        '📺 <b>Привязка Twitch</b>\n\n'
-        'Отправь свой Twitch ник.\n\n'
-        'Например: <code>ninja</code>',
-        parse_mode='HTML',
-        reply_markup=back_to_menu_keyboard()
+        '📺 <b>Привязка Twitch</b>\n\nОтправь свой Twitch ник.\n\nНапример: <code>ninja</code>',
+        parse_mode='HTML', reply_markup=back_to_menu_keyboard()
     )
     await callback.answer()
 
@@ -694,63 +590,48 @@ async def cb_link_twitch(callback: CallbackQuery, state: FSMContext):
 @router.message(LinkTwitch.waiting_username)
 async def process_twitch_username(message: Message, state: FSMContext):
     username = message.text.strip().lstrip('@')
+    try:
+        await message.delete()
+    except Exception:
+        pass
     if not username:
         await message.answer('❌ Ник не может быть пустым.')
         return
-
     data, status = await api_post('/auth/twitch/link/', {
         'telegram_id': message.from_user.id,
         'twitch_username': username,
     })
     await state.clear()
-
     if status == 200:
         await message.answer(
             f'✅ <b>Twitch привязан!</b>\n\nНик: <b>{username}</b>',
-            parse_mode='HTML',
-            reply_markup=back_to_menu_keyboard()
+            parse_mode='HTML', reply_markup=back_to_menu_keyboard()
         )
     else:
-        await message.answer(
-            '❌ Ошибка привязки.',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await message.answer('❌ Ошибка привязки.', reply_markup=back_to_menu_keyboard())
 
 
 @router.callback_query(F.data == 'my_prizes')
 async def cb_my_prizes(callback: CallbackQuery):
     await callback.answer('Загружаю...')
     data, status = await api_get(f'/prizes/my/{callback.from_user.id}/')
-
     if status != 200 or not data:
         await callback.message.edit_text(
             '🏆 <b>Мои призы</b>\n\nУ тебя пока нет призов. 🎯',
-            parse_mode='HTML',
-            reply_markup=back_to_menu_keyboard()
+            parse_mode='HTML', reply_markup=back_to_menu_keyboard()
         )
         return
-
     await callback.message.edit_text(
-        _format_prizes(data),
-        parse_mode='HTML',
-        reply_markup=back_to_menu_keyboard()
+        _format_prizes(data), parse_mode='HTML', reply_markup=back_to_menu_keyboard()
     )
 
-
-# ─── Вспомогательные функции ──────────────────────────────────────────────
 
 async def show_giveaways(message: Message):
     giveaways = await get_active_giveaways()
     if not giveaways:
-        await message.answer(
-            '😔 Сейчас нет активных розыгрышей.',
-            reply_markup=back_to_menu_keyboard()
-        )
+        await message.answer('😔 Сейчас нет активных розыгрышей.', reply_markup=back_to_menu_keyboard())
         return
-    await message.answer(
-        '🎁 Активные розыгрыши:',
-        reply_markup=giveaway_list_keyboard(giveaways[:5])
-    )
+    await message.answer('🎁 Активные розыгрыши:', reply_markup=giveaway_list_keyboard(giveaways[:5]))
 
 
 async def show_profile_message(message: Message):
@@ -761,16 +642,10 @@ async def show_profile_message(message: Message):
     roles = user.get('roles', [])
     role_names = [r['role']['name'] for r in roles] if roles else ['Участник']
     await message.answer(
-        f"👤 <b>Профиль</b>\n\n"
-        f"Ник: <b>{user['username']}</b>\n"
-        f"Роль: {', '.join(role_names)}\n\n"
-        f"Steam: {'✅' if user.get('has_steam') else '❌'}\n"
-        f"Twitch: {'✅' if user.get('has_twitch') else '❌'}",
+        f"👤 <b>Профиль</b>\n\nНик: <b>{user['username']}</b>\nРоль: {', '.join(role_names)}\n\n"
+        f"Steam: {'✅' if user.get('has_steam') else '❌'}\nTwitch: {'✅' if user.get('has_twitch') else '❌'}",
         parse_mode='HTML',
-        reply_markup=profile_keyboard(
-            user.get('has_steam', False),
-            user.get('has_twitch', False)
-        )
+        reply_markup=profile_keyboard(user.get('has_steam', False), user.get('has_twitch', False))
     )
 
 
@@ -778,9 +653,8 @@ def _format_prizes(data: list) -> str:
     text = '🏆 <b>Твои призы:</b>\n\n'
     for prize in data[:10]:
         emoji = {
-            'pending': '⏳', 'processing': '🔄',
-            'sent': '📦', 'delivered': '✅',
-            'failed': '❌', 'cancelled': '🚫',
+            'pending': '⏳', 'processing': '🔄', 'sent': '📦',
+            'delivered': '✅', 'failed': '❌', 'cancelled': '🚫',
         }.get(prize['status'], '❓')
         text += f"{emoji} <b>{prize['name']}</b> — {prize['status']}\n"
     return text

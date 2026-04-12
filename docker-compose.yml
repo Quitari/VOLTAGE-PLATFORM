@@ -67,7 +67,6 @@ services:
       - backend
       - redis
     command: python -m apps.bots.telegram.bot
-
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped

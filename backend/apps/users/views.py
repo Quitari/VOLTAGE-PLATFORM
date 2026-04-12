@@ -365,3 +365,31 @@ def twitch_link(request):
     user.save(update_fields=['twitch_username'])
 
     return Response({'message': 'Twitch привязан'})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_list(request):
+    """
+    GET /api/users/
+    Список пользователей — только для модераторов+
+    """
+    from .permissions import _user_has_permission
+    if not _user_has_permission(request.user, 'users.view'):
+        return Response(
+            {'error': 'Нет доступа'},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    qs = User.objects.all().order_by('-created_at')
+
+    # Фильтры
+    search = request.query_params.get('search')
+    status_filter = request.query_params.get('status')
+
+    if search:
+        qs = qs.filter(username__icontains=search)
+    if status_filter:
+        qs = qs.filter(status=status_filter)
+
+    serializer = UserSerializer(qs[:50], many=True)
+    return Response(serializer.data)

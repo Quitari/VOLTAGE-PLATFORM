@@ -2,7 +2,11 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Prize
-
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .models import Prize
+from apps.users.permissions import _user_has_permission
 
 @api_view(['GET'])
 @authentication_classes([])
@@ -31,6 +35,33 @@ def my_prizes(request, telegram_id):
             'delivery_method': prize.delivery_method,
             'created_at': prize.created_at.isoformat(),
             'sent_at': prize.sent_at.isoformat() if prize.sent_at else None,
+        })
+
+    return Response(data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def prize_list(request):
+    if not _user_has_permission(request.user, 'prizes.view'):
+        return Response({'error': 'Нет доступа'}, status=403)
+
+    prizes = Prize.objects.select_related(
+        'recipient', 'winner'
+    ).order_by('-created_at')[:50]
+
+    data = []
+    for p in prizes:
+        data.append({
+            'id': str(p.id),
+            'name': p.name,
+            'status': p.status,
+            'delivery_method': p.delivery_method,
+            'steam_trade_url': p.steam_trade_url,
+            'recipient': {
+                'username': p.recipient.username if p.recipient else None
+            },
+            'created_at': p.created_at.isoformat(),
+            'sent_at': p.sent_at.isoformat() if p.sent_at else None,
         })
 
     return Response(data)

@@ -3,6 +3,7 @@ import AdminLayout from '../../components/admin/AdminLayout'
 import DashboardHome from '../../components/admin/pages/DashboardHome'
 import UsersPage from '../../components/admin/pages/UsersPage'
 import GiveawaysPage from '../../components/admin/pages/GiveawaysPage'
+import CreateGiveawayPage from '../../components/admin/pages/CreateGiveawayPage'
 import ModerationPage from '../../components/admin/pages/ModerationPage'
 import TicketsPage from '../../components/admin/pages/TicketsPage'
 import AppealsPage from '../../components/admin/pages/AppealsPage'
@@ -18,6 +19,7 @@ export default function AdminDashboardPage() {
         <Route index element={<DashboardHome />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="giveaways" element={<GiveawaysPage />} />
+        <Route path="giveaways/create" element={<CreateGiveawayPage />} />
         <Route path="moderation" element={<ModerationPage />} />
         <Route path="tickets" element={<TicketsPage />} />
         <Route path="appeals" element={<AppealsPage />} />

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import BotSettings
-
+from .models import BotSettings, TwitchCommand
 
 @admin.register(BotSettings)
 class BotSettingsAdmin(admin.ModelAdmin):
@@ -12,3 +12,9 @@ class BotSettingsAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+    
+@admin.register(TwitchCommand)
+class TwitchCommandAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'cooldown', 'updated_at')
+    list_filter = ('is_active',)
+    search_fields = ('name', 'response')

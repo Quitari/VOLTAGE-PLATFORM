@@ -110,7 +110,7 @@ export default function CommandsPage() {
                   onChange={(e) =>
                     setForm((p) => ({
                       ...p,
-                      name: e.target.value.lstrip?.("!") || e.target.value,
+                      name: e.target.value.replace(/^!+/, ""),
                     }))
                   }
                   placeholder="discord"

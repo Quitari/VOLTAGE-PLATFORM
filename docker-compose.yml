@@ -67,6 +67,19 @@ services:
       - backend
       - redis
     command: python -m apps.bots.telegram.bot
+  twitch_bot:
+    build: ./backend
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - redis
+    command: python -c "from apps.bots.twitch.bot import run; run()"
+    ports:
+      - "4343:4343"
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped

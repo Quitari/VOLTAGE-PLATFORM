@@ -98,3 +98,44 @@ class TwitchCommand(models.Model):
 
     def __str__(self):
         return f'!{self.name}'
+    
+class ViewerStats(models.Model):
+    """Статистика зрителей Twitch"""
+    twitch_id = models.CharField(
+        max_length=50,
+        unique=True,
+        verbose_name='Twitch ID'
+    )
+    twitch_login = models.CharField(
+        max_length=50,
+        verbose_name='Twitch логин'
+    )
+    channel_id = models.CharField(
+        max_length=50,
+        verbose_name='ID канала'
+    )
+    watch_time_minutes = models.PositiveIntegerField(
+        default=0,
+        verbose_name='Время просмотра (мин)'
+    )
+    messages_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name='Сообщений'
+    )
+    last_seen = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Последний раз в чате'
+    )
+    first_seen = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Первый раз в чате'
+    )
+
+    class Meta:
+        verbose_name = 'Статистика зрителя'
+        verbose_name_plural = 'Статистика зрителей'
+        db_table = 'viewer_stats'
+        unique_together = ('twitch_id', 'channel_id')
+
+    def __str__(self):
+        return f'{self.twitch_login} — {self.watch_time_minutes} мин'

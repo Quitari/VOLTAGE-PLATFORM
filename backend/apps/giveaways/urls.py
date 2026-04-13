@@ -40,4 +40,7 @@ urlpatterns = [
     path('<uuid:pk>/join/telegram/',
          views.join_giveaway_telegram,
          name='giveaway-join-telegram'),
+     path('<uuid:pk>/join/twitch/',
+          views.join_giveaway_twitch,
+          name='giveaway-join-twitch'),
 ]

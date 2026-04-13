@@ -482,3 +482,65 @@ def join_giveaway_telegram(request, pk):
         'message': 'Ты в розыгрыше!',
         'participants_count': giveaway.participants_count
     }, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def join_giveaway_twitch(request, pk):
+    """
+    POST /api/giveaways/<id>/join/twitch/
+    Участие через Twitch бота по twitch_username
+    """
+    twitch_username = request.data.get('twitch_username')
+    if not twitch_username:
+        return Response(
+            {'error': 'twitch_username обязателен'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        from apps.users.models import User
+        user = User.objects.filter(
+            twitch_username__iexact=twitch_username
+        ).first()
+        if not user:
+            return Response(
+                {'error': 'Привяжи Twitch в боте или на сайте'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+    except Exception:
+        return Response(
+            {'error': 'Ошибка поиска пользователя'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+    try:
+        giveaway = Giveaway.objects.get(id=pk)
+    except Giveaway.DoesNotExist:
+        return Response(
+            {'error': 'Розыгрыш не найден'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if not giveaway.can_participate:
+        return Response(
+            {'error': 'Розыгрыш недоступен'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    if Participant.objects.filter(giveaway=giveaway, user=user).exists():
+        return Response(
+            {'error': 'Ты уже участвуешь в этом розыгрыше'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    Participant.objects.create(
+        giveaway=giveaway,
+        user=user,
+        source=Participant.Source.TWITCH
+    )
+
+    return Response({
+        'message': 'Участие зарегистрировано',
+        'participants_count': giveaway.participants_count
+    }, status=status.HTTP_201_CREATED)

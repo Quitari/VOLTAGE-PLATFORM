@@ -6,7 +6,6 @@ interface NavItem {
   path: string;
   icon: string;
   label: string;
-  badge?: number;
 }
 
 interface NavGroup {
@@ -72,7 +71,6 @@ export default function AdminLayout({
     return location.pathname.startsWith(path);
   };
 
-  // Открываем группу с активным элементом
   useEffect(() => {
     for (const group of NAV_GROUPS) {
       if (group.items.some((item) => isActive(item.path))) {
@@ -90,12 +88,10 @@ export default function AdminLayout({
 
   return (
     <div className="flex min-h-screen bg-[#0A0A0A] text-white">
-      {/* Sidebar */}
       <aside
         className="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden"
         style={{ width: collapsed ? 60 : 256 }}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 flex-shrink-0">
           {!collapsed && (
             <span className="text-xl font-black tracking-tighter text-[#FFE100] uppercase">
@@ -110,7 +106,6 @@ export default function AdminLayout({
           </button>
         </div>
 
-        {/* User */}
         {!collapsed && (
           <div className="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
             <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">
@@ -137,13 +132,11 @@ export default function AdminLayout({
 
         <div className="mx-4 mb-3 border-t border-white/5 flex-shrink-0" />
 
-        {/* Nav */}
         <nav className="flex-1 overflow-y-auto px-2 space-y-0.5 pb-2">
           {NAV_GROUPS.map((group) => {
             const isOpen = openGroups.includes(group.title);
             return (
               <div key={group.title}>
-                {/* Group header */}
                 {!collapsed && (
                   <button
                     onClick={() => toggleGroup(group.title)}
@@ -161,7 +154,6 @@ export default function AdminLayout({
                   </button>
                 )}
 
-                {/* Group items */}
                 {(isOpen || collapsed) && (
                   <div className="space-y-0.5">
                     {group.items.map((item) => (
@@ -183,16 +175,7 @@ export default function AdminLayout({
                           {item.icon}
                         </span>
                         {!collapsed && (
-                          <>
-                            <span className="flex-1 text-left">
-                              {item.label}
-                            </span>
-                            {item.badge && (
-                              <span className="text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">
-                                {item.badge}
-                              </span>
-                            )}
-                          </>
+                          <span className="flex-1 text-left">{item.label}</span>
                         )}
                       </button>
                     ))}
@@ -203,7 +186,6 @@ export default function AdminLayout({
           })}
         </nav>
 
-        {/* Logout */}
         <div className="px-4 py-3 border-t border-white/5 flex-shrink-0">
           <button
             onClick={handleLogout}
@@ -217,26 +199,19 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      {/* Main content */}
       <main
         className="flex-1 transition-all duration-200"
         style={{ marginLeft: collapsed ? 60 : 256 }}
       >
-        {/* Top bar */}
         <header className="sticky top-0 z-40 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between h-16 px-8">
-          <div className="flex items-center gap-6">
-            <h2 className="text-lg font-black text-white uppercase tracking-tight">
-              Панель управления
-            </h2>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-white/40 font-bold uppercase tracking-widest">
-              {user?.username}
-            </span>
-          </div>
+          <h2 className="text-lg font-black text-white uppercase tracking-tight">
+            Панель управления
+          </h2>
+          <span className="text-xs text-white/40 font-bold uppercase tracking-widest">
+            {user?.username}
+          </span>
         </header>
 
-        {/* Page content */}
         <div className="p-8">{children}</div>
       </main>
     </div>

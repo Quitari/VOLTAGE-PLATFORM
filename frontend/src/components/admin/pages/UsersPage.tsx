@@ -1,11 +1,36 @@
 import { useEffect, useState } from "react";
 import { authApi } from "../../../api/auth";
+import { moderationApi } from "../../../api/moderation";
 import type { User } from "../../../types";
+
+const PUNISHMENT_TYPES = [
+  { value: "warning", label: "⚠️ Предупреждение" },
+  { value: "mute", label: "🔇 Мут" },
+  { value: "ban", label: "🔨 Бан" },
+];
+
+const PLATFORMS = [
+  { value: "all", label: "Все платформы" },
+  { value: "telegram", label: "Telegram" },
+  { value: "twitch", label: "Twitch" },
+  { value: "site", label: "Сайт" },
+];
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+  // Модалка наказания
+  const [punishUser, setPunishUser] = useState<User | null>(null);
+  const [punishForm, setPunishForm] = useState({
+    punishment_type: "warning",
+    platform: "all",
+    reason: "",
+    expires_at: "",
+  });
+  const [punishing, setPunishing] = useState(false);
+  const [punishError, setPunishError] = useState("");
 
   const load = (s = "") => {
     setLoading(true);
@@ -25,8 +50,162 @@ export default function UsersPage() {
     load(search);
   };
 
+  const openPunish = (user: User) => {
+    setPunishUser(user);
+    setPunishForm({
+      punishment_type: "warning",
+      platform: "all",
+      reason: "",
+      expires_at: "",
+    });
+    setPunishError("");
+  };
+
+  const handlePunish = async () => {
+    if (!punishUser || !punishForm.reason.trim()) {
+      setPunishError("Укажи причину");
+      return;
+    }
+    setPunishing(true);
+    setPunishError("");
+    try {
+      await moderationApi.punish(punishUser.id, {
+        punishment_type: punishForm.punishment_type,
+        platform: punishForm.platform,
+        reason: punishForm.reason,
+        expires_at: punishForm.expires_at || undefined,
+      });
+      setPunishUser(null);
+      load(search);
+    } catch (err: any) {
+      setPunishError(err.response?.data?.error || "Ошибка");
+    } finally {
+      setPunishing(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {/* Модалка наказания */}
+      {punishUser && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                Наказание
+              </h3>
+              <button
+                onClick={() => setPunishUser(null)}
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+
+            <div className="bg-[#1C1B1B] rounded-xl px-4 py-3">
+              <p className="text-xs text-white/40 uppercase tracking-widest mb-0.5">
+                Пользователь
+              </p>
+              <p className="text-white font-bold">{punishUser.username}</p>
+            </div>
+
+            {punishError && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
+                ⚠️ {punishError}
+              </div>
+            )}
+
+            <div>
+              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
+                Тип наказания
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {PUNISHMENT_TYPES.map((t) => (
+                  <button
+                    key={t.value}
+                    onClick={() =>
+                      setPunishForm((p) => ({ ...p, punishment_type: t.value }))
+                    }
+                    className={`py-2 rounded-xl text-xs font-bold transition-colors ${
+                      punishForm.punishment_type === t.value
+                        ? "bg-[#FFE100] text-[#211C00]"
+                        : "bg-[#1C1B1B] text-white/60 hover:text-white"
+                    }`}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
+                Платформа
+              </label>
+              <select
+                value={punishForm.platform}
+                onChange={(e) =>
+                  setPunishForm((p) => ({ ...p, platform: e.target.value }))
+                }
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+              >
+                {PLATFORMS.map((pl) => (
+                  <option key={pl.value} value={pl.value}>
+                    {pl.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
+                Причина *
+              </label>
+              <textarea
+                value={punishForm.reason}
+                onChange={(e) =>
+                  setPunishForm((p) => ({ ...p, reason: e.target.value }))
+                }
+                placeholder="Укажи причину наказания..."
+                rows={3}
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+              />
+            </div>
+
+            <div>
+              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
+                Срок истечения (необязательно)
+              </label>
+              <input
+                type="datetime-local"
+                value={punishForm.expires_at}
+                onChange={(e) =>
+                  setPunishForm((p) => ({ ...p, expires_at: e.target.value }))
+                }
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+              />
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <button
+                onClick={() => setPunishUser(null)}
+                className="flex-1 py-3 bg-[#1C1B1B] text-white/60 font-bold rounded-xl uppercase tracking-widest text-xs hover:bg-[#2A2A2A] transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                onClick={handlePunish}
+                disabled={punishing}
+                className="flex-1 py-3 bg-red-500/20 text-red-400 font-bold rounded-xl uppercase tracking-widest text-xs hover:bg-red-500/30 transition-colors disabled:opacity-50"
+              >
+                {punishing ? "Выдаём..." : "🔨 Выдать"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Заголовок */}
       <div className="flex items-end justify-between">
         <div>
           <h1 className="text-4xl font-black text-white uppercase tracking-tighter">
@@ -50,6 +229,7 @@ export default function UsersPage() {
         </form>
       </div>
 
+      {/* Таблица */}
       <div className="bg-[#111] border border-white/5 rounded-2xl overflow-hidden">
         <table className="w-full text-left">
           <thead>
@@ -62,6 +242,7 @@ export default function UsersPage() {
                 "Twitch",
                 "Steam",
                 "Дата",
+                "Действия",
               ].map((h) => (
                 <th
                   key={h}
@@ -76,7 +257,7 @@ export default function UsersPage() {
             {loading ? (
               <tr>
                 <td
-                  colSpan={7}
+                  colSpan={8}
                   className="px-6 py-8 text-center text-white/40 text-sm"
                 >
                   Загрузка...
@@ -85,7 +266,7 @@ export default function UsersPage() {
             ) : users.length === 0 ? (
               <tr>
                 <td
-                  colSpan={7}
+                  colSpan={8}
                   className="px-6 py-8 text-center text-white/40 text-sm"
                 >
                   Пользователи не найдены
@@ -113,23 +294,24 @@ export default function UsersPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    {(() => {
-                      if (!user.roles?.length) return "—";
-                      const topRole = user.roles.reduce((prev, curr) =>
-                        curr.role.level > prev.role.level ? curr : prev,
-                      );
-                      return (
-                        <span
-                          className="text-xs font-bold px-2 py-1 rounded-full"
-                          style={{
-                            background: topRole.role.color + "20",
-                            color: topRole.role.color,
-                          }}
-                        >
-                          {topRole.role.name}
-                        </span>
-                      );
-                    })()}
+                    {user.roles?.length
+                      ? (() => {
+                          const top = user.roles.reduce((p, c) =>
+                            c.role.level > p.role.level ? c : p,
+                          );
+                          return (
+                            <span
+                              className="text-xs font-bold px-2 py-1 rounded-full"
+                              style={{
+                                background: top.role.color + "20",
+                                color: top.role.color,
+                              }}
+                            >
+                              {top.role.name}
+                            </span>
+                          );
+                        })()
+                      : "—"}
                   </td>
                   <td className="px-6 py-4">
                     <span
@@ -161,6 +343,14 @@ export default function UsersPage() {
                   </td>
                   <td className="px-6 py-4 text-xs text-white/40">
                     {user.created_at.slice(0, 10)}
+                  </td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => openPunish(user)}
+                      className="px-3 py-1.5 bg-red-500/10 text-red-400/70 text-xs font-bold rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors"
+                    >
+                      Наказать
+                    </button>
                   </td>
                 </tr>
               ))

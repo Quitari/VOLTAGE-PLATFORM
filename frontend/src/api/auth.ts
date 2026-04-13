@@ -1,5 +1,5 @@
 import client from "./client";
-import type { AuthResponse, User } from "../types";
+import type { AuthResponse, User, Role } from "../types";
 
 export const authApi = {
   register: (data: {
@@ -21,4 +21,6 @@ export const authApi = {
 
   userList: (params?: { search?: string; status?: string }) =>
     client.get<User[]>("/auth/list/", { params }),
+
+  roles: () => client.get<Role[]>("/auth/roles/"),
 };

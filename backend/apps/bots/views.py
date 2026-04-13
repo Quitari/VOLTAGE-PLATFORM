@@ -1,8 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from .models import BotSettings, TwitchCommand
-
+from .models import BotSettings, TwitchCommand, ViewerStats
 
 @api_view(['GET'])
 @authentication_classes([])
@@ -105,3 +104,61 @@ def twitch_commands_public(request):
         'cooldown': c.cooldown,
     } for c in commands]
     return Response(data)
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def twitch_stats_update(request):
+    """
+    POST /api/bots/twitch/stats/
+    Обновление статистики зрителя от Twitch бота
+    """
+    twitch_id = request.data.get('twitch_id')
+    twitch_login = request.data.get('twitch_login')
+    channel_id = request.data.get('channel_id')
+    messages = request.data.get('messages', 0)
+    watch_minutes = request.data.get('watch_minutes', 0)
+
+    if not twitch_id or not channel_id:
+        return Response({'error': 'twitch_id и channel_id обязательны'}, status=400)
+
+    stats, _ = ViewerStats.objects.get_or_create(
+        twitch_id=twitch_id,
+        channel_id=channel_id,
+        defaults={'twitch_login': twitch_login or twitch_id}
+    )
+    stats.twitch_login = twitch_login or stats.twitch_login
+    stats.messages_count += messages
+    stats.watch_time_minutes += watch_minutes
+    stats.save()
+
+    return Response({
+        'watch_time_minutes': stats.watch_time_minutes,
+        'messages_count': stats.messages_count,
+    })
+
+
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def twitch_stats_get(request, twitch_login):
+    """
+    GET /api/bots/twitch/stats/<login>/
+    Получить статистику зрителя
+    """
+    channel_id = request.query_params.get('channel_id', '')
+    try:
+        stats = ViewerStats.objects.get(
+            twitch_login__iexact=twitch_login,
+            channel_id=channel_id
+        )
+        hours = stats.watch_time_minutes // 60
+        minutes = stats.watch_time_minutes % 60
+        return Response({
+            'login': stats.twitch_login,
+            'watch_time_minutes': stats.watch_time_minutes,
+            'watch_time_formatted': f'{hours}h {minutes}m' if hours else f'{minutes}m',
+            'messages_count': stats.messages_count,
+        })
+    except ViewerStats.DoesNotExist:
+        return Response({'error': 'Не найдено'}, status=404)

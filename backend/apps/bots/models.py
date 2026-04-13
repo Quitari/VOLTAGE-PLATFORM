@@ -67,3 +67,34 @@ class BotSettings(models.Model):
         """Получить настройки или создать с дефолтными значениями"""
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+    
+class TwitchCommand(models.Model):
+    """Команды Twitch чата"""
+
+    name = models.CharField(
+        max_length=50,
+        unique=True,
+        verbose_name='Команда'
+    )
+    response = models.TextField(
+        verbose_name='Ответ'
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='Активна'
+    )
+    cooldown = models.PositiveIntegerField(
+        default=5,
+        verbose_name='Кулдаун (сек)'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Команда Twitch'
+        verbose_name_plural = 'Команды Twitch'
+        db_table = 'twitch_commands'
+        ordering = ['name']
+
+    def __str__(self):
+        return f'!{self.name}'

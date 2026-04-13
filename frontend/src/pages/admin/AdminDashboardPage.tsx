@@ -11,6 +11,7 @@ import LogsPage from '../../components/admin/pages/LogsPage'
 import RolesPage from '../../components/admin/pages/RolesPage'
 import SettingsPage from '../../components/admin/pages/SettingsPage'
 import PrizesPage from '../../components/admin/pages/PrizesPage'
+import CommandsPage from '../../components/admin/pages/CommandsPage'
 
 export default function AdminDashboardPage() {
   return (
@@ -27,6 +28,7 @@ export default function AdminDashboardPage() {
         <Route path="roles" element={<RolesPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="prizes" element={<PrizesPage />} />
+        <Route path="commands" element={<CommandsPage />} />
       </Routes>
     </AdminLayout>
   )

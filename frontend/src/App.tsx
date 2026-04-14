@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "./store/auth";
-
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import MainPage from "./pages/main/MainPage";
 
 function ProtectedRoute({
   children,
@@ -15,7 +15,6 @@ function ProtectedRoute({
   adminOnly?: boolean;
 }) {
   const { isAuthenticated, isLoading, userLevel } = useAuthStore();
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
@@ -23,16 +22,13 @@ function ProtectedRoute({
       </div>
     );
   }
-
   if (!isAuthenticated) return <Navigate to="/login" />;
   if (adminOnly && userLevel() < 30) return <Navigate to="/dashboard" />;
-
   return <>{children}</>;
 }
 
 export default function App() {
   const { loadUser } = useAuthStore();
-
   useEffect(() => {
     loadUser();
   }, []);
@@ -40,16 +36,25 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Публичный сайт */}
+        <Route path="/" element={<MainPage />} />
+        <Route path="/rules" element={<MainPage />} />
+
+        {/* Авторизация */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+
+        {/* Личный кабинет */}
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <ProtectedRoute>
               <DashboardPage />
             </ProtectedRoute>
           }
         />
+
+        {/* Админка */}
         <Route
           path="/admin/*"
           element={
@@ -58,8 +63,8 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

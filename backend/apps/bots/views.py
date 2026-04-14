@@ -16,6 +16,20 @@ def bot_settings(request):
         'channel_id': settings.channel_id,
         'channel_username': settings.channel_username,
         'chat_id': settings.chat_id,
+        # Публичные настройки сайта
+        'streamer_name': settings.streamer_name,
+        'streamer_description': settings.streamer_description,
+        'streamer_avatar_url': settings.streamer_avatar_url,
+        'twitch_url': settings.twitch_url,
+        'telegram_url': settings.telegram_url,
+        'vk_url': settings.vk_url,
+        'youtube_url': settings.youtube_url,
+        'show_giveaways': settings.show_giveaways,
+        'show_winners': settings.show_winners,
+        'show_schedule': settings.show_schedule,
+        'show_moments': settings.show_moments,
+        'show_rules': settings.show_rules,
+        'schedule': settings.schedule,
     })
 
 
@@ -25,7 +39,11 @@ def bot_settings_update(request):
     settings = BotSettings.get()
     allowed = [
         'welcome_new', 'welcome_back', 'giveaway_post_template',
-        'join_button_text', 'channel_id', 'channel_username', 'chat_id'
+        'join_button_text', 'channel_id', 'channel_username', 'chat_id',
+        'streamer_name', 'streamer_description', 'streamer_avatar_url',
+        'twitch_url', 'telegram_url', 'vk_url', 'youtube_url',
+        'show_giveaways', 'show_winners', 'show_schedule',
+        'show_moments', 'show_rules', 'schedule',
     ]
     for field in allowed:
         if field in request.data:

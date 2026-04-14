@@ -52,6 +52,78 @@ class BotSettings(models.Model):
         verbose_name='ID чата канала'
     )
 
+    # ─── Настройки публичного сайта ───────────────────────────────
+    # Информация о стримере
+    streamer_name = models.CharField(
+        max_length=100,
+        default='',
+        blank=True,
+        verbose_name='Имя стримера'
+    )
+    streamer_description = models.TextField(
+        default='',
+        blank=True,
+        verbose_name='Описание стримера'
+    )
+    streamer_avatar_url = models.URLField(
+        default='',
+        blank=True,
+        verbose_name='URL аватара'
+    )
+    twitch_url = models.CharField(
+        max_length=100,
+        default='',
+        blank=True,
+        verbose_name='Ссылка Twitch'
+    )
+    telegram_url = models.CharField(
+        max_length=100,
+        default='',
+        blank=True,
+        verbose_name='Ссылка Telegram'
+    )
+    vk_url = models.CharField(
+        max_length=100,
+        default='',
+        blank=True,
+        verbose_name='Ссылка VK'
+    )
+    youtube_url = models.CharField(
+        max_length=100,
+        default='',
+        blank=True,
+        verbose_name='Ссылка YouTube'
+    )
+
+    # ─── Переключатели блоков сайта ───────────────────────────────
+    show_giveaways = models.BooleanField(
+        default=True,
+        verbose_name='Показывать розыгрыши'
+    )
+    show_winners = models.BooleanField(
+        default=True,
+        verbose_name='Показывать победителей'
+    )
+    show_schedule = models.BooleanField(
+        default=True,
+        verbose_name='Показывать расписание'
+    )
+    show_moments = models.BooleanField(
+        default=False,
+        verbose_name='Показывать лучшие моменты'
+    )
+    show_rules = models.BooleanField(
+        default=True,
+        verbose_name='Показывать правила'
+    )
+
+    # ─── Расписание стримов ───────────────────────────────────────
+    schedule = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name='Расписание стримов'
+    )
+
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

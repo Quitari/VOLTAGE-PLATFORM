@@ -10,4 +10,5 @@ urlpatterns = [
     path('commands/public/', views.twitch_commands_public, name='twitch-commands-public'),
     path('twitch/stats/', views.twitch_stats_update, name='twitch-stats-update'),
     path('twitch/stats/<str:twitch_login>/', views.twitch_stats_get, name='twitch-stats-get'),
+    path('avatar/upload/', views.upload_avatar, name='upload-avatar'),
 ]

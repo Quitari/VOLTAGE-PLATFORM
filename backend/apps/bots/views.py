@@ -20,6 +20,7 @@ def bot_settings(request):
         'streamer_name': settings.streamer_name,
         'streamer_description': settings.streamer_description,
         'streamer_avatar_url': settings.streamer_avatar_url,
+        'streamer_avatar_file': request.build_absolute_uri(settings.streamer_avatar_file.url) if settings.streamer_avatar_file else None,
         'twitch_url': settings.twitch_url,
         'telegram_url': settings.telegram_url,
         'vk_url': settings.vk_url,
@@ -180,3 +181,35 @@ def twitch_stats_get(request, twitch_login):
         })
     except ViewerStats.DoesNotExist:
         return Response({'error': 'Не найдено'}, status=404)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_avatar(request):
+    from apps.users.permissions import _user_has_permission
+    if not _user_has_permission(request.user, 'settings.edit'):
+        return Response({'error': 'Нет доступа'}, status=403)
+
+    file = request.FILES.get('avatar')
+    if not file:
+        return Response({'error': 'Файл не передан'}, status=400)
+
+    allowed = ['image/jpeg', 'image/png', 'image/webp']
+    if file.content_type not in allowed:
+        return Response({'error': 'Разрешены только JPG, PNG, WEBP'}, status=400)
+
+    if file.size > 5 * 1024 * 1024:
+        return Response({'error': 'Файл не должен превышать 5 MB'}, status=400)
+
+    s = BotSettings.get()
+    if s.streamer_avatar_url:
+        return Response(
+            {'error': 'Удали URL аватара перед загрузкой файла'},
+            status=400
+        )
+
+    s.streamer_avatar_file = file
+    s.save()
+
+    return Response({
+        'url': request.build_absolute_uri(s.streamer_avatar_file.url)
+    })

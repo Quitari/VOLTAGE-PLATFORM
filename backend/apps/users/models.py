@@ -27,6 +27,13 @@ class User(AbstractUser):
         max_length=50, null=True, blank=True,
         verbose_name='Telegram Username'
     )
+    link_token = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        unique=True,
+        verbose_name='Токен привязки Telegram'
+    )
     twitch_id = models.CharField(
         max_length=50, unique=True, null=True, blank=True,
         verbose_name='Twitch ID'

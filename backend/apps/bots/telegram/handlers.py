@@ -661,3 +661,31 @@ def _format_prizes(data: list) -> str:
         }.get(prize['status'], '❓')
         text += f"{emoji} <b>{prize['name']}</b> — {prize['status']}\n"
     return text
+
+@router.message(Command('link'))
+async def cmd_link(message: Message):
+    args = message.text.split()
+    if len(args) < 2:
+        await message.answer(
+            '❌ Укажи код привязки.\n\nПример: <code>/link ABC12345</code>',
+            parse_mode='HTML'
+        )
+        return
+
+    token = args[1].upper().strip()
+    result, status = await api_post('/auth/telegram/link-by-token/', {
+        'token': token,
+        'telegram_id': message.from_user.id,
+        'telegram_username': message.from_user.username or '',
+    })
+
+    if status == 200:
+        username = result.get('username', '')
+        await message.answer(
+            f'✅ <b>Telegram привязан!</b>\n\nАккаунт: <b>{username}</b>',
+            parse_mode='HTML',
+            reply_markup=back_to_menu_keyboard()
+        )
+    else:
+        error = result.get('error', 'Ошибка')
+        await message.answer(f'❌ {error}')

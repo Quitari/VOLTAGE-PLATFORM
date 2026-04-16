@@ -70,6 +70,12 @@ class BotSettings(models.Model):
         blank=True,
         verbose_name='URL аватара'
     )
+    streamer_avatar_file = models.ImageField(
+        upload_to='avatars/',
+        null=True,
+        blank=True,
+        verbose_name='Файл аватара'
+    )
     twitch_url = models.CharField(
         max_length=100,
         default='',

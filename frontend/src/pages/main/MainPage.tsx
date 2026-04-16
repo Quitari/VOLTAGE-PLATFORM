@@ -28,7 +28,7 @@ export default function MainPage() {
   if (loading)
     return (
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="text-[#FFE100] text-xl font-black tracking-tighter animate-pulse">
+        <div className="text-[#FFE100] text-2xl font-black tracking-tighter animate-pulse">
           VOLTAGE...
         </div>
       </div>
@@ -40,7 +40,10 @@ export default function MainPage() {
     "Профессиональный стример. Розыгрыши каждый стрим.";
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-body">
+    <div
+      className="min-h-screen bg-[#0A0A0A] text-white"
+      style={{ fontFamily: "Manrope, sans-serif" }}
+    >
       {/* Nav */}
       <nav className="bg-[#0E0E0E]/70 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center w-full px-8 py-4 border-b border-white/5">
         <div className="text-2xl font-black tracking-tighter text-[#FFE100] uppercase">
@@ -53,12 +56,20 @@ export default function MainPage() {
           >
             Главная
           </a>
-          {settings?.show_schedule && (
+          {settings?.show_schedule && settings?.schedule?.length > 0 && (
             <a
               href="#schedule"
               className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
             >
               Расписание
+            </a>
+          )}
+          {settings?.show_moments && (
+            <a
+              href="#moments"
+              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
+            >
+              Моменты
             </a>
           )}
           {settings?.show_rules && (
@@ -79,7 +90,7 @@ export default function MainPage() {
       </nav>
 
       {/* Hero */}
-      <header className="relative w-full min-h-[600px] flex items-end pb-24 overflow-hidden">
+      <header className="relative w-full min-h-[600px] lg:min-h-[800px] flex items-end pb-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           {settings?.streamer_avatar_url ? (
             <img
@@ -88,26 +99,33 @@ export default function MainPage() {
               className="w-full h-full object-cover grayscale opacity-40"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-[#1C1B1B] to-[#0A0A0A]" />
+            <div className="w-full h-full bg-gradient-to-br from-[#1C1B1B] via-[#111] to-[#0A0A0A]" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
         </div>
 
         <div className="container mx-auto px-8 relative z-10 flex flex-col items-start gap-6">
+          <div className="flex items-center gap-3 bg-green-500/20 text-green-400 px-3 py-1 rounded font-bold text-xs uppercase">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            Следи за розыгрышами
+          </div>
+
           <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase text-white leading-none">
-            {name.split(" ").map((word: string, i: number) => (
-              <span key={i}>
-                {i === 0 ? (
-                  word
-                ) : (
-                  <span className="text-[#FFE100]">{" " + word}</span>
-                )}
-              </span>
-            ))}
+            {name.split(" ").map((word: string, i: number) =>
+              i === 0 ? (
+                <span key={i}>{word}</span>
+              ) : (
+                <span key={i} className="text-[#FFE100]">
+                  {" " + word}
+                </span>
+              ),
+            )}
           </h1>
+
           <p className="max-w-2xl text-lg text-white/70 font-medium leading-relaxed">
             {description}
           </p>
+
           <div className="flex flex-wrap gap-4 mt-4">
             <button
               onClick={() => navigate("/register")}
@@ -120,7 +138,7 @@ export default function MainPage() {
                 href={settings.twitch_url}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[#9146FF]/20 backdrop-blur-md text-[#9146FF] px-8 py-4 rounded-lg font-bold uppercase border border-[#9146FF]/30 hover:bg-[#9146FF]/30 transition-colors"
+                className="bg-[#2A2A2A]/60 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold uppercase border border-white/20 hover:bg-[#3A3939] transition-colors"
               >
                 Twitch
               </a>
@@ -130,7 +148,7 @@ export default function MainPage() {
                 href={settings.telegram_url}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white/5 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold uppercase border border-white/10 hover:bg-white/10 transition-colors"
+                className="bg-[#2A2A2A]/60 backdrop-blur-md text-white px-8 py-4 rounded-lg font-bold uppercase border border-white/20 hover:bg-[#3A3939] transition-colors"
               >
                 Telegram
               </a>
@@ -139,7 +157,7 @@ export default function MainPage() {
         </div>
       </header>
 
-      {/* Main content */}
+      {/* Main */}
       <main className="container mx-auto px-8 py-24 space-y-32">
         {/* Активные розыгрыши */}
         {settings?.show_giveaways !== false && (
@@ -163,7 +181,8 @@ export default function MainPage() {
                 {giveaways.map((g) => (
                   <div
                     key={g.id}
-                    className="bg-[#1C1B1B] hover:bg-[#2A2A2A] transition-all hover:scale-[1.02] p-6 rounded-xl flex flex-col gap-4"
+                    className="bg-[#1C1B1B] hover:bg-[#2A2A2A] hover:scale-[1.02] transition-all duration-200 p-6 rounded-xl flex flex-col gap-4 cursor-pointer"
+                    onClick={() => navigate("/register")}
                   >
                     <div className="relative rounded-lg overflow-hidden h-48 bg-[#0E0E0E] flex items-center justify-center">
                       <span
@@ -192,19 +211,13 @@ export default function MainPage() {
                         </span>
                         <span className="text-[#FFE100] text-xs font-bold uppercase">
                           {g.platform === "telegram"
-                            ? "Telegram"
+                            ? "TG"
                             : g.platform === "twitch"
-                              ? "Twitch"
-                              : "Все"}
+                              ? "TW"
+                              : "ALL"}
                         </span>
                       </div>
                     </div>
-                    <button
-                      onClick={() => navigate("/login")}
-                      className="w-full py-3 bg-[#FFE100]/10 text-[#FFE100] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#FFE100]/20 transition-colors mt-auto"
-                    >
-                      Участвовать
-                    </button>
                   </div>
                 ))}
               </div>
@@ -212,7 +225,7 @@ export default function MainPage() {
           </section>
         )}
 
-        {/* Победители и расписание */}
+        {/* Победители и моменты */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Победители */}
           {settings?.show_winners !== false && (
@@ -221,7 +234,9 @@ export default function MainPage() {
                 Последние <span className="text-[#FFE100]">победители</span>
               </h2>
               {winners.length === 0 ? (
-                <p className="text-white/30 text-sm">Пока нет победителей</p>
+                <div className="bg-[#1C1B1B] rounded-xl p-6 text-center">
+                  <p className="text-white/30 text-sm">Пока нет победителей</p>
+                </div>
               ) : (
                 <div className="space-y-4">
                   {winners.slice(0, 5).map((g) =>
@@ -249,8 +264,43 @@ export default function MainPage() {
             </section>
           )}
 
+          {/* Моменты */}
+          {settings?.show_moments && (
+            <section id="moments" className="lg:col-span-2">
+              <h2 className="text-2xl font-black uppercase tracking-tight mb-8">
+                Лучшие <span className="text-[#FFE100]">моменты</span>
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="group relative rounded-xl overflow-hidden aspect-video bg-[#1C1B1B]"
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span
+                        className="material-symbols-outlined text-white/10"
+                        style={{ fontSize: "48px" }}
+                      >
+                        play_circle
+                      </span>
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold">
+                      0:00
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                      <p className="text-sm font-bold uppercase">
+                        Добавь момент в настройках
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Расписание */}
-          {settings?.show_schedule !== false &&
+          {!settings?.show_moments &&
+            settings?.show_schedule &&
             settings?.schedule?.length > 0 && (
               <section id="schedule" className="lg:col-span-2">
                 <h2 className="text-2xl font-black uppercase tracking-tight mb-8">
@@ -283,8 +333,8 @@ export default function MainPage() {
 
       {/* Footer */}
       <footer className="bg-[#0A0A0A] py-12 border-t border-white/5 mt-32">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col items-center md:items-start gap-3">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="flex flex-col items-center md:items-start gap-4">
             <div className="text-xl font-black text-[#FFE100] uppercase">
               {name}
             </div>
@@ -296,35 +346,41 @@ export default function MainPage() {
           <div className="flex gap-12">
             <div className="flex flex-col gap-3">
               <span className="text-[10px] uppercase font-bold text-white/30 tracking-widest">
-                Инфо
+                ИНФО
               </span>
               {settings?.show_rules && (
                 <a
                   href="/rules"
-                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm"
+                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
                 >
-                  Правила
+                  ПРАВИЛА
                 </a>
               )}
               <a
                 href="/login"
-                className="text-white/50 hover:text-[#FFE100] transition-colors text-sm"
+                className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
               >
-                Войти
+                ВОЙТИ
+              </a>
+              <a
+                href="/register"
+                className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
+              >
+                РЕГИСТРАЦИЯ
               </a>
             </div>
             <div className="flex flex-col gap-3">
               <span className="text-[10px] uppercase font-bold text-white/30 tracking-widest">
-                Соцсети
+                СОЦСЕТИ
               </span>
               {settings?.twitch_url && (
                 <a
                   href={settings.twitch_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm"
+                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
                 >
-                  Twitch
+                  TWITCH
                 </a>
               )}
               {settings?.telegram_url && (
@@ -332,9 +388,9 @@ export default function MainPage() {
                   href={settings.telegram_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm"
+                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
                 >
-                  Telegram
+                  TELEGRAM
                 </a>
               )}
               {settings?.vk_url && (
@@ -342,12 +398,35 @@ export default function MainPage() {
                   href={settings.vk_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm"
+                  className="text-white/50 hover:text-[#FFE100] transition-colors text-sm font-medium"
                 >
                   VK
                 </a>
               )}
             </div>
+          </div>
+
+          <div className="flex gap-4">
+            {settings?.telegram_url && (
+              <a
+                href={settings.telegram_url}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#FFE100] transition-colors cursor-pointer"
+              >
+                <span className="material-symbols-outlined">send</span>
+              </a>
+            )}
+            {settings?.twitch_url && (
+              <a
+                href={settings.twitch_url}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#FFE100] transition-colors cursor-pointer"
+              >
+                <span className="material-symbols-outlined">live_tv</span>
+              </a>
+            )}
           </div>
         </div>
       </footer>

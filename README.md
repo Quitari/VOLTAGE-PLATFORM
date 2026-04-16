@@ -126,12 +126,12 @@ BOT_PASSWORD=your-bot-password
 docker compose up -d
 ```
 
-### 4. Применить миграции и создать роли
+### 4. Применить миграции и настроить платформу
 
 ```bash
 docker compose exec backend python manage.py migrate
 docker compose exec backend python manage.py create_roles
-docker compose exec backend python manage.py createsuperuser
+docker compose exec backend python manage.py setup
 ```
 
 ### 5. Создать бот-пользователя

@@ -393,3 +393,47 @@ def user_list(request):
 
     serializer = UserSerializer(qs[:50], many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def generate_link_token(request):
+    """Генерирует токен для привязки Telegram"""
+    import secrets
+    token = secrets.token_hex(8).upper()
+    request.user.link_token = token
+    request.user.save()
+    return Response({'token': token})
+
+
+@api_view(['POST'])
+@authentication_classes([])
+@permission_classes([AllowAny])
+def link_by_token(request):
+    """Привязывает Telegram аккаунт по токену — вызывается ботом"""
+    token = request.data.get('token', '').upper().strip()
+    telegram_id = request.data.get('telegram_id')
+    telegram_username = request.data.get('telegram_username', '')
+
+    if not token or not telegram_id:
+        return Response({'error': 'token и telegram_id обязательны'}, status=400)
+
+    try:
+        from apps.users.models import User
+        user = User.objects.get(link_token=token)
+    except User.DoesNotExist:
+        return Response({'error': 'Неверный код. Попробуй ещё раз.'}, status=404)
+
+    # Проверим что этот telegram_id не занят другим аккаунтом
+    existing = User.objects.filter(telegram_id=telegram_id).exclude(pk=user.pk).first()
+    if existing:
+        if existing.username.startswith('tg_'):
+            existing.delete()
+        else:
+            return Response({'error': 'Этот Telegram уже привязан к другому аккаунту'}, status=400)
+
+    user.telegram_id = telegram_id
+    user.telegram_username = telegram_username
+    user.link_token = None  # сбрасываем токен после использования
+    user.save()
+
+    return Response({'message': 'Telegram привязан', 'username': user.username})

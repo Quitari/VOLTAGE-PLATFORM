@@ -21,4 +21,7 @@ urlpatterns = [
     path('twitch/link/', views.twitch_link, name='twitch-link'),
 
     path('list/', views.user_list, name='user-list'),
+
+    path('telegram/generate-token/', views.generate_link_token, name='generate-link-token'),
+    path('telegram/link-by-token/', views.link_by_token, name='link-by-token'),
 ]

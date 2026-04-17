@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import client from "../../../api/client";
 
-type Section = "bot" | "streamer" | "pages" | "schedule";
+type Section = "bot" | "streamer" | "pages" | "schedule" | "rules";
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<any>(null);
@@ -75,6 +75,7 @@ export default function SettingsPage() {
     { id: "pages", label: "Страницы сайта", icon: "web" },
     { id: "schedule", label: "Расписание", icon: "calendar_month" },
     { id: "bot", label: "Telegram бот", icon: "smart_toy" },
+    { id: "rules", label: "Правила", icon: "gavel" },
   ];
 
   const avatarSrc =
@@ -122,12 +123,10 @@ export default function SettingsPage() {
               СТРИМЕР
             </h1>
 
-            {/* Публичный профиль */}
             <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
               <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
                 Публичный профиль
               </h2>
-
               <div>
                 <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
                   Имя стримера
@@ -139,7 +138,6 @@ export default function SettingsPage() {
                   className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
                 />
               </div>
-
               <div>
                 <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
                   Описание
@@ -158,7 +156,6 @@ export default function SettingsPage() {
                 <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
                   Аватар
                 </label>
-
                 {avatarSrc && (
                   <div className="mb-3 flex items-center gap-3">
                     <img
@@ -179,13 +176,11 @@ export default function SettingsPage() {
                     </button>
                   </div>
                 )}
-
                 {avatarError && (
                   <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs px-3 py-2 rounded-xl mb-3">
                     ⚠️ {avatarError}
                   </div>
                 )}
-
                 <div className="space-y-3">
                   <div>
                     <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
@@ -207,7 +202,6 @@ export default function SettingsPage() {
                       className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
                     />
                   </div>
-
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-px bg-white/10" />
                     <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
@@ -215,7 +209,6 @@ export default function SettingsPage() {
                     </span>
                     <div className="flex-1 h-px bg-white/10" />
                   </div>
-
                   <div>
                     <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
                       Вариант 2 — Файл (JPG, PNG, WEBP, до 5 MB)
@@ -270,7 +263,6 @@ export default function SettingsPage() {
                         Загружаем...
                       </p>
                     )}
-
                     {avatarSrc && (
                       <div className="mt-4">
                         <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
@@ -290,12 +282,7 @@ export default function SettingsPage() {
                                 onClick={() =>
                                   set("streamer_avatar_position", pos)
                                 }
-                                className={`w-9 h-9 rounded-lg border transition-colors ${
-                                  (settings?.streamer_avatar_position ||
-                                    "center center") === pos
-                                    ? "bg-[#FFE100] border-[#FFE100]"
-                                    : "bg-[#1C1B1B] border-white/10 hover:border-white/30"
-                                }`}
+                                className={`w-9 h-9 rounded-lg border transition-colors ${(settings?.streamer_avatar_position || "center center") === pos ? "bg-[#FFE100] border-[#FFE100]" : "bg-[#1C1B1B] border-white/10 hover:border-white/30"}`}
                               />
                             ))}
                         </div>
@@ -314,7 +301,6 @@ export default function SettingsPage() {
               <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
                 Преимущества (страница входа)
               </h2>
-
               {(settings?.streamer_features || []).length > 0 && (
                 <div className="space-y-2">
                   {(settings.streamer_features as string[]).map((text, i) => (
@@ -336,7 +322,6 @@ export default function SettingsPage() {
                   ))}
                 </div>
               )}
-
               <div className="flex gap-2">
                 <input
                   value={newFeature}
@@ -581,46 +566,294 @@ export default function SettingsPage() {
                 />
               </div>
             </div>
-
             <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
               <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
                 Telegram канал
               </h2>
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
-                    ID канала
-                  </label>
-                  <input
-                    value={settings?.channel_id || ""}
-                    onChange={(e) => set("channel_id", e.target.value)}
-                    placeholder="-1001234567890"
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
-                    Username канала
-                  </label>
-                  <input
-                    value={settings?.channel_username || ""}
-                    onChange={(e) => set("channel_username", e.target.value)}
-                    placeholder="@mychannel"
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
-                    ID чата канала
-                  </label>
-                  <input
-                    value={settings?.chat_id || ""}
-                    onChange={(e) => set("chat_id", e.target.value)}
-                    placeholder="-1001234567891"
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
-                  />
-                </div>
+                {[
+                  {
+                    field: "channel_id",
+                    label: "ID канала",
+                    placeholder: "-1001234567890",
+                  },
+                  {
+                    field: "channel_username",
+                    label: "Username канала",
+                    placeholder: "@mychannel",
+                  },
+                  {
+                    field: "chat_id",
+                    label: "ID чата канала",
+                    placeholder: "-1001234567891",
+                  },
+                ].map((item) => (
+                  <div key={item.field}>
+                    <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
+                      {item.label}
+                    </label>
+                    <input
+                      value={settings?.[item.field] || ""}
+                      onChange={(e) => set(item.field, e.target.value)}
+                      placeholder={item.placeholder}
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                    />
+                  </div>
+                ))}
               </div>
+            </div>
+          </>
+        )}
+
+        {/* Правила */}
+        {section === "rules" && (
+          <>
+            <h1 className="text-4xl font-black text-white uppercase tracking-tighter">
+              ПРАВИЛА
+            </h1>
+
+            {/* Правила чата */}
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
+              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+                Правила чата
+              </h2>
+              {(settings?.rules_chat || []).map((text: string, i: number) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
+                >
+                  <span className="text-[#FFE100] font-black text-sm w-6">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm text-white flex-1">{text}</span>
+                  <button
+                    onClick={() =>
+                      set(
+                        "rules_chat",
+                        settings.rules_chat.filter(
+                          (_: any, idx: number) => idx !== i,
+                        ),
+                      )
+                    }
+                    className="text-white/20 hover:text-red-400 transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-base">
+                      close
+                    </span>
+                  </button>
+                </div>
+              ))}
+              <div className="flex gap-2">
+                <input
+                  id="chat-rule-input"
+                  placeholder="Новое правило чата"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  onKeyDown={(e) => {
+                    if (e.key !== "Enter") return;
+                    const val = (e.target as HTMLInputElement).value.trim();
+                    if (!val) return;
+                    set("rules_chat", [...(settings?.rules_chat || []), val]);
+                    (e.target as HTMLInputElement).value = "";
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    const el = document.getElementById(
+                      "chat-rule-input",
+                    ) as HTMLInputElement;
+                    const val = el?.value.trim();
+                    if (!val) return;
+                    set("rules_chat", [...(settings?.rules_chat || []), val]);
+                    el.value = "";
+                  }}
+                  className="px-4 py-2.5 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl hover:bg-[#2A2A2A] transition-colors"
+                >
+                  +
+                </button>
+              </div>
+              <p className="text-[10px] text-white/20">
+                Enter или кнопка + чтобы добавить
+              </p>
+            </div>
+
+            {/* Правила розыгрышей */}
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
+              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+                Правила розыгрышей
+              </h2>
+              {(settings?.rules_giveaway || []).map(
+                (text: string, i: number) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
+                  >
+                    <span className="material-symbols-outlined text-[#FFE100] text-base">
+                      check_circle
+                    </span>
+                    <span className="text-sm text-white flex-1">{text}</span>
+                    <button
+                      onClick={() =>
+                        set(
+                          "rules_giveaway",
+                          settings.rules_giveaway.filter(
+                            (_: any, idx: number) => idx !== i,
+                          ),
+                        )
+                      }
+                      className="text-white/20 hover:text-red-400 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-base">
+                        close
+                      </span>
+                    </button>
+                  </div>
+                ),
+              )}
+              <div className="flex gap-2">
+                <input
+                  id="giveaway-rule-input"
+                  placeholder="Новое правило розыгрыша"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  onKeyDown={(e) => {
+                    if (e.key !== "Enter") return;
+                    const val = (e.target as HTMLInputElement).value.trim();
+                    if (!val) return;
+                    set("rules_giveaway", [
+                      ...(settings?.rules_giveaway || []),
+                      val,
+                    ]);
+                    (e.target as HTMLInputElement).value = "";
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    const el = document.getElementById(
+                      "giveaway-rule-input",
+                    ) as HTMLInputElement;
+                    const val = el?.value.trim();
+                    if (!val) return;
+                    set("rules_giveaway", [
+                      ...(settings?.rules_giveaway || []),
+                      val,
+                    ]);
+                    el.value = "";
+                  }}
+                  className="px-4 py-2.5 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl hover:bg-[#2A2A2A] transition-colors"
+                >
+                  +
+                </button>
+              </div>
+              <p className="text-[10px] text-white/20">
+                Enter или кнопка + чтобы добавить
+              </p>
+            </div>
+
+            {/* Система наказаний */}
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
+              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+                Система наказаний
+              </h2>
+              {(settings?.rules_punishments || []).map(
+                (row: any, i: number) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
+                  >
+                    <span className="text-sm text-white flex-1">
+                      {row.violation}
+                    </span>
+                    <span
+                      className={`px-2 py-0.5 text-[10px] font-black uppercase rounded ${
+                        row.type === "Ban"
+                          ? "bg-red-600 text-white"
+                          : row.type === "Mute"
+                            ? "bg-orange-500 text-black"
+                            : "bg-[#FFE100] text-[#211C00]"
+                      }`}
+                    >
+                      {row.type}
+                    </span>
+                    <span className="text-xs text-white/40 w-36 text-right">
+                      {row.duration}
+                    </span>
+                    <button
+                      onClick={() =>
+                        set(
+                          "rules_punishments",
+                          settings.rules_punishments.filter(
+                            (_: any, idx: number) => idx !== i,
+                          ),
+                        )
+                      }
+                      className="text-white/20 hover:text-red-400 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-base">
+                        close
+                      </span>
+                    </button>
+                  </div>
+                ),
+              )}
+              <div className="grid grid-cols-3 gap-2">
+                <input
+                  id="p-violation"
+                  placeholder="Нарушение"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                />
+                <select
+                  id="p-type"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                >
+                  <option value="Warning">Warning</option>
+                  <option value="Mute">Mute</option>
+                  <option value="Ban">Ban</option>
+                </select>
+                <input
+                  id="p-duration"
+                  placeholder="Срок"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                />
+              </div>
+              <button
+                onClick={() => {
+                  const violation = (
+                    document.getElementById("p-violation") as HTMLInputElement
+                  )?.value.trim();
+                  const type = (
+                    document.getElementById("p-type") as HTMLSelectElement
+                  )?.value;
+                  const duration = (
+                    document.getElementById("p-duration") as HTMLInputElement
+                  )?.value.trim();
+                  if (!violation || !duration) return;
+                  set("rules_punishments", [
+                    ...(settings?.rules_punishments || []),
+                    { violation, type, duration },
+                  ]);
+                  (
+                    document.getElementById("p-violation") as HTMLInputElement
+                  ).value = "";
+                  (
+                    document.getElementById("p-duration") as HTMLInputElement
+                  ).value = "";
+                }}
+                className="w-full py-2.5 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl uppercase tracking-widest hover:bg-[#2A2A2A] transition-colors"
+              >
+                + Добавить наказание
+              </button>
+            </div>
+
+            {/* Текст апелляций */}
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
+              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+                Текст апелляций
+              </h2>
+              <textarea
+                value={settings?.rules_appeals_text || ""}
+                onChange={(e) => set("rules_appeals_text", e.target.value)}
+                rows={3}
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+              />
             </div>
           </>
         )}

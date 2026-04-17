@@ -41,47 +41,48 @@ export default function MainPage() {
     settings?.streamer_description ||
     "Профессиональный стример. Розыгрыши каждый стрим.";
 
+  const navItems = [
+    { label: "Главная", href: "/", show: true },
+    {
+      label: "Расписание",
+      href: "#schedule",
+      show: !!(settings?.show_schedule && settings?.schedule?.length > 0),
+    },
+    { label: "Моменты", href: "/moments", show: !!settings?.show_moments },
+    { label: "Правила", href: "/rules", show: !!settings?.show_rules },
+  ].filter((item) => item.show);
+
   return (
     <div
       className="min-h-screen bg-[#0A0A0A] text-white"
       style={{ fontFamily: "Manrope, sans-serif" }}
     >
       {/* Nav */}
+      {/* Nav */}
       <nav className="bg-[#0E0E0E]/70 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center w-full px-8 py-4 border-b border-white/5">
         <div className="text-2xl font-black tracking-tighter text-[#FFE100] uppercase">
           {name}
         </div>
         <div className="hidden md:flex gap-8 items-center">
-          <a
-            href="/"
-            className="text-[#FFE100] border-b-2 border-[#FFE100] pb-1 font-bold uppercase text-sm"
-          >
-            Главная
-          </a>
-          {settings?.show_schedule && settings?.schedule?.length > 0 && (
-            <a
-              href="#schedule"
-              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-            >
-              Расписание
-            </a>
-          )}
-          {settings?.show_moments && (
-            <a
-              href="#moments"
-              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-            >
-              Моменты
-            </a>
-          )}
-          {settings?.show_rules && (
-            <a
-              href="/rules"
-              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-            >
-              Правила
-            </a>
-          )}
+          {navItems.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? window.location.pathname === "/" && !window.location.hash
+                : window.location.pathname === item.href;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`font-bold uppercase text-sm transition-colors ${
+                  isActive
+                    ? "text-[#FFE100] border-b-2 border-[#FFE100] pb-1"
+                    : "text-white/70 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </div>
         <button
           onClick={() => navigate("/login")}

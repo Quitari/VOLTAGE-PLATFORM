@@ -76,6 +76,17 @@ class BotSettings(models.Model):
         blank=True,
         verbose_name='Файл аватара'
     )
+    streamer_avatar_position = models.CharField(
+        max_length=20,
+        default='center center',
+        blank=True,
+        verbose_name='Фокус аватара'
+    )
+    streamer_features = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name='Фичи на странице входа'
+    )
     twitch_url = models.CharField(
         max_length=100,
         default='',

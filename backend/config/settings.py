@@ -103,6 +103,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost",
 ]
 
+CORS_URLS_REGEX = r'^.*$'
+
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'

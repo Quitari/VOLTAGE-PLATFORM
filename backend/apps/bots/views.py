@@ -31,6 +31,8 @@ def bot_settings(request):
         'show_moments': settings.show_moments,
         'show_rules': settings.show_rules,
         'schedule': settings.schedule,
+        'streamer_avatar_position': settings.streamer_avatar_position,
+        'streamer_features': settings.streamer_features,
     })
 
 
@@ -42,9 +44,12 @@ def bot_settings_update(request):
         'welcome_new', 'welcome_back', 'giveaway_post_template',
         'join_button_text', 'channel_id', 'channel_username', 'chat_id',
         'streamer_name', 'streamer_description', 'streamer_avatar_url',
+        'streamer_avatar_file',
         'twitch_url', 'telegram_url', 'vk_url', 'youtube_url',
         'show_giveaways', 'show_winners', 'show_schedule',
         'show_moments', 'show_rules', 'schedule',
+        'streamer_avatar_position',
+        'streamer_features',
     ]
     for field in allowed:
         if field in request.data:
@@ -211,5 +216,5 @@ def upload_avatar(request):
     s.save()
 
     return Response({
-        'url': request.build_absolute_uri(s.streamer_avatar_file.url)
+        'url': s.streamer_avatar_file.url  # только /media/avatars/filename.jpg
     })

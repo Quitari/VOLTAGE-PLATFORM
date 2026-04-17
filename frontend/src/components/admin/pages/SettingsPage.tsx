@@ -14,6 +14,7 @@ export default function SettingsPage() {
     time: "",
     note: "",
   });
+  const [newFeature, setNewFeature] = useState("");
   const [avatarError, setAvatarError] = useState("");
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
@@ -32,7 +33,8 @@ export default function SettingsPage() {
     setSaving(true);
     setSaved(false);
     try {
-      await client.patch("/bots/settings/update/", settings);
+      const { streamer_avatar_file, ...patchData } = settings;
+      await client.patch("/bots/settings/update/", patchData);
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
     } catch {}
@@ -49,6 +51,20 @@ export default function SettingsPage() {
     set(
       "schedule",
       settings.schedule.filter((_: any, idx: number) => idx !== i),
+    );
+  };
+
+  const addFeature = () => {
+    const val = newFeature.trim();
+    if (!val) return;
+    set("streamer_features", [...(settings?.streamer_features || []), val]);
+    setNewFeature("");
+  };
+
+  const removeFeature = (i: number) => {
+    set(
+      "streamer_features",
+      settings.streamer_features.filter((_: any, idx: number) => idx !== i),
     );
   };
 
@@ -106,6 +122,7 @@ export default function SettingsPage() {
               СТРИМЕР
             </h1>
 
+            {/* Публичный профиль */}
             <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
               <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
                 Публичный профиль
@@ -233,7 +250,10 @@ export default function SettingsPage() {
                               },
                             },
                           );
-                          set("streamer_avatar_file", data.url);
+                          const base =
+                            import.meta.env.VITE_API_URL?.replace("/api", "") ||
+                            "http://localhost:8000";
+                          set("streamer_avatar_file", `${base}${data.url}`);
                         } catch (err: any) {
                           setAvatarError(
                             err.response?.data?.error || "Ошибка загрузки",
@@ -250,11 +270,99 @@ export default function SettingsPage() {
                         Загружаем...
                       </p>
                     )}
+
+                    {avatarSrc && (
+                      <div className="mt-4">
+                        <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
+                          Фокус фото
+                        </label>
+                        <div className="grid grid-cols-3 gap-1.5 w-32">
+                          {[
+                            ["top left", "top center", "top right"],
+                            ["center left", "center center", "center right"],
+                            ["bottom left", "bottom center", "bottom right"],
+                          ]
+                            .flat()
+                            .map((pos) => (
+                              <button
+                                key={pos}
+                                type="button"
+                                onClick={() =>
+                                  set("streamer_avatar_position", pos)
+                                }
+                                className={`w-9 h-9 rounded-lg border transition-colors ${
+                                  (settings?.streamer_avatar_position ||
+                                    "center center") === pos
+                                    ? "bg-[#FFE100] border-[#FFE100]"
+                                    : "bg-[#1C1B1B] border-white/10 hover:border-white/30"
+                                }`}
+                              />
+                            ))}
+                        </div>
+                        <p className="text-[10px] text-white/20 mt-1.5">
+                          Выбери где находится лицо на фото
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* Преимущества */}
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
+              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+                Преимущества (страница входа)
+              </h2>
+
+              {(settings?.streamer_features || []).length > 0 && (
+                <div className="space-y-2">
+                  {(settings.streamer_features as string[]).map((text, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-[#FFE100] flex-shrink-0" />
+                      <span className="text-sm text-white flex-1">{text}</span>
+                      <button
+                        onClick={() => removeFeature(i)}
+                        className="text-white/20 hover:text-red-400 transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-base">
+                          close
+                        </span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                <input
+                  value={newFeature}
+                  onChange={(e) => setNewFeature(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addFeature();
+                    }
+                  }}
+                  placeholder="Розыгрыши каждый стрим"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                />
+                <button
+                  onClick={addFeature}
+                  className="px-4 py-2.5 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl uppercase tracking-widest hover:bg-[#2A2A2A] transition-colors"
+                >
+                  +
+                </button>
+              </div>
+              <p className="text-[10px] text-white/20">
+                Enter или кнопка + чтобы добавить
+              </p>
+            </div>
+
+            {/* Социальные сети */}
             <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-4">
               <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest">
                 Социальные сети

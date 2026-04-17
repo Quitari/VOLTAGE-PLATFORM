@@ -35,6 +35,8 @@ export default function MainPage() {
     );
 
   const name = settings?.streamer_name || "VOLTAGE";
+  const avatarUrl =
+    settings?.streamer_avatar_file || settings?.streamer_avatar_url || "";
   const description =
     settings?.streamer_description ||
     "Профессиональный стример. Розыгрыши каждый стрим.";
@@ -90,39 +92,59 @@ export default function MainPage() {
       </nav>
 
       {/* Hero */}
-      <header className="relative w-full min-h-[600px] lg:min-h-[800px] flex items-end pb-24 overflow-hidden">
+      <header className="relative w-full min-h-[600px] lg:min-h-[860px] overflow-hidden">
+        {/* Размытый фон для атмосферы */}
         <div className="absolute inset-0 z-0">
-          {settings?.streamer_avatar_url ? (
+          {avatarUrl ? (
             <img
-              src={settings.streamer_avatar_url}
-              alt={name}
-              className="w-full h-full object-cover grayscale opacity-40"
+              src={avatarUrl}
+              alt=""
+              className="w-full h-full object-cover opacity-20 blur-2xl scale-110"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#1C1B1B] via-[#111] to-[#0A0A0A]" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
         </div>
 
-        <div className="container mx-auto px-8 relative z-10 flex flex-col items-start gap-6">
+        {/* Фото стримера — справа, полный цвет */}
+        {avatarUrl && (
+          <div className="absolute right-0 top-0 h-full w-full z-10 pointer-events-none">
+            <img
+              src={avatarUrl}
+              alt={name}
+              className="h-full w-full object-cover"
+              style={{
+                objectPosition:
+                  settings?.streamer_avatar_position || "center center",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
+          </div>
+        )}
+        {/* Текст — слева */}
+        <div className="container mx-auto px-8 relative z-20 flex flex-col items-start gap-6 justify-center min-h-[600px] lg:min-h-[860px] pb-24 max-w-[55%] lg:max-w-[50%]">
           <div className="flex items-center gap-3 bg-green-500/20 text-green-400 px-3 py-1 rounded font-bold text-xs uppercase">
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             Следи за розыгрышами
           </div>
 
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase text-white leading-none">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase text-white leading-none">
             {name.split(" ").map((word: string, i: number) =>
               i === 0 ? (
-                <span key={i}>{word}</span>
+                <span key={i} className="block">
+                  {word}
+                </span>
               ) : (
-                <span key={i} className="text-[#FFE100]">
-                  {" " + word}
+                <span key={i} className="block text-[#FFE100]">
+                  {word}
                 </span>
               ),
             )}
           </h1>
 
-          <p className="max-w-2xl text-lg text-white/70 font-medium leading-relaxed">
+          <p className="max-w-lg text-lg text-white/70 font-medium leading-relaxed">
             {description}
           </p>
 

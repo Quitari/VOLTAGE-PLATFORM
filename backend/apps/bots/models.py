@@ -141,6 +141,28 @@ class BotSettings(models.Model):
         verbose_name='Расписание стримов'
     )
 
+    # ─── Страница правил ──────────────────────────────────────────
+    rules_chat = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name='Правила чата'
+    )
+    rules_giveaway = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name='Правила розыгрышей'
+    )
+    rules_punishments = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name='Система наказаний'
+    )
+    rules_appeals_text = models.TextField(
+        default='Если вы считаете, что наказание было выдано по ошибке, вы можете подать запрос на пересмотр дела. Модераторы рассмотрят вашу заявку в течение 48 часов.',
+        blank=True,
+        verbose_name='Текст апелляций'
+    )
+
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

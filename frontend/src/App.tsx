@@ -6,6 +6,8 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import MainPage from "./pages/main/MainPage";
+import MomentsPage from "./pages/main/MomentsPage";
+import RulesPage from "./pages/main/RulesPage";
 
 function ProtectedRoute({
   children,
@@ -38,7 +40,8 @@ export default function App() {
       <Routes>
         {/* Публичный сайт */}
         <Route path="/" element={<MainPage />} />
-        <Route path="/rules" element={<MainPage />} />
+        <Route path="/rules" element={<RulesPage />} />
+        <Route path="/moments" element={<MomentsPage />} />
 
         {/* Авторизация */}
         <Route path="/login" element={<LoginPage />} />

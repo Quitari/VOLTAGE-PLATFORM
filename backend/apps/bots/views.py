@@ -33,6 +33,10 @@ def bot_settings(request):
         'schedule': settings.schedule,
         'streamer_avatar_position': settings.streamer_avatar_position,
         'streamer_features': settings.streamer_features,
+        'rules_chat': settings.rules_chat,
+        'rules_giveaway': settings.rules_giveaway,
+        'rules_punishments': settings.rules_punishments,
+        'rules_appeals_text': settings.rules_appeals_text,
     })
 
 
@@ -50,6 +54,10 @@ def bot_settings_update(request):
         'show_moments', 'show_rules', 'schedule',
         'streamer_avatar_position',
         'streamer_features',
+        'rules_chat',
+        'rules_giveaway',
+        'rules_punishments',
+        'rules_appeals_text',
     ]
     for field in allowed:
         if field in request.data:

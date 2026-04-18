@@ -24,4 +24,7 @@ urlpatterns = [
 
     path('telegram/generate-token/', views.generate_link_token, name='generate-link-token'),
     path('telegram/link-by-token/', views.link_by_token, name='link-by-token'),
+
+    path('unlink/', views.unlink_account, name='unlink-account'),
+    path('change-password/', views.change_password, name='change-password'),
 ]

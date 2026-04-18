@@ -43,4 +43,5 @@ urlpatterns = [
      path('<uuid:pk>/join/twitch/',
           views.join_giveaway_twitch,
           name='giveaway-join-twitch'),
+     path('my-stats/', views.my_stats, name='my-stats'),
 ]

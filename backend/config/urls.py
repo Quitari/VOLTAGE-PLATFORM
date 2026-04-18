@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/moderation/', include('apps.moderation.urls')),
     path('api/prizes/',     include('apps.prizes.urls')),
     path('api/bots/',       include('apps.bots.urls')),
+    path('api/clips/', include('apps.clips.urls')),
 ]
 
 # Media всегда, не только при DEBUG=True

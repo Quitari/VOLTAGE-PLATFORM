@@ -37,6 +37,8 @@ def bot_settings(request):
         'rules_giveaway': settings.rules_giveaway,
         'rules_punishments': settings.rules_punishments,
         'rules_appeals_text': settings.rules_appeals_text,
+        'show_schedule_page': settings.show_schedule_page,
+        'show_status_page': settings.show_status_page,
     })
 
 

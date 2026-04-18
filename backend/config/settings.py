@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'apps.moderation',
     'apps.prizes',
     'apps.bots',
+    'apps.clips',
 ]
 
 MIDDLEWARE = [

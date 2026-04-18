@@ -544,3 +544,23 @@ def join_giveaway_twitch(request, pk):
         'message': 'Участие зарегистрировано',
         'participants_count': giveaway.participants_count
     }, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_stats(request):
+    """
+    GET /api/giveaways/my-stats/
+    Статистика текущего пользователя
+    """
+    user = request.user
+    total = Participant.objects.filter(user=user).count()
+    wins = Winner.objects.filter(user=user, status__in=['confirmed', 'pending']).count()
+    active = Participant.objects.filter(user=user, giveaway__status='active').count()
+    from apps.moderation.models import Punishment
+    violations = Punishment.objects.filter(user=user, is_active=True).count()
+    return Response({
+        'total_participations': total,
+        'wins': wins,
+        'active_giveaways': active,
+        'violations': violations,
+    })

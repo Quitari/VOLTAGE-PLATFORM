@@ -42,4 +42,6 @@ urlpatterns = [
     path('audit/',
          views.audit_log_list,
          name='audit-log-list'),
+
+     path('my/', views.my_punishments, name='my-punishments'),
 ]

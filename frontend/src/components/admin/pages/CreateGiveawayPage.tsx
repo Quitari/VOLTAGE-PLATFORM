@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { giveawaysApi } from "../../../api/giveaways";
+import client from "../../../api/client";
 
 interface GiveawayForm {
   title: string;
@@ -8,6 +9,7 @@ interface GiveawayForm {
   prize_type: "skin" | "other";
   skin_name: string;
   skin_max_price: string;
+  skin_image_url: string;
   platform: "telegram" | "twitch" | "both";
   require_telegram: boolean;
   require_twitch_stream: boolean;
@@ -22,6 +24,7 @@ const INITIAL: GiveawayForm = {
   prize_type: "skin",
   skin_name: "",
   skin_max_price: "",
+  skin_image_url: "",
   platform: "telegram",
   require_telegram: true,
   require_twitch_stream: false,
@@ -35,9 +38,38 @@ export default function CreateGiveawayPage() {
   const [form, setForm] = useState<GiveawayForm>(INITIAL);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imageError, setImageError] = useState("");
 
   const set = (field: keyof GiveawayForm, value: any) =>
     setForm((prev) => ({ ...prev, [field]: value }));
+
+  const handleImageUpload = async (file: File) => {
+    if (file.size > 5 * 1024 * 1024) {
+      setImageError("Файл не должен превышать 5 MB");
+      return;
+    }
+    setUploadingImage(true);
+    setImageError("");
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+      const { data } = await client.post("/giveaways/upload-image/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      const base =
+        import.meta.env.VITE_API_URL?.replace("/api", "") ||
+        "http://localhost:8000";
+      const fullUrl = `${base}${data.url}`;
+      set("skin_image_url", fullUrl);
+      setImagePreview(fullUrl);
+    } catch (err: any) {
+      setImageError(err.response?.data?.error || "Ошибка загрузки");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const handleSubmit = async (activate: boolean) => {
     if (!form.title.trim()) {
@@ -57,23 +89,16 @@ export default function CreateGiveawayPage() {
         twitch_keyword: form.twitch_keyword,
         draw_manually: form.draw_manually,
       };
-      if (form.prize_type === "skin" && form.skin_name) {
+      if (form.prize_type === "skin" && form.skin_name)
         payload.skin_name = form.skin_name;
-      }
-      if (form.prize_type === "skin" && form.skin_max_price) {
+      if (form.prize_type === "skin" && form.skin_max_price)
         payload.skin_max_price = parseFloat(form.skin_max_price);
-      }
-      if (form.ends_at) {
-        payload.ends_at = new Date(form.ends_at).toISOString();
-      }
+      if (form.skin_image_url) payload.skin_image_url = form.skin_image_url;
+      if (form.ends_at) payload.ends_at = new Date(form.ends_at).toISOString();
 
       const res = await giveawaysApi.create(payload);
       const id = res.data.id;
-
-      if (activate) {
-        await giveawaysApi.activate(id);
-      }
-
+      if (activate) await giveawaysApi.activate(id);
       navigate("/admin/giveaways");
     } catch (err: any) {
       const data = err.response?.data;
@@ -167,29 +192,189 @@ export default function CreateGiveawayPage() {
 
         {/* Поля для скина */}
         {form.prize_type === "skin" && (
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
-                Название скина
-              </label>
-              <input
-                value={form.skin_name}
-                onChange={(e) => set("skin_name", e.target.value)}
-                placeholder="AWP | Азимов"
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
-              />
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
+                  Название скина
+                </label>
+                <input
+                  value={form.skin_name}
+                  onChange={(e) => set("skin_name", e.target.value)}
+                  placeholder="AWP | Азимов"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
+                  Макс. цена (₽)
+                </label>
+                <input
+                  type="number"
+                  value={form.skin_max_price}
+                  onChange={(e) => set("skin_max_price", e.target.value)}
+                  placeholder="3000"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+                />
+              </div>
             </div>
+
+            {/* Фото приза */}
             <div>
-              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-1.5">
-                Макс. цена (₽)
+              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
+                Фото приза
               </label>
-              <input
-                type="number"
-                value={form.skin_max_price}
-                onChange={(e) => set("skin_max_price", e.target.value)}
-                placeholder="3000"
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
-              />
+
+              {imagePreview && (
+                <div className="mb-3 flex items-center gap-3">
+                  <img
+                    src={imagePreview}
+                    alt="preview"
+                    className="w-20 h-20 rounded-xl object-cover border border-white/10"
+                  />
+                  <button
+                    onClick={() => {
+                      set("skin_image_url", "");
+                      setImagePreview("");
+                    }}
+                    className="text-xs text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    Удалить
+                  </button>
+                </div>
+              )}
+
+              {imageError && (
+                <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs px-3 py-2 rounded-xl mb-3">
+                  ⚠️ {imageError}
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <div>
+                  <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
+                    Вариант 1 — URL
+                  </label>
+                  <input
+                    value={imagePreview ? "" : form.skin_image_url}
+                    onChange={(e) => {
+                      if (imagePreview) return;
+                      set("skin_image_url", e.target.value);
+                    }}
+                    placeholder="https://example.com/skin.png"
+                    disabled={!!imagePreview}
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 disabled:opacity-40"
+                  />
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-px bg-white/10" />
+                  <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
+                    или
+                  </span>
+                  <div className="flex-1 h-px bg-white/10" />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
+                    Вариант 2 — Файл (JPG, PNG, WEBP до 5 MB)
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleImageUpload(file);
+                      e.target.value = "";
+                    }}
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#FFE100] file:text-[#211C00] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                  />
+                  {uploadingImage && (
+                    <p className="text-xs text-white/40 mt-1 animate-pulse">
+                      Загружаем...
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Фото для других призов */}
+        {form.prize_type === "other" && (
+          <div>
+            <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
+              Фото приза
+            </label>
+
+            {imagePreview && (
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src={imagePreview}
+                  alt="preview"
+                  className="w-20 h-20 rounded-xl object-cover border border-white/10"
+                />
+                <button
+                  onClick={() => {
+                    set("skin_image_url", "");
+                    setImagePreview("");
+                  }}
+                  className="text-xs text-red-400 hover:text-red-300 transition-colors"
+                >
+                  Удалить
+                </button>
+              </div>
+            )}
+
+            {imageError && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs px-3 py-2 rounded-xl mb-3">
+                ⚠️ {imageError}
+              </div>
+            )}
+
+            <div className="space-y-3">
+              <div>
+                <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
+                  Вариант 1 — URL
+                </label>
+                <input
+                  value={imagePreview ? "" : form.skin_image_url}
+                  onChange={(e) => {
+                    if (imagePreview) return;
+                    set("skin_image_url", e.target.value);
+                  }}
+                  placeholder="https://example.com/prize.png"
+                  disabled={!!imagePreview}
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 disabled:opacity-40"
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="text-[10px] font-bold text-white/20 uppercase tracking-widest">
+                  или
+                </span>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+              <div>
+                <label className="text-[10px] font-bold text-white/20 uppercase tracking-widest block mb-1.5">
+                  Вариант 2 — Файл (JPG, PNG, WEBP до 5 MB)
+                </label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleImageUpload(file);
+                    e.target.value = "";
+                  }}
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#FFE100] file:text-[#211C00] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                />
+                {uploadingImage && (
+                  <p className="text-xs text-white/40 mt-1 animate-pulse">
+                    Загружаем...
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -221,7 +406,6 @@ export default function CreateGiveawayPage() {
           ))}
         </div>
 
-        {/* Условия */}
         <div className="space-y-2">
           {[
             { field: "require_telegram", label: "Нажать кнопку в Telegram" },

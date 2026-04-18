@@ -564,3 +564,41 @@ def my_stats(request):
         'active_giveaways': active,
         'violations': violations,
     })
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_giveaway_image(request):
+    """
+    POST /api/giveaways/upload-image/
+    Загрузка фото приза
+    """
+    if not _user_has_permission(request.user, 'giveaways.create'):
+        return Response({'error': 'Нет доступа'}, status=403)
+
+    image = request.FILES.get('image')
+    if not image:
+        return Response({'error': 'Файл не передан'}, status=400)
+
+    if image.size > 5 * 1024 * 1024:
+        return Response({'error': 'Файл не должен превышать 5 MB'}, status=400)
+
+    import os
+    from django.conf import settings as django_settings
+
+    upload_dir = os.path.join(django_settings.MEDIA_ROOT, 'giveaways')
+    os.makedirs(upload_dir, exist_ok=True)
+
+    ext = os.path.splitext(image.name)[1].lower()
+    if ext not in ['.jpg', '.jpeg', '.png', '.webp']:
+        return Response({'error': 'Только JPG, PNG, WEBP'}, status=400)
+
+    import uuid
+    filename = f"{uuid.uuid4()}{ext}"
+    filepath = os.path.join(upload_dir, filename)
+
+    with open(filepath, 'wb+') as f:
+        for chunk in image.chunks():
+            f.write(chunk)
+
+    url = f"{django_settings.MEDIA_URL}giveaways/{filename}"
+    return Response({'url': url})

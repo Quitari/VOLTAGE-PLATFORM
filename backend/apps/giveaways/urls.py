@@ -44,4 +44,5 @@ urlpatterns = [
           views.join_giveaway_twitch,
           name='giveaway-join-twitch'),
      path('my-stats/', views.my_stats, name='my-stats'),
+     path('upload-image/', views.upload_giveaway_image, name='giveaway-upload-image'),
 ]

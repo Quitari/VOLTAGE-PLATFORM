@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { authApi } from "../../../api/auth";
 import { moderationApi } from "../../../api/moderation";
 import type { User } from "../../../types";
+import { useNavigate } from "react-router-dom";
 
 const PUNISHMENT_TYPES = [
   { value: "warning", label: "⚠️ Предупреждение" },
@@ -31,6 +32,7 @@ export default function UsersPage() {
   });
   const [punishing, setPunishing] = useState(false);
   const [punishError, setPunishError] = useState("");
+  const navigate = useNavigate();
 
   const load = (s = "") => {
     setLoading(true);
@@ -345,12 +347,20 @@ export default function UsersPage() {
                     {user.created_at.slice(0, 10)}
                   </td>
                   <td className="px-6 py-4">
-                    <button
-                      onClick={() => openPunish(user)}
-                      className="px-3 py-1.5 bg-red-500/10 text-red-400/70 text-xs font-bold rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors"
-                    >
-                      Наказать
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => navigate(`/admin/users/${user.id}`)}
+                        className="px-3 py-1.5 bg-[#1C1B1B] border border-white/5 text-white/60 text-xs font-bold rounded-lg hover:text-white hover:bg-[#2A2A2A] transition-colors"
+                      >
+                        Профиль
+                      </button>
+                      <button
+                        onClick={() => openPunish(user)}
+                        className="px-3 py-1.5 bg-red-500/10 text-red-400/70 text-xs font-bold rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors"
+                      >
+                        Наказать
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

@@ -41,23 +41,28 @@ export default function PrizesPage() {
         <table className="w-full text-left">
           <thead>
             <tr className="bg-[#1C1B1B]">
-              {["Приз", "Получатель", "Статус", "Доставка", "Создан"].map(
-                (h) => (
-                  <th
-                    key={h}
-                    className="px-6 py-4 text-[10px] font-bold text-white/40 uppercase tracking-widest"
-                  >
-                    {h}
-                  </th>
-                ),
-              )}
+              {[
+                "Приз",
+                "Розыгрыш",
+                "Победитель",
+                "Статус",
+                "Доставка",
+                "Создан",
+              ].map((h) => (
+                <th
+                  key={h}
+                  className="px-6 py-4 text-[10px] font-bold text-white/40 uppercase tracking-widest"
+                >
+                  {h}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
             {loading ? (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   className="px-6 py-8 text-center text-white/40 text-sm"
                 >
                   Загрузка...
@@ -66,7 +71,7 @@ export default function PrizesPage() {
             ) : prizes.length === 0 ? (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   className="px-6 py-8 text-center text-white/40 text-sm"
                 >
                   Нет призов
@@ -87,12 +92,15 @@ export default function PrizesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <p className="text-sm text-white/60">
+                        {prize.giveaway_title || "—"}
+                      </p>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm text-white/60">
                         {prize.recipient?.username || "—"}
                       </p>
                       {prize.steam_trade_url && (
-                        <p className="text-xs text-white/30 truncate max-w-[150px]">
-                          Steam привязан
-                        </p>
+                        <p className="text-xs text-white/30">Steam привязан</p>
                       )}
                     </td>
                     <td className="px-6 py-4">

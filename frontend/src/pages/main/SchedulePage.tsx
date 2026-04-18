@@ -33,7 +33,7 @@ export default function SchedulePage() {
 
   const schedule = settings?.schedule || [];
 
-  // Сортируем по дням недели
+  // Сортируем по дням недели]
   const sorted = [...schedule].sort((a, b) => {
     const ai = DAYS_ORDER.findIndex((d) => a.day?.startsWith(d));
     const bi = DAYS_ORDER.findIndex((d) => b.day?.startsWith(d));

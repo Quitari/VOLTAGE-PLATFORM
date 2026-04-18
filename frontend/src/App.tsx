@@ -4,10 +4,19 @@ import { useAuthStore } from "./store/auth";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import PrizesPage from "./pages/dashboard/PrizesPage";
+import GiveawaysPage from "./pages/dashboard/GiveawaysPage";
+import ConnectionsPage from "./pages/dashboard/ConnectionsPage";
+import NotificationsPage from "./pages/dashboard/NotificationsPage";
+import ViolationsPage from "./pages/dashboard/ViolationsPage";
+import DashboardSettingsPage from "./pages/dashboard/DashboardSettingsPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import MainPage from "./pages/main/MainPage";
 import MomentsPage from "./pages/main/MomentsPage";
 import RulesPage from "./pages/main/RulesPage";
+import DashboardLayout from "./pages/dashboard/DashboardLayout";
+import SchedulePage from "./pages/main/SchedulePage";
+import StatusPage from "./pages/main/StatusPage";
 
 function ProtectedRoute({
   children,
@@ -29,6 +38,14 @@ function ProtectedRoute({
   return <>{children}</>;
 }
 
+function DashboardRoute({ children }: { children: React.ReactNode }) {
+  return (
+    <ProtectedRoute>
+      <DashboardLayout>{children}</DashboardLayout>
+    </ProtectedRoute>
+  );
+}
+
 export default function App() {
   const { loadUser } = useAuthStore();
   useEffect(() => {
@@ -42,6 +59,8 @@ export default function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/rules" element={<RulesPage />} />
         <Route path="/moments" element={<MomentsPage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
+        <Route path="/status" element={<StatusPage />} />
 
         {/* Авторизация */}
         <Route path="/login" element={<LoginPage />} />
@@ -49,11 +68,59 @@ export default function App() {
 
         {/* Личный кабинет */}
         <Route
-          path="/dashboard/*"
+          path="/dashboard"
           element={
-            <ProtectedRoute>
+            <DashboardRoute>
               <DashboardPage />
-            </ProtectedRoute>
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/prizes"
+          element={
+            <DashboardRoute>
+              <PrizesPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/giveaways"
+          element={
+            <DashboardRoute>
+              <GiveawaysPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/connections"
+          element={
+            <DashboardRoute>
+              <ConnectionsPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/notifications"
+          element={
+            <DashboardRoute>
+              <NotificationsPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/violations"
+          element={
+            <DashboardRoute>
+              <ViolationsPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/settings"
+          element={
+            <DashboardRoute>
+              <DashboardSettingsPage />
+            </DashboardRoute>
           }
         />
 

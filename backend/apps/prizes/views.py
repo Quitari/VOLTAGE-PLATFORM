@@ -65,3 +65,25 @@ def prize_list(request):
         })
 
     return Response(data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_prizes_auth(request):
+    """
+    GET /api/prizes/my/
+    Призы текущего авторизованного пользователя
+    """
+    prizes = Prize.objects.filter(
+        recipient=request.user
+    ).select_related('winner__giveaway').order_by('-created_at')
+
+    data = [{
+        'id': str(p.id),
+        'name': p.name,
+        'status': p.status,
+        'delivery_method': p.delivery_method,
+        'created_at': p.created_at.isoformat(),
+        'sent_at': p.sent_at.isoformat() if p.sent_at else None,
+    } for p in prizes[:20]]
+
+    return Response(data)

@@ -479,3 +479,28 @@ def audit_log_list(request):
 
     serializer = AuditLogSerializer(qs[:100], many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_punishments(request):
+    """
+    GET /api/moderation/my/
+    Наказания текущего пользователя
+    """
+    from .models import Punishment
+    punishments = Punishment.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
+
+    data = [{
+        'id': str(p.id),
+        'punishment_type': p.punishment_type,
+        'reason': p.reason,
+        'platform': p.platform,
+        'is_active': p.is_active,
+        'created_at': p.created_at.isoformat(),
+        'expires_at': p.expires_at.isoformat() if p.expires_at else None,
+        'moderator': p.moderator.username if p.moderator else None,
+    } for p in punishments]
+
+    return Response(data)

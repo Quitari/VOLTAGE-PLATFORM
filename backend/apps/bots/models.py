@@ -133,6 +133,14 @@ class BotSettings(models.Model):
         default=True,
         verbose_name='Показывать правила'
     )
+    show_schedule_page = models.BooleanField(
+        default=True,
+        verbose_name='Показывать страницу расписания'
+    )
+    show_status_page = models.BooleanField(
+        default=True,
+        verbose_name='Показывать страницу статуса'
+    )
 
     # ─── Расписание стримов ───────────────────────────────────────
     schedule = models.JSONField(

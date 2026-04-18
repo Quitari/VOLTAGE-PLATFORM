@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import client from "../../api/client";
+import PublicNav from "../../components/PublicNav";
 
 const DEFAULT_CHAT_RULES = [
   "Проявляйте уважение ко всем участникам сообщества и стримеру.",
@@ -76,71 +77,27 @@ export default function RulesPage() {
       .catch(() => {});
   }, []);
 
-  const chatRules: string[] = settings?.rules_chat?.length
+  const chatRules = settings?.rules_chat?.length
     ? settings.rules_chat
     : DEFAULT_CHAT_RULES;
-  const giveawayRules: string[] = settings?.rules_giveaway?.length
+  const giveawayRules = settings?.rules_giveaway?.length
     ? settings.rules_giveaway
     : DEFAULT_GIVEAWAY_RULES;
   const punishments = settings?.rules_punishments?.length
     ? settings.rules_punishments
     : DEFAULT_PUNISHMENTS;
-  const appealsText: string =
-    settings?.rules_appeals_text || DEFAULT_APPEALS_TEXT;
-  const streamerName: string = settings?.streamer_name || "VOLTAGE";
+  const appealsText = settings?.rules_appeals_text || DEFAULT_APPEALS_TEXT;
+  const streamerName = settings?.streamer_name || "VOLTAGE";
 
   return (
     <div
       className="min-h-screen bg-[#0A0A0A] text-white"
       style={{ fontFamily: "Manrope, sans-serif" }}
     >
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 h-20 bg-[#0E0E0E]/90 backdrop-blur-md flex justify-between items-center px-8 border-b border-white/5">
-        <button
-          onClick={() => navigate("/")}
-          className="text-2xl font-black tracking-tighter text-[#FFE100] uppercase"
-        >
-          {streamerName}
-        </button>
-        <div className="hidden md:flex gap-8 items-center">
-          <a
-            href="/"
-            className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-          >
-            Главная
-          </a>
-          {settings?.show_schedule && settings?.schedule?.length > 0 && (
-            <a
-              href="/#schedule"
-              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-            >
-              Расписание
-            </a>
-          )}
-          {settings?.show_moments && (
-            <a
-              href="/#moments"
-              className="text-white/70 hover:text-white transition-colors font-bold uppercase text-sm"
-            >
-              Моменты
-            </a>
-          )}
-          <a
-            href="/rules"
-            className="text-[#FFE100] border-b-2 border-[#FFE100] pb-1 font-bold uppercase text-sm"
-          >
-            Правила
-          </a>
-        </div>
-        <button
-          onClick={() => navigate("/login")}
-          className="bg-[#FFE100] text-[#211C00] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#FFE330] transition-colors"
-        >
-          ВОЙТИ
-        </button>
-      </nav>
+      {/* ← Заменили весь <nav> на один компонент */}
+      <PublicNav settings={settings} currentPath="/rules" />
 
-      {/* Sidebar */}
+      {/* Sidebar — остался без изменений */}
       <aside className="fixed left-0 top-20 h-[calc(100vh-80px)] w-56 bg-[#0E0E0E] flex-col py-8 hidden md:flex border-r border-white/5">
         <div className="px-6 mb-6">
           <p className="text-[10px] font-bold text-[#FFE100] uppercase tracking-widest">
@@ -170,10 +127,9 @@ export default function RulesPage() {
         </div>
       </aside>
 
-      {/* Main */}
+      {/* Main — без изменений */}
       <main className="pt-28 pb-20 md:ml-56 px-6 md:px-12">
         <div className="max-w-5xl mx-auto space-y-16">
-          {/* Hero */}
           <section>
             <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
               ПРАВИЛА <span className="text-[#FFE100]">СООБЩЕСТВА</span>
@@ -184,9 +140,7 @@ export default function RulesPage() {
             </p>
           </section>
 
-          {/* Чат + Розыгрыши */}
           <section id="chat" className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Правила чата */}
             <div className="bg-[#111] border border-white/5 rounded-2xl p-8">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 bg-[#FFE100] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -199,7 +153,7 @@ export default function RulesPage() {
                 </h2>
               </div>
               <div className="space-y-4">
-                {chatRules.map((rule, i) => (
+                {chatRules.map((rule: string, i: number) => (
                   <div key={i} className="flex gap-4">
                     <span className="text-[#FFE100] font-black text-lg italic w-8 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
@@ -212,7 +166,6 @@ export default function RulesPage() {
               </div>
             </div>
 
-            {/* Правила розыгрышей */}
             <div
               id="giveaways"
               className="bg-[#1C1B1B] border border-white/5 rounded-2xl p-8 flex flex-col justify-between"
@@ -229,7 +182,7 @@ export default function RulesPage() {
                   </h2>
                 </div>
                 <ul className="space-y-4">
-                  {giveawayRules.map((rule, i) => (
+                  {giveawayRules.map((rule: string, i: number) => (
                     <li key={i} className="flex items-start gap-3">
                       <span className="material-symbols-outlined text-[#FFE100] text-lg flex-shrink-0">
                         check_circle
@@ -250,7 +203,6 @@ export default function RulesPage() {
             </div>
           </section>
 
-          {/* Система наказаний */}
           <section id="punishments" className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-[#FFE100] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -303,7 +255,6 @@ export default function RulesPage() {
             </div>
           </section>
 
-          {/* Апелляции */}
           <section
             id="appeals"
             className="bg-[#FFE100] rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6"
@@ -325,7 +276,6 @@ export default function RulesPage() {
             </button>
           </section>
 
-          {/* Footer stamp */}
           <footer className="pt-4 opacity-20 flex justify-between items-center">
             <div className="text-4xl font-black uppercase tracking-tighter">
               {streamerName}

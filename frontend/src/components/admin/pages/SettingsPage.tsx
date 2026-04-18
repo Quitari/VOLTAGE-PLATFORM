@@ -410,8 +410,13 @@ export default function SettingsPage() {
                 },
                 {
                   field: "show_schedule",
-                  label: "Расписание стримов",
-                  desc: "Блок на главной странице",
+                  label: "Расписание (блок)",
+                  desc: "Блок расписания на главной странице",
+                },
+                {
+                  field: "show_schedule_page",
+                  label: "Страница расписания",
+                  desc: "Страница /schedule",
                 },
                 {
                   field: "show_moments",
@@ -422,6 +427,11 @@ export default function SettingsPage() {
                   field: "show_rules",
                   label: "Правила сообщества",
                   desc: "Страница /rules",
+                },
+                {
+                  field: "show_status_page",
+                  label: "Статус платформы",
+                  desc: "Страница /status",
                 },
               ].map((item, i) => (
                 <div

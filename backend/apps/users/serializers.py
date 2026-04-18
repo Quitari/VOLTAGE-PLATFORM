@@ -165,7 +165,7 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'username', 'email',
-            'steam_trade_url'
+            'steam_trade_url', 'twitch_username'
         )
 
     def validate_username(self, value):

@@ -1,17 +1,35 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import client from "../../api/client";
+import PublicNav from "../../components/PublicNav";
+
+interface Clip {
+  id: string;
+  title: string;
+  url: string;
+  game: string;
+  preview_url: string;
+  created_at: string;
+  submitted_by: string | null;
+}
 
 export default function MomentsPage() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState<any>(null);
+  const [clips, setClips] = useState<Clip[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [gameFilter, setGameFilter] = useState("");
 
   useEffect(() => {
     document.title = "Моменты — VOLTAGE";
-    client
-      .get("/bots/settings/")
-      .then((r) => setSettings(r.data))
-      .catch(() => {});
+    Promise.all([client.get("/bots/settings/"), client.get("/clips/")])
+      .then(([s, c]) => {
+        setSettings(s.data);
+        setClips(c.data);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   const streamerName = settings?.streamer_name || "VOLTAGE";
@@ -20,93 +38,148 @@ export default function MomentsPage() {
     { label: "Главная", href: "/", show: true },
     {
       label: "Расписание",
-      href: "/",
+      href: "#schedule",
       show: !!(settings?.show_schedule && settings?.schedule?.length > 0),
     },
     { label: "Моменты", href: "/moments", show: !!settings?.show_moments },
     { label: "Правила", href: "/rules", show: !!settings?.show_rules },
   ].filter((item) => item.show);
 
+  const games = Array.from(new Set(clips.map((c) => c.game).filter(Boolean)));
+
+  const filtered = clips.filter((c) => {
+    const matchSearch = c.title.toLowerCase().includes(search.toLowerCase());
+    const matchGame = gameFilter ? c.game === gameFilter : true;
+    return matchSearch && matchGame;
+  });
+
   return (
     <div
       className="min-h-screen bg-[#0A0A0A] text-white"
       style={{ fontFamily: "Manrope, sans-serif" }}
     >
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 h-20 bg-[#0E0E0E]/90 backdrop-blur-md flex justify-between items-center px-8 border-b border-white/5">
-        <button
-          onClick={() => navigate("/")}
-          className="text-2xl font-black tracking-tighter text-[#FFE100] uppercase"
-        >
-          {streamerName}
-        </button>
-        <div className="hidden md:flex gap-8 items-center">
-          {navItems.map((item) => {
-            const isActive = window.location.pathname === item.href;
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                className={`font-bold uppercase text-sm transition-colors ${
-                  isActive
-                    ? "text-[#FFE100] border-b-2 border-[#FFE100] pb-1"
-                    : "text-white/70 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </a>
-            );
-          })}
-        </div>
-        <button
-          onClick={() => navigate("/login")}
-          className="bg-[#FFE100] text-[#211C00] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#FFE330] transition-colors"
-        >
-          ВОЙТИ
-        </button>
-      </nav>
+      <PublicNav settings={settings} currentPath="/moments" />
 
-      {/* Main */}
       <main className="pt-28 pb-20 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto space-y-12">
-          {/* Hero */}
+        <div className="max-w-7xl mx-auto space-y-10">
           <section>
             <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
               ЛУЧШИЕ <span className="text-[#FFE100]">МОМЕНТЫ</span>
             </h1>
             <p className="text-lg text-white/50 mt-4 max-w-2xl leading-relaxed">
-              Лучшие клипы и моменты со стримов.
+              Лучшие клипы и моменты со стримов — предложенные сообществом.
             </p>
           </section>
 
-          {/* Сетка моментов */}
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div
-                key={i}
-                className="group relative rounded-2xl overflow-hidden aspect-video bg-[#1C1B1B] cursor-pointer hover:scale-[1.02] transition-transform"
+          <section className="flex flex-wrap items-center gap-4 bg-[#111] border border-white/5 p-4 rounded-2xl">
+            <div className="flex flex-wrap gap-3 flex-1">
+              <select
+                value={gameFilter}
+                onChange={(e) => setGameFilter(e.target.value)}
+                className="bg-[#1C1B1B] border border-white/10 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-white/10"
-                    style={{ fontSize: "64px" }}
-                  >
-                    play_circle
-                  </span>
-                </div>
-                <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold">
-                  0:00
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                  <p className="text-sm font-bold uppercase">
-                    Добавь момент в настройках
-                  </p>
-                </div>
+                <option value="">Все игры</option>
+                {games.map((g) => (
+                  <option key={g} value={g}>
+                    {g}
+                  </option>
+                ))}
+              </select>
+              <div className="relative flex-1 max-w-md">
+                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-lg">
+                  search
+                </span>
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Поиск по названию..."
+                  className="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm pl-10 pr-4 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                />
               </div>
-            ))}
+            </div>
+            <button
+              onClick={() => navigate("/dashboard?suggest=clip")}
+              className="bg-[#FFE100] text-[#211C00] px-6 py-2.5 rounded-xl font-bold text-sm uppercase hover:bg-[#FFE330] transition-colors flex items-center gap-2"
+            >
+              <span className="material-symbols-outlined text-base">add</span>
+              Предложить клип
+            </button>
           </section>
+
+          {loading ? (
+            <div className="text-center py-20 text-white/30">Загрузка...</div>
+          ) : filtered.length === 0 ? (
+            <div className="bg-[#111] border border-white/5 rounded-2xl p-16 text-center">
+              <span className="material-symbols-outlined text-white/10 text-7xl block mb-4">
+                movie
+              </span>
+              <p className="text-white/40 text-lg font-bold uppercase">
+                Клипов пока нет
+              </p>
+              <p className="text-white/20 text-sm mt-2">
+                Стань первым — предложи клип из стрима
+              </p>
+              <button
+                onClick={() => navigate("/dashboard?suggest=clip")}
+                className="mt-6 bg-[#FFE100] text-[#211C00] px-6 py-3 rounded-xl font-bold text-sm uppercase hover:bg-[#FFE330] transition-colors"
+              >
+                Предложить клип
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {filtered.map((clip) => (
+                <article
+                  key={clip.id}
+                  className="group cursor-pointer"
+                  onClick={() => window.open(clip.url, "_blank")}
+                >
+                  <div className="relative aspect-video rounded-xl overflow-hidden mb-3 bg-[#1C1B1B]">
+                    {clip.preview_url ? (
+                      <img
+                        src={clip.preview_url}
+                        alt={clip.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span
+                          className="material-symbols-outlined text-white/10"
+                          style={{ fontSize: "48px" }}
+                        >
+                          movie
+                        </span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="bg-[#FFE100] text-[#211C00] w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+                        <span
+                          className="material-symbols-outlined text-3xl"
+                          style={{ fontVariationSettings: "'FILL' 1" }}
+                        >
+                          play_arrow
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="text-white font-bold text-sm leading-tight mb-1 group-hover:text-[#FFE100] transition-colors line-clamp-2">
+                    {clip.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-xs text-white/40">
+                    {clip.game && <span>{clip.game}</span>}
+                    {clip.game && clip.submitted_by && (
+                      <span className="w-1 h-1 rounded-full bg-white/20" />
+                    )}
+                    {clip.submitted_by && <span>{clip.submitted_by}</span>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </main>
+
+      <div className="fixed top-0 right-0 w-1/3 h-full bg-[#FFE100]/5 blur-[120px] -z-10 pointer-events-none" />
     </div>
   );
 }

@@ -86,7 +86,7 @@ class User(AbstractUser):
 
     @property
     def has_steam(self):
-        return bool(self.steam_id and self.steam_trade_url)
+        return bool(self.steam_trade_url)
 
     @property
     def has_telegram(self):

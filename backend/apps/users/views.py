@@ -437,3 +437,52 @@ def link_by_token(request):
     user.save()
 
     return Response({'message': 'Telegram привязан', 'username': user.username})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def unlink_account(request):
+    """
+    POST /api/auth/unlink/
+    Отвязать аккаунт: platform = 'twitch' | 'steam'
+    """
+    platform = request.data.get('platform')
+    user = request.user
+
+    if platform == 'twitch':
+        user.twitch_id = None
+        user.twitch_username = None
+        user.save()
+        return Response({'message': 'Twitch отвязан'})
+
+    if platform == 'steam':
+        user.steam_id = None
+        user.steam_trade_url = None
+        user.save()
+        return Response({'message': 'Steam отвязан'})
+    
+    if platform == 'telegram':
+        user.telegram_id = None
+        user.telegram_username = None
+        user.save()
+        return Response({'message': 'Telegram отвязан'})
+
+    return Response({'error': 'Укажи platform: twitch или steam'}, status=400)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def change_password(request):
+    """
+    POST /api/auth/change-password/
+    """
+    old_password = request.data.get('old_password', '')
+    new_password = request.data.get('new_password', '')
+
+    if not request.user.check_password(old_password):
+        return Response({'error': 'Неверный текущий пароль'}, status=400)
+
+    if len(new_password) < 8:
+        return Response({'error': 'Минимум 8 символов'}, status=400)
+
+    request.user.set_password(new_password)
+    request.user.save()
+    return Response({'message': 'Пароль изменён'})

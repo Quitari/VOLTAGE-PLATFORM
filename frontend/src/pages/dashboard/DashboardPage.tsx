@@ -24,7 +24,7 @@ export default function DashboardPage() {
   const [clipSuccess, setClipSuccess] = useState(false);
   const [clipError, setClipError] = useState("");
 
-  useEffect(() => {
+  const loadData = () => {
     Promise.all([
       giveawaysApi.list({ status: "active" }),
       client.get("/giveaways/my-stats/"),
@@ -37,10 +37,16 @@ export default function DashboardPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  };
 
+  useEffect(() => {
+    loadData();
     if (new URLSearchParams(location.search).get("suggest") === "clip") {
       setClipModal(true);
     }
+    // Автообновление каждые 30 секунд
+    const interval = setInterval(loadData, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleJoin = async (id: string) => {
@@ -183,13 +189,21 @@ export default function DashboardPage() {
                       </span>
                     )}
                   </div>
-                  <div className="h-32 bg-[#0E0E0E] flex items-center justify-center">
-                    <span
-                      className="material-symbols-outlined text-white/5"
-                      style={{ fontSize: "64px" }}
-                    >
-                      redeem
-                    </span>
+                  <div className="h-32 bg-[#0E0E0E] flex items-center justify-center overflow-hidden">
+                    {g.skin_image_url ? (
+                      <img
+                        src={g.skin_image_url}
+                        alt={g.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span
+                        className="material-symbols-outlined text-white/5"
+                        style={{ fontSize: "64px" }}
+                      >
+                        redeem
+                      </span>
+                    )}
                   </div>
                   <div className="p-5">
                     <div className="flex justify-between items-start mb-3">
@@ -239,13 +253,21 @@ export default function DashboardPage() {
             </h2>
             {lastPrize ? (
               <div className="bg-[#111] border border-white/5 rounded-2xl p-5 border-l-4 border-l-[#FFE100]">
-                <div className="h-32 bg-[#0E0E0E] rounded-xl mb-4 flex items-center justify-center">
-                  <span
-                    className="material-symbols-outlined text-white/10"
-                    style={{ fontSize: "48px" }}
-                  >
-                    inventory
-                  </span>
+                <div className="h-32 bg-[#0E0E0E] rounded-xl mb-4 flex items-center justify-center overflow-hidden">
+                  {lastPrize.skin_image_url ? (
+                    <img
+                      src={lastPrize.skin_image_url}
+                      alt={lastPrize.name}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  ) : (
+                    <span
+                      className="material-symbols-outlined text-white/10"
+                      style={{ fontSize: "48px" }}
+                    >
+                      inventory
+                    </span>
+                  )}
                 </div>
                 <h4 className="font-bold text-sm text-white mb-1">
                   {lastPrize.name}

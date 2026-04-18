@@ -25,7 +25,7 @@ export default function GiveawaysPage() {
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<"active" | "finished">("active");
 
-  useEffect(() => {
+  const loadData = () => {
     Promise.all([
       giveawaysApi.list({ status: "active" }),
       giveawaysApi.list({ status: "finished" }),
@@ -36,6 +36,12 @@ export default function GiveawaysPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    loadData();
+    const interval = setInterval(loadData, 15000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleJoin = async (id: string) => {
@@ -128,13 +134,21 @@ export default function GiveawaysPage() {
                 key={g.id}
                 className="bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:bg-[#1C1B1B] transition-colors"
               >
-                <div className="h-32 bg-[#0E0E0E] flex items-center justify-center relative">
-                  <span
-                    className="material-symbols-outlined text-white/5"
-                    style={{ fontSize: "64px" }}
-                  >
-                    redeem
-                  </span>
+                <div className="h-32 bg-[#0E0E0E] flex items-center justify-center relative overflow-hidden">
+                  {g.skin_image_url ? (
+                    <img
+                      src={g.skin_image_url}
+                      alt={g.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span
+                      className="material-symbols-outlined text-white/5"
+                      style={{ fontSize: "64px" }}
+                    >
+                      redeem
+                    </span>
+                  )}
                   <div className="absolute top-3 left-3 flex gap-2">
                     <span className="bg-[#FFE100] text-[#211C00] text-[10px] font-black px-2 py-0.5 rounded uppercase">
                       {PLATFORM[g.platform] || g.platform}

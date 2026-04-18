@@ -2,11 +2,22 @@ from rest_framework import serializers
 from .models import Giveaway, Participant, Winner
 from apps.users.serializers import UserPublicSerializer
 
+class WinnerSerializer(serializers.ModelSerializer):
+    user = UserPublicSerializer(read_only=True)
+
+    class Meta:
+        model = Winner
+        fields = (
+            'id', 'user', 'status',
+            'twitch_username_provided', 'twitch_verified',
+            'reroll_count', 'drawn_at', 'confirmed_at'
+        )
 
 class GiveawayListSerializer(serializers.ModelSerializer):
     """Краткая версия — для списка розыгрышей"""
     participants_count = serializers.IntegerField(read_only=True)
     created_by = UserPublicSerializer(read_only=True)
+    winners = WinnerSerializer(many=True, read_only=True)
 
     class Meta:
         model = Giveaway
@@ -14,9 +25,8 @@ class GiveawayListSerializer(serializers.ModelSerializer):
             'id', 'title', 'prize_type', 'skin_name',
             'skin_image_url', 'platform', 'status',
             'participants_count', 'starts_at', 'ends_at',
-            'created_by', 'created_at'
+            'created_by', 'created_at', 'winners'
         )
-
 
 class GiveawayDetailSerializer(serializers.ModelSerializer):
     """Полная версия — для детальной страницы"""
@@ -73,15 +83,3 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         fields = ('id', 'user', 'source', 'joined_at')
-
-
-class WinnerSerializer(serializers.ModelSerializer):
-    user = UserPublicSerializer(read_only=True)
-
-    class Meta:
-        model = Winner
-        fields = (
-            'id', 'user', 'status',
-            'twitch_username_provided', 'twitch_verified',
-            'reroll_count', 'drawn_at', 'confirmed_at'
-        )

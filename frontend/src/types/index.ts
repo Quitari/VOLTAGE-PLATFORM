@@ -49,6 +49,14 @@ export interface AuthResponse {
   message: string;
 }
 
+export interface Winner {
+  id: string;
+  user: { id: string; username: string };
+  status: string;
+  reroll_count: number;
+  drawn_at: string | null;
+  confirmed_at: string | null;
+}
 export interface Giveaway {
   id: string;
   title: string;
@@ -62,6 +70,7 @@ export interface Giveaway {
   ends_at: string | null;
   created_by: { id: string; username: string };
   created_at: string;
+  winners?: Winner[];
 }
 
 export interface Prize {

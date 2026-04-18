@@ -486,3 +486,100 @@ def change_password(request):
     request.user.set_password(new_password)
     request.user.save()
     return Response({'message': 'Пароль изменён'})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_detail(request, user_id):
+    """
+    GET /api/auth/users/<uuid>/
+    Детальные данные пользователя для админки
+    """
+    from .permissions import _user_has_permission
+    from apps.giveaways.models import Participant, Winner
+    from apps.moderation.models import Punishment
+    from apps.prizes.models import Prize
+
+    if not _user_has_permission(request.user, 'users.view'):
+        return Response({'error': 'Нет доступа'}, status=403)
+
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({'error': 'Не найден'}, status=404)
+
+    # Статистика
+    total_participations = Participant.objects.filter(user=user).count()
+    wins = Winner.objects.filter(
+        user=user,
+        status__in=[Winner.Status.CONFIRMED, Winner.Status.PENDING]
+    ).count()
+
+    # Нарушения — is_active это @property, фильтруем по status
+    violations_qs = Punishment.objects.filter(
+        user=user
+    ).select_related('issued_by').order_by('-issued_at')
+
+    active_violations = Punishment.objects.filter(
+        user=user,
+        status=Punishment.Status.ACTIVE
+    ).count()
+
+    # Призы
+    prizes_qs = Prize.objects.filter(
+        recipient=user
+    ).select_related('winner__giveaway').order_by('-created_at')[:20]
+
+    # Участия
+    participations_qs = Participant.objects.filter(
+        user=user
+    ).select_related('giveaway').order_by('-joined_at')[:20]
+
+    return Response({
+        'user': UserSerializer(user).data,
+        'stats': {
+            'total_participations': total_participations,
+            'wins': wins,
+            'active_violations': active_violations,
+            'total_violations': violations_qs.count(),
+        },
+        'violations': [
+            {
+                'id': str(v.id),
+                'punishment_type': v.punishment_type,
+                'reason': v.reason,
+                'platform': v.platform,
+                'is_active': v.is_active,
+                'created_at': v.issued_at.isoformat(),
+                'expires_at': v.expires_at.isoformat() if v.expires_at else None,
+                'moderator': v.issued_by.username if v.issued_by else None,
+            }
+            for v in violations_qs[:20]
+        ],
+        'prizes': [
+            {
+                'id': str(p.id),
+                'name': p.name,
+                'status': p.status,
+                'giveaway_title': (
+                    p.winner.giveaway.title
+                    if p.winner and p.winner.giveaway else None
+                ),
+                'platform': (
+                    p.winner.giveaway.platform
+                    if p.winner and p.winner.giveaway else None
+                ),
+                'created_at': p.created_at.isoformat(),
+            }
+            for p in prizes_qs
+        ],
+        'participations': [
+            {
+                'id': str(p.id),
+                'giveaway_title': p.giveaway.title,
+                'giveaway_platform': p.giveaway.platform,
+                'participants_count': p.giveaway.participants_count,
+                'joined_at': p.joined_at.isoformat(),
+            }
+            for p in participations_qs
+        ],
+    })

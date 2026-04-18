@@ -115,6 +115,12 @@ def clip_moderate(request, clip_id):
 
     clip.status = status
     clip.admin_note = request.data.get('admin_note', '')
+    if 'title' in request.data and request.data['title']:
+        clip.title = request.data['title']
+    if 'game' in request.data:
+        clip.game = request.data['game']
+    if 'preview_url' in request.data:
+        clip.preview_url = request.data['preview_url']
     clip.save()
     return Response({'message': 'Обновлено'})
 

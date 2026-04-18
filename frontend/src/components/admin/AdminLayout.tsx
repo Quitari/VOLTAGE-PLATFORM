@@ -28,6 +28,7 @@ const NAV_GROUPS: NavGroup[] = [
       { path: "/admin/giveaways", icon: "redeem", label: "Розыгрыши" },
       { path: "/admin/prizes", icon: "inventory", label: "Призы и доставка" },
       { path: "/admin/commands", icon: "terminal", label: "Команды Twitch" },
+      { path: "/admin/clips", icon: "movie", label: "Клипы" },
     ],
   },
   {

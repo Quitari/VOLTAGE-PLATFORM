@@ -46,7 +46,7 @@ def prize_list(request):
         return Response({'error': 'Нет доступа'}, status=403)
 
     prizes = Prize.objects.select_related(
-        'recipient', 'winner'
+        'recipient', 'winner__giveaway'
     ).order_by('-created_at')[:50]
 
     data = []
@@ -60,6 +60,7 @@ def prize_list(request):
             'recipient': {
                 'username': p.recipient.username if p.recipient else None
             },
+            'giveaway_title': p.winner.giveaway.title if p.winner and p.winner.giveaway else None,
             'created_at': p.created_at.isoformat(),
             'sent_at': p.sent_at.isoformat() if p.sent_at else None,
         })
@@ -84,6 +85,7 @@ def my_prizes_auth(request):
         'delivery_method': p.delivery_method,
         'created_at': p.created_at.isoformat(),
         'sent_at': p.sent_at.isoformat() if p.sent_at else None,
+        'skin_image_url': p.winner.giveaway.skin_image_url if p.winner and p.winner.giveaway else None,
     } for p in prizes[:20]]
 
     return Response(data)

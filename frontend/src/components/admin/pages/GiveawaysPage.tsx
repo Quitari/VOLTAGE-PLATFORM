@@ -277,6 +277,12 @@ export default function GiveawaysPage() {
                         )}
                         {g.status === "drawing" && (
                           <>
+                            {/* Показываем победителя */}
+                            {g.winners && g.winners[0] && (
+                              <span className="text-xs text-[#FFE100] font-bold">
+                                🏆 {g.winners[0].user.username}
+                              </span>
+                            )}
                             <button
                               onClick={() => handleConfirm(g.id)}
                               disabled={isLoading}

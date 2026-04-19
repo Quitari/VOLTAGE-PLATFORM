@@ -28,4 +28,5 @@ urlpatterns = [
     path('unlink/', views.unlink_account, name='unlink-account'),
     path('change-password/', views.change_password, name='change-password'),
     path('users/<uuid:user_id>/', views.user_detail, name='user-detail'),
+    path('admin-stats/', views.admin_dashboard_stats, name='admin-stats'),
 ]

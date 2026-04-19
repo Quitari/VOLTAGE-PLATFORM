@@ -583,3 +583,57 @@ def user_detail(request, user_id):
             for p in participations_qs
         ],
     })
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def admin_dashboard_stats(request):
+    """
+    GET /api/auth/admin-stats/
+    Статистика для админ-дашборда
+    """
+    from .permissions import _user_has_permission
+    if not _user_has_permission(request.user, 'users.view'):
+        return Response({'error': 'Нет доступа'}, status=403)
+
+    from django.utils import timezone
+    from datetime import timedelta
+    from apps.giveaways.models import Winner
+    from apps.moderation.models import Ticket, Punishment, AuditLog
+    from apps.prizes.models import Prize
+
+    today = timezone.now().date()
+    today_start = timezone.make_aware(
+        timezone.datetime.combine(today, timezone.datetime.min.time())
+    )
+
+    new_users_today = User.objects.filter(
+        created_at__gte=today_start
+    ).count()
+
+    prizes_today = Prize.objects.filter(
+        created_at__gte=today_start
+    ).count()
+
+    open_tickets = Ticket.objects.filter(
+        status__in=['open', 'in_work']
+    ).count()
+
+    recent_logs = AuditLog.objects.select_related(
+        'actor', 'target_user'
+    ).order_by('-created_at')[:10]
+
+    logs_data = [{
+        'id': str(log.id),
+        'actor': log.actor.username if log.actor else '—',
+        'action': log.get_action_display(),
+        'action_code': log.action,
+        'target_user': log.target_user.username if log.target_user else None,
+        'created_at': log.created_at.isoformat(),
+    } for log in recent_logs]
+
+    return Response({
+        'new_users_today': new_users_today,
+        'prizes_today': prizes_today,
+        'open_tickets': open_tickets,
+        'recent_logs': logs_data,
+    })

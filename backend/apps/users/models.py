@@ -94,7 +94,7 @@ class User(AbstractUser):
 
     @property
     def has_twitch(self):
-        return bool(self.twitch_id)
+        return bool(self.twitch_username or self.twitch_id)
 
 
 class Permission(models.Model):

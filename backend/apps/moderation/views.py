@@ -487,10 +487,9 @@ def my_punishments(request):
     GET /api/moderation/my/
     Наказания текущего пользователя
     """
-    from .models import Punishment
     punishments = Punishment.objects.filter(
         user=request.user
-    ).order_by('-created_at')
+    ).select_related('issued_by').order_by('-issued_at')
 
     data = [{
         'id': str(p.id),
@@ -498,9 +497,10 @@ def my_punishments(request):
         'reason': p.reason,
         'platform': p.platform,
         'is_active': p.is_active,
-        'created_at': p.created_at.isoformat(),
+        'status': p.status,
+        'issued_at': p.issued_at.isoformat(),
         'expires_at': p.expires_at.isoformat() if p.expires_at else None,
-        'moderator': p.moderator.username if p.moderator else None,
+        'moderator': p.issued_by.username if p.issued_by else None,
     } for p in punishments]
 
     return Response(data)

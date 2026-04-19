@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [form, setForm] = useState({ login: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
@@ -76,36 +77,48 @@ export default function LoginPage() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              {[
-                {
-                  field: "login",
-                  label: "Логин или Email",
-                  type: "text",
-                  placeholder: "username или email@example.com",
-                },
-                {
-                  field: "password",
-                  label: "Пароль",
-                  type: "password",
-                  placeholder: "••••••••",
-                },
-              ].map((item) => (
-                <div key={item.field} className="space-y-1">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-                    {item.label}
-                  </label>
+              {/* Логин */}
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                  Логин или Email
+                </label>
+                <input
+                  type="text"
+                  value={form.login}
+                  onChange={(e) => setForm({ ...form, login: e.target.value })}
+                  placeholder="username или email@example.com"
+                  required
+                  className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                />
+              </div>
+
+              {/* Пароль */}
+              <div className="space-y-1">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                  Пароль
+                </label>
+                <div className="relative">
                   <input
-                    type={item.type}
-                    value={form[item.field as keyof typeof form]}
+                    type={showPassword ? "text" : "password"}
+                    value={form.password}
                     onChange={(e) =>
-                      setForm({ ...form, [item.field]: e.target.value })
+                      setForm({ ...form, password: e.target.value })
                     }
-                    placeholder={item.placeholder}
+                    placeholder="••••••••"
                     required
-                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-xl">
+                      {showPassword ? "visibility" : "visibility_off"}
+                    </span>
+                  </button>
                 </div>
-              ))}
+              </div>
 
               <button
                 type="submit"

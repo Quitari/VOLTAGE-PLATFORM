@@ -13,6 +13,8 @@ export default function RegisterPage() {
     password_confirm: "",
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [error, setError] = useState("");
   const [step, setStep] = useState(1);
   const [linkToken, setLinkToken] = useState("");
@@ -147,46 +149,89 @@ export default function RegisterPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {[
-                  {
-                    field: "username",
-                    label: "Никнейм",
-                    type: "text",
-                    placeholder: "username",
-                  },
-                  {
-                    field: "email",
-                    label: "Email",
-                    type: "email",
-                    placeholder: "email@example.com",
-                  },
-                  {
-                    field: "password",
-                    label: "Пароль",
-                    type: "password",
-                    placeholder: "••••••••",
-                  },
-                  {
-                    field: "password_confirm",
-                    label: "Повтори пароль",
-                    type: "password",
-                    placeholder: "••••••••",
-                  },
-                ].map((item) => (
-                  <div key={item.field} className="space-y-1">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-                      {item.label}
-                    </label>
+                {/* Никнейм */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                    Никнейм
+                  </label>
+                  <input
+                    type="text"
+                    value={form.username}
+                    onChange={(e) => set("username", e.target.value)}
+                    placeholder="username"
+                    required
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => set("email", e.target.value)}
+                    placeholder="email@example.com"
+                    required
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                  />
+                </div>
+
+                {/* Пароль */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                    Пароль
+                  </label>
+                  <div className="relative">
                     <input
-                      type={item.type}
-                      value={form[item.field as keyof typeof form]}
-                      onChange={(e) => set(item.field, e.target.value)}
-                      placeholder={item.placeholder}
+                      type={showPassword ? "text" : "password"}
+                      value={form.password}
+                      onChange={(e) => set("password", e.target.value)}
+                      placeholder="••••••••"
                       required
-                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-xl">
+                        {showPassword ? "visibility" : "visibility_off"}
+                      </span>
+                    </button>
                   </div>
-                ))}
+                </div>
+
+                {/* Повтори пароль */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                    Повтори пароль
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPasswordConfirm ? "text" : "password"}
+                      value={form.password_confirm}
+                      onChange={(e) => set("password_confirm", e.target.value)}
+                      placeholder="••••••••"
+                      required
+                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowPasswordConfirm(!showPasswordConfirm)
+                      }
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-xl">
+                        {showPasswordConfirm ? "visibility" : "visibility_off"}
+                      </span>
+                    </button>
+                  </div>
+                </div>
 
                 <button
                   type="submit"

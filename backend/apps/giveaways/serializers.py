@@ -18,6 +18,13 @@ class GiveawayListSerializer(serializers.ModelSerializer):
     participants_count = serializers.IntegerField(read_only=True)
     created_by = UserPublicSerializer(read_only=True)
     winners = WinnerSerializer(many=True, read_only=True)
+    is_participant = serializers.SerializerMethodField()
+
+    def get_is_participant(self, obj):
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return False
+        return obj.participants.filter(user=request.user).exists()
 
     class Meta:
         model = Giveaway
@@ -25,7 +32,7 @@ class GiveawayListSerializer(serializers.ModelSerializer):
             'id', 'title', 'prize_type', 'skin_name',
             'skin_image_url', 'platform', 'status',
             'participants_count', 'starts_at', 'ends_at',
-            'created_by', 'created_at', 'winners'
+            'created_by', 'created_at', 'winners', 'is_participant'
         )
 
 class GiveawayDetailSerializer(serializers.ModelSerializer):

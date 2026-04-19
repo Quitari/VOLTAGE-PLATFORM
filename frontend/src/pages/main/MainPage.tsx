@@ -3,6 +3,104 @@ import { useNavigate } from "react-router-dom";
 import client from "../../api/client";
 import type { Giveaway } from "../../types";
 
+function MomentsBlock() {
+  const navigate = useNavigate();
+  const [clips, setClips] = useState<any[]>([]);
+
+  useEffect(() => {
+    client
+      .get("/clips/?status=approved&limit=4")
+      .then((r) => setClips(r.data.slice(0, 4)))
+      .catch(() => {});
+  }, []);
+
+  return (
+    <section id="moments" className="lg:col-span-2">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-2xl font-black uppercase tracking-tight">
+          Лучшие <span className="text-[#FFE100]">моменты</span>
+        </h2>
+        <button
+          onClick={() => navigate("/moments")}
+          className="text-xs font-bold text-[#FFE100] uppercase hover:underline"
+        >
+          Все моменты
+        </button>
+      </div>
+
+      {clips.length === 0 ? (
+        <div className="grid grid-cols-2 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="group relative rounded-xl overflow-hidden aspect-video bg-[#1C1B1B]"
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span
+                  className="material-symbols-outlined text-white/10"
+                  style={{ fontSize: "48px" }}
+                >
+                  play_circle
+                </span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                <p className="text-sm font-bold uppercase text-white/30">
+                  Клипов пока нет
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4">
+          {clips.map((clip) => (
+            <a
+              key={clip.id}
+              href={clip.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative rounded-xl overflow-hidden aspect-video bg-[#1C1B1B] block"
+            >
+              {clip.preview_url ? (
+                <img
+                  src={clip.preview_url}
+                  alt={clip.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span
+                    className="material-symbols-outlined text-white/10"
+                    style={{ fontSize: "48px" }}
+                  >
+                    play_circle
+                  </span>
+                </div>
+              )}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                <span
+                  className="material-symbols-outlined text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ fontSize: "48px" }}
+                >
+                  play_circle
+                </span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 to-transparent">
+                <p className="text-sm font-bold uppercase truncate">
+                  {clip.title}
+                </p>
+                {clip.game && (
+                  <p className="text-xs text-white/50 mt-0.5">{clip.game}</p>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function MainPage() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState<any>(null);
@@ -121,7 +219,8 @@ export default function MainPage() {
                   settings?.streamer_avatar_position || "center center",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/40" />
           </div>
         )}
         {/* Текст — слева */}
@@ -288,38 +387,7 @@ export default function MainPage() {
           )}
 
           {/* Моменты */}
-          {settings?.show_moments && (
-            <section id="moments" className="lg:col-span-2">
-              <h2 className="text-2xl font-black uppercase tracking-tight mb-8">
-                Лучшие <span className="text-[#FFE100]">моменты</span>
-              </h2>
-              <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="group relative rounded-xl overflow-hidden aspect-video bg-[#1C1B1B]"
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span
-                        className="material-symbols-outlined text-white/10"
-                        style={{ fontSize: "48px" }}
-                      >
-                        play_circle
-                      </span>
-                    </div>
-                    <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-bold">
-                      0:00
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                      <p className="text-sm font-bold uppercase">
-                        Добавь момент в настройках
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          {settings?.show_moments && <MomentsBlock />}
 
           {/* Расписание */}
           {!settings?.show_moments &&

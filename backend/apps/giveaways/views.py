@@ -37,7 +37,7 @@ def giveaway_list(request):
     if platform:
         qs = qs.filter(platform=platform)
 
-    serializer = GiveawayListSerializer(qs, many=True)
+    serializer = GiveawayListSerializer(qs, many=True, context={'request': request})
     return Response(serializer.data)
 
 
@@ -557,7 +557,7 @@ def my_stats(request):
     wins = Winner.objects.filter(user=user, status__in=['confirmed', 'pending']).count()
     active = Participant.objects.filter(user=user, giveaway__status='active').count()
     from apps.moderation.models import Punishment
-    violations = Punishment.objects.filter(user=user, is_active=True).count()
+    violations = Punishment.objects.filter(user=user, status='active').count()
     return Response({
         'total_participations': total,
         'wins': wins,

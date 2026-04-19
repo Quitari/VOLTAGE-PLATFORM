@@ -208,9 +208,20 @@ export default function AdminLayout({
           <h2 className="text-lg font-black text-white uppercase tracking-tight">
             Панель управления
           </h2>
-          <span className="text-xs text-white/40 font-bold uppercase tracking-widest">
-            {user?.username}
-          </span>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="flex items-center gap-2 px-4 py-2 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-all"
+            >
+              <span className="material-symbols-outlined text-base">
+                arrow_back
+              </span>
+              Дашборд
+            </button>
+            <span className="text-xs text-white/40 font-bold uppercase tracking-widest">
+              {user?.username}
+            </span>
+          </div>
         </header>
 
         <div className="p-8">{children}</div>

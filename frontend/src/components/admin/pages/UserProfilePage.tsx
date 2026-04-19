@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import client from "../../../api/client";
 import { moderationApi } from "../../../api/moderation";
 
 const PUNISHMENT_TYPES = [
-  { value: "warning", label: "⚠️ Предупреждение" },
-  { value: "mute", label: "🔇 Мут" },
-  { value: "ban", label: "🔨 Бан" },
+  {
+    value: "warning",
+    label: "Предупредить",
+    icon: "warning",
+    color: "hover:text-yellow-400",
+  },
+  {
+    value: "mute",
+    label: "Мут",
+    icon: "mic_off",
+    color: "hover:text-orange-400",
+  },
+  { value: "ban", label: "Бан", icon: "block", color: "hover:text-red-400" },
 ];
 
 const PLATFORMS = [
@@ -36,6 +46,7 @@ const PLATFORM_LABELS: Record<string, string> = {
   twitch: "TW",
   both: "TG+TW",
   all: "Все",
+  site: "Сайт",
 };
 
 export default function UserProfilePage() {
@@ -43,24 +54,33 @@ export default function UserProfilePage() {
   const navigate = useNavigate();
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<"prizes" | "violations" | "activity">(
-    "prizes",
+  const [tab, setTab] = useState<
+    "prizes" | "violations" | "activity" | "settings"
+  >("prizes");
+  const [prizeFilter, setPrizeFilter] = useState<"all" | "wins" | "lost">(
+    "all",
   );
+  const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
 
   // Модалка наказания
   const [punishModal, setPunishModal] = useState(false);
+  const [punishType, setPunishType] = useState("warning");
   const [punishForm, setPunishForm] = useState({
-    punishment_type: "warning",
     platform: "all",
     reason: "",
     expires_at: "",
   });
   const [punishing, setPunishing] = useState(false);
   const [punishError, setPunishError] = useState("");
+  const [punishSuccess, setPunishSuccess] = useState("");
 
-  // Модалка отмены наказания
+  // Модалка отмены
   const [revokeId, setRevokeId] = useState<string | null>(null);
   const [revoking, setRevoking] = useState(false);
+
+  // Настройки профиля (таб)
+  const [roleForm, setRoleForm] = useState({ note: "" });
 
   const load = () => {
     setLoading(true);
@@ -75,6 +95,28 @@ export default function UserProfilePage() {
     load();
   }, [id]);
 
+  // Закрытие меню по клику вне
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (
+        moreMenuRef.current &&
+        !moreMenuRef.current.contains(e.target as Node)
+      ) {
+        setMoreMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const openPunish = (type: string) => {
+    setPunishType(type);
+    setPunishForm({ platform: "all", reason: "", expires_at: "" });
+    setPunishError("");
+    setPunishSuccess("");
+    setPunishModal(true);
+  };
+
   const handlePunish = async () => {
     if (!punishForm.reason.trim()) {
       setPunishError("Укажи причину");
@@ -84,18 +126,16 @@ export default function UserProfilePage() {
     setPunishError("");
     try {
       await moderationApi.punish(id!, {
-        punishment_type: punishForm.punishment_type,
+        punishment_type: punishType,
         platform: punishForm.platform,
         reason: punishForm.reason,
         expires_at: punishForm.expires_at || undefined,
       });
-      setPunishModal(false);
-      setPunishForm({
-        punishment_type: "warning",
-        platform: "all",
-        reason: "",
-        expires_at: "",
-      });
+      setPunishSuccess("Наказание выдано");
+      setTimeout(() => {
+        setPunishModal(false);
+        setPunishSuccess("");
+      }, 1500);
       load();
     } catch (err: any) {
       setPunishError(err.response?.data?.error || "Ошибка");
@@ -129,6 +169,12 @@ export default function UserProfilePage() {
       )
     : null;
 
+  const filteredPrizes = prizes.filter((p: any) => {
+    if (prizeFilter === "wins") return p.status !== "cancelled";
+    if (prizeFilter === "lost") return p.status === "cancelled";
+    return true;
+  });
+
   return (
     <div className="space-y-6 max-w-5xl">
       {/* Модалка наказания */}
@@ -137,7 +183,7 @@ export default function UserProfilePage() {
           <div className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-md space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-black text-white uppercase">
-                Наказание
+                {PUNISHMENT_TYPES.find((t) => t.value === punishType)?.label}
               </h3>
               <button
                 onClick={() => setPunishModal(false)}
@@ -146,32 +192,23 @@ export default function UserProfilePage() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <div className="bg-[#1C1B1B] rounded-xl px-4 py-3">
-              <p className="text-xs text-white/40 uppercase tracking-widest mb-0.5">
-                Пользователь
-              </p>
-              <p className="text-white font-bold">{user.username}</p>
-            </div>
-            {punishError && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
-                ⚠️ {punishError}
+
+            <div className="bg-[#1C1B1B] rounded-xl px-4 py-3 flex items-center justify-between">
+              <div>
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-0.5">
+                  Пользователь
+                </p>
+                <p className="text-white font-bold">{user.username}</p>
               </div>
-            )}
-            <div>
-              <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
-                Тип
-              </label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="flex gap-1">
                 {PUNISHMENT_TYPES.map((t) => (
                   <button
                     key={t.value}
-                    onClick={() =>
-                      setPunishForm((p) => ({ ...p, punishment_type: t.value }))
-                    }
-                    className={`py-2 rounded-xl text-xs font-bold transition-colors ${
-                      punishForm.punishment_type === t.value
+                    onClick={() => setPunishType(t.value)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                      punishType === t.value
                         ? "bg-[#FFE100] text-[#211C00]"
-                        : "bg-[#1C1B1B] text-white/60 hover:text-white"
+                        : "bg-[#111] text-white/40 hover:text-white"
                     }`}
                   >
                     {t.label}
@@ -179,6 +216,18 @@ export default function UserProfilePage() {
                 ))}
               </div>
             </div>
+
+            {punishError && (
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
+                ⚠️ {punishError}
+              </div>
+            )}
+            {punishSuccess && (
+              <div className="bg-green-500/10 border border-green-500/20 text-green-400 text-sm px-4 py-3 rounded-xl">
+                ✅ {punishSuccess}
+              </div>
+            )}
+
             <div>
               <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">
                 Платформа
@@ -236,14 +285,14 @@ export default function UserProfilePage() {
                 disabled={punishing}
                 className="flex-1 py-3 bg-red-500/20 text-red-400 font-bold rounded-xl uppercase text-xs hover:bg-red-500/30 transition-colors disabled:opacity-50"
               >
-                {punishing ? "Выдаём..." : "🔨 Выдать"}
+                {punishing ? "Выдаём..." : "Выдать"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Модалка отмены наказания */}
+      {/* Модалка отмены */}
       {revokeId && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-[#111] border border-white/10 rounded-2xl p-6 w-full max-w-sm space-y-4">
@@ -300,7 +349,7 @@ export default function UserProfilePage() {
                 {initials}
               </div>
               <div
-                className={`absolute -bottom-1 -right-1 w-4 h-4 border-2 border-[#111] rounded-full ${
+                className={`absolute -bottom-1 -right-1 w-5 h-5 border-2 border-[#111] rounded-full ${
                   user.status === "active"
                     ? "bg-green-500"
                     : user.status === "banned"
@@ -316,7 +365,7 @@ export default function UserProfilePage() {
                 </h1>
                 {topRole && (
                   <span
-                    className="text-xs font-bold px-2.5 py-1 rounded-full"
+                    className="text-xs font-bold px-2.5 py-1 rounded-full cursor-help"
                     style={{
                       background: topRole.role.color + "20",
                       color: topRole.role.color,
@@ -334,7 +383,11 @@ export default function UserProfilePage() {
                         : "bg-white/10 text-white/40"
                   }`}
                 >
-                  {user.status}
+                  {user.status === "active"
+                    ? "Активен"
+                    : user.status === "banned"
+                      ? "Заблокирован"
+                      : user.status}
                 </span>
               </div>
               <p className="text-sm text-white/40 mb-3">
@@ -347,9 +400,12 @@ export default function UserProfilePage() {
                     <span className="material-symbols-outlined text-xs">
                       send
                     </span>
-                    {user.telegram_username
-                      ? `@${user.telegram_username}`
-                      : `ID: ${user.telegram_id}`}
+                    {user.telegram_username ? `@${user.telegram_username}` : ""}
+                    {user.telegram_id && (
+                      <span className="opacity-60 ml-1">
+                        ID: {user.telegram_id}
+                      </span>
+                    )}
                   </span>
                 )}
                 {user.has_twitch && (
@@ -360,30 +416,74 @@ export default function UserProfilePage() {
                     {user.twitch_username}
                   </span>
                 )}
-                {user.has_steam ? (
-                  <span className="bg-white/5 text-white/40 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                    Steam ✓
-                  </span>
-                ) : (
-                  <span className="bg-white/5 text-white/20 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                    Steam не привязан
-                  </span>
-                )}
+                <span
+                  className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${
+                    user.has_steam
+                      ? "bg-white/5 text-white/40"
+                      : "bg-white/5 text-white/20"
+                  }`}
+                >
+                  {user.has_steam ? "Steam ✓" : "Steam не привязан"}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Кнопки действий */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <button
-              onClick={() => setPunishModal(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/70 hover:text-[#FFE100] text-xs font-bold uppercase tracking-widest rounded-lg transition-all"
-            >
-              <span className="material-symbols-outlined text-base">
-                warning
-              </span>
-              Наказать
-            </button>
+            {PUNISHMENT_TYPES.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => openPunish(t.value)}
+                className={`flex items-center gap-2 px-4 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/70 text-xs font-bold uppercase tracking-widest rounded-lg transition-all ${t.color}`}
+              >
+                <span className="material-symbols-outlined text-base">
+                  {t.icon}
+                </span>
+                {t.label}
+              </button>
+            ))}
+
+            {/* Меню "..." */}
+            <div className="relative" ref={moreMenuRef}>
+              <button
+                onClick={() => setMoreMenuOpen(!moreMenuOpen)}
+                className="flex items-center gap-2 px-3 py-2.5 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 hover:text-white text-xs font-bold rounded-lg transition-all"
+              >
+                <span className="material-symbols-outlined text-base">
+                  more_horiz
+                </span>
+              </button>
+              {moreMenuOpen && (
+                <div className="absolute right-0 top-full mt-1 bg-[#1C1B1B] border border-white/10 rounded-xl shadow-xl z-50 w-52 py-1">
+                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left">
+                    <span className="material-symbols-outlined text-base">
+                      lock_reset
+                    </span>
+                    Сбросить пароль
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left">
+                    <span className="material-symbols-outlined text-base">
+                      notifications
+                    </span>
+                    Отправить уведомление
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-white/70 hover:text-white hover:bg-[#2A2A2A] transition-all text-left">
+                    <span className="material-symbols-outlined text-base">
+                      download
+                    </span>
+                    Экспорт данных
+                  </button>
+                  <div className="border-t border-white/5 my-1" />
+                  <button className="w-full flex items-center gap-3 px-4 py-2.5 text-xs text-red-400 hover:bg-red-500/10 transition-all text-left">
+                    <span className="material-symbols-outlined text-base">
+                      delete
+                    </span>
+                    Удалить аккаунт
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -394,22 +494,28 @@ export default function UserProfilePage() {
           {
             label: "Участий",
             value: stats.total_participations,
+            sub: "за всё время",
             color: "text-white",
           },
-          { label: "Побед", value: stats.wins, color: "text-[#FFE100]" },
+          {
+            label: "Побед",
+            value: stats.wins,
+            sub: "получено призов",
+            color: "text-[#FFE100]",
+          },
           {
             label: "Нарушений",
             value: stats.total_violations,
+            sub: "за всё время",
             color:
-              stats.total_violations > 0 ? "text-red-400" : "text-green-400",
+              stats.total_violations > 0 ? "text-orange-400" : "text-green-400",
           },
           {
             label: "Активных нар.",
             value: stats.active_violations,
+            sub: "прямо сейчас",
             color:
-              stats.active_violations > 0
-                ? "text-orange-400"
-                : "text-green-400",
+              stats.active_violations > 0 ? "text-red-400" : "text-green-400",
           },
         ].map((item) => (
           <div
@@ -420,6 +526,7 @@ export default function UserProfilePage() {
               {item.label}
             </p>
             <p className={`text-3xl font-black ${item.color}`}>{item.value}</p>
+            <p className="text-xs text-white/20 mt-1">{item.sub}</p>
           </div>
         ))}
       </div>
@@ -430,6 +537,7 @@ export default function UserProfilePage() {
           { id: "prizes", label: "Розыгрыши и призы" },
           { id: "violations", label: "Нарушения" },
           { id: "activity", label: "Активность" },
+          { id: "settings", label: "Настройки профиля" },
         ].map((t) => (
           <button
             key={t.id}
@@ -448,23 +556,36 @@ export default function UserProfilePage() {
       {/* Таб: Розыгрыши и призы */}
       {tab === "prizes" && (
         <div className="space-y-4">
-          <p className="text-xs text-white/30 font-bold uppercase tracking-widest">
-            {stats.total_participations} участий · {stats.wins} побед
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-white/30 font-bold uppercase tracking-widest">
+              {stats.total_participations} участий · {stats.wins} побед
+            </p>
+            <select
+              value={prizeFilter}
+              onChange={(e) => setPrizeFilter(e.target.value as any)}
+              className="bg-[#111] border border-white/5 text-white/50 text-xs px-3 py-1.5 rounded-lg focus:outline-none"
+            >
+              <option value="all">Все</option>
+              <option value="wins">Победы</option>
+              <option value="lost">Не победил</option>
+            </select>
+          </div>
 
-          {prizes.length > 0 && (
+          {filteredPrizes.length > 0 && (
             <div className="space-y-2">
               <p className="text-[10px] font-bold text-white/25 uppercase tracking-widest">
                 Призы
               </p>
-              {prizes.map((p: any) => (
+              {filteredPrizes.map((p: any) => (
                 <div
                   key={p.id}
-                  className="bg-[#111] border border-white/5 rounded-xl p-4 flex items-center gap-4"
+                  className="bg-[#111] border border-white/5 rounded-xl p-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors"
                 >
                   <div className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-[#FFE100]">
-                      emoji_events
+                    <span
+                      className={`material-symbols-outlined ${p.status === "cancelled" ? "text-white/20" : "text-[#FFE100]"}`}
+                    >
+                      {p.status === "cancelled" ? "close" : "emoji_events"}
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -487,6 +608,14 @@ export default function UserProfilePage() {
                       {p.giveaway_title} · {p.created_at?.slice(0, 10)}
                     </span>
                   </div>
+                  {p.status === "pending" && (
+                    <button className="text-xs text-[#FFE100] hover:text-yellow-300 transition-colors font-bold uppercase tracking-widest flex-shrink-0">
+                      Напомнить
+                    </button>
+                  )}
+                  <button className="text-xs text-white/30 hover:text-white transition-colors font-bold uppercase tracking-widest flex-shrink-0">
+                    Детали
+                  </button>
                 </div>
               ))}
             </div>
@@ -542,7 +671,7 @@ export default function UserProfilePage() {
             </div>
           )}
 
-          {prizes.length === 0 && participations.length === 0 && (
+          {filteredPrizes.length === 0 && participations.length === 0 && (
             <div className="bg-[#111] border border-white/5 rounded-2xl p-8 text-center">
               <p className="text-white/30 text-sm">
                 Пользователь ещё не участвовал в розыгрышах
@@ -571,7 +700,11 @@ export default function UserProfilePage() {
             violations.map((v: any) => (
               <div
                 key={v.id}
-                className={`bg-[#111] border rounded-xl p-5 ${v.is_active ? "border-orange-500/20" : "border-white/5 opacity-60"}`}
+                className={`bg-[#111] border rounded-xl p-5 ${
+                  v.is_active
+                    ? "border-orange-500/20"
+                    : "border-white/5 opacity-60"
+                }`}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2">
@@ -626,6 +759,84 @@ export default function UserProfilePage() {
           <p className="text-white/20 text-xs mt-1">
             Будет добавлена после интеграции с ботами
           </p>
+        </div>
+      )}
+
+      {/* Таб: Настройки профиля */}
+      {tab === "settings" && (
+        <div className="space-y-4">
+          <div className="bg-[#111] border border-white/5 rounded-2xl p-6 space-y-5">
+            <h3 className="text-xs font-bold text-white/40 uppercase tracking-widest">
+              Роль и статус
+            </h3>
+
+            <div>
+              <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5">
+                Текущая роль
+              </label>
+              <div className="flex items-center gap-3">
+                <span
+                  className="text-sm font-bold px-3 py-1.5 rounded-lg"
+                  style={
+                    topRole
+                      ? {
+                          background: topRole.role.color + "20",
+                          color: topRole.role.color,
+                        }
+                      : { color: "rgba(255,255,255,0.4)" }
+                  }
+                >
+                  {topRole?.role.name || "Участник"}
+                </span>
+                <button className="text-xs text-[#FFE100] font-bold uppercase tracking-widest hover:underline">
+                  Изменить роль
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5">
+                Заметка модератора
+              </label>
+              <textarea
+                value={roleForm.note}
+                onChange={(e) =>
+                  setRoleForm((f) => ({ ...f, note: e.target.value }))
+                }
+                placeholder="Внутренняя заметка видна только модераторам..."
+                rows={3}
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none resize-none text-sm"
+              />
+            </div>
+
+            <div className="pt-2">
+              <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-3">
+                Информация
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-white/40">Зарегистрирован</span>
+                  <span className="text-white">
+                    {user.created_at?.slice(0, 10)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-white/40">UUID</span>
+                  <span className="text-white/50 font-mono text-xs">
+                    {user.id}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-white/40">Email</span>
+                  <span className="text-white/70">{user.email || "—"}</span>
+                </div>
+              </div>
+            </div>
+
+            <button className="w-full bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-widest transition-all">
+              Сохранить изменения
+            </button>
+          </div>
         </div>
       )}
     </div>

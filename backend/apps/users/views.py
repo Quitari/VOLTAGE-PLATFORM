@@ -387,7 +387,13 @@ def user_list(request):
     status_filter = request.query_params.get('status')
 
     if search:
-        qs = qs.filter(username__icontains=search)
+        from django.db.models import Q
+        qs = qs.filter(
+            Q(username__icontains=search) |
+            Q(telegram_username__icontains=search) |
+            Q(twitch_username__icontains=search) |
+            Q(email__icontains=search)
+        )
     if status_filter:
         qs = qs.filter(status=status_filter)
 

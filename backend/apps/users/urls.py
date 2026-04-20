@@ -29,4 +29,10 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change-password'),
     path('users/<uuid:user_id>/', views.user_detail, name='user-detail'),
     path('admin-stats/', views.admin_dashboard_stats, name='admin-stats'),
+    path('roles/create/', views.create_role, name='role-create'),
+    path('roles/<int:role_id>/', views.update_role, name='role-update'),
+    path('roles/<int:role_id>/delete/', views.delete_role, name='role-delete'),
+    path('revoke-role/', views.revoke_role, name='role-revoke'),
+    path('permissions/', views.get_permissions, name='permissions'),
+    path('role-assignments/', views.role_assignments, name='role-assignments'),
 ]

@@ -26,3 +26,9 @@ mediafiles/
 
 # Docker
 .docker/
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+twitch_tokens*.db

@@ -1,53 +1,38 @@
 # ⚡ VOLTAGE Platform
 
-Самохостируемая плптформа для управления компанентами () платформа для розыгрышей скинов CS2 и управления сообществом.
+> **⚠️ Статус:** Проект находится в активной разработке. Ряд функций не завершён, production-деплой требует дополнительной настройки безопасности.
+
+Самохостируемая open source платформа для стримеров на Twitch — упрощает взаимодействие с аудиторией, автоматизирует розыгрыши скинов CS2 и управляет сообществом через единую панель.
+
+Платформа строится вокруг идеи, что стример не должен думать об организационных процессах во время трансляции — всё должно работать само.
 
 ---
 
-## 🌐 Домены
+## 🚀 Что умеет платформа
 
-| Сервис                | URL                                        |
-| --------------------- | ------------------------------------------ |
-| Публичный сайт        | `https://examle.com`                       |
-| Панель управления     | `https://admin.examle.comu`                |
-| API                   | `https://api.examle.com`                   |
-| Twitch OAuth callback | `https://twitch.examle.com/oauth/callback` |
-| Telegram Mini App     | `https://app.examle.com`                   |
-
----
-
-## 🖥️ Системные требования
-
-### Минимальные
-
-- **CPU:** 1 vCPU
-- **RAM:** 2 GB
-- **Диск:** 30 GB SSD
-- **ОС:** Ubuntu 22.04 / 24.04 LTS
-- **Сеть:** 10 Мбит/с
-
-### Рекомендуемые
-
-- **CPU:** 2 vCPU
-- **RAM:** 4 GB
-- **Диск:** 60 GB SSD
-- **ОС:** Ubuntu 22.04 / 24.04 LTS
-- **Сеть:** 100 Мбит/с+
+- **Розыгрыши скинов CS2** — создание, управление и автоматическое проведение розыгрышей через Telegram и Twitch одновременно
+- **Единая админ-панель** — управление пользователями, ролями, наказаниями, призами и настройками из одного интерфейса
+- **RBAC система** — гибкая иерархия ролей (Owner → Admin → Super Moderator → Moderator → Streamer → Участник) с настраиваемыми правами
+- **Telegram бот** — участие в розыгрышах, уведомления о победах, привязка аккаунтов
+- **Twitch бот** — интеграция с чатом стримера, участие через команды
+- **Публичный сайт** — лендинг для зрителей с активными розыгрышами, победителями и расписанием стримов
+- **Система модерации** — наказания, апелляции, тикеты, аудит-лог всех действий
 
 ---
 
 ## 🛠️ Стек технологий
 
-| Компонент       | Технология                                  |
-| --------------- | ------------------------------------------- |
-| Backend API     | Python 3.11 + Django REST Framework         |
-| База данных     | PostgreSQL 15                               |
-| Кэш / Очереди   | Redis 7 + Celery                            |
-| Telegram бот    | Python + aiogram 3.27                       |
-| Twitch бот      | Python + twitchio 3.2                       |
-| Frontend        | React 18 + TypeScript + Vite + Tailwind CSS |
-| Веб-сервер      | Caddy (авто HTTPS)                          |
-| Контейнеризация | Docker + Docker Compose                     |
+| Компонент | Технология |
+| --- | --- |
+| Backend API | Python 3.11 + Django REST Framework |
+| База данных | PostgreSQL 15 |
+| Кэш / Очереди | Redis 7 + Celery |
+| Telegram бот | Python + aiogram 3.27 |
+| Twitch бот | Python + twitchio 3.2 |
+| Frontend | React 18 + TypeScript + Vite + Tailwind CSS |
+| Веб-сервер | Caddy (авто HTTPS) |
+| Контейнеризация | Docker + Docker Compose |
+| Аутентификация | JWT (djangorestframework-simplejwt) |
 
 ---
 
@@ -57,24 +42,34 @@
 VOLTAGE-PLATFORM/
 ├── backend/
 │   ├── apps/
-│   │   ├── users/        # Пользователи, роли, права
-│   │   ├── giveaways/    # Розыгрыши
-│   │   ├── prizes/       # Призы и доставка
-│   │   ├── moderation/   # Наказания, тикеты, апелляции
-│   │   └── bots/         # Telegram бот, Twitch бот, GSI
+│   │   ├── users/        # Пользователи, роли, права, RBAC
+│   │   ├── giveaways/    # Розыгрыши — создание, участие, итоги
+│   │   ├── prizes/       # Призы и статусы доставки
+│   │   ├── moderation/   # Наказания, тикеты, апелляции, аудит
+│   │   └── bots/         # Telegram бот, Twitch бот, настройки
 │   ├── config/           # Настройки Django
 │   ├── Dockerfile
 │   └── requirements.txt
-├── frontend/             # React приложение
-├── caddy/                # Конфигурация Caddy
+├── frontend/             # React SPA — Dashboard + Admin Panel
+├── caddy/                # Конфигурация reverse proxy
 ├── docker-compose.yml
-├── docker-compose.prod.yml
-└── .env
+└── .env.example
 ```
 
 ---
 
-## 🚀 Быстрый старт (локальная разработка)
+## 🖥️ Системные требования
+
+| | Минимум | Рекомендуется |
+| --- | --- | --- |
+| CPU | 1 vCPU | 2 vCPU |
+| RAM | 2 GB | 4 GB |
+| Диск | 30 GB SSD | 60 GB SSD |
+| ОС | Ubuntu 22.04 LTS | Ubuntu 22.04 / 24.04 LTS |
+
+---
+
+## 🚀 Быстрый старт
 
 ### 1. Клонировать репозиторий
 
@@ -83,75 +78,47 @@ git clone https://github.com/Quitari/VOLTAGE-PLATFORM.git
 cd VOLTAGE-PLATFORM
 ```
 
-### 2. Создать `.env` файл
+### 2. Настроить окружение
 
 ```bash
 cp .env.example .env
 ```
 
-Заполни переменные в `.env`:
+Заполни `.env`:
 
 ```env
-# Django
 SECRET_KEY=your-secret-key-here
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-# База данных
 POSTGRES_DB=voltage
 POSTGRES_USER=voltage_user
 POSTGRES_PASSWORD=your-db-password
 DATABASE_URL=postgresql://voltage_user:your-db-password@db:5432/voltage
 
-# Redis
 REDIS_URL=redis://redis:6379/0
 
-# Telegram бот
 TELEGRAM_BOT_TOKEN=your-telegram-bot-token
 
-# Twitch бот
 TWITCH_CLIENT_ID=your-twitch-client-id
 TWITCH_CLIENT_SECRET=your-twitch-client-secret
 TWITCH_BOT_ID=your-bot-twitch-id
 TWITCH_OWNER_ID=your-twitch-id
 TWITCH_REDIRECT_URI=http://localhost:4343/oauth/callback
 
-# Бот-пользователь для API
 BOT_PASSWORD=your-bot-password
 ```
 
-### 3. Запустить контейнеры
+### 3. Запустить
 
 ```bash
 docker compose up -d
-```
-
-### 4. Применить миграции и настроить платформу
-
-```bash
 docker compose exec backend python manage.py migrate
 docker compose exec backend python manage.py create_roles
-docker compose exec backend python manage.py setup
+docker compose exec backend python manage.py createsuperuser
 ```
 
-### 5. Создать бот-пользователя
-
-```bash
-docker compose exec backend python manage.py shell -c "
-from apps.users.models import User, Role, UserRole
-bot_user, _ = User.objects.get_or_create(
-    username='voltage_bot',
-    defaults={'email': None, 'status': 'active'}
-)
-bot_user.set_password('YOUR_BOT_PASSWORD')
-bot_user.save()
-role = Role.objects.get(codename='streamer')
-UserRole.objects.get_or_create(user=bot_user, role=role)
-print('Готово')
-"
-```
-
-### 6. Запустить фронтенд
+### 4. Фронтенд (dev режим)
 
 ```bash
 cd frontend
@@ -159,102 +126,43 @@ npm install
 npm run dev
 ```
 
-Открой браузер: **http://localhost:5173**
+Открой: **http://localhost:5173**
 
 ---
 
 ## 🌍 Деплой на VPS
 
-### Требования к серверу
-
-- Ubuntu 22.04 или 24.04
-- Docker + Docker Compose
-- Домен направленный на IP сервера
-
-### 1. Подключиться к серверу
-
 ```bash
-ssh root@YOUR_SERVER_IP
-```
-
-### 2. Установить Docker
-
-```bash
-curl -fsSL https://get.docker.com | sh
-systemctl enable docker
-systemctl start docker
-```
-
-### 3. Клонировать репозиторий
-
-```bash
+# Клонировать и настроить
 git clone https://github.com/Quitari/VOLTAGE-PLATFORM.git
 cd VOLTAGE-PLATFORM
-```
-
-### 4. Создать `.env` для production
-
-```bash
 cp .env.example .env
-nano .env
-```
+# Заполнить .env production-значениями (DEBUG=False, домен и т.д.)
 
-Измени на production значения:
-
-```env
-DEBUG=False
-ALLOWED_HOSTS=quitari.ru,admin.quitari.ru,api.quitari.ru
-DOMAIN=quitari.ru
-TWITCH_REDIRECT_URI=https://twitch.quitari.ru/oauth/callback
-```
-
-### 5. Настроить DNS
-
-Добавь A-записи в DNS панели:
-
-```
-@           →  YOUR_SERVER_IP
-admin       →  YOUR_SERVER_IP
-api         →  YOUR_SERVER_IP
-twitch      →  YOUR_SERVER_IP
-app         →  YOUR_SERVER_IP
-```
-
-### 6. Собрать и запустить
-
-```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-```
-
-### 7. Применить миграции
-
-```bash
+# Запустить
+docker compose up -d --build
 docker compose exec backend python manage.py migrate
 docker compose exec backend python manage.py create_roles
 docker compose exec backend python manage.py createsuperuser
 ```
 
+Caddy автоматически получит TLS-сертификат если настроен домен.
+
 ---
 
-## 🤖 Настройка Telegram бота
+## 🤖 Настройка ботов
 
-### 1. Создать бота
+### Telegram
 
-1. Открой [@BotFather](https://t.me/BotFather) в Telegram
-2. Отправь `/newbot`
-3. Укажи название и username бота
-4. Скопируй токен в `.env` → `TELEGRAM_BOT_TOKEN`
+1. Создай бота через [@BotFather](https://t.me/BotFather)
+2. Скопируй токен в `.env` → `TELEGRAM_BOT_TOKEN`
+3. После запуска напиши `/start` боту — аккаунт создастся автоматически
 
-### 2. Авторизовать администратора
-
-После запуска напиши `/start` боту — аккаунт создастся автоматически.
-
-Назначь роль Owner:
+Назначь Owner:
 
 ```bash
 docker compose exec backend python manage.py shell -c "
 from apps.users.models import User, Role, UserRole
-# Замени YOUR_TELEGRAM_ID на свой Telegram ID
 user = User.objects.get(telegram_id=YOUR_TELEGRAM_ID)
 role = Role.objects.get(codename='owner')
 UserRole.objects.get_or_create(user=user, role=role)
@@ -262,95 +170,46 @@ print('Owner назначен:', user.username)
 "
 ```
 
----
+### Twitch
 
-## 🎮 Настройка Twitch бота
-
-### 1. Создать приложение на Twitch
-
-1. Зайди на [dev.twitch.tv/console](https://dev.twitch.tv/console)
-2. Нажми **Register Your Application**
-3. Заполни:
-   - **Name:** LarkinBot (или любое)
-   - **OAuth Redirect URL:** `https://twitch.quitari.ru/oauth/callback`
-   - **Category:** Chat Bot
-4. Скопируй **Client ID** и **Client Secret** в `.env`
-
-### 2. Получить ID бота и стримера
-
-```bash
-# Замени USERNAME на нужный ник
-curl -X GET 'https://api.twitch.tv/helix/users?login=USERNAME' \
-  -H 'Client-Id: YOUR_CLIENT_ID' \
-  -H 'Authorization: Bearer YOUR_APP_TOKEN'
-```
-
-Или через Python:
-
-```python
-# python get_ids.py
-import asyncio
-import twitchio
-
-async def main():
-    async with twitchio.Client(
-        client_id="YOUR_CLIENT_ID",
-        client_secret="YOUR_CLIENT_SECRET"
-    ) as client:
-        await client.login()
-        users = await client.fetch_users(logins=["larkin_bot", "zhenyalarkin"])
-        for u in users:
-            print(f"{u.name}: {u.id}")
-
-asyncio.run(main())
-```
-
-### 3. Авторизовать аккаунты
-
-После запуска сервера открой в браузере:
-
-```
-https://twitch.quitari.ru/oauth
-```
-
-Нужно авторизовать **два аккаунта**:
-
-1. **Аккаунт бота** (`larkin_bot`) — скопы: `user:bot`, `user:read:chat`, `user:write:chat`
-2. **Аккаунт стримера** (`ZhenyaLarkin`) — скопы: `channel:bot`, `channel:manage:redemptions`
+1. Зарегистрируй приложение на [dev.twitch.tv/console](https://dev.twitch.tv/console)
+2. OAuth Redirect URL: `https://twitch.YOUR_DOMAIN/oauth/callback`
+3. Скопируй Client ID и Client Secret в `.env`
+4. Открой `https://twitch.YOUR_DOMAIN/oauth` и авторизуй два аккаунта: бота и стримера
 
 ---
 
-## 📊 Роли и уровни доступа
+## 📊 Роли и права доступа
 
-| Роль            | Уровень | Описание                      |
-| --------------- | ------- | ----------------------------- |
-| Owner           | 999     | Полный доступ, нельзя удалить |
-| Admin           | 100     | Административный доступ       |
-| Super Moderator | 75      | Расширенная модерация         |
-| Moderator       | 50      | Модерация сообщества          |
-| Streamer        | 30      | Управление контентом          |
-| Участник        | 0       | Базовая роль                  |
+| Роль | Уровень | Описание |
+| --- | --- | --- |
+| Owner | 999 | Полный доступ, системная роль |
+| Admin | 100 | Полное управление платформой |
+| Super Moderator | 75 | Расширенная модерация + апелляции |
+| Moderator | 50 | Модерация чата и наказания |
+| Streamer | 30 | Управление контентом |
+| Участник | 0 | Базовая роль (выдаётся автоматически) |
 
 ---
 
 ## 🔧 Полезные команды
 
 ```bash
-# Просмотр логов
+# Логи
 docker compose logs -f backend
 docker compose logs -f telegram_bot
 docker compose logs -f twitch_bot
 
-# Перезапуск сервиса
+# Перезапуск
 docker compose restart backend
-
-# Подключение к базе данных
-docker compose exec db psql -U voltage_user -d voltage
 
 # Django shell
 docker compose exec backend python manage.py shell
 
-# Обновление кода на сервере
+# БД
+docker compose exec db psql -U voltage_user -d voltage
+
+# Обновление
 git pull origin main
 docker compose up -d --build
 docker compose exec backend python manage.py migrate
@@ -360,24 +219,28 @@ docker compose exec backend python manage.py migrate
 
 ## 🗺️ Roadmap
 
-- [x] Backend API (Django REST Framework)
-- [x] RBAC система ролей и прав
-- [x] Розыгрыши (полный цикл)
-- [x] Система модерации
-- [x] Telegram бот
-- [x] Twitch бот (базовый)
-- [x] Веб панель администратора (React)
-- [ ] GSI интеграция (CS2)
-- [ ] LisSkins / VoltageDrops интеграция
-- [ ] Overlay для OBS
-- [ ] Мобильное приложение
+- [x] Backend REST API (Django REST Framework)
+- [x] RBAC — роли, права, назначение через UI
+- [x] Розыгрыши — полный цикл (создание → участие → итоги → приз)
+- [x] Система модерации (наказания, апелляции, тикеты, аудит-лог)
+- [x] Telegram бот (участие, привязка аккаунтов, уведомления)
+- [x] Twitch бот (интеграция с чатом)
+- [x] React Admin Panel (управление всем из браузера)
+- [x] Dashboard для участников
+- [ ] Celery-задачи (авто-проведение розыгрышей, снятие наказаний)
+- [ ] LisSkins / CS Market интеграция (автоматическая отправка скинов)
+- [ ] Steam OAuth
+- [ ] Twitch OAuth (вместо ручной привязки)
+- [ ] Система уведомлений
+- [ ] Telegram Mini App
+- [ ] OBS Overlay
 
 ---
 
 ## 📝 Лицензия
 
-MIT License — используй свободно для своих проектов.
+MIT License — используй, форкай, адаптируй под себя.
 
 ---
 
-_VOLTAGE Platform — open source платформа для стримеров_
+*VOLTAGE Platform — open source инструмент для стримеров*

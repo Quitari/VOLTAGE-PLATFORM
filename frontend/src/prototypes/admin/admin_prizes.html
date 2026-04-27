@@ -129,7 +129,7 @@
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #0000CD !important;
+  border-left: 2px solid #9caffc !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -177,13 +177,13 @@ body { min-width: 860px; }
 <!-- SideNavBar (Authority Source: Shared Components JSON) -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
 <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
-  <h1 class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <h1 class="text-xl font-black tracking-tighter text-[#9caffc] font-headline uppercase sidebar-text">VOLTAGE</h1>
   <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -205,7 +205,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5">
-    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#0000CD] border-l-4 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#9caffc] border-l-4 border-[#9caffc] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -213,7 +213,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5 hidden">
-    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -244,12 +244,12 @@ body { min-width: 860px; }
 <nav class="flex gap-2 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white/30 mb-2">
 <span>Console</span>
 <span>/</span>
-<span class="text-[#0000CD]">Prizes and Delivery</span>
+<span class="text-[#9caffc]">Prizes and Delivery</span>
 </nav>
 <h2 class="text-5xl font-headline font-extrabold uppercase tracking-tighter text-white">
                         Призы и доставка
 <div class="flex gap-1 mt-4 mb-4">
-  <button class="px-4 py-2 bg-[#0000CD] text-[#FFFFFF] text-xs font-bold uppercase tracking-widest rounded">Все</button>
+  <button class="px-4 py-2 bg-[#9caffc] text-[#FFFFFF] text-xs font-bold uppercase tracking-widest rounded">Все</button>
   <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded">Ожидают <span class="ml-1 bg-white/10 px-1.5 py-0.5 rounded text-[10px]">3</span></button>
   <button class="px-4 py-2 text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-bold uppercase tracking-widest rounded">Ошибки <span class="ml-1 bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded text-[10px]">2</span></button>
 </div>
@@ -312,7 +312,7 @@ body { min-width: 860px; }
 <div class="bg-surface-container-low overflow-hidden">
 <!-- Custom Tabs -->
 <div class="flex border-b border-outline-variant/10 px-8">
-<button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-[#0000CD] border-b-2 border-[#0000CD] -mb-[2px]">
+<button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-[#9caffc] border-b-2 border-[#9caffc] -mb-[2px]">
                         Все призы
                     </button>
 <button class="px-8 py-5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white/40 hover:text-white transition-colors">
@@ -484,13 +484,13 @@ body { min-width: 860px; }
 <div class="bg-surface-container-lowest/50 px-8 py-4 flex justify-between items-center">
 <span class="text-[10px] font-headline font-bold uppercase tracking-widest text-white/20">Showing 1-4 of 96 items</span>
 <div class="flex items-center gap-2">
-<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#0000CD] transition-colors">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#9caffc] transition-colors">
 <span class="material-symbols-outlined text-sm">chevron_left</span>
 </button>
-<button class="w-8 h-8 flex items-center justify-center bg-[#0000CD] text-[#FFFFFF] font-headline font-bold text-xs">1</button>
-<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#0000CD] transition-colors font-headline font-bold text-xs">2</button>
-<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#0000CD] transition-colors font-headline font-bold text-xs">3</button>
-<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#0000CD] transition-colors">
+<button class="w-8 h-8 flex items-center justify-center bg-[#9caffc] text-[#FFFFFF] font-headline font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#9caffc] transition-colors font-headline font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#9caffc] transition-colors font-headline font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant/20 text-white/40 hover:text-white hover:border-[#9caffc] transition-colors">
 <span class="material-symbols-outlined text-sm">chevron_right</span>
 </button>
 </div>
@@ -499,11 +499,11 @@ body { min-width: 860px; }
 <!-- Contextual Helper Card -->
 <div class="mt-8 bg-surface-container-low p-8 flex items-center gap-8 relative overflow-hidden group">
 <div class="relative z-10 max-w-lg">
-<h3 class="text-xl font-headline font-bold uppercase tracking-tight text-[#0000CD] mb-2">Автоматизация доставки</h3>
+<h3 class="text-xl font-headline font-bold uppercase tracking-tight text-[#9caffc] mb-2">Автоматизация доставки</h3>
 <p class="text-sm text-white/60 leading-relaxed mb-4">Система автоматически проверяет Steam Trade Link перед отправкой. Если статус помечается ошибкой, пожалуйста, свяжитесь с пользователем через раздел "Тикеты" или обновите ссылку вручную.</p>
 <div class="flex gap-4">
-<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#0000CD] transition-colors underline decoration-outline-variant" href="/docs">Инструкция по API</a>
-<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#0000CD] transition-colors underline decoration-outline-variant" href="/docs">Настройка уведомлений</a>
+<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#9caffc] transition-colors underline decoration-outline-variant" href="/docs">Инструкция по API</a>
+<a class="text-[10px] font-headline font-bold uppercase tracking-widest text-white hover:text-[#9caffc] transition-colors underline decoration-outline-variant" href="/docs">Настройка уведомлений</a>
 </div>
 </div>
 <div class="absolute right-0 top-0 h-full w-1/3 opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity">
@@ -543,8 +543,8 @@ function showConfirm(opts) {
     wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
     btn.style.background = '#EF4444'; btn.style.color = '#fff';
   } else {
-    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#0000CD'; icon.textContent = 'help';
-    btn.style.background = '#0000CD'; btn.style.color = '#FFFFFF';
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#9caffc'; icon.textContent = 'help';
+    btn.style.background = '#9caffc'; btn.style.color = '#FFFFFF';
   }
   btn.textContent = opts.confirmLabel || 'Подтвердить';
   btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };

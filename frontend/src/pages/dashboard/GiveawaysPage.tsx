@@ -68,7 +68,7 @@ export default function GiveawaysPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">
-          Роз<span className="text-[#0000CD]">ыгрыши</span>
+          Роз<span className="text-[#9caffc]">ыгрыши</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">
           Активные и завершённые розыгрыши
@@ -92,7 +92,7 @@ export default function GiveawaysPage() {
             onClick={() => setTab(t.id as any)}
             className={`px-4 py-2 rounded-xl text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2 ${
               tab === t.id
-                ? "bg-[#0000CD] text-[#FFFFFF]"
+                ? "bg-[#9caffc] text-[#0a0a0a]"
                 : "bg-[#111] border border-white/5 text-white/40 hover:text-white"
             }`}
           >
@@ -150,7 +150,7 @@ export default function GiveawaysPage() {
                     </span>
                   )}
                   <div className="absolute top-3 left-3 flex gap-2">
-                    <span className="bg-[#0000CD] text-[#FFFFFF] text-[10px] font-black px-2 py-0.5 rounded uppercase">
+                    <span className="bg-[#9caffc] text-[#0a0a0a] text-[10px] font-black px-2 py-0.5 rounded uppercase">
                       {PLATFORM[g.platform] || g.platform}
                     </span>
                     {joined.includes(g.id) && (
@@ -176,7 +176,7 @@ export default function GiveawaysPage() {
                     <button
                       onClick={() => handleJoin(g.id)}
                       disabled={joining === g.id || joined.includes(g.id)}
-                      className="px-3 py-1.5 bg-[#0000CD] text-[#FFFFFF] text-xs font-bold rounded-lg uppercase hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
+                      className="px-3 py-1.5 bg-[#9caffc] text-[#0a0a0a] text-xs font-bold rounded-lg uppercase hover:bg-[#7b94f8] transition-colors disabled:opacity-50"
                     >
                       {joining === g.id
                         ? "..."
@@ -207,7 +207,7 @@ export default function GiveawaysPage() {
             return (
               <div
                 key={g.id}
-                className={`bg-[#111] border rounded-2xl p-5 flex items-center gap-5 ${isWinner ? "border-[#0000CD]/30" : "border-white/5"}`}
+                className={`bg-[#111] border rounded-2xl p-5 flex items-center gap-5 ${isWinner ? "border-[#9caffc]/30" : "border-white/5"}`}
               >
                 <div className="w-12 h-12 rounded-xl bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
                   <span className="material-symbols-outlined text-white/20">
@@ -218,7 +218,7 @@ export default function GiveawaysPage() {
                   <div className="flex items-center gap-2 mb-0.5">
                     <p className="font-bold text-white truncate">{g.title}</p>
                     {isWinner && (
-                      <span className="text-[10px] font-black bg-[#0000CD] text-[#FFFFFF] px-2 py-0.5 rounded uppercase flex-shrink-0">
+                      <span className="text-[10px] font-black bg-[#9caffc] text-[#0a0a0a] px-2 py-0.5 rounded uppercase flex-shrink-0">
                         🏆 Победитель
                       </span>
                     )}

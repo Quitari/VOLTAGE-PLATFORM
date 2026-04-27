@@ -127,7 +127,7 @@
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #0000CD !important;
+  border-left: 2px solid #9caffc !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -175,13 +175,13 @@ body { min-width: 860px; }
 <!-- SideNavBar -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden" style="width:256px">
 <div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
-  <span class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sb-text">VOLTAGE</span>
+  <span class="text-xl font-black tracking-tighter text-[#9caffc] font-headline uppercase sb-text">VOLTAGE</span>
   <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 sb-text overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -211,7 +211,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90" style="transform:rotate(90deg)">chevron_right</span>
   </button>
   <div class="sidebar-acc-body space-y-0.5">
-    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#0000CD] border-l-2 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9caffc] border-l-2 border-[#9caffc] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-accordion">
   <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
@@ -239,19 +239,19 @@ body { min-width: 860px; }
 <!-- Filter & Search -->
 <div class="p-4 space-y-4">
 <div class="flex gap-1 bg-[#1C1B1B] p-1 rounded-lg">
-<button class="flex-1 py-2 text-[10px] font-black uppercase tracking-widest bg-[#0000CD] text-[#FFFFFF] rounded">Открытые</button>
+<button class="flex-1 py-2 text-[10px] font-black uppercase tracking-widest bg-[#9caffc] text-[#FFFFFF] rounded">Открытые</button>
 <button class="flex-1 py-2 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">В работе</button>
 <button class="flex-1 py-2 text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-white transition-colors">Закрытые</button>
 </div>
 <div class="relative">
-<input class="w-full bg-[#1C1B1B] border-none text-xs text-on-surface p-3 pr-10 focus:ring-1 focus:ring-[#0000CD]/30 rounded" placeholder="Поиск по тикетам..." type="text"/>
+<input class="w-full bg-[#1C1B1B] border-none text-xs text-on-surface p-3 pr-10 focus:ring-1 focus:ring-[#9caffc]/30 rounded" placeholder="Поиск по тикетам..." type="text"/>
 <span class="material-symbols-outlined absolute right-3 top-2.5 text-outline text-lg">search</span>
 </div>
 </div>
 <!-- List -->
 <div class="flex-1 overflow-y-auto custom-scrollbar">
 <!-- Active Ticket -->
-<div class="p-4 bg-[#1C1B1B] border-l-4 border-[#0000CD] cursor-pointer group">
+<div class="p-4 bg-[#1C1B1B] border-l-4 border-[#9caffc] cursor-pointer group">
 <div class="flex justify-between items-start mb-2">
 <div class="flex gap-3">
 <img class="w-10 h-10 rounded-lg" data-alt="smiling young male avatar in modern streetwear aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYYI2z_Larvs2Ka7HpGZrIEVCE3AmGZa8DGUGyb1MyPrbOl4vLUZqO5QxRsLtdJreuYbzw36N4BF47MBoCIlgCvsketcwoHpxV0MjoUW8gitZXQ9ms7c7z5bH1RarEcTPL_SeGSfZ4IhpJap0ojFE0VB6AxFFoIjqL3xPGzsrptE8vPTngUAMHdPmed-TMlPJjyvGyqeoBP-0koLr0POuwCklPtyWZ6MBzk4Pmp0LWobgNinLma9470ubM13s3PVQmtNnVQbp5HIPN"/>
@@ -315,7 +315,7 @@ body { min-width: 860px; }
 <header class="h-16 border-b border-outline-variant/10 px-8 flex items-center justify-between">
 <div class="flex items-center gap-4">
 <div class="bg-[#1C1B1B] w-10 h-10 rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-[#0000CD]">confirmation_number</span>
+<span class="material-symbols-outlined text-[#9caffc]">confirmation_number</span>
 </div>
 <div>
 <h2 class="text-base font-black uppercase tracking-tight text-white leading-tight">Ошибка при выводе приза</h2>
@@ -355,10 +355,10 @@ body { min-width: 860px; }
 </div>
 <!-- Admin Response -->
 <div class="flex flex-col items-start gap-2 max-w-[80%] self-start">
-<div class="bg-[#1C1B1B] p-4 rounded-xl rounded-tl-none border-l-2 border-[#0000CD]">
+<div class="bg-[#1C1B1B] p-4 rounded-xl rounded-tl-none border-l-2 border-[#9caffc]">
 <p class="text-sm text-white/90 leading-relaxed font-medium">Приветствуем! Приносим извинения за неудобства. Мы уже работаем над устранением технической неполадки. Уточните, пожалуйста, через какой браузер вы заходите на сайт?</p>
 </div>
-<span class="text-[10px] text-[#0000CD] uppercase font-black">Служба поддержки • 14:15</span>
+<span class="text-[10px] text-[#9caffc] uppercase font-black">Служба поддержки • 14:15</span>
 </div>
 <!-- User Message -->
 <div class="flex flex-col items-end gap-2 max-w-[80%] self-end">
@@ -374,17 +374,17 @@ body { min-width: 860px; }
 <textarea class="w-full bg-transparent border-none focus:ring-0 text-sm text-white placeholder-white/20 resize-none min-h-[80px] p-2 custom-scrollbar" placeholder="Введите ответ пользователю..."></textarea>
 <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/5">
 <div class="flex gap-1">
-<button class="p-2 text-white/40 hover:text-[#0000CD] transition-colors rounded hover:bg-white/5">
+<button class="p-2 text-white/40 hover:text-[#9caffc] transition-colors rounded hover:bg-white/5">
 <span class="material-symbols-outlined">attach_file</span>
 </button>
-<button class="p-2 text-white/40 hover:text-[#0000CD] transition-colors rounded hover:bg-white/5">
+<button class="p-2 text-white/40 hover:text-[#9caffc] transition-colors rounded hover:bg-white/5">
 <span class="material-symbols-outlined">image</span>
 </button>
-<button class="p-2 text-white/40 hover:text-[#0000CD] transition-colors rounded hover:bg-white/5">
+<button class="p-2 text-white/40 hover:text-[#9caffc] transition-colors rounded hover:bg-white/5">
 <span class="material-symbols-outlined">mood</span>
 </button>
 </div>
-<button class="bg-[#0000CD] text-[#FFFFFF] px-6 py-2 rounded font-black uppercase text-xs tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95 flex items-center gap-2">
+<button class="bg-[#9caffc] text-[#FFFFFF] px-6 py-2 rounded font-black uppercase text-xs tracking-widest hover:bg-[#7b94f8] transition-all active:scale-95 flex items-center gap-2">
 <span>Отправить</span>
 <span class="material-symbols-outlined text-lg">send</span>
 </button>
@@ -434,8 +434,8 @@ function showConfirm(opts) {
     wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
     btn.style.background = '#EF4444'; btn.style.color = '#fff';
   } else {
-    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#0000CD'; icon.textContent = 'help';
-    btn.style.background = '#0000CD'; btn.style.color = '#FFFFFF';
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#9caffc'; icon.textContent = 'help';
+    btn.style.background = '#9caffc'; btn.style.color = '#FFFFFF';
   }
   btn.textContent = opts.confirmLabel || 'Подтвердить';
   btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };

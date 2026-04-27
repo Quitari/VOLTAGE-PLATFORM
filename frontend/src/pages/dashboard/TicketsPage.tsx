@@ -8,9 +8,9 @@ const STATUS: Record<
 > = {
   open: {
     label: "Открыт",
-    color: "text-[#0000CD]",
-    bg: "bg-[#0000CD]/10",
-    border: "border-[#0000CD]/20",
+    color: "text-[#9caffc]",
+    bg: "bg-[#9caffc]/10",
+    border: "border-[#9caffc]/20",
   },
   in_work: {
     label: "В работе",
@@ -104,13 +104,13 @@ export default function TicketsPage() {
       <div className="flex items-end justify-between">
         <div>
           <h1 className="text-4xl font-black uppercase tracking-tighter text-white">
-            Тике<span className="text-[#0000CD]">ты</span>
+            Тике<span className="text-[#9caffc]">ты</span>
           </h1>
           <p className="text-white/40 text-sm mt-1">Обращения в поддержку</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-5 py-2.5 bg-[#0000CD] text-white font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#7b94f8] transition-colors"
         >
           <span className="material-symbols-outlined text-base">add</span>
           Новый тикет
@@ -119,7 +119,7 @@ export default function TicketsPage() {
 
       {/* Форма создания */}
       {showForm && (
-        <div className="bg-[#111] border border-[#0000CD]/20 rounded-2xl p-5 space-y-4">
+        <div className="bg-[#111] border border-[#9caffc]/20 rounded-2xl p-5 space-y-4">
           <h3 className="text-sm font-black text-white uppercase tracking-tight">
             Новое обращение
           </h3>
@@ -141,7 +141,7 @@ export default function TicketsPage() {
                   setForm((f) => ({ ...f, subject: e.target.value }))
                 }
                 placeholder="Кратко опиши проблему"
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
             </div>
             <div>
@@ -153,7 +153,7 @@ export default function TicketsPage() {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, category: e.target.value }))
                 }
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               >
                 {Object.entries(CATEGORY).map(([key, val]) => (
                   <option key={key} value={key}>
@@ -175,7 +175,7 @@ export default function TicketsPage() {
               }
               placeholder="Опиши проблему подробно..."
               rows={4}
-              className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none placeholder-white/20"
+              className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 resize-none placeholder-white/20"
             />
           </div>
 
@@ -192,7 +192,7 @@ export default function TicketsPage() {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="flex-1 py-3 bg-[#0000CD] text-white font-bold rounded-xl uppercase text-xs hover:bg-[#1A1AE8] transition-colors disabled:opacity-40"
+              className="flex-1 py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs hover:bg-[#7b94f8] transition-colors disabled:opacity-40"
             >
               {submitting ? "Отправляем..." : "Отправить"}
             </button>
@@ -217,7 +217,7 @@ export default function TicketsPage() {
               onClick={() => setFilter(f.key as typeof filter)}
               className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${
                 filter === f.key
-                  ? "bg-[#0000CD] text-white"
+                  ? "bg-[#9caffc] text-[#0a0a0a]"
                   : "text-white/40 hover:text-white"
               }`}
             >

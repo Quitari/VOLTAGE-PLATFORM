@@ -25,7 +25,7 @@ function Countdown({ endsAt }: { endsAt: string }) {
   return (
     <div className="text-right">
       <div className="text-white/40 text-[10px] uppercase font-bold">До конца:</div>
-      <div className="text-[#0000CD] font-black text-sm">{display}</div>
+      <div className="text-[#9caffc] font-black text-sm">{display}</div>
     </div>
   );
 }
@@ -136,7 +136,7 @@ export default function DashboardPage() {
       {/* Приветствие */}
       <div>
         <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase">
-          Привет, <span className="text-[#0000CD]">{user?.username}!</span>
+          Привет, <span className="text-[#9caffc]">{user?.username}!</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">
           Участник с {user?.created_at?.slice(0, 10)}
@@ -147,7 +147,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: "Участий",   value: stats?.total_participations ?? "—", color: "text-white" },
-          { label: "Побед",     value: stats?.wins ?? "—",                  color: "text-[#0000CD]" },
+          { label: "Побед",     value: stats?.wins ?? "—",                  color: "text-[#9caffc]" },
           { label: "Активных",  value: stats?.active_giveaways ?? "—",      color: "text-white" },
           {
             label: "Нарушений",
@@ -169,7 +169,7 @@ export default function DashboardPage() {
         {/* Левая часть — активные розыгрыши */}
         <div className="flex-1 space-y-4">
           <h2 className="text-xl font-black uppercase tracking-tight">
-            Активные <span className="text-[#0000CD]">розыгрыши</span>
+            Активные <span className="text-[#9caffc]">розыгрыши</span>
           </h2>
 
           {error && (
@@ -206,7 +206,7 @@ export default function DashboardPage() {
 
                     {/* Бейджи */}
                     <div className="absolute top-3 left-3 flex gap-2 z-10">
-                      <span className="bg-[#0000CD] text-[#FFFFFF] px-2 py-0.5 rounded text-[10px] font-black uppercase">
+                      <span className="bg-[#9caffc] text-[#0a0a0a] px-2 py-0.5 rounded text-[10px] font-black uppercase">
                         {PLATFORM_LABELS[g.platform] || g.platform}
                       </span>
                       {isJoined && (
@@ -251,7 +251,7 @@ export default function DashboardPage() {
                           className={`px-3 py-1.5 text-xs font-bold rounded-lg uppercase transition-colors disabled:opacity-50 ${
                             isJoined
                               ? "bg-green-500/20 text-green-400 cursor-default"
-                              : "bg-[#0000CD] text-[#FFFFFF] hover:bg-[#1A1AE8]"
+                              : "bg-[#9caffc] text-[#0a0a0a] hover:bg-[#7b94f8]"
                           }`}
                         >
                           {joining === g.id ? "..." : isJoined ? "✅ Участвуешь" : "Участвовать"}
@@ -271,10 +271,10 @@ export default function DashboardPage() {
           {/* Последний приз */}
           <div>
             <h2 className="text-xl font-black uppercase tracking-tight mb-4">
-              Последний <span className="text-[#0000CD]">приз</span>
+              Последний <span className="text-[#9caffc]">приз</span>
             </h2>
             {lastPrize ? (
-              <div className="bg-[#111] border border-white/5 rounded-2xl p-5 border-l-4 border-l-[#0000CD]">
+              <div className="bg-[#111] border border-white/5 rounded-2xl p-5 border-l-4 border-l-[#9caffc]">
                 <div className="relative h-40 bg-[#0E0E0E] rounded-xl mb-4 overflow-hidden">
                   {lastPrize.skin_image_url ? (
                     <img src={lastPrize.skin_image_url} alt={lastPrize.name}
@@ -341,9 +341,9 @@ export default function DashboardPage() {
 
           {/* Предложить клип */}
           <button onClick={() => setClipModal(true)}
-            className="bg-[#0000CD]/10 border border-[#0000CD]/20 rounded-2xl p-5 flex items-center gap-3 hover:bg-[#0000CD]/20 transition-colors">
-            <span className="material-symbols-outlined text-2xl text-[#0000CD]">video_library</span>
-            <span className="text-sm font-bold text-[#0000CD] uppercase tracking-widest">Предложить клип</span>
+            className="bg-[#9caffc]/10 border border-[#9caffc]/20 rounded-2xl p-5 flex items-center gap-3 hover:bg-[#9caffc]/20 transition-colors">
+            <span className="material-symbols-outlined text-2xl text-[#9caffc]">video_library</span>
+            <span className="text-sm font-bold text-[#9caffc] uppercase tracking-widest">Предложить клип</span>
           </button>
         </div>
       </div>
@@ -386,13 +386,13 @@ export default function DashboardPage() {
                         value={clipForm[item.field as keyof typeof clipForm]}
                         onChange={(e) => setClipForm({ ...clipForm, [item.field]: e.target.value })}
                         placeholder={item.placeholder}
-                        className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                        className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                       />
                     </div>
                   ))}
                 </div>
                 <button onClick={handleClipSubmit} disabled={clipSubmitting}
-                  className="w-full bg-[#0000CD] text-[#FFFFFF] py-3 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-[#1A1AE8] transition-colors disabled:opacity-50">
+                  className="w-full bg-[#9caffc] text-[#0a0a0a] py-3 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-[#7b94f8] transition-colors disabled:opacity-50">
                   {clipSubmitting ? "Отправляем..." : "Отправить на модерацию"}
                 </button>
               </>

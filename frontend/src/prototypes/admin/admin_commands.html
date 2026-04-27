@@ -36,10 +36,10 @@ body { font-family: 'Manrope', sans-serif; background: #0A0A0A; color: #e5e2e1; 
 .font-headline { font-family: 'Space Grotesk', sans-serif; }
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 .row-hover:hover { background: rgba(255,255,255,0.02); }
-.var-tag { background: rgba(255,225,0,0.1); color: #0000CD; border: 1px solid rgba(255,225,0,0.2); font-family: monospace; font-size: 11px; padding: 2px 7px; border-radius: 4px; cursor: pointer; transition: all 0.15s; }
+.var-tag { background: rgba(255,225,0,0.1); color: #9caffc; border: 1px solid rgba(255,225,0,0.2); font-family: monospace; font-size: 11px; padding: 2px 7px; border-radius: 4px; cursor: pointer; transition: all 0.15s; }
 .var-tag:hover { background: rgba(255,225,0,0.2); }
 .perm-btn { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid transparent; transition: all 0.15s; cursor: pointer; }
-.perm-btn.active-all  { background: rgba(255,225,0,0.15); color: #0000CD; border-color: rgba(255,225,0,0.2); }
+.perm-btn.active-all  { background: rgba(255,225,0,0.15); color: #9caffc; border-color: rgba(255,225,0,0.2); }
 .perm-btn.active-sub  { background: rgba(145,70,255,0.15); color: #9146FF; border-color: rgba(145,70,255,0.2); }
 .perm-btn.active-mod  { background: rgba(34,197,94,0.15); color: #4ADE80; border-color: rgba(34,197,94,0.2); }
 .perm-btn.inactive    { background: transparent; color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.08); }
@@ -50,7 +50,7 @@ body { font-family: 'Manrope', sans-serif; background: #0A0A0A; color: #e5e2e1; 
 .toggle.on  .toggle-thumb { left: 18px; }
 .toggle.off .toggle-thumb { left: 2px; }
 .cmd-type-btn { padding: 8px 16px; border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-.cmd-type-btn.active { background: #0000CD; color: #FFFFFF; }
+.cmd-type-btn.active { background: #9caffc; color: #FFFFFF; }
 .cmd-type-btn.inactive { background: #1C1B1B; color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.05); }
 .cmd-type-btn.inactive:hover { color: white; background: #2A2A2A; }
 .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:999; align-items:center; justify-content:center; }
@@ -97,7 +97,7 @@ body { font-family: 'Manrope', sans-serif; background: #0A0A0A; color: #e5e2e1; 
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #0000CD !important;
+  border-left: 2px solid #9caffc !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -146,13 +146,13 @@ body { min-width: 860px; }
 <!-- SIDEBAR -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
 <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
-  <h1 class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <h1 class="text-xl font-black tracking-tighter text-[#9caffc] font-headline uppercase sidebar-text">VOLTAGE</h1>
   <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -174,7 +174,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5">
-    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#0000CD] border-l-4 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="text-sm">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="text-sm">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="text-sm">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="text-sm">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#9caffc] border-l-4 border-[#9caffc] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="text-sm">Команды Twitch</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -182,7 +182,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5 hidden">
-    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -212,7 +212,7 @@ body { min-width: 860px; }
       <span class="material-symbols-outlined text-sm">chevron_right</span>
       <a href="#" class="hover:text-white transition-colors">Контент</a>
       <span class="material-symbols-outlined text-sm">chevron_right</span>
-      <span class="text-[#0000CD]">Команды Twitch</span>
+      <span class="text-[#9caffc]">Команды Twitch</span>
     </nav>
 
     <!-- Page header -->
@@ -221,7 +221,7 @@ body { min-width: 860px; }
         <h1 class="text-3xl font-black text-white font-headline uppercase tracking-tight">Команды Twitch</h1>
         <p class="text-white/40 text-sm mt-1">Настройка ответов бота на команды в чате канала</p>
       </div>
-      <button onclick="openModal()" class="flex items-center gap-2 px-5 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#1A1AE8] transition-all active:scale-95">
+      <button onclick="openModal()" class="flex items-center gap-2 px-5 py-3 bg-[#9caffc] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#7b94f8] transition-all active:scale-95">
         <span class="material-symbols-outlined text-lg">add</span>
         Создать команду
       </button>
@@ -235,7 +235,7 @@ body { min-width: 860px; }
       </div>
       <div class="bg-[#111] border border-white/5 rounded-xl p-5">
         <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Активных</div>
-        <div class="text-3xl font-black text-[#0000CD] font-headline">6</div>
+        <div class="text-3xl font-black text-[#9caffc] font-headline">6</div>
       </div>
       <div class="bg-[#111] border border-white/5 rounded-xl p-5">
         <div class="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">Использований сегодня</div>
@@ -247,7 +247,7 @@ body { min-width: 860px; }
     <div class="bg-[#111] border border-white/5 rounded-2xl overflow-hidden">
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/5">
         <div class="flex gap-1">
-          <button class="px-3 py-1.5 bg-[#0000CD] text-[#FFFFFF] text-[10px] font-black uppercase tracking-widest rounded-lg">Все</button>
+          <button class="px-3 py-1.5 bg-[#9caffc] text-[#FFFFFF] text-[10px] font-black uppercase tracking-widest rounded-lg">Все</button>
           <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Активные</button>
           <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Системные</button>
           <button class="px-3 py-1.5 text-white/40 hover:text-white hover:bg-[#1C1B1B] text-[10px] font-black uppercase tracking-widest rounded-lg transition-all">Кастомные</button>
@@ -281,7 +281,7 @@ body { min-width: 860px; }
     <!-- Variables reference -->
     <div class="bg-[#111] border border-white/5 rounded-2xl p-6 mt-6">
       <div class="flex items-center gap-2 mb-4">
-        <span class="material-symbols-outlined text-[#0000CD]">code</span>
+        <span class="material-symbols-outlined text-[#9caffc]">code</span>
         <h3 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Доступные переменные</h3>
       </div>
       <p class="text-xs text-white/40 mb-4">Нажмите на переменную чтобы скопировать. Используйте в тексте ответа бота.</p>
@@ -323,8 +323,8 @@ body { min-width: 860px; }
       <div>
         <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Команда</label>
         <div class="relative">
-          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#0000CD] font-black font-mono text-lg">!</span>
-          <input id="cmd-name" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 pl-9 pr-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40 font-mono" placeholder="roll" type="text"/>
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[#9caffc] font-black font-mono text-lg">!</span>
+          <input id="cmd-name" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 pl-9 pr-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40 font-mono" placeholder="roll" type="text"/>
         </div>
         <p class="text-[10px] text-white/25 mt-1">Зрители пишут !roll в чате. Без пробелов и спецсимволов.</p>
       </div>
@@ -349,7 +349,7 @@ body { min-width: 860px; }
       <div id="response-block">
         <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Ответ бота</label>
         <div class="relative">
-          <textarea id="cmd-response" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 px-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none h-24" placeholder="Например: {user}, ты участвуешь в розыгрыше! Осталось {viewers} зрителей."></textarea>
+          <textarea id="cmd-response" class="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-3 px-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40 resize-none h-24" placeholder="Например: {user}, ты участвуешь в розыгрыше! Осталось {viewers} зрителей."></textarea>
           <div class="absolute bottom-3 right-3 flex gap-1">
             <button onclick="insertVar('{user}')" class="var-tag">{user}</button>
             <button onclick="insertVar('{viewers}')" class="var-tag">{viewers}</button>
@@ -383,11 +383,11 @@ body { min-width: 860px; }
       </div>
 
       <!-- Giveaway params (shown when type=giveaway) -->
-      <div id="giveaway-params-block" class="hidden bg-[#1C1B1B] border border-[#0000CD]/20 rounded-xl p-5 space-y-4">
-        <div class="text-[10px] font-bold text-[#0000CD] uppercase tracking-widest">⚡ Параметры розыгрыша</div>
+      <div id="giveaway-params-block" class="hidden bg-[#1C1B1B] border border-[#9caffc]/20 rounded-xl p-5 space-y-4">
+        <div class="text-[10px] font-bold text-[#9caffc] uppercase tracking-widest">⚡ Параметры розыгрыша</div>
         <div>
           <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Действие розыгрыша</label>
-          <select class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40">
+          <select class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40">
             <option>Зарегистрировать участника (написал ключевое слово)</option>
             <option>Запустить новый розыгрыш</option>
             <option>Показать текущих участников</option>
@@ -396,7 +396,7 @@ body { min-width: 860px; }
         </div>
         <div id="keyword-row">
           <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Ключевое слово для регистрации</label>
-          <input class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40 font-mono" placeholder="Например: 1  (зрители пишут 1 чтобы участвовать)"/>
+          <input class="w-full bg-[#111] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40 font-mono" placeholder="Например: 1  (зрители пишут 1 чтобы участвовать)"/>
         </div>
         <div class="text-[10px] text-white/30 leading-relaxed">
           Бот будет отслеживать написавших это слово и добавлять их в список участников текущего розыгрыша.
@@ -431,7 +431,7 @@ body { min-width: 860px; }
     </div>
     <div class="flex gap-3 px-6 py-5 border-t border-white/5 bg-[#0A0A0A]">
       <button onclick="closeModal()" class="flex-1 py-3 bg-[#1C1B1B] hover:bg-[#2A2A2A] border border-white/5 text-white/50 text-xs font-bold uppercase tracking-widest rounded-xl transition-all">Отмена</button>
-      <button class="flex-2 px-8 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить команду</button>
+      <button class="flex-2 px-8 py-3 bg-[#9caffc] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#7b94f8] transition-all active:scale-95">Сохранить команду</button>
     </div>
   </div>
 </div>
@@ -461,7 +461,7 @@ const COMMANDS = [
 ];
 
 const PERM_LABEL = { all: 'Все', sub: 'Подписчики', mod: 'Модераторы' };
-const PERM_CLASS = { all: 'bg-[#0000CD]/10 text-[#0000CD]', sub: 'bg-[#9146FF]/10 text-[#9146FF]', mod: 'bg-green-500/10 text-green-400' };
+const PERM_CLASS = { all: 'bg-[#9caffc]/10 text-[#9caffc]', sub: 'bg-[#9146FF]/10 text-[#9146FF]', mod: 'bg-green-500/10 text-green-400' };
 const TYPE_ICON  = { action: 'bolt', text: 'chat', giveaway: 'redeem' };
 
 function renderTable() {
@@ -555,7 +555,7 @@ function insertVar(v) {
 function updatePreview() {
   const val = document.getElementById('cmd-response').value;
   const preview = val
-    .replace(/{user}/g, '<span class="text-[#0000CD]">CyberVova_99</span>')
+    .replace(/{user}/g, '<span class="text-[#9caffc]">CyberVova_99</span>')
     .replace(/{viewers}/g, '<span class="text-white">12 430</span>')
     .replace(/{random}/g, '<span class="text-[#9146FF]">@random_user</span>')
     .replace(/{uptime}/g, '<span class="text-white">2ч 14мин</span>')

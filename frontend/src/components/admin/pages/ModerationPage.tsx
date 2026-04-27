@@ -234,7 +234,7 @@ export default function ModerationPage() {
                   setSelectedUser(null);
                 }}
                 placeholder="Ник на сайте, @Telegram, Twitch ник..."
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 pl-10 pr-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 pl-10 pr-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
               {/* Результаты поиска */}
               {searchResults.length > 0 && (
@@ -245,7 +245,7 @@ export default function ModerationPage() {
                       onClick={() => selectUser(u)}
                       className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#2A2A2A] transition-colors text-left"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#0000CD] text-xs flex-shrink-0">
+                      <div className="w-7 h-7 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#9caffc] text-xs flex-shrink-0">
                         {u.username?.slice(0, 2).toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -288,7 +288,7 @@ export default function ModerationPage() {
             {selectedUser && (
               <div className="mt-2 bg-[#1C1B1B] rounded-xl p-4 border border-white/5">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#0000CD] text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#9caffc] text-sm">
                     {selectedUser.username?.slice(0, 2).toUpperCase()}
                   </div>
                   <div>
@@ -309,7 +309,7 @@ export default function ModerationPage() {
                       key={pl.value}
                       className={`flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-lg border text-xs font-bold transition-colors ${
                         punishPlatforms.includes(pl.value)
-                          ? "bg-[#0000CD]/10 border-[#0000CD]/30 text-[#0000CD]"
+                          ? "bg-[#9caffc]/10 border-[#9caffc]/30 text-[#9caffc]"
                           : "bg-[#111] border-white/10 text-white/40 hover:text-white"
                       }`}
                     >
@@ -340,7 +340,7 @@ export default function ModerationPage() {
                     onClick={() => setPunishType(t.value)}
                     className={`px-4 py-2 text-xs font-bold rounded-lg uppercase tracking-widest transition-all ${
                       punishType === t.value
-                        ? "bg-[#0000CD] text-[#FFFFFF]"
+                        ? "bg-[#9caffc] text-[#0a0a0a]"
                         : "text-white/40 hover:text-white"
                     }`}
                   >
@@ -358,7 +358,7 @@ export default function ModerationPage() {
                 value={punishReason}
                 onChange={(e) => setPunishReason(e.target.value)}
                 placeholder="Укажите причину..."
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
             </div>
 
@@ -370,14 +370,14 @@ export default function ModerationPage() {
                 type="datetime-local"
                 value={punishExpires}
                 onChange={(e) => setPunishExpires(e.target.value)}
-                className="bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="bg-[#1C1B1B] border border-white/5 text-white text-sm py-2.5 px-4 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
             </div>
 
             <button
               onClick={handlePunish}
               disabled={punishing || !selectedUser}
-              className="px-6 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#1A1AE8] transition-all active:scale-95 flex items-center gap-2 flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#7b94f8] transition-all active:scale-95 flex items-center gap-2 flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span className="material-symbols-outlined text-base">gavel</span>
               {punishing ? "Выдаём..." : "Выдать наказание"}
@@ -397,7 +397,7 @@ export default function ModerationPage() {
             onClick={() => setStatusFilter(s)}
             className={`pb-3 px-4 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
               statusFilter === s
-                ? "text-[#0000CD] border-[#0000CD]"
+                ? "text-[#9caffc] border-[#9caffc]"
                 : "text-white/40 border-transparent hover:text-white"
             }`}
           >
@@ -405,7 +405,7 @@ export default function ModerationPage() {
             {s === "active" &&
               punishments.length > 0 &&
               statusFilter === "active" && (
-                <span className="ml-2 text-[9px] bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">
+                <span className="ml-2 text-[9px] bg-[#9caffc]/15 text-[#9caffc] px-1.5 py-0.5 rounded-full">
                   {punishments.length}
                 </span>
               )}

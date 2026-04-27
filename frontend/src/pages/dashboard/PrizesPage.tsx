@@ -16,16 +16,16 @@ const STATUS: Record<
   },
   processing: {
     label: "В обработке",
-    color: "text-[#0000CD]",
-    bg: "bg-[#0000CD]/10",
-    border: "border-[#0000CD]/20",
+    color: "text-[#9caffc]",
+    bg: "bg-[#9caffc]/10",
+    border: "border-[#9caffc]/20",
     step: 1,
   },
   sent: {
     label: "Отправлен",
-    color: "text-[#0000CD]",
-    bg: "bg-[#0000CD]/10",
-    border: "border-[#0000CD]/20",
+    color: "text-[#9caffc]",
+    bg: "bg-[#9caffc]/10",
+    border: "border-[#9caffc]/20",
     step: 2,
   },
   delivered: {
@@ -76,7 +76,7 @@ function ProgressBar({ status }: { status: string }) {
               i <= step
                 ? isDelivered
                   ? "text-green-400"
-                  : "text-[#0000CD]"
+                  : "text-[#9caffc]"
                 : "text-white/20"
             }
           >
@@ -86,11 +86,11 @@ function ProgressBar({ status }: { status: string }) {
       </div>
       <div className="h-1 w-full bg-white/5 rounded-full relative">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${isDelivered ? "bg-green-400" : "bg-[#0000CD]"}`}
+          className={`h-full rounded-full transition-all duration-500 ${isDelivered ? "bg-green-400" : "bg-[#9caffc]"}`}
           style={{ width: `${progress}%` }}
         />
         <div
-          className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 transition-all duration-500 ${isDelivered ? "bg-green-400 border-[#111]" : "bg-[#0000CD] border-[#111]"}`}
+          className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 transition-all duration-500 ${isDelivered ? "bg-green-400 border-[#111]" : "bg-[#9caffc] border-[#111]"}`}
           style={{ left: `calc(${progress}% - 6px)` }}
         />
       </div>
@@ -137,7 +137,7 @@ export default function PrizesPage() {
       {/* Заголовок */}
       <div>
         <h1 className="text-4xl font-black uppercase tracking-tighter">
-          Мои <span className="text-[#0000CD]">призы</span>
+          Мои <span className="text-[#9caffc]">призы</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">История выигранных призов</p>
       </div>
@@ -155,7 +155,7 @@ export default function PrizesPage() {
               onClick={() => setFilter(f.key as typeof filter)}
               className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${
                 filter === f.key
-                  ? "bg-[#0000CD] text-white"
+                  ? "bg-[#9caffc] text-[#0a0a0a]"
                   : "text-white/40 hover:text-white"
               }`}
             >

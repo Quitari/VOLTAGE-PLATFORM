@@ -95,7 +95,7 @@ export default function AdminLayout({
       >
         <div className="flex items-center justify-between px-5 py-4 flex-shrink-0">
           {!collapsed && (
-            <span className="text-xl font-black tracking-tighter text-[#0000CD] uppercase">
+            <span className="text-xl font-black tracking-tighter text-[#9caffc] uppercase">
               VOLTAGE
             </span>
           )}
@@ -109,7 +109,7 @@ export default function AdminLayout({
 
         {!collapsed && (
           <div className="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm flex-shrink-0">
               {initials}
             </div>
             <div className="flex flex-col min-w-0 overflow-hidden">
@@ -125,7 +125,7 @@ export default function AdminLayout({
 
         {collapsed && (
           <div className="px-3 mb-3 flex justify-center flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm">
+            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm">
               {initials}
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function AdminLayout({
                             : "px-3 py-2.5"
                         } ${
                           isActive(item.path)
-                            ? "text-white border-l-2 border-[#0000CD] bg-[#1C1B1B] font-bold"
+                            ? "text-white border-l-2 border-[#9caffc] bg-[#1C1B1B] font-bold"
                             : "text-gray-400 hover:text-white hover:bg-[#1C1B1B]"
                         }`}
                         title={collapsed ? item.label : undefined}

@@ -32,7 +32,7 @@ function ProtectedRoute({
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="text-[#0000CD] text-xl font-bold">VOLTAGE...</div>
+        <div className="text-[#9caffc] text-xl font-bold">VOLTAGE...</div>
       </div>
     );
   }

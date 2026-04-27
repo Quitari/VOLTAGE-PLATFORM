@@ -18,11 +18,11 @@ function MomentsBlock() {
     <section id="moments" className="lg:col-span-2">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-black uppercase tracking-tight">
-          Лучшие <span className="text-[#0000CD]">моменты</span>
+          Лучшие <span className="text-[#9caffc]">моменты</span>
         </h2>
         <button
           onClick={() => navigate("/moments")}
-          className="text-xs font-bold text-[#0000CD] uppercase hover:underline"
+          className="text-xs font-bold text-[#9caffc] uppercase hover:underline"
         >
           Все моменты
         </button>
@@ -126,7 +126,7 @@ export default function MainPage() {
   if (loading)
     return (
       <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-        <div className="text-[#0000CD] text-2xl font-black tracking-tighter animate-pulse">
+        <div className="text-[#9caffc] text-2xl font-black tracking-tighter animate-pulse">
           VOLTAGE...
         </div>
       </div>
@@ -158,7 +158,7 @@ export default function MainPage() {
     >
       {/* Nav */}
       <nav className="bg-[#0E0E0E]/70 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center w-full px-8 py-4 border-b border-white/5">
-        <div className="text-2xl font-black tracking-tighter text-[#0000CD] uppercase">
+        <div className="text-2xl font-black tracking-tighter text-[#9caffc] uppercase">
           {name}
         </div>
         <div className="hidden md:flex gap-8 items-center">
@@ -173,7 +173,7 @@ export default function MainPage() {
                 href={item.href}
                 className={`font-bold uppercase text-sm transition-colors ${
                   isActive
-                    ? "text-[#0000CD] border-b-2 border-[#0000CD] pb-1"
+                    ? "text-[#9caffc] border-b-2 border-[#9caffc] pb-1"
                     : "text-white/70 hover:text-white"
                 }`}
               >
@@ -184,7 +184,7 @@ export default function MainPage() {
         </div>
         <button
           onClick={() => navigate("/login")}
-          className="bg-[#0000CD] text-[#FFFFFF] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#1A1AE8] transition-colors active:scale-95"
+          className="bg-[#9caffc] text-[#0a0a0a] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#7b94f8] transition-colors active:scale-95"
         >
           ВОЙТИ
         </button>
@@ -237,7 +237,7 @@ export default function MainPage() {
                   {word}
                 </span>
               ) : (
-                <span key={i} className="block text-[#0000CD]">
+                <span key={i} className="block text-[#9caffc]">
                   {word}
                 </span>
               ),
@@ -251,7 +251,7 @@ export default function MainPage() {
           <div className="flex flex-wrap gap-4 mt-4">
             <button
               onClick={() => navigate("/register")}
-              className="bg-[#0000CD] text-[#FFFFFF] px-8 py-4 rounded-lg font-bold uppercase flex items-center gap-2 hover:bg-[#1A1AE8] transition-colors"
+              className="bg-[#9caffc] text-[#0a0a0a] px-8 py-4 rounded-lg font-bold uppercase flex items-center gap-2 hover:bg-[#7b94f8] transition-colors"
             >
               Зарегистрироваться
             </button>
@@ -286,9 +286,9 @@ export default function MainPage() {
           <section>
             <div className="flex justify-between items-end mb-12">
               <h2 className="text-4xl font-black uppercase tracking-tight">
-                Активные <span className="text-[#0000CD]">розыгрыши</span>
+                Активные <span className="text-[#9caffc]">розыгрыши</span>
               </h2>
-              <div className="h-1 w-24 bg-[#0000CD]" />
+              <div className="h-1 w-24 bg-[#9caffc]" />
             </div>
 
             {giveaways.length === 0 ? (
@@ -313,7 +313,7 @@ export default function MainPage() {
                       >
                         redeem
                       </span>
-                      <div className="absolute top-3 left-3 bg-[#0000CD] text-[#FFFFFF] px-2 py-0.5 rounded font-bold text-[10px] uppercase">
+                      <div className="absolute top-3 left-3 bg-[#9caffc] text-[#0a0a0a] px-2 py-0.5 rounded font-bold text-[10px] uppercase">
                         АКТИВНЫЙ
                       </div>
                     </div>
@@ -331,7 +331,7 @@ export default function MainPage() {
                           </span>
                           {g.participants_count} участников
                         </span>
-                        <span className="text-[#0000CD] text-xs font-bold uppercase">
+                        <span className="text-[#9caffc] text-xs font-bold uppercase">
                           {g.platform === "telegram"
                             ? "TG"
                             : g.platform === "twitch"
@@ -353,7 +353,7 @@ export default function MainPage() {
           {settings?.show_winners !== false && (
             <section className="lg:col-span-1">
               <h2 className="text-2xl font-black uppercase tracking-tight mb-8">
-                Последние <span className="text-[#0000CD]">победители</span>
+                Последние <span className="text-[#9caffc]">победители</span>
               </h2>
               {winners.length === 0 ? (
                 <div className="bg-[#1C1B1B] rounded-xl p-6 text-center">
@@ -367,7 +367,7 @@ export default function MainPage() {
                         key={w.id}
                         className="flex items-center gap-4 bg-[#1C1B1B] p-4 rounded-xl"
                       >
-                        <div className="w-12 h-12 rounded-full bg-[#0000CD]/10 flex items-center justify-center text-[#0000CD] font-black text-sm flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-[#9caffc]/10 flex items-center justify-center text-[#9caffc] font-black text-sm flex-shrink-0">
                           {w.user?.username?.slice(0, 2).toUpperCase() || "??"}
                         </div>
                         <div className="flex flex-col flex-1 min-w-0">
@@ -395,7 +395,7 @@ export default function MainPage() {
             settings?.schedule?.length > 0 && (
               <section id="schedule" className="lg:col-span-2">
                 <h2 className="text-2xl font-black uppercase tracking-tight mb-8">
-                  Расписание <span className="text-[#0000CD]">стримов</span>
+                  Расписание <span className="text-[#9caffc]">стримов</span>
                 </h2>
                 <div className="grid grid-cols-2 gap-4">
                   {settings.schedule.map((item: any, i: number) => (
@@ -406,7 +406,7 @@ export default function MainPage() {
                       <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">
                         {item.day}
                       </p>
-                      <p className="text-3xl font-black text-[#0000CD]">
+                      <p className="text-3xl font-black text-[#9caffc]">
                         {item.time}
                       </p>
                       {item.note && (
@@ -426,7 +426,7 @@ export default function MainPage() {
       <footer className="bg-[#0A0A0A] py-12 border-t border-white/5 mt-32">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex flex-col items-center md:items-start gap-4">
-            <div className="text-xl font-black text-[#0000CD] uppercase">
+            <div className="text-xl font-black text-[#9caffc] uppercase">
               {name}
             </div>
             <p className="text-white/30 text-xs max-w-xs text-center md:text-left">
@@ -442,20 +442,20 @@ export default function MainPage() {
               {settings?.show_rules && (
                 <a
                   href="/rules"
-                  className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                  className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
                 >
                   ПРАВИЛА
                 </a>
               )}
               <a
                 href="/login"
-                className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
               >
                 ВОЙТИ
               </a>
               <a
                 href="/register"
-                className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
               >
                 РЕГИСТРАЦИЯ
               </a>
@@ -469,7 +469,7 @@ export default function MainPage() {
                   href={settings.twitch_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                  className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
                 >
                   TWITCH
                 </a>
@@ -479,7 +479,7 @@ export default function MainPage() {
                   href={settings.telegram_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                  className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
                 >
                   TELEGRAM
                 </a>
@@ -489,7 +489,7 @@ export default function MainPage() {
                   href={settings.vk_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-white/50 hover:text-[#0000CD] transition-colors text-sm font-medium"
+                  className="text-white/50 hover:text-[#9caffc] transition-colors text-sm font-medium"
                 >
                   VK
                 </a>
@@ -503,7 +503,7 @@ export default function MainPage() {
                 href={settings.telegram_url}
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#0000CD] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#9caffc] transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined">send</span>
               </a>
@@ -513,7 +513,7 @@ export default function MainPage() {
                 href={settings.twitch_url}
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#0000CD] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center hover:text-[#9caffc] transition-colors cursor-pointer"
               >
                 <span className="material-symbols-outlined">live_tv</span>
               </a>

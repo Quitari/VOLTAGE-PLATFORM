@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import client from "../../api/client";
 
 const STATUS: Record<string, { label: string; color: string; bg: string }> = {
-  open: { label: "Открыт", color: "text-[#0000CD]", bg: "bg-[#0000CD]/10" },
+  open: { label: "Открыт", color: "text-[#9caffc]", bg: "bg-[#9caffc]/10" },
   in_work: {
     label: "В работе",
     color: "text-yellow-400",
@@ -159,7 +159,7 @@ export default function TicketDetailPage() {
                 <div
                   className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-xs font-black ${
                     msg.is_staff
-                      ? "bg-[#0000CD]/20 text-[#0000CD]"
+                      ? "bg-[#9caffc]/20 text-[#9caffc]"
                       : "bg-white/5 text-white/60"
                   }`}
                 >
@@ -187,7 +187,7 @@ export default function TicketDetailPage() {
                   <div
                     className={`px-4 py-3 rounded-2xl text-sm ${
                       msg.is_staff
-                        ? "bg-[#0000CD]/10 border border-[#0000CD]/20 text-white/80 rounded-tl-sm"
+                        ? "bg-[#9caffc]/10 border border-[#9caffc]/20 text-white/80 rounded-tl-sm"
                         : "bg-[#1C1B1B] border border-white/5 text-white/80 rounded-tr-sm"
                     }`}
                   >
@@ -226,12 +226,12 @@ export default function TicketDetailPage() {
                 }}
                 placeholder="Напиши сообщение... (Enter для отправки)"
                 rows={2}
-                className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none placeholder-white/20"
+                className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 resize-none placeholder-white/20"
               />
               <button
                 onClick={handleSend}
                 disabled={sending || !reply.trim()}
-                className="w-12 h-full bg-[#0000CD] text-white rounded-xl flex items-center justify-center hover:bg-[#1A1AE8] transition-colors disabled:opacity-40"
+                className="w-12 h-full bg-[#9caffc] text-[#0a0a0a] rounded-xl flex items-center justify-center hover:bg-[#7b94f8] transition-colors disabled:opacity-40"
               >
                 <span className="material-symbols-outlined text-base">
                   send

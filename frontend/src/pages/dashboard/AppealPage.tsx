@@ -18,7 +18,7 @@ const APPEAL_STATUS: Record<string, { label: string; color: string; bg: string }
   pending: { label: "На рассмотрении", color: "text-yellow-400", bg: "bg-yellow-400/10" },
   approved: { label: "Одобрена", color: "text-green-400", bg: "bg-green-400/10" },
   rejected: { label: "Отклонена", color: "text-red-400", bg: "bg-red-400/10" },
-  clarify: { label: "Запрошено уточнение", color: "text-[#0000CD]", bg: "bg-[#0000CD]/10" },
+  clarify: { label: "Запрошено уточнение", color: "text-[#9caffc]", bg: "bg-[#9caffc]/10" },
 };
 
 export default function AppealPage() {
@@ -113,7 +113,7 @@ export default function AppealPage() {
         </button>
         <div>
           <h1 className="text-3xl font-black uppercase tracking-tighter text-white">
-            Апел<span className="text-[#0000CD]">ляция</span>
+            Апел<span className="text-[#9caffc]">ляция</span>
           </h1>
           <p className="text-white/40 text-sm mt-0.5">Оспорить наказание</p>
         </div>
@@ -162,8 +162,8 @@ export default function AppealPage() {
             <p className="text-white/70 text-sm">{existingAppeal.text}</p>
           </div>
           {existingAppeal.moderator_response && (
-            <div className="bg-[#0000CD]/5 border border-[#0000CD]/20 rounded-xl p-4">
-              <p className="text-[10px] text-[#0000CD]/60 uppercase tracking-widest mb-2">
+            <div className="bg-[#9caffc]/5 border border-[#9caffc]/20 rounded-xl p-4">
+              <p className="text-[10px] text-[#9caffc]/60 uppercase tracking-widest mb-2">
                 Ответ модератора
               </p>
               <p className="text-white/70 text-sm">{existingAppeal.moderator_response}</p>
@@ -191,7 +191,7 @@ export default function AppealPage() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Объясни почему считаешь наказание несправедливым. Чем подробнее — тем лучше."
               rows={5}
-              className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none placeholder-white/20"
+              className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 resize-none placeholder-white/20"
             />
             <p className="text-[10px] text-white/20 mt-1.5 text-right">
               {text.length} символов (мин. 20)
@@ -208,7 +208,7 @@ export default function AppealPage() {
           <button
             onClick={handleSubmit}
             disabled={submitting || text.trim().length < 20}
-            className="w-full py-3 bg-[#0000CD] text-white font-bold rounded-xl uppercase text-xs tracking-widest hover:bg-[#1A1AE8] transition-colors disabled:opacity-40"
+            className="w-full py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs tracking-widest hover:bg-[#7b94f8] transition-colors disabled:opacity-40"
           >
             {submitting ? "Отправляем..." : "Подать апелляцию"}
           </button>

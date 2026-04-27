@@ -57,7 +57,7 @@ export default function DashboardLayout({
           {!collapsed && (
             <button
               onClick={() => navigate("/")}
-              className="text-xl font-black tracking-tighter text-[#0000CD] uppercase hover:opacity-80 transition-opacity"
+              className="text-xl font-black tracking-tighter text-[#9caffc] uppercase hover:opacity-80 transition-opacity"
             >
               VOLTAGE
             </button>
@@ -73,7 +73,7 @@ export default function DashboardLayout({
         {/* Профиль */}
         {!collapsed ? (
           <div className="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm flex-shrink-0">
               {initials}
             </div>
             <div className="flex flex-col min-w-0 overflow-hidden">
@@ -90,7 +90,7 @@ export default function DashboardLayout({
           </div>
         ) : (
           <div className="px-3 mb-3 flex justify-center flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm">
+            <div className="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#9caffc] font-bold text-sm">
               {initials}
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function DashboardLayout({
                   collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
                 } ${
                   active
-                    ? "text-white border-l-2 border-[#0000CD] bg-[#1C1B1B] font-bold"
+                    ? "text-white border-l-2 border-[#9caffc] bg-[#1C1B1B] font-bold"
                     : "text-gray-400 hover:text-white hover:bg-[#1C1B1B]"
                 }`}
               >
@@ -132,7 +132,7 @@ export default function DashboardLayout({
               <button
                 onClick={() => navigate("/admin")}
                 title={collapsed ? "Панель управления" : undefined}
-                className={`w-full flex items-center gap-3 rounded-lg transition-colors text-sm text-gray-400 hover:text-[#0000CD] hover:bg-[#0000CD]/10 ${
+                className={`w-full flex items-center gap-3 rounded-lg transition-colors text-sm text-gray-400 hover:text-[#9caffc] hover:bg-[#9caffc]/10 ${
                   collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
                 }`}
               >

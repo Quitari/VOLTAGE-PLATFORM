@@ -64,7 +64,7 @@ export default function MomentsPage() {
         <div className="max-w-7xl mx-auto space-y-10">
           <section>
             <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
-              ЛУЧШИЕ <span className="text-[#0000CD]">МОМЕНТЫ</span>
+              ЛУЧШИЕ <span className="text-[#9caffc]">МОМЕНТЫ</span>
             </h1>
             <p className="text-lg text-white/50 mt-4 max-w-2xl leading-relaxed">
               Лучшие клипы и моменты со стримов — предложенные сообществом.
@@ -76,7 +76,7 @@ export default function MomentsPage() {
               <select
                 value={gameFilter}
                 onChange={(e) => setGameFilter(e.target.value)}
-                className="bg-[#1C1B1B] border border-white/10 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="bg-[#1C1B1B] border border-white/10 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               >
                 <option value="">Все игры</option>
                 {games.map((g) => (
@@ -93,13 +93,13 @@ export default function MomentsPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Поиск по названию..."
-                  className="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm pl-10 pr-4 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm pl-10 pr-4 py-2.5 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 />
               </div>
             </div>
             <button
               onClick={() => navigate("/dashboard?suggest=clip")}
-              className="bg-[#0000CD] text-[#FFFFFF] px-6 py-2.5 rounded-xl font-bold text-sm uppercase hover:bg-[#1A1AE8] transition-colors flex items-center gap-2"
+              className="bg-[#9caffc] text-[#0a0a0a] px-6 py-2.5 rounded-xl font-bold text-sm uppercase hover:bg-[#7b94f8] transition-colors flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-base">add</span>
               Предложить клип
@@ -121,7 +121,7 @@ export default function MomentsPage() {
               </p>
               <button
                 onClick={() => navigate("/dashboard?suggest=clip")}
-                className="mt-6 bg-[#0000CD] text-[#FFFFFF] px-6 py-3 rounded-xl font-bold text-sm uppercase hover:bg-[#1A1AE8] transition-colors"
+                className="mt-6 bg-[#9caffc] text-[#0a0a0a] px-6 py-3 rounded-xl font-bold text-sm uppercase hover:bg-[#7b94f8] transition-colors"
               >
                 Предложить клип
               </button>
@@ -152,7 +152,7 @@ export default function MomentsPage() {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="bg-[#0000CD] text-[#FFFFFF] w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
+                      <div className="bg-[#9caffc] text-[#0a0a0a] w-14 h-14 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">
                         <span
                           className="material-symbols-outlined text-3xl"
                           style={{ fontVariationSettings: "'FILL' 1" }}
@@ -162,7 +162,7 @@ export default function MomentsPage() {
                       </div>
                     </div>
                   </div>
-                  <h3 className="text-white font-bold text-sm leading-tight mb-1 group-hover:text-[#0000CD] transition-colors line-clamp-2">
+                  <h3 className="text-white font-bold text-sm leading-tight mb-1 group-hover:text-[#9caffc] transition-colors line-clamp-2">
                     {clip.title}
                   </h3>
                   <div className="flex items-center gap-2 text-xs text-white/40">
@@ -179,7 +179,7 @@ export default function MomentsPage() {
         </div>
       </main>
 
-      <div className="fixed top-0 right-0 w-1/3 h-full bg-[#0000CD]/5 blur-[120px] -z-10 pointer-events-none" />
+      <div className="fixed top-0 right-0 w-1/3 h-full bg-[#9caffc]/5 blur-[120px] -z-10 pointer-events-none" />
     </div>
   );
 }

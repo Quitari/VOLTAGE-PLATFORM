@@ -56,11 +56,11 @@ export default function LogsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Поиск по нику..."
-            className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40 w-64"
+            className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#9caffc]/40 w-64"
           />
           <button
             type="submit"
-            className="px-4 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest"
+            className="px-4 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase tracking-widest"
           >
             Найти
           </button>

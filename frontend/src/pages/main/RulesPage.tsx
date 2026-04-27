@@ -53,7 +53,7 @@ const DEFAULT_APPEALS_TEXT =
   "Если вы считаете, что наказание было выдано по ошибке, вы можете подать запрос на пересмотр дела. Модераторы рассмотрят вашу заявку в течение 48 часов.";
 
 const PUNISHMENT_COLOR: Record<string, string> = {
-  Warning: "bg-[#0000CD] text-[#FFFFFF]",
+  Warning: "bg-[#9caffc] text-[#0a0a0a]",
   Mute: "bg-orange-500 text-black",
   Ban: "bg-red-600 text-white",
 };
@@ -100,7 +100,7 @@ export default function RulesPage() {
       {/* Sidebar — остался без изменений */}
       <aside className="fixed left-0 top-20 h-[calc(100vh-80px)] w-56 bg-[#0E0E0E] flex-col py-8 hidden md:flex border-r border-white/5">
         <div className="px-6 mb-6">
-          <p className="text-[10px] font-bold text-[#0000CD] uppercase tracking-widest">
+          <p className="text-[10px] font-bold text-[#9caffc] uppercase tracking-widest">
             Категории
           </p>
           <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mt-0.5">
@@ -114,7 +114,7 @@ export default function RulesPage() {
               href={item.anchor}
               className={`flex items-center px-6 py-4 font-bold uppercase text-sm transition-all ${
                 i === 0
-                  ? "bg-[#0000CD] text-[#FFFFFF]"
+                  ? "bg-[#9caffc] text-[#0a0a0a]"
                   : "text-white/50 hover:text-white hover:bg-[#1C1B1B] hover:translate-x-1"
               }`}
             >
@@ -132,7 +132,7 @@ export default function RulesPage() {
         <div className="max-w-5xl mx-auto space-y-16">
           <section>
             <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
-              ПРАВИЛА <span className="text-[#0000CD]">СООБЩЕСТВА</span>
+              ПРАВИЛА <span className="text-[#9caffc]">СООБЩЕСТВА</span>
             </h1>
             <p className="text-lg text-white/50 mt-4 max-w-2xl leading-relaxed">
               Соблюдение этих правил обязательно для всех участников. Незнание
@@ -143,7 +143,7 @@ export default function RulesPage() {
           <section id="chat" className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-[#111] border border-white/5 rounded-2xl p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-10 h-10 bg-[#0000CD] rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-[#9caffc] rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="material-symbols-outlined text-[#FFFFFF]">
                     chat
                   </span>
@@ -155,7 +155,7 @@ export default function RulesPage() {
               <div className="space-y-4">
                 {chatRules.map((rule: string, i: number) => (
                   <div key={i} className="flex gap-4">
-                    <span className="text-[#0000CD] font-black text-lg italic w-8 flex-shrink-0">
+                    <span className="text-[#9caffc] font-black text-lg italic w-8 flex-shrink-0">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="text-white/70 text-sm leading-relaxed">
@@ -172,7 +172,7 @@ export default function RulesPage() {
             >
               <div>
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-10 h-10 bg-[#0000CD] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-[#9caffc] rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="material-symbols-outlined text-[#FFFFFF]">
                       redeem
                     </span>
@@ -184,7 +184,7 @@ export default function RulesPage() {
                 <ul className="space-y-4">
                   {giveawayRules.map((rule: string, i: number) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="material-symbols-outlined text-[#0000CD] text-lg flex-shrink-0">
+                      <span className="material-symbols-outlined text-[#9caffc] text-lg flex-shrink-0">
                         check_circle
                       </span>
                       <p className="text-white/70 text-sm leading-relaxed">
@@ -205,7 +205,7 @@ export default function RulesPage() {
 
           <section id="punishments" className="space-y-6">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-[#0000CD] rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 bg-[#9caffc] rounded-lg flex items-center justify-center flex-shrink-0">
                 <span className="material-symbols-outlined text-[#FFFFFF]">
                   gavel
                 </span>
@@ -218,13 +218,13 @@ export default function RulesPage() {
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-[#0E0E0E]">
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#0000CD]">
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#9caffc]">
                       Нарушение
                     </th>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#0000CD]">
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#9caffc]">
                       Наказание
                     </th>
-                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#0000CD]">
+                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-widest text-[#9caffc]">
                       Срок
                     </th>
                   </tr>
@@ -257,7 +257,7 @@ export default function RulesPage() {
 
           <section
             id="appeals"
-            className="bg-[#0000CD] rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6"
+            className="bg-[#9caffc] rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6"
           >
             <div className="space-y-2 max-w-xl">
               <h2 className="text-4xl font-black uppercase text-[#FFFFFF] leading-none">
@@ -269,7 +269,7 @@ export default function RulesPage() {
             </div>
             <button
               onClick={() => navigate("/dashboard")}
-              className="bg-[#FFFFFF] text-[#0000CD] px-8 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-95 flex items-center gap-2 whitespace-nowrap"
+              className="bg-[#FFFFFF] text-[#9caffc] px-8 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-95 flex items-center gap-2 whitespace-nowrap"
             >
               Подать апелляцию
               <span className="material-symbols-outlined">arrow_forward</span>

@@ -117,7 +117,7 @@ export default function GiveawaysPage() {
                 value={rerollReason}
                 onChange={(e) => setRerollReason(e.target.value)}
                 placeholder="Не ответил, не был на стриме..."
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
             </div>
             <div className="flex gap-3">
@@ -133,7 +133,7 @@ export default function GiveawaysPage() {
               <button
                 onClick={() => handleReroll(rerollId)}
                 disabled={actionLoading === rerollId}
-                className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase tracking-widest text-xs disabled:opacity-50"
+                className="flex-1 py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase tracking-widest text-xs disabled:opacity-50"
               >
                 {actionLoading === rerollId ? "..." : "🎲 Перевыбрать"}
               </button>
@@ -153,7 +153,7 @@ export default function GiveawaysPage() {
         </div>
         <button
           onClick={() => navigate("/admin/giveaways/create")}
-          className="px-6 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors"
+          className="px-6 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#7b94f8] transition-colors"
         >
           + Создать розыгрыш
         </button>
@@ -168,7 +168,7 @@ export default function GiveawaysPage() {
               onClick={() => setStatusFilter(s)}
               className={`pb-3 px-4 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
                 statusFilter === s
-                  ? "text-[#0000CD] border-[#0000CD]"
+                  ? "text-[#9caffc] border-[#9caffc]"
                   : "text-white/40 border-transparent hover:text-white"
               }`}
             >
@@ -270,7 +270,7 @@ export default function GiveawaysPage() {
                           <button
                             onClick={() => handleDraw(g.id)}
                             disabled={isLoading}
-                            className="px-3 py-1.5 bg-[#0000CD]/15 text-[#0000CD] text-xs font-bold rounded-lg hover:bg-[#0000CD]/25 transition-colors disabled:opacity-50"
+                            className="px-3 py-1.5 bg-[#9caffc]/15 text-[#9caffc] text-xs font-bold rounded-lg hover:bg-[#9caffc]/25 transition-colors disabled:opacity-50"
                           >
                             {isLoading ? "..." : "🏆 Итоги"}
                           </button>
@@ -279,7 +279,7 @@ export default function GiveawaysPage() {
                           <>
                             {/* Показываем победителя */}
                             {g.winners && g.winners[0] && (
-                              <span className="text-xs text-[#0000CD] font-bold">
+                              <span className="text-xs text-[#9caffc] font-bold">
                                 🏆 {g.winners[0].user.username}
                               </span>
                             )}

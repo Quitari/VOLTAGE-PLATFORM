@@ -79,13 +79,13 @@ export default function RegisterPage() {
       <header className="fixed top-0 w-full z-50 bg-[#0A0A0A]/70 backdrop-blur-xl flex justify-between items-center px-8 h-20">
         <button
           onClick={() => navigate("/")}
-          className="text-2xl font-black tracking-tighter text-[#0000CD] uppercase"
+          className="text-2xl font-black tracking-tighter text-[#9caffc] uppercase"
         >
           VOLTAGE
         </button>
         <button
           onClick={() => navigate("/login")}
-          className="bg-[#0000CD] text-[#FFFFFF] px-6 py-2 font-bold rounded-lg hover:bg-[#1A1AE8] transition-all uppercase text-sm"
+          className="bg-[#9caffc] text-[#0a0a0a] px-6 py-2 font-bold rounded-lg hover:bg-[#7b94f8] transition-all uppercase text-sm"
         >
           ВОЙТИ
         </button>
@@ -99,33 +99,33 @@ export default function RegisterPage() {
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center font-black mb-2 transition-colors"
                 style={{
-                  background: step >= 1 ? "#0000CD" : "#1C1B1B",
+                  background: step >= 1 ? "#9caffc" : "#1C1B1B",
                   color: step >= 1 ? "#FFFFFF" : "rgba(255,255,255,0.4)",
                 }}
               >
                 1
               </div>
               <span
-                className={`text-[10px] font-bold uppercase tracking-widest ${step >= 1 ? "text-[#0000CD]" : "text-white/40"}`}
+                className={`text-[10px] font-bold uppercase tracking-widest ${step >= 1 ? "text-[#9caffc]" : "text-white/40"}`}
               >
                 Аккаунт
               </span>
             </div>
             <div
-              className={`h-0.5 flex-1 mb-6 transition-colors ${step >= 2 ? "bg-[#0000CD]/40" : "bg-white/10"}`}
+              className={`h-0.5 flex-1 mb-6 transition-colors ${step >= 2 ? "bg-[#9caffc]/40" : "bg-white/10"}`}
             />
             <div className="flex flex-col items-center flex-1">
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center font-black mb-2 transition-colors"
                 style={{
-                  background: step >= 2 ? "#0000CD" : "#1C1B1B",
+                  background: step >= 2 ? "#9caffc" : "#1C1B1B",
                   color: step >= 2 ? "#FFFFFF" : "rgba(255,255,255,0.4)",
                 }}
               >
                 2
               </div>
               <span
-                className={`text-[10px] font-bold uppercase tracking-widest ${step >= 2 ? "text-[#0000CD]" : "text-white/40"}`}
+                className={`text-[10px] font-bold uppercase tracking-widest ${step >= 2 ? "text-[#9caffc]" : "text-white/40"}`}
               >
                 Telegram
               </span>
@@ -137,7 +137,7 @@ export default function RegisterPage() {
           {/* Левая часть */}
           {step === 1 ? (
             <section className="bg-[#111] p-8 lg:p-12 rounded-2xl relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-[#0000CD]" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#9caffc]" />
               <h1 className="text-4xl font-black uppercase tracking-tighter mb-8">
                 Создать аккаунт
               </h1>
@@ -160,7 +160,7 @@ export default function RegisterPage() {
                     onChange={(e) => set("username", e.target.value)}
                     placeholder="username"
                     required
-                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#9caffc] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
                   />
                 </div>
 
@@ -175,7 +175,7 @@ export default function RegisterPage() {
                     onChange={(e) => set("email", e.target.value)}
                     placeholder="email@example.com"
                     required
-                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#9caffc] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
                   />
                 </div>
 
@@ -191,7 +191,7 @@ export default function RegisterPage() {
                       onChange={(e) => set("password", e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
+                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#9caffc] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
                     />
                     <button
                       type="button"
@@ -217,7 +217,7 @@ export default function RegisterPage() {
                       onChange={(e) => set("password_confirm", e.target.value)}
                       placeholder="••••••••"
                       required
-                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
+                      className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#9caffc] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
                     />
                     <button
                       type="button"
@@ -236,7 +236,7 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#0000CD] text-[#FFFFFF] py-4 rounded-xl font-black uppercase tracking-tight hover:bg-[#1A1AE8] transition-all active:scale-[0.98] disabled:opacity-50"
+                  className="w-full bg-[#9caffc] text-[#0a0a0a] py-4 rounded-xl font-black uppercase tracking-tight hover:bg-[#7b94f8] transition-all active:scale-[0.98] disabled:opacity-50"
                 >
                   {loading ? "Регистрация..." : "Продолжить"}
                 </button>
@@ -253,7 +253,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={() => navigate("/login")}
-                    className="text-[#0000CD] font-bold hover:underline"
+                    className="text-[#9caffc] font-bold hover:underline"
                   >
                     Войти
                   </button>
@@ -278,7 +278,7 @@ export default function RegisterPage() {
                   <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3 text-center">
                     Твой код привязки
                   </p>
-                  <p className="text-4xl font-black text-[#0000CD] tracking-widest font-mono text-center mb-4">
+                  <p className="text-4xl font-black text-[#9caffc] tracking-widest font-mono text-center mb-4">
                     {linkToken}
                   </p>
                   <p className="text-xs text-white/40 text-center">
@@ -336,7 +336,7 @@ export default function RegisterPage() {
                   розыгрышах.
                 </p>
               </div>
-              <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-[#0000CD]/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-[#9caffc]/5 rounded-full blur-3xl pointer-events-none" />
             </section>
           ) : (
             <section className="bg-[#111] p-8 lg:p-12 rounded-2xl relative overflow-hidden flex flex-col justify-center min-h-[400px]">
@@ -357,7 +357,7 @@ export default function RegisterPage() {
                     key={item.num}
                     className="flex items-center gap-4 text-left"
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#0000CD]/10 flex items-center justify-center text-[#0000CD] font-black text-sm flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[#9caffc]/10 flex items-center justify-center text-[#9caffc] font-black text-sm flex-shrink-0">
                       {item.num}
                     </div>
                     <p className="text-sm text-white/60 font-mono">

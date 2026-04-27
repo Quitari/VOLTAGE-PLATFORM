@@ -25,7 +25,7 @@ export default function PublicNav({ settings, currentPath }: Props) {
     <nav className="fixed top-0 w-full z-50 h-20 bg-[#0E0E0E]/90 backdrop-blur-md flex justify-between items-center px-8 border-b border-white/5">
       <button
         onClick={() => navigate("/")}
-        className="text-2xl font-black tracking-tighter text-[#0000CD] uppercase hover:opacity-80 transition-opacity"
+        className="text-2xl font-black tracking-tighter text-[#9caffc] uppercase hover:opacity-80 transition-opacity"
       >
         {name}
       </button>
@@ -38,7 +38,7 @@ export default function PublicNav({ settings, currentPath }: Props) {
               href={item.href}
               className={`font-bold uppercase text-sm transition-colors ${
                 isActive
-                  ? "text-[#0000CD] border-b-2 border-[#0000CD] pb-1"
+                  ? "text-[#9caffc] border-b-2 border-[#9caffc] pb-1"
                   : "text-white/70 hover:text-white"
               }`}
             >
@@ -49,7 +49,7 @@ export default function PublicNav({ settings, currentPath }: Props) {
       </div>
       <button
         onClick={() => navigate("/login")}
-        className="bg-[#0000CD] text-[#FFFFFF] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#1A1AE8] transition-colors"
+        className="bg-[#9caffc] text-[#0a0a0a] px-6 py-2 rounded-lg font-bold text-sm hover:bg-[#7b94f8] transition-colors"
       >
         ВОЙТИ
       </button>

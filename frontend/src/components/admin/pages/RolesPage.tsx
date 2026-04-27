@@ -17,7 +17,7 @@ const ALL_PERMISSIONS = [
 ];
 
 const PRESET_COLORS = [
-  "#0000CD",
+  "#9caffc",
   "#FF6B35",
   "#EF4444",
   "#F97316",
@@ -278,7 +278,7 @@ export default function RolesPage() {
                     setForm((f) => ({ ...f, name: e.target.value }))
                   }
                   placeholder="Модератор"
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 />
               </div>
               <div>
@@ -292,7 +292,7 @@ export default function RolesPage() {
                   }
                   placeholder="moderator"
                   disabled={modal === "edit" && (editRole as any)?.is_system}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 disabled:opacity-40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 disabled:opacity-40"
                 />
               </div>
             </div>
@@ -313,7 +313,7 @@ export default function RolesPage() {
                     }))
                   }
                   disabled={modal === "edit" && (editRole as any)?.is_system}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 disabled:opacity-40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 disabled:opacity-40"
                 />
               </div>
               <div>
@@ -350,7 +350,7 @@ export default function RolesPage() {
                   setForm((f) => ({ ...f, description: e.target.value }))
                 }
                 placeholder="Описание роли..."
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
               />
             </div>
             <div>
@@ -367,7 +367,7 @@ export default function RolesPage() {
                       type="checkbox"
                       checked={form.permissions.includes(p.codename)}
                       onChange={() => togglePerm(p.codename)}
-                      className="rounded accent-[#0000CD]"
+                      className="rounded accent-[#9caffc]"
                     />
                     <span className="text-xs text-white/70">
                       {p.name || p.codename}
@@ -403,7 +403,7 @@ export default function RolesPage() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase text-xs hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs hover:bg-[#7b94f8] transition-colors disabled:opacity-50"
               >
                 {saving
                   ? "Сохраняем..."
@@ -488,7 +488,7 @@ export default function RolesPage() {
           </div>
           <button
             onClick={openCreate}
-            className="flex items-center gap-2 px-6 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors"
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#7b94f8] transition-colors"
           >
             <span className="material-symbols-outlined text-base">add</span>
             Создать роль
@@ -502,7 +502,7 @@ export default function RolesPage() {
               label: "Всего ролей",
               value: roles.length,
               icon: "verified_user",
-              color: "text-[#0000CD]",
+              color: "text-[#9caffc]",
             },
             {
               label: "Назначений",
@@ -688,7 +688,7 @@ export default function RolesPage() {
                     }}
                     placeholder="Ник, @Telegram..."
                     autoComplete="off"
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                   />
                   {assignResults.length > 0 && (
                     <div className="absolute top-full left-0 right-0 mt-1 bg-[#1C1B1B] border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
@@ -702,7 +702,7 @@ export default function RolesPage() {
                           }}
                           className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[#2A2A2A] transition-colors text-left"
                         >
-                          <div className="w-7 h-7 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#0000CD] text-xs flex-shrink-0">
+                          <div className="w-7 h-7 rounded-lg bg-[#111] flex items-center justify-center font-bold text-[#9caffc] text-xs flex-shrink-0">
                             {u.username?.slice(0, 2).toUpperCase()}
                           </div>
                           <div className="flex-1 min-w-0">
@@ -741,7 +741,7 @@ export default function RolesPage() {
                 </div>
                 {assignSelectedUser && (
                   <div className="mt-2 bg-[#1C1B1B] rounded-xl px-4 py-2.5 flex items-center gap-2">
-                    <div className="w-6 h-6 rounded bg-[#0000CD]/10 flex items-center justify-center text-[#0000CD] font-black text-[10px]">
+                    <div className="w-6 h-6 rounded bg-[#9caffc]/10 flex items-center justify-center text-[#9caffc] font-black text-[10px]">
                       {assignSelectedUser.username?.slice(0, 2).toUpperCase()}
                     </div>
                     <span className="text-sm font-bold text-white">
@@ -770,7 +770,7 @@ export default function RolesPage() {
                 <select
                   value={assignSelectedRole}
                   onChange={(e) => setAssignSelectedRole(e.target.value)}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 >
                   <option value="">Выбери роль...</option>
                   {assignableRoles.map((r) => (
@@ -790,7 +790,7 @@ export default function RolesPage() {
                   type="date"
                   value={assignExpires}
                   onChange={(e) => setAssignExpires(e.target.value)}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 />
               </div>
 
@@ -799,7 +799,7 @@ export default function RolesPage() {
                 disabled={
                   assigning || !assignSelectedUser || !assignSelectedRole
                 }
-                className="w-full py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase text-xs tracking-widest hover:bg-[#1A1AE8] transition-colors disabled:opacity-40"
+                className="w-full py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs tracking-widest hover:bg-[#7b94f8] transition-colors disabled:opacity-40"
               >
                 {assigning ? "Назначаем..." : "Назначить"}
               </button>

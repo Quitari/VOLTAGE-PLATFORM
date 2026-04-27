@@ -77,7 +77,7 @@ export default function TicketsPage() {
             onClick={() => setStatusFilter(s)}
             className={`pb-3 px-4 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
               statusFilter === s
-                ? "text-[#0000CD] border-[#0000CD]"
+                ? "text-[#9caffc] border-[#9caffc]"
                 : "text-white/40 border-transparent hover:text-white"
             }`}
           >
@@ -158,7 +158,7 @@ export default function TicketsPage() {
                     key={msg.id}
                     className={`rounded-xl px-4 py-3 text-sm ${
                       msg.is_staff
-                        ? "bg-[#0000CD]/10 border border-[#0000CD]/20 ml-4"
+                        ? "bg-[#9caffc]/10 border border-[#9caffc]/20 ml-4"
                         : "bg-[#1C1B1B] mr-4"
                     }`}
                   >
@@ -176,12 +176,12 @@ export default function TicketsPage() {
                     value={reply}
                     onChange={(e) => setReply(e.target.value)}
                     placeholder="Напиши ответ..."
-                    className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                    className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                     onKeyDown={(e) => e.key === "Enter" && handleReply()}
                   />
                   <button
                     onClick={handleReply}
-                    className="px-4 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase"
+                    className="px-4 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase"
                   >
                     Ответить
                   </button>

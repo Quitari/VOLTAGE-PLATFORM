@@ -229,7 +229,7 @@ export default function ClipsPage() {
                   onChange={(e) =>
                     setEditForm((p) => ({ ...p, title: e.target.value }))
                   }
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 />
               </div>
 
@@ -243,7 +243,7 @@ export default function ClipsPage() {
                     setEditForm((p) => ({ ...p, game: e.target.value }))
                   }
                   placeholder="CS2, Valorant..."
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                 />
               </div>
 
@@ -262,11 +262,11 @@ export default function ClipsPage() {
                       setPreviewError(false);
                     }}
                     placeholder="https://..."
-                    className="flex-1 bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                    className="flex-1 bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                   />
                   <button
                     onClick={autoPreview}
-                    className="px-4 py-3 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl hover:text-[#0000CD] hover:border-[#0000CD]/30 transition-colors whitespace-nowrap flex items-center gap-1.5"
+                    className="px-4 py-3 bg-[#1C1B1B] border border-white/10 text-white/60 text-xs font-bold rounded-xl hover:text-[#9caffc] hover:border-[#9caffc]/30 transition-colors whitespace-nowrap flex items-center gap-1.5"
                   >
                     <span className="material-symbols-outlined text-sm">
                       auto_awesome
@@ -314,7 +314,7 @@ export default function ClipsPage() {
               <button
                 onClick={handleApproveWithEdit}
                 disabled={editLoading}
-                className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase text-xs hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs hover:bg-[#7b94f8] transition-colors disabled:opacity-50"
               >
                 {editLoading ? "..." : "✅ Одобрить"}
               </button>
@@ -350,7 +350,7 @@ export default function ClipsPage() {
                 onChange={(e) => setRejectNote(e.target.value)}
                 placeholder="Укажи причину отклонения..."
                 rows={3}
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40 resize-none"
               />
             </div>
             <div className="flex gap-3">
@@ -431,7 +431,7 @@ export default function ClipsPage() {
                       setAddForm({ ...addForm, [item.field]: e.target.value })
                     }
                     placeholder={item.placeholder}
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#9caffc]/40"
                   />
                 </div>
               ))}
@@ -453,7 +453,7 @@ export default function ClipsPage() {
               <button
                 onClick={handleAdd}
                 disabled={addLoading}
-                className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase text-xs hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-[#9caffc] text-[#0a0a0a] font-bold rounded-xl uppercase text-xs hover:bg-[#7b94f8] transition-colors disabled:opacity-50"
               >
                 {addLoading ? "Добавляем..." : "Добавить"}
               </button>
@@ -474,7 +474,7 @@ export default function ClipsPage() {
         </div>
         <button
           onClick={() => setAddModal(true)}
-          className="px-6 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors"
+          className="px-6 py-2.5 bg-[#9caffc] text-[#0a0a0a] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#7b94f8] transition-colors"
         >
           + Добавить клип
         </button>
@@ -488,7 +488,7 @@ export default function ClipsPage() {
             onClick={() => setStatusFilter(s)}
             className={`pb-3 px-4 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
               statusFilter === s
-                ? "text-[#0000CD] border-[#0000CD]"
+                ? "text-[#9caffc] border-[#9caffc]"
                 : "text-white/40 border-transparent hover:text-white"
             }`}
           >
@@ -574,7 +574,7 @@ export default function ClipsPage() {
                 {clip.status === "pending" && (
                   <button
                     onClick={() => openEdit(clip)}
-                    className="px-3 py-1.5 bg-[#0000CD]/15 text-[#0000CD] text-xs font-bold rounded-lg hover:bg-[#0000CD]/25 transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 bg-[#9caffc]/15 text-[#9caffc] text-xs font-bold rounded-lg hover:bg-[#9caffc]/25 transition-colors flex items-center gap-1"
                   >
                     <span className="material-symbols-outlined text-sm">
                       edit

@@ -86,6 +86,8 @@ def my_prizes_auth(request):
         'created_at': p.created_at.isoformat(),
         'sent_at': p.sent_at.isoformat() if p.sent_at else None,
         'skin_image_url': p.winner.giveaway.skin_image_url if p.winner and p.winner.giveaway else None,
+        'giveaway_ends_at': p.winner.giveaway.ends_at.isoformat() if p.winner and p.winner.giveaway and p.winner.giveaway.ends_at else None,
+        'giveaway_title': p.winner.giveaway.title if p.winner and p.winner.giveaway else None,
     } for p in prizes[:20]]
 
     return Response(data)

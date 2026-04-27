@@ -13,6 +13,7 @@ const NAV = [
     label: "Уведомления",
   },
   { path: "/dashboard/violations", icon: "gavel", label: "Нарушения" },
+  { path: "/dashboard/tickets", icon: "support_agent", label: "Тикеты" },
   { path: "/dashboard/settings", icon: "settings", label: "Настройки" },
 ];
 
@@ -182,7 +183,7 @@ export default function DashboardLayout({
             </span>
           </div>
         </header>
-        <div className="p-8">{children}</div>
+        <div className="p-8 w-full">{children}</div>
       </main>
     </div>
   );

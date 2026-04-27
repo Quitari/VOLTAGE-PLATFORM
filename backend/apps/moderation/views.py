@@ -324,14 +324,15 @@ def ticket_list_create(request):
     POST /api/moderation/tickets/ — создать тикет
     """
     if request.method == 'GET':
-        # Модераторы видят все тикеты
-        if _user_has_permission(request.user, 'tickets.view'):
+        my_only = request.query_params.get('my') == 'true'
+        # Модераторы видят все тикеты (если не запрошены только свои)
+        if _user_has_permission(request.user, 'tickets.view') and not my_only:
             qs = Ticket.objects.all()
             status_filter = request.query_params.get('status')
             if status_filter:
                 qs = qs.filter(status=status_filter)
         else:
-            # Обычный пользователь — только свои
+            # Обычный пользователь или ?my=true — только свои
             qs = Ticket.objects.filter(user=request.user)
 
         serializer = TicketSerializer(qs[:50], many=True)

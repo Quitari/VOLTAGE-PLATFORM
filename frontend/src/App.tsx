@@ -9,6 +9,9 @@ import GiveawaysPage from "./pages/dashboard/GiveawaysPage";
 import ConnectionsPage from "./pages/dashboard/ConnectionsPage";
 import NotificationsPage from "./pages/dashboard/NotificationsPage";
 import ViolationsPage from "./pages/dashboard/ViolationsPage";
+import AppealPage from "./pages/dashboard/AppealPage";
+import TicketsPage from "./pages/dashboard/TicketsPage";
+import TicketDetailPage from "./pages/dashboard/TicketDetailPage";
 import DashboardSettingsPage from "./pages/dashboard/DashboardSettingsPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import MainPage from "./pages/main/MainPage";
@@ -112,6 +115,30 @@ export default function App() {
           element={
             <DashboardRoute>
               <ViolationsPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/violations/:id/appeal"
+          element={
+            <DashboardRoute>
+              <AppealPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/tickets"
+          element={
+            <DashboardRoute>
+              <TicketsPage />
+            </DashboardRoute>
+          }
+        />
+        <Route
+          path="/dashboard/tickets/:id"
+          element={
+            <DashboardRoute>
+              <TicketDetailPage />
             </DashboardRoute>
           }
         />

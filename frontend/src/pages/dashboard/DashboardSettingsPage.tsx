@@ -12,12 +12,12 @@ function Toggle({ checked, onChange }: ToggleProps) {
     <button
       onClick={onChange}
       className={`w-12 h-6 rounded-full relative transition-colors duration-300 flex-shrink-0 ${
-        checked ? "bg-[#FFE100]" : "bg-[#353534]"
+        checked ? "bg-[#0000CD]" : "bg-[#353534]"
       }`}
     >
       <span
         className={`absolute top-1 w-4 h-4 rounded-full transition-all duration-300 ${
-          checked ? "left-7 bg-[#211C00]" : "left-1 bg-white/40"
+          checked ? "left-7 bg-[#FFFFFF]" : "left-1 bg-white/40"
         }`}
       />
     </button>
@@ -47,7 +47,7 @@ function PasswordField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder || "••••••••"}
-          className="w-full bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#FFE100] text-white px-4 py-3 pr-12 focus:outline-none transition-colors"
+          className="w-full bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#0000CD] text-white px-4 py-3 pr-12 focus:outline-none transition-colors"
         />
         <button
           type="button"
@@ -234,13 +234,13 @@ export default function DashboardSettingsPage() {
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               {/* Аватар */}
               <div className="relative group cursor-pointer flex-shrink-0">
-                <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#FFE100] p-1 bg-[#0E0E0E] shadow-xl shadow-[#FFE100]/10">
-                  <div className="w-full h-full rounded-full bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-black text-3xl">
+                <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-[#0000CD] p-1 bg-[#0E0E0E] shadow-xl shadow-[#0000CD]/10">
+                  <div className="w-full h-full rounded-full bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-black text-3xl">
                     {user?.username?.slice(0, 2).toUpperCase()}
                   </div>
                 </div>
                 <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="material-symbols-outlined text-[#FFE100]">
+                  <span className="material-symbols-outlined text-[#0000CD]">
                     photo_camera
                   </span>
                 </div>
@@ -258,7 +258,7 @@ export default function DashboardSettingsPage() {
             {/* Поля */}
             <div className="space-y-5">
               <div>
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#FFE100] block mb-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-[#0000CD] block mb-1.5">
                   Отображаемое имя
                 </label>
                 <input
@@ -267,11 +267,11 @@ export default function DashboardSettingsPage() {
                   onChange={(e) =>
                     setForm({ ...form, username: e.target.value })
                   }
-                  className="w-full bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#FFE100] text-white px-4 py-3 focus:outline-none transition-colors"
+                  className="w-full bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#0000CD] text-white px-4 py-3 focus:outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#FFE100] block mb-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-[#0000CD] block mb-1.5">
                   Email адрес
                 </label>
                 <div className="flex gap-3">
@@ -282,7 +282,7 @@ export default function DashboardSettingsPage() {
                       setForm({ ...form, email: e.target.value })
                     }
                     placeholder="email@voltage.gg"
-                    className="flex-1 bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#FFE100] text-white px-4 py-3 focus:outline-none transition-colors"
+                    className="flex-1 bg-[#0E0E0E] border-b-2 border-white/10 focus:border-[#0000CD] text-white px-4 py-3 focus:outline-none transition-colors"
                   />
                   <button className="bg-[#1C1B1B] hover:bg-[#2A2A2A] text-white/70 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all border border-white/5">
                     Изменить
@@ -292,11 +292,11 @@ export default function DashboardSettingsPage() {
 
               {/* Язык */}
               <div>
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#FFE100] block mb-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-[#0000CD] block mb-2">
                   Язык интерфейса
                 </label>
                 <div className="flex bg-[#0E0E0E] border border-white/5 p-1 rounded-xl w-fit">
-                  <button className="px-6 py-1.5 rounded-lg bg-[#FFE100] text-[#211C00] text-xs font-bold transition-all">
+                  <button className="px-6 py-1.5 rounded-lg bg-[#0000CD] text-[#FFFFFF] text-xs font-bold transition-all">
                     RU
                   </button>
                   <button className="px-6 py-1.5 rounded-lg text-white/40 text-xs font-bold hover:text-white transition-all">
@@ -322,7 +322,7 @@ export default function DashboardSettingsPage() {
           {/* Приватность */}
           <section className="bg-[#111] border border-white/5 rounded-2xl p-8">
             <h2 className="text-xl font-black uppercase tracking-tight text-white mb-6 flex items-center gap-3">
-              <span className="material-symbols-outlined text-[#FFE100]">
+              <span className="material-symbols-outlined text-[#0000CD]">
                 security
               </span>
               Приватность
@@ -368,9 +368,9 @@ export default function DashboardSettingsPage() {
         {/* Правая колонка */}
         <div className="lg:col-span-5 space-y-8">
           {/* Безопасность — смена пароля */}
-          <section className="bg-[#111] border border-white/5 rounded-2xl p-8 border-t-4 border-t-[#FFE100]/20">
+          <section className="bg-[#111] border border-white/5 rounded-2xl p-8 border-t-4 border-t-[#0000CD]/20">
             <h2 className="text-xl font-black uppercase tracking-tight text-white mb-6 flex items-center gap-3">
-              <span className="material-symbols-outlined text-[#FFE100]">
+              <span className="material-symbols-outlined text-[#0000CD]">
                 lock
               </span>
               Безопасность
@@ -491,7 +491,7 @@ export default function DashboardSettingsPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="w-full bg-[#FFE100] hover:bg-[#FFE330] text-[#211C00] font-black py-4 rounded-xl uppercase tracking-widest text-sm transition-all shadow-xl shadow-[#FFE100]/10 active:scale-[0.98] disabled:opacity-50"
+            className="w-full bg-[#0000CD] hover:bg-[#1A1AE8] text-[#FFFFFF] font-black py-4 rounded-xl uppercase tracking-widest text-sm transition-all shadow-xl shadow-[#0000CD]/10 active:scale-[0.98] disabled:opacity-50"
           >
             {saving ? "Сохраняем..." : "Сохранить все изменения"}
           </button>

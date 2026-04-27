@@ -38,7 +38,7 @@ export default function PrizesPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-4xl font-black uppercase tracking-tighter">
-          Мои <span className="text-[#FFE100]">призы</span>
+          Мои <span className="text-[#0000CD]">призы</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">История выигранных призов</p>
       </div>

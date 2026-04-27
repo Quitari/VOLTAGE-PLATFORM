@@ -56,7 +56,7 @@ export default function StatusPage() {
         <div className="max-w-2xl mx-auto space-y-8">
           <div>
             <h1 className="text-5xl font-black uppercase tracking-tighter">
-              Статус <span className="text-[#FFE100]">платформы</span>
+              Статус <span className="text-[#0000CD]">платформы</span>
             </h1>
             <p className="text-white/40 text-sm mt-2">
               Текущее состояние сервисов

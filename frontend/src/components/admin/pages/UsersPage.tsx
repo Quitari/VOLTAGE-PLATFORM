@@ -130,7 +130,7 @@ export default function UsersPage() {
                     }
                     className={`py-2 rounded-xl text-xs font-bold transition-colors ${
                       punishForm.punishment_type === t.value
-                        ? "bg-[#FFE100] text-[#211C00]"
+                        ? "bg-[#0000CD] text-[#FFFFFF]"
                         : "bg-[#1C1B1B] text-white/60 hover:text-white"
                     }`}
                   >
@@ -149,7 +149,7 @@ export default function UsersPage() {
                 onChange={(e) =>
                   setPunishForm((p) => ({ ...p, platform: e.target.value }))
                 }
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
               >
                 {PLATFORMS.map((pl) => (
                   <option key={pl.value} value={pl.value}>
@@ -170,7 +170,7 @@ export default function UsersPage() {
                 }
                 placeholder="Укажи причину наказания..."
                 rows={3}
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
               />
             </div>
 
@@ -184,7 +184,7 @@ export default function UsersPage() {
                 onChange={(e) =>
                   setPunishForm((p) => ({ ...p, expires_at: e.target.value }))
                 }
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
               />
             </div>
 
@@ -220,11 +220,11 @@ export default function UsersPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Поиск по нику..."
-            className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40 w-64"
+            className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40 w-64"
           />
           <button
             type="submit"
-            className="px-4 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs rounded-xl uppercase tracking-widest"
+            className="px-4 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest"
           >
             Найти
           </button>
@@ -282,7 +282,7 @@ export default function UsersPage() {
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-xs flex-shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-xs flex-shrink-0">
                         {user.username.slice(0, 2).toUpperCase()}
                       </div>
                       <div>

@@ -130,7 +130,7 @@
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #FFE100 !important;
+  border-left: 2px solid #0000CD !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -178,13 +178,13 @@ body { min-width: 860px; }
 <!-- SideNavBar -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden" style="width:256px">
 <div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
-  <span class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sb-text">VOLTAGE</span>
+  <span class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sb-text">VOLTAGE</span>
   <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 sb-text overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -206,7 +206,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90" style="transform:rotate(90deg)">chevron_right</span>
   </button>
   <div class="sidebar-acc-body space-y-0.5">
-    <a data-label="Розыгрыши" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#FFE100] border-l-2 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="flex-1">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="flex-1">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="flex-1">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="flex-1">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="flex-1">Команды Twitch</span></a>
+    <a data-label="Розыгрыши" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#0000CD] border-l-2 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">redeem</span><span class="flex-1">Розыгрыши</span></a><a data-label="Призы и доставка" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">inventory</span><span class="flex-1">Призы и доставка</span></a><a data-label="Расписание" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">calendar_month</span><span class="flex-1">Расписание</span></a><a data-label="Шаблоны" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">edit_note</span><span class="flex-1">Шаблоны</span></a><a data-label="Команды Twitch" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">terminal</span><span class="flex-1">Команды Twitch</span></a>
   </div>
 </div><div class="sidebar-accordion">
   <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
@@ -214,7 +214,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
   </button>
   <div class="sidebar-acc-body space-y-0.5 hidden">
-    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-accordion">
   <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
@@ -247,7 +247,7 @@ body { min-width: 860px; }
 <p class="mt-2 text-white/40 text-sm">Создайте и настройте условия для проведения нового ивента в сообществе.</p>
 </div>
 <div class="inline-flex bg-[#1C1B1B] p-1 rounded-sm">
-<button class="px-6 py-2 text-xs font-bold space-grotesk uppercase tracking-widest bg-[#FFE100] text-[#211C00] transition-all">Быстрый</button>
+<button class="px-6 py-2 text-xs font-bold space-grotesk uppercase tracking-widest bg-[#0000CD] text-[#FFFFFF] transition-all">Быстрый</button>
 <button class="px-6 py-2 text-xs font-bold space-grotesk uppercase tracking-widest text-white/40 hover:text-white transition-all">Расширенный</button>
 </div>
 </div>
@@ -255,24 +255,24 @@ body { min-width: 860px; }
 <!-- Left: Form -->
 <div class="lg:col-span-8 flex flex-col gap-6">
 <!-- Section: Приз -->
-<section class="bg-[#111111] p-6 border-l-2 border-[#FFE100]/50">
-<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#FFE100] mb-6">01. ПРИЗ И ТИП</h3>
+<section class="bg-[#111111] p-6 border-l-2 border-[#0000CD]/50">
+<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#0000CD] mb-6">01. ПРИЗ И ТИП</h3>
 <div class="space-y-6">
 <div>
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Название приза</label>
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-3 transition-all" placeholder="Напр: Легендарный набор" type="text"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-3 transition-all" placeholder="Напр: Легендарный набор" type="text"/>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <label class="cursor-pointer group">
 <input checked="" class="hidden peer" name="prize_type" type="radio"/>
-<div class="flex items-center justify-center gap-3 p-4 bg-[#1C1B1B] border border-transparent peer-checked:border-[#FFE100] transition-all group-hover:bg-[#201F1F]">
-<span class="material-symbols-outlined text-[#FFE100]" data-icon="pistol" style="font-variation-settings: 'FILL' 1;">9mp</span>
+<div class="flex items-center justify-center gap-3 p-4 bg-[#1C1B1B] border border-transparent peer-checked:border-[#0000CD] transition-all group-hover:bg-[#201F1F]">
+<span class="material-symbols-outlined text-[#0000CD]" data-icon="pistol" style="font-variation-settings: 'FILL' 1;">9mp</span>
 <span class="text-xs font-bold uppercase tracking-widest space-grotesk">Скин CS2</span>
 </div>
 </label>
 <label class="cursor-pointer group">
 <input class="hidden peer" name="prize_type" type="radio"/>
-<div class="flex items-center justify-center gap-3 p-4 bg-[#1C1B1B] border border-transparent peer-checked:border-[#FFE100] transition-all group-hover:bg-[#201F1F]">
+<div class="flex items-center justify-center gap-3 p-4 bg-[#1C1B1B] border border-transparent peer-checked:border-[#0000CD] transition-all group-hover:bg-[#201F1F]">
 <span class="material-symbols-outlined text-white/40" data-icon="category">category</span>
 <span class="text-xs font-bold uppercase tracking-widest space-grotesk text-white/40 group-hover:text-white transition-colors">Другое</span>
 </div>
@@ -281,11 +281,11 @@ body { min-width: 860px; }
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-[#4C4732]/20">
 <div class="md:col-span-2">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Название скина</label>
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-3 transition-all" placeholder="AWP | Dragon Lore" type="text"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-3 transition-all" placeholder="AWP | Dragon Lore" type="text"/>
 </div>
 <div>
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Максимальная цена (руб)</label>
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-3 transition-all" placeholder="5000" type="number"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-3 transition-all" placeholder="5000" type="number"/>
 </div>
 <div class="flex items-end">
 <button class="w-full h-[50px] bg-[#2A2A2A] text-white text-[10px] font-bold uppercase tracking-widest space-grotesk hover:bg-[#3A3939] transition-all flex items-center justify-center gap-2">
@@ -299,7 +299,7 @@ body { min-width: 860px; }
 <div class="mt-4 border-t border-white/5 pt-4">
   <div class="flex items-center justify-between mb-3">
     <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Изображение для поста</label>
-    <button onclick="document.getElementById('img-library').classList.toggle('hidden')" class="text-xs text-[#FFE100] font-bold uppercase tracking-widest hover:text-yellow-300 flex items-center gap-1">
+    <button onclick="document.getElementById('img-library').classList.toggle('hidden')" class="text-xs text-[#0000CD] font-bold uppercase tracking-widest hover:text-yellow-300 flex items-center gap-1">
       <span class="material-symbols-outlined text-base">photo_library</span> Библиотека
     </button>
   </div>
@@ -322,26 +322,26 @@ body { min-width: 860px; }
     <div class="flex items-center justify-between mb-3">
       <span class="text-xs font-bold text-white/60 uppercase tracking-widest">Библиотека изображений</span>
       <div class="flex gap-1">
-        <button class="px-3 py-1 bg-[#FFE100] text-[#211C00] text-[10px] font-bold uppercase tracking-widest rounded-lg">CS2 скины</button>
+        <button class="px-3 py-1 bg-[#0000CD] text-[#FFFFFF] text-[10px] font-bold uppercase tracking-widest rounded-lg">CS2 скины</button>
         <button class="px-3 py-1 text-white/40 hover:bg-[#2A2A2A] text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all">Периферия</button>
         <button class="px-3 py-1 text-white/40 hover:bg-[#2A2A2A] text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all">Gift Cards</button>
         <button class="px-3 py-1 text-white/40 hover:bg-[#2A2A2A] text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all">+ Категория</button>
       </div>
     </div>
     <div class="grid grid-cols-5 gap-2">
-      <div onclick="selectImg(this,'AWP Dragon Lore')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#FFE100]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
+      <div onclick="selectImg(this,'AWP Dragon Lore')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#0000CD]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
         <span class="material-symbols-outlined text-white/10 text-2xl">image</span>
       </div>
-      <div onclick="selectImg(this,'AWP Азимов')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#FFE100]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
+      <div onclick="selectImg(this,'AWP Азимов')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#0000CD]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
         <span class="material-symbols-outlined text-white/10 text-2xl">image</span>
       </div>
-      <div onclick="selectImg(this,'AK-47 Вулкан')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#FFE100]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
+      <div onclick="selectImg(this,'AK-47 Вулкан')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#0000CD]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
         <span class="material-symbols-outlined text-white/10 text-2xl">image</span>
       </div>
-      <div onclick="selectImg(this,'M4A4 Цветок жизни')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#FFE100]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
+      <div onclick="selectImg(this,'M4A4 Цветок жизни')" class="aspect-video bg-[#111] rounded-lg border-2 border-transparent hover:border-[#0000CD]/50 cursor-pointer overflow-hidden flex items-center justify-center transition-all">
         <span class="material-symbols-outlined text-white/10 text-2xl">image</span>
       </div>
-      <div class="aspect-video bg-[#111]/50 rounded-lg border-2 border-dashed border-white/10 cursor-pointer flex items-center justify-center hover:border-[#FFE100]/30 transition-all">
+      <div class="aspect-video bg-[#111]/50 rounded-lg border-2 border-dashed border-white/10 cursor-pointer flex items-center justify-center hover:border-[#0000CD]/30 transition-all">
         <span class="material-symbols-outlined text-white/20 text-xl">add</span>
       </div>
     </div>
@@ -349,40 +349,40 @@ body { min-width: 860px; }
 </div>
 <script>
 function selectImg(el, name) {
-  document.querySelectorAll('#img-library > div.grid > div').forEach(d => d.classList.remove('border-[#FFE100]'));
-  el.classList.add('border-[#FFE100]');
+  document.querySelectorAll('#img-library > div.grid > div').forEach(d => d.classList.remove('border-[#0000CD]'));
+  el.classList.add('border-[#0000CD]');
   document.getElementById('img-name').textContent = name;
   setTimeout(() => document.getElementById('img-library').classList.add('hidden'), 300);
 }
 </script>
 </section>
 <!-- Section: Условия участия -->
-<section class="bg-[#111111] p-6 border-l-2 border-[#FFE100]/20">
-<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#FFE100] mb-6">02. УСЛОВИЯ УЧАСТИЯ</h3>
+<section class="bg-[#111111] p-6 border-l-2 border-[#0000CD]/20">
+<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#0000CD] mb-6">02. УСЛОВИЯ УЧАСТИЯ</h3>
 <div class="space-y-4">
 <label class="flex items-center gap-4 p-4 bg-[#1C1B1B] hover:bg-[#201F1F] transition-colors cursor-pointer rounded-sm">
-<input class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#FFE100] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
+<input class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#0000CD] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
 <span class="text-sm font-medium">Кнопка "Участвовать" в Telegram</span>
 </label>
 <label class="flex items-center gap-4 p-4 bg-[#1C1B1B] hover:bg-[#201F1F] transition-colors cursor-pointer rounded-sm">
-<input checked="" class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#FFE100] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
+<input checked="" class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#0000CD] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
 <span class="text-sm font-medium">Быть на стриме Twitch</span>
 </label>
 <div class="flex flex-col gap-4 p-4 bg-[#1C1B1B] rounded-sm">
 <label class="flex items-center gap-4 cursor-pointer">
-<input checked="" class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#FFE100] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
+<input checked="" class="w-5 h-5 bg-[#0E0E0E] border-2 border-[#4C4732] rounded-sm text-[#0000CD] focus:ring-offset-0 focus:ring-0" type="checkbox"/>
 <span class="text-sm font-medium">Написать ключевое слово в чат Twitch</span>
 </label>
 <div class="pl-9">
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#FFE100] text-white p-2 text-sm focus:ring-0" type="text" value="!voltage"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#0000CD] text-white p-2 text-sm focus:ring-0" type="text" value="!voltage"/>
 </div>
 </div>
 </div>
 </section>
 <!-- Section: Публикация -->
-<section class="bg-[#111111] p-6 border-l-2 border-[#FFE100]/20">
+<section class="bg-[#111111] p-6 border-l-2 border-[#0000CD]/20">
 <div class="flex justify-between items-center mb-6">
-<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#FFE100]">03. ПУБЛИКАЦИЯ</h3>
+<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#0000CD]">03. ПУБЛИКАЦИЯ</h3>
 <div class="flex gap-4">
 <div class="flex items-center gap-2">
 <span class="text-[10px] font-bold uppercase tracking-tighter text-white/40 space-grotesk">Telegram</span>
@@ -402,7 +402,7 @@ function selectImg(el, name) {
 </div>
 <div class="space-y-4">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Текст поста</label>
-<textarea class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-4 transition-all resize-none font-mono text-sm" rows="6">Разыгрываем {приз}! 
+<textarea class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-4 transition-all resize-none font-mono text-sm" rows="6">Разыгрываем {приз}! 
                                     
 Условия:
 - Написать в чат "!voltage"
@@ -410,23 +410,23 @@ function selectImg(el, name) {
                                     
 Итоги через {время}. Удачи!</textarea>
 <div class="flex flex-wrap gap-2">
-<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#FFE100]">{приз}</span>
-<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#FFE100]">{время}</span>
-<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#FFE100]">{условия}</span>
+<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#0000CD]">{приз}</span>
+<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#0000CD]">{время}</span>
+<span class="px-2 py-1 bg-[#1C1B1B] text-[10px] font-mono text-white/60 cursor-pointer hover:text-[#0000CD]">{условия}</span>
 </div>
 </div>
 </section>
 <!-- Section: Время -->
-<section class="bg-[#111111] p-6 border-l-2 border-[#FFE100]/20">
-<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#FFE100] mb-6">04. ВРЕМЯ ПРОВЕДЕНИЯ</h3>
+<section class="bg-[#111111] p-6 border-l-2 border-[#0000CD]/20">
+<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#0000CD] mb-6">04. ВРЕМЯ ПРОВЕДЕНИЯ</h3>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Начало</label>
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-3 transition-all" type="datetime-local"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-3 transition-all" type="datetime-local"/>
 </div>
 <div>
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 space-grotesk">Конец / Подведение итогов</label>
-<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#FFE100] focus:ring-0 text-white p-3 transition-all" type="datetime-local"/>
+<input class="w-full bg-[#0E0E0E] border-none border-b-2 border-[#4C4732] focus:border-[#0000CD] focus:ring-0 text-white p-3 transition-all" type="datetime-local"/>
 </div>
 <div class="md:col-span-2 flex items-center justify-between p-4 bg-[#1C1B1B] rounded-sm">
 <div class="flex items-center gap-3">
@@ -435,14 +435,14 @@ function selectImg(el, name) {
 </div>
 <div class="relative inline-flex items-center cursor-pointer">
 <input class="sr-only peer" type="checkbox"/>
-<div class="w-10 h-5 bg-[#353534] rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#FFE100] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+<div class="w-10 h-5 bg-[#353534] rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#0000CD] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
 </div>
 </div>
 </div>
 </section>
 <!-- Section: Проверка победителя -->
-<section class="bg-[#111111] p-6 border-l-2 border-[#FFE100]/20">
-<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#FFE100] mb-6">05. ПРОВЕРКА ПОБЕДИТЕЛЯ</h3>
+<section class="bg-[#111111] p-6 border-l-2 border-[#0000CD]/20">
+<h3 class="text-xs font-bold space-grotesk uppercase tracking-[0.2em] text-[#0000CD] mb-6">05. ПРОВЕРКА ПОБЕДИТЕЛЯ</h3>
 <div class="space-y-8">
 <div class="flex items-start justify-between">
 <div class="max-w-[80%]">
@@ -457,9 +457,9 @@ function selectImg(el, name) {
 <div>
 <div class="flex justify-between items-end mb-4">
 <label class="block text-[10px] font-bold uppercase tracking-widest text-white/40 space-grotesk">Время на ответ победителя</label>
-<span class="text-[#FFE100] font-bold space-grotesk">60 СЕК</span>
+<span class="text-[#0000CD] font-bold space-grotesk">60 СЕК</span>
 </div>
-<input class="w-full h-1 bg-[#1C1B1B] rounded-lg appearance-none cursor-pointer accent-[#FFE100]" max="300" min="10" type="range" value="60"/>
+<input class="w-full h-1 bg-[#1C1B1B] rounded-lg appearance-none cursor-pointer accent-[#0000CD]" max="300" min="10" type="range" value="60"/>
 <div class="flex justify-between mt-2 text-[10px] text-white/20 uppercase font-bold tracking-tighter">
 <span>10с</span>
 <span>300с</span>
@@ -475,14 +475,14 @@ function selectImg(el, name) {
 <!-- Telegram Mockup Card -->
 <div class="bg-[#201F1F] rounded-xl overflow-hidden shadow-2xl border border-white/5">
 <div class="h-48 bg-cover bg-center relative" data-alt="Close up of a stylized high-end gaming keyboard with intense yellow and cyan neon backlighting in a dark room" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBytzm9XAqFE1eYqJkyU_SRJJMVSOHoFpbOJY7CYJkTCJ5ZV9DSJGVe4UBCulNytthbHD5pqwuELymRyIDmggidiM7dzeU91YbNF19bhtgJmFFBH4lQbzR5DeD60S_lJX0NKlfuvGM-1AxtqA7yOtIO__KUGL0vNqaoGjeqf0DqnSouHt0H3r33w6pe2H5RGXcLIJWmP_UoOAWW_-mFiup0sg73kc825EKiAqpdTx1K80141Fx58wEdgQKEN-RDX9EgxTHvxgS9nc2A')">
-<div class="absolute top-3 left-3 bg-[#FFE100] text-[#211C00] text-[10px] font-black px-2 py-1 uppercase space-grotesk">КОНКУРС</div>
+<div class="absolute top-3 left-3 bg-[#0000CD] text-[#FFFFFF] text-[10px] font-black px-2 py-1 uppercase space-grotesk">КОНКУРС</div>
 <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#201F1F] to-transparent"></div>
 </div>
 <div class="p-4 pt-0 -mt-8 relative z-10">
 <div class="bg-[#1C1B1B] p-4 rounded-lg shadow-lg border-t border-white/10">
 <p class="text-sm font-bold text-white mb-2 uppercase space-grotesk tracking-tight">Розыгрыш: {приз}</p>
 <p class="text-xs text-white/60 leading-relaxed mb-4">Разыгрываем {приз}! <br/><br/>Условия:<br/>— Написать в чат "!voltage"<br/>— Быть онлайн до конца<br/><br/>Итоги через {время}. Удачи!</p>
-<button class="w-full py-3 bg-[#FFE100] text-[#211C00] font-bold text-xs uppercase tracking-widest space-grotesk rounded-sm">УЧАСТВОВАТЬ</button>
+<button class="w-full py-3 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs uppercase tracking-widest space-grotesk rounded-sm">УЧАСТВОВАТЬ</button>
 </div>
 </div>
 <div class="p-3 bg-[#0E0E0E]/50 border-t border-white/5 flex items-center justify-between">
@@ -514,7 +514,7 @@ function selectImg(el, name) {
 <button class="px-8 py-3 bg-transparent border border-[#4C4732]/30 text-white/60 hover:text-white hover:border-white transition-all text-xs font-bold uppercase tracking-widest space-grotesk">
                 Сохранить черновик
             </button>
-<button class="px-12 py-3 bg-[#FFE100] text-[#211C00] hover:bg-[#FFE330] transition-all text-xs font-black uppercase tracking-widest space-grotesk shadow-[0_0_20px_rgba(255,225,0,0.2)]">
+<button class="px-12 py-3 bg-[#0000CD] text-[#FFFFFF] hover:bg-[#1A1AE8] transition-all text-xs font-black uppercase tracking-widest space-grotesk shadow-[0_0_20px_rgba(255,225,0,0.2)]">
                 Опубликовать
             </button>
 </footer>
@@ -549,8 +549,8 @@ function showConfirm(opts) {
     wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
     btn.style.background = '#EF4444'; btn.style.color = '#fff';
   } else {
-    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
-    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#0000CD'; icon.textContent = 'help';
+    btn.style.background = '#0000CD'; btn.style.color = '#FFFFFF';
   }
   btn.textContent = opts.confirmLabel || 'Подтвердить';
   btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };

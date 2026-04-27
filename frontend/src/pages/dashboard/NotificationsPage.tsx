@@ -3,7 +3,7 @@ export default function NotificationsPage() {
     <div className="space-y-8 max-w-2xl">
       <div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">
-          Уведомле<span className="text-[#FFE100]">ния</span>
+          Уведомле<span className="text-[#0000CD]">ния</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">
           Управляй тем, как получаешь обновления
@@ -41,8 +41,8 @@ export default function NotificationsPage() {
               <p className="text-sm font-bold text-white">{item.label}</p>
               <p className="text-xs text-white/40 mt-0.5">{item.desc}</p>
             </div>
-            <div className="w-10 h-5 rounded-full bg-[#FFE100]/80 relative flex-shrink-0">
-              <div className="absolute top-0.5 right-0.5 w-4 h-4 bg-[#211C00] rounded-full" />
+            <div className="w-10 h-5 rounded-full bg-[#0000CD]/80 relative flex-shrink-0">
+              <div className="absolute top-0.5 right-0.5 w-4 h-4 bg-[#FFFFFF] rounded-full" />
             </div>
           </div>
         ))}

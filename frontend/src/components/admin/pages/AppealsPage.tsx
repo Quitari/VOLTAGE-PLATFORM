@@ -59,7 +59,7 @@ export default function AppealsPage() {
             onClick={() => setStatusFilter(s)}
             className={`pb-3 px-4 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
               statusFilter === s
-                ? "text-[#FFE100] border-[#FFE100]"
+                ? "text-[#0000CD] border-[#0000CD]"
                 : "text-white/40 border-transparent hover:text-white"
             }`}
           >
@@ -157,7 +157,7 @@ export default function AppealsPage() {
                       onChange={(e) => setResponse(e.target.value)}
                       placeholder="Напиши ответ пользователю..."
                       rows={3}
-                      className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
                     />
                   </div>
 
@@ -183,7 +183,7 @@ export default function AppealsPage() {
                   <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">
                     Ответ модератора
                   </p>
-                  <p className="text-white/80 text-sm bg-[#FFE100]/10 border border-[#FFE100]/20 rounded-xl px-4 py-3">
+                  <p className="text-white/80 text-sm bg-[#0000CD]/10 border border-[#0000CD]/20 rounded-xl px-4 py-3">
                     {selected.moderator_response}
                   </p>
                 </div>

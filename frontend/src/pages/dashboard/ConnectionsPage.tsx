@@ -192,7 +192,7 @@ export default function ConnectionsPage() {
 
       <div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">
-          Привязанные <span className="text-[#FFE100]">аккаунты</span>
+          Привязанные <span className="text-[#0000CD]">аккаунты</span>
         </h1>
         <p className="text-white/40 text-sm mt-1 max-w-2xl">
           Управляйте подключениями социальных сетей и игровых платформ для
@@ -252,7 +252,7 @@ export default function ConnectionsPage() {
                     <p className="text-white/40 text-xs">
                       Отправь команду боту:
                     </p>
-                    <div className="bg-[#0E0E0E] rounded-xl px-4 py-3 font-mono text-sm text-[#FFE100]">
+                    <div className="bg-[#0E0E0E] rounded-xl px-4 py-3 font-mono text-sm text-[#0000CD]">
                       /link {telegramToken}
                     </div>
                     <a
@@ -344,12 +344,12 @@ export default function ConnectionsPage() {
                 value={twitchUsername}
                 onChange={(e) => setTwitchUsername(e.target.value)}
                 placeholder="Твой никнейм на Twitch"
-                className="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                className="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
               />
               <button
                 onClick={saveTwitch}
                 disabled={saving === "twitch"}
-                className="w-full bg-[#FFE100] text-[#211C00] py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-colors disabled:opacity-50"
+                className="w-full bg-[#0000CD] text-[#FFFFFF] py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
               >
                 {saving === "twitch" ? "Сохраняем..." : "Привязать Twitch"}
               </button>
@@ -400,7 +400,7 @@ export default function ConnectionsPage() {
           ) : (
             <button
               onClick={() => document.getElementById("steam-input")?.focus()}
-              className="w-full bg-[#FFE100] text-[#211C00] py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-[#FFE330] transition-all active:scale-95"
+              className="w-full bg-[#0000CD] text-[#FFFFFF] py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95"
             >
               Привязать Steam
             </button>
@@ -411,7 +411,7 @@ export default function ConnectionsPage() {
       {/* Steam Trade URL */}
       <div className="bg-[#111] border border-white/5 rounded-2xl p-8">
         <div className="flex items-center gap-3 mb-6">
-          <span className="material-symbols-outlined text-[#FFE100]">
+          <span className="material-symbols-outlined text-[#0000CD]">
             swap_horiz
           </span>
           <h2 className="text-2xl font-black text-white uppercase tracking-tight">
@@ -424,12 +424,12 @@ export default function ConnectionsPage() {
             value={steamUrl}
             onChange={(e) => setSteamUrl(e.target.value)}
             placeholder="https://steamcommunity.com/tradeoffer/new/?partner=...&token=..."
-            className="flex-1 bg-[#1C1B1B] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 px-0 text-sm outline-none transition-colors"
+            className="flex-1 bg-[#1C1B1B] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 px-0 text-sm outline-none transition-colors"
           />
           <button
             onClick={saveSteam}
             disabled={saving === "steam"}
-            className="bg-[#FFE100] text-[#211C00] px-8 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-[#FFE330] transition-all active:scale-95 disabled:opacity-50"
+            className="bg-[#0000CD] text-[#FFFFFF] px-8 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95 disabled:opacity-50"
           >
             {saving === "steam" ? "..." : "Сохранить"}
           </button>
@@ -441,7 +441,7 @@ export default function ConnectionsPage() {
             href="https://steamcommunity.com/my/tradeoffers/privacy"
             target="_blank"
             rel="noreferrer"
-            className="text-[#FFE100] hover:underline ml-1"
+            className="text-[#0000CD] hover:underline ml-1"
           >
             Где найти мою ссылку?
           </a>
@@ -451,7 +451,7 @@ export default function ConnectionsPage() {
       {/* Безопасность */}
       <div className="bg-[#111] border border-white/5 rounded-2xl p-8">
         <div className="flex items-center gap-3 mb-8">
-          <span className="material-symbols-outlined text-[#FFE100]">
+          <span className="material-symbols-outlined text-[#0000CD]">
             security
           </span>
           <h2 className="text-2xl font-black text-white uppercase tracking-tight">
@@ -495,7 +495,7 @@ export default function ConnectionsPage() {
                     setPwForm({ ...pwForm, [item.field]: e.target.value })
                   }
                   placeholder={item.placeholder}
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               ))}
             </div>

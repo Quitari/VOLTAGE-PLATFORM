@@ -44,7 +44,7 @@ export default function ViolationsPage() {
     <div className="space-y-8 max-w-3xl">
       <div>
         <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">
-          Нару<span className="text-[#FFE100]">шения</span>
+          Нару<span className="text-[#0000CD]">шения</span>
         </h1>
         <p className="text-white/40 text-sm mt-1">
           История наказаний на аккаунте
@@ -115,7 +115,7 @@ export default function ViolationsPage() {
                         onClick={() =>
                           (window.location.href = `/dashboard/violations/${v.id}/appeal`)
                         }
-                        className="text-xs font-bold text-[#FFE100] hover:underline uppercase tracking-widest flex items-center gap-1"
+                        className="text-xs font-bold text-[#0000CD] hover:underline uppercase tracking-widest flex items-center gap-1"
                       >
                         <span className="material-symbols-outlined text-sm">
                           balance

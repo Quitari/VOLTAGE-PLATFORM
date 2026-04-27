@@ -148,7 +148,7 @@ export default function CreateGiveawayPage() {
             value={form.title}
             onChange={(e) => set("title", e.target.value)}
             placeholder="AWP Азимов FT или Gift Card $50"
-            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors"
           />
         </div>
 
@@ -161,7 +161,7 @@ export default function CreateGiveawayPage() {
             onChange={(e) => set("description", e.target.value)}
             placeholder="Дополнительное описание розыгрыша..."
             rows={3}
-            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors resize-none"
+            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors resize-none"
           />
         </div>
 
@@ -180,7 +180,7 @@ export default function CreateGiveawayPage() {
                 onClick={() => set("prize_type", opt.value)}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-colors ${
                   form.prize_type === opt.value
-                    ? "bg-[#FFE100] text-[#211C00]"
+                    ? "bg-[#0000CD] text-[#FFFFFF]"
                     : "bg-[#1C1B1B] text-white/60 hover:text-white"
                 }`}
               >
@@ -202,7 +202,7 @@ export default function CreateGiveawayPage() {
                   value={form.skin_name}
                   onChange={(e) => set("skin_name", e.target.value)}
                   placeholder="AWP | Азимов"
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors"
                 />
               </div>
               <div>
@@ -214,7 +214,7 @@ export default function CreateGiveawayPage() {
                   value={form.skin_max_price}
                   onChange={(e) => set("skin_max_price", e.target.value)}
                   placeholder="3000"
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors"
                 />
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function CreateGiveawayPage() {
                     }}
                     placeholder="https://example.com/skin.png"
                     disabled={!!imagePreview}
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 disabled:opacity-40"
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 disabled:opacity-40"
                   />
                 </div>
 
@@ -287,7 +287,7 @@ export default function CreateGiveawayPage() {
                       if (file) handleImageUpload(file);
                       e.target.value = "";
                     }}
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#FFE100] file:text-[#211C00] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#0000CD] file:text-[#FFFFFF] file:font-bold file:text-xs file:uppercase cursor-pointer"
                   />
                   {uploadingImage && (
                     <p className="text-xs text-white/40 mt-1 animate-pulse">
@@ -345,7 +345,7 @@ export default function CreateGiveawayPage() {
                   }}
                   placeholder="https://example.com/prize.png"
                   disabled={!!imagePreview}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 disabled:opacity-40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 disabled:opacity-40"
                 />
               </div>
               <div className="flex items-center gap-3">
@@ -367,7 +367,7 @@ export default function CreateGiveawayPage() {
                     if (file) handleImageUpload(file);
                     e.target.value = "";
                   }}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#FFE100] file:text-[#211C00] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#0000CD] file:text-[#FFFFFF] file:font-bold file:text-xs file:uppercase cursor-pointer"
                 />
                 {uploadingImage && (
                   <p className="text-xs text-white/40 mt-1 animate-pulse">
@@ -397,7 +397,7 @@ export default function CreateGiveawayPage() {
               onClick={() => set("platform", opt.value)}
               className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-colors ${
                 form.platform === opt.value
-                  ? "bg-[#FFE100] text-[#211C00]"
+                  ? "bg-[#0000CD] text-[#FFFFFF]"
                   : "bg-[#1C1B1B] text-white/60 hover:text-white"
               }`}
             >
@@ -424,12 +424,12 @@ export default function CreateGiveawayPage() {
                 }
                 className={`w-5 h-5 rounded flex items-center justify-center transition-colors flex-shrink-0 ${
                   form[item.field as keyof GiveawayForm]
-                    ? "bg-[#FFE100]"
+                    ? "bg-[#0000CD]"
                     : "bg-[#1C1B1B] border border-white/10"
                 }`}
               >
                 {form[item.field as keyof GiveawayForm] && (
-                  <span className="text-[#211C00] text-xs font-black">✓</span>
+                  <span className="text-[#FFFFFF] text-xs font-black">✓</span>
                 )}
               </div>
               <span className="text-sm text-white/60">{item.label}</span>
@@ -446,7 +446,7 @@ export default function CreateGiveawayPage() {
               value={form.twitch_keyword}
               onChange={(e) => set("twitch_keyword", e.target.value)}
               placeholder="+розыгрыш"
-              className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+              className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors"
             />
           </div>
         )}
@@ -466,7 +466,7 @@ export default function CreateGiveawayPage() {
             type="datetime-local"
             value={form.ends_at}
             onChange={(e) => set("ends_at", e.target.value)}
-            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 transition-colors"
+            className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 transition-colors"
           />
         </div>
 
@@ -475,12 +475,12 @@ export default function CreateGiveawayPage() {
             onClick={() => set("draw_manually", !form.draw_manually)}
             className={`w-5 h-5 rounded flex items-center justify-center transition-colors flex-shrink-0 ${
               form.draw_manually
-                ? "bg-[#FFE100]"
+                ? "bg-[#0000CD]"
                 : "bg-[#1C1B1B] border border-white/10"
             }`}
           >
             {form.draw_manually && (
-              <span className="text-[#211C00] text-xs font-black">✓</span>
+              <span className="text-[#FFFFFF] text-xs font-black">✓</span>
             )}
           </div>
           <div>
@@ -504,7 +504,7 @@ export default function CreateGiveawayPage() {
         <button
           onClick={() => handleSubmit(true)}
           disabled={loading}
-          className="flex-1 py-3 bg-[#FFE100] text-[#211C00] font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-[#FFE330] transition-colors disabled:opacity-50"
+          className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
         >
           {loading ? "Запускаем..." : "🚀 Создать и запустить"}
         </button>

@@ -128,7 +128,7 @@
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #FFE100 !important;
+  border-left: 2px solid #0000CD !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -178,13 +178,13 @@ body { min-width: 860px; }
 <!-- SideNavBar -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen bg-[#0E0E0E] flex flex-col z-50 transition-all duration-200 overflow-hidden" style="width:256px">
 <div class="flex items-center justify-between px-5 py-4 flex-shrink-0">
-  <span class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sb-text">VOLTAGE</span>
+  <span class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sb-text">VOLTAGE</span>
   <button onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all" title="Свернуть">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-3 flex items-center gap-3 flex-shrink-0">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 sb-text overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -214,7 +214,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 " style="transform:rotate(0deg)">chevron_right</span>
   </button>
   <div class="sidebar-acc-body space-y-0.5 hidden">
-    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="flex-1">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="flex-1">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="flex-1">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-accordion">
   <button class="sidebar-acc-btn w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors rounded" onclick="sidebarToggle(this)">
@@ -222,7 +222,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90" style="transform:rotate(90deg)">chevron_right</span>
   </button>
   <div class="sidebar-acc-body space-y-0.5">
-    <a data-label="Настройки" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#FFE100] border-l-2 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="flex-1">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="flex-1">Роли и права</span></a>
+    <a data-label="Настройки" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#0000CD] border-l-2 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">settings</span><span class="flex-1">Настройки</span></a><a data-label="Роли и права" class="flex items-center gap-3 px-3 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors rounded-lg w-full text-left text-sm" href="#"><span class="material-symbols-outlined text-xl">shield</span><span class="flex-1">Роли и права</span></a>
   </div>
 </div>
 </nav>
@@ -244,14 +244,14 @@ body { min-width: 860px; }
   </div>
   <div class="relative px-4 py-3 border-b border-white/5">
     <span class="material-symbols-outlined absolute left-7 top-1/2 -translate-y-1/2 text-white/30 text-sm">search</span>
-    <input class="w-full bg-[#111] text-xs text-white py-2 pl-8 pr-3 rounded border border-white/5 focus:outline-none focus:border-[#FFE100]/40 placeholder-white/20" placeholder="Поиск настроек..." type="text"/>
+    <input class="w-full bg-[#111] text-xs text-white py-2 pl-8 pr-3 rounded border border-white/5 focus:outline-none focus:border-[#0000CD]/40 placeholder-white/20" placeholder="Поиск настроек..." type="text"/>
   </div>
   <nav class="flex-1 py-4 px-3 space-y-5">
     <!-- КАСТОМИЗАЦИЯ -->
     <div>
       <p class="px-3 mb-2 text-[10px] font-bold text-white/25 tracking-[0.15em] uppercase">Кастомизация</p>
       <div class="space-y-0.5">
-        <button onclick="showSection('branding')" id="nav-branding" class="settings-nav-item active w-full flex items-center gap-3 px-3 py-2 rounded text-[#FFE100] bg-[#1C1B1B] border-l-2 border-[#FFE100] text-xs font-bold text-left transition-all">
+        <button onclick="showSection('branding')" id="nav-branding" class="settings-nav-item active w-full flex items-center gap-3 px-3 py-2 rounded text-[#0000CD] bg-[#1C1B1B] border-l-2 border-[#0000CD] text-xs font-bold text-left transition-all">
           <span class="material-symbols-outlined text-base">palette</span> Брендинг
         </button>
         <button onclick="showSection('theme')" id="nav-theme" class="settings-nav-item w-full flex items-center gap-3 px-3 py-2 rounded text-white/50 hover:text-white hover:bg-[#1C1B1B] text-xs font-medium text-left transition-all">
@@ -307,14 +307,14 @@ body { min-width: 860px; }
     <div class="bg-[#111] rounded-xl p-6 border border-white/5 space-y-6">
       <h2 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Логотип и название</h2>
       <div class="flex gap-6 items-start">
-        <div class="w-32 h-32 bg-[#1C1B1B] border-2 border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-[#FFE100]/40 transition-all flex-shrink-0">
+        <div class="w-32 h-32 bg-[#1C1B1B] border-2 border-dashed border-white/10 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-[#0000CD]/40 transition-all flex-shrink-0">
           <span class="material-symbols-outlined text-white/20 text-3xl">upload_file</span>
           <span class="text-[10px] text-white/25 uppercase tracking-widest text-center">PNG / SVG</span>
         </div>
         <div class="flex-1 space-y-4">
           <div>
             <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Название платформы</label>
-            <input class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50 transition-all" type="text" value="STREAM_CORE"/>
+            <input class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50 transition-all" type="text" value="STREAM_CORE"/>
           </div>
           <p class="text-xs text-white/30 leading-relaxed">Отображается в заголовке браузера и навигации. Рекомендуется до 12 символов.</p>
         </div>
@@ -322,10 +322,10 @@ body { min-width: 860px; }
     </div>
     <div class="bg-[#111] rounded-xl p-6 border border-white/5 space-y-4">
       <h2 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Описание платформы</h2>
-      <textarea class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50 transition-all resize-none h-24" placeholder="Краткое описание для публичной страницы..."></textarea>
+      <textarea class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50 transition-all resize-none h-24" placeholder="Краткое описание для публичной страницы..."></textarea>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -339,14 +339,14 @@ body { min-width: 860px; }
     <div class="bg-[#111] rounded-xl p-6 border border-white/5 space-y-4">
       <h2 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Быстрые пресеты</h2>
       <div class="grid grid-cols-4 gap-3">
-        <div class="preset-card cursor-pointer p-3 rounded-lg bg-[#1C1B1B] border-2 border-[#FFE100] transition-all" onclick="selectPreset(this,'#FFE100','#0A0A0A')">
+        <div class="preset-card cursor-pointer p-3 rounded-lg bg-[#1C1B1B] border-2 border-[#0000CD] transition-all" onclick="selectPreset(this,'#0000CD','#0A0A0A')">
           <div class="flex items-center gap-2 mb-2">
-            <div class="w-4 h-4 rounded-full bg-[#FFE100]"></div>
+            <div class="w-4 h-4 rounded-full bg-[#0000CD]"></div>
             <span class="text-xs font-bold text-white">Стандарт</span>
           </div>
           <div class="flex gap-1">
             <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <div class="w-3 h-3 rounded-full bg-[#FFE100]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#0000CD]"></div>
             <div class="w-3 h-3 rounded-full bg-red-500"></div>
           </div>
         </div>
@@ -435,8 +435,8 @@ body { min-width: 860px; }
       <div>
         <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Акцентный цвет</label>
         <div class="flex items-center gap-3">
-          <input type="color" id="accent-picker" value="#FFE100" class="w-10 h-10 rounded-lg cursor-pointer border border-white/10 bg-transparent" oninput="document.getElementById('accent-hex').value=this.value"/>
-          <input id="accent-hex" class="flex-1 bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50 font-mono" type="text" value="#FFE100" oninput="document.getElementById('accent-picker').value=this.value"/>
+          <input type="color" id="accent-picker" value="#0000CD" class="w-10 h-10 rounded-lg cursor-pointer border border-white/10 bg-transparent" oninput="document.getElementById('accent-hex').value=this.value"/>
+          <input id="accent-hex" class="flex-1 bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50 font-mono" type="text" value="#0000CD" oninput="document.getElementById('accent-picker').value=this.value"/>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4">
@@ -457,7 +457,7 @@ body { min-width: 860px; }
       </div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -471,8 +471,8 @@ body { min-width: 860px; }
       <div class="flex justify-between items-center">
         <h2 class="text-sm font-bold text-white font-headline uppercase tracking-wider">Анимированный фон</h2>
         <label class="flex items-center gap-2 cursor-pointer">
-          <span class="text-xs text-[#FFE100] font-bold uppercase">Активен</span>
-          <div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative">
+          <span class="text-xs text-[#0000CD] font-bold uppercase">Активен</span>
+          <div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative">
             <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div>
           </div>
         </label>
@@ -485,11 +485,11 @@ body { min-width: 860px; }
           <span class="block text-[10px] text-center mt-1.5 text-white/40 uppercase tracking-widest">Без фона</span>
         </div>
         <div class="cursor-pointer group">
-          <div class="aspect-video bg-[#0A0A0A] rounded-lg border-2 border-[#FFE100] relative overflow-hidden">
-            <div class="absolute inset-0 opacity-30" style="background-image:linear-gradient(#FFE100 1px,transparent 1px),linear-gradient(90deg,#FFE100 1px,transparent 1px);background-size:10px 10px"></div>
-            <span class="absolute top-1 right-1 material-symbols-outlined text-[#FFE100] text-sm">check_circle</span>
+          <div class="aspect-video bg-[#0A0A0A] rounded-lg border-2 border-[#0000CD] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-30" style="background-image:linear-gradient(#0000CD 1px,transparent 1px),linear-gradient(90deg,#0000CD 1px,transparent 1px);background-size:10px 10px"></div>
+            <span class="absolute top-1 right-1 material-symbols-outlined text-[#0000CD] text-sm">check_circle</span>
           </div>
-          <span class="block text-[10px] text-center mt-1.5 text-[#FFE100] uppercase tracking-widest font-bold">Сетка</span>
+          <span class="block text-[10px] text-center mt-1.5 text-[#0000CD] uppercase tracking-widest font-bold">Сетка</span>
         </div>
         <div class="cursor-pointer group">
           <div class="aspect-video bg-[#0A0A0A] rounded-lg border-2 border-transparent group-hover:border-white/20 relative overflow-hidden">
@@ -546,19 +546,19 @@ body { min-width: 860px; }
             <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Прозрачность</label>
             <span class="text-xs font-bold text-white">0.45</span>
           </div>
-          <input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#FFE100]" max="100" min="0" type="range" value="45"/>
+          <input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#0000CD]" max="100" min="0" type="range" value="45"/>
         </div>
         <div>
           <div class="flex justify-between mb-2">
             <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Скорость</label>
             <span class="text-xs font-bold text-white">Средняя</span>
           </div>
-          <input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#FFE100]" max="100" min="0" type="range" value="50"/>
+          <input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#0000CD]" max="100" min="0" type="range" value="50"/>
         </div>
       </div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -581,14 +581,14 @@ body { min-width: 860px; }
               <div class="text-xs text-white/40">Бот, события, баллы канала</div>
             </div>
           </div>
-          <div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer">
+          <div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer">
             <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div>
           </div>
         </div>
         <div class="space-y-2.5 pl-11">
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Учёт сообщений чата</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Баллы канала → призы</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">LinkDrops (CS2 события)</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Учёт сообщений чата</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Баллы канала → призы</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">LinkDrops (CS2 события)</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
           <div class="flex justify-between items-center"><span class="text-xs text-white/40">Команды в чате (!roll)</span><div class="w-8 h-4 bg-[#2A2A2A] rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white/20 rounded-full shadow"></div></div></div>
         </div>
       </div>
@@ -604,14 +604,14 @@ body { min-width: 860px; }
               <div class="text-xs text-white/40">Бот, уведомления, канал</div>
             </div>
           </div>
-          <div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer">
+          <div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer">
             <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div>
           </div>
         </div>
         <div class="space-y-2.5 pl-11">
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Учёт сообщений канала</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Уведомления о победителях</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
-          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Уведомления о стриме</span><div class="w-8 h-4 bg-[#FFE100]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Учёт сообщений канала</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Уведомления о победителях</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
+          <div class="flex justify-between items-center"><span class="text-xs text-white/60">Уведомления о стриме</span><div class="w-8 h-4 bg-[#0000CD]/70 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div></div>
           <div class="flex justify-between items-center"><span class="text-xs text-white/40">Модерация (кик/бан)</span><div class="w-8 h-4 bg-[#2A2A2A] rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white/20 rounded-full shadow"></div></div></div>
         </div>
       </div>
@@ -627,14 +627,14 @@ body { min-width: 860px; }
               <div class="text-xs text-white/40">LisSkins API, трейд-офферы</div>
             </div>
           </div>
-          <div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer">
+          <div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer">
             <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -645,14 +645,14 @@ body { min-width: 860px; }
       <p class="text-white/40 text-sm mt-1">Включить или скрыть разделы публичного сайта.</p>
     </div>
     <div class="bg-[#111] rounded-xl border border-white/5 divide-y divide-white/5">
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Расписание стримов</div><div class="text-xs text-white/40 mt-0.5">Страница /schedule</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Лучшие моменты</div><div class="text-xs text-white/40 mt-0.5">Страница /moments</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Победители на главной</div><div class="text-xs text-white/40 mt-0.5">Блок на главной странице</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Расписание стримов</div><div class="text-xs text-white/40 mt-0.5">Страница /schedule</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Лучшие моменты</div><div class="text-xs text-white/40 mt-0.5">Страница /moments</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Победители на главной</div><div class="text-xs text-white/40 mt-0.5">Блок на главной странице</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
       <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white/40">Статус сервисов</div><div class="text-xs text-white/25 mt-0.5">Страница /status</div></div><div class="w-10 h-5 bg-[#2A2A2A] rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white/20 rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Правила сообщества</div><div class="text-xs text-white/40 mt-0.5">Страница /rules</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Правила сообщества</div><div class="text-xs text-white/40 mt-0.5">Страница /rules</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -663,14 +663,14 @@ body { min-width: 860px; }
       <p class="text-white/40 text-sm mt-1">Параметры системы розыгрышей и призов.</p>
     </div>
     <div class="bg-[#111] rounded-xl border border-white/5 divide-y divide-white/5">
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Ручные розыгрыши</div><div class="text-xs text-white/40 mt-0.5">Создание вручную через панель</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Автоматические по событиям CS2</div><div class="text-xs text-white/40 mt-0.5">Триггер от GameState Integration</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">По баллам канала Twitch</div><div class="text-xs text-white/40 mt-0.5">Зрители активируют наградой</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="p-5"><div class="flex justify-between items-center mb-3"><label class="text-sm font-medium text-white">Время на ответ победителя</label><span class="text-xs font-bold text-[#FFE100]">60 сек</span></div><input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#FFE100]" max="300" min="30" type="range" value="60"/></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Автопроверка активности Twitch</div><div class="text-xs text-white/40 mt-0.5">Бот сам проверяет через API</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Ручные розыгрыши</div><div class="text-xs text-white/40 mt-0.5">Создание вручную через панель</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Автоматические по событиям CS2</div><div class="text-xs text-white/40 mt-0.5">Триггер от GameState Integration</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">По баллам канала Twitch</div><div class="text-xs text-white/40 mt-0.5">Зрители активируют наградой</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="p-5"><div class="flex justify-between items-center mb-3"><label class="text-sm font-medium text-white">Время на ответ победителя</label><span class="text-xs font-bold text-[#0000CD]">60 сек</span></div><input class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#0000CD]" max="300" min="30" type="range" value="60"/></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Автопроверка активности Twitch</div><div class="text-xs text-white/40 mt-0.5">Бот сам проверяет через API</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -681,20 +681,20 @@ body { min-width: 860px; }
       <p class="text-white/40 text-sm mt-1">Основные параметры платформы.</p>
     </div>
     <div class="bg-[#111] rounded-xl p-6 border border-white/5 space-y-5">
-      <div><label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Домен платформы</label><input class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50 font-mono" type="text" value="example.com"/></div>
+      <div><label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Домен платформы</label><input class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50 font-mono" type="text" value="example.com"/></div>
       <div><label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Язык интерфейса по умолчанию</label>
-        <select class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50">
+        <select class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50">
           <option>Русский</option><option>English</option>
         </select>
       </div>
       <div><label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Часовой пояс</label>
-        <select class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#FFE100]/50">
+        <select class="w-full bg-[#1C1B1B] border border-white/10 text-white text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-[#0000CD]/50">
           <option>Europe/Moscow (UTC+3)</option><option>UTC</option>
         </select>
       </div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -706,13 +706,13 @@ body { min-width: 860px; }
     </div>
     <div class="bg-[#111] rounded-xl border border-white/5 divide-y divide-white/5">
       <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Двухфакторная аутентификация</div><div class="text-xs text-white/40 mt-0.5">Для всех администраторов</div></div><div class="w-10 h-5 bg-[#2A2A2A] rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white/20 rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Rate limiting на API</div><div class="text-xs text-white/40 mt-0.5">Ограничение запросов по IP</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Rate limiting на API</div><div class="text-xs text-white/40 mt-0.5">Ограничение запросов по IP</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
       <!-- AI moderation full block -->
       <div class="p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
             <div class="text-sm font-medium text-white flex items-center gap-2">
-              <span class="material-symbols-outlined text-base text-[#FFE100]">auto_awesome</span>
+              <span class="material-symbols-outlined text-base text-[#0000CD]">auto_awesome</span>
               AI модерация сообщений
             </div>
             <div class="text-xs text-white/40 mt-0.5">Автоматическое определение спама, рекламы и нарушений</div>
@@ -725,7 +725,7 @@ body { min-width: 860px; }
           <div>
             <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">API ключ (Anthropic Claude или OpenAI)</label>
             <div class="flex gap-2">
-              <input type="password" id="ai-key-input" class="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-xs py-2.5 px-4 rounded-xl font-mono focus:outline-none focus:border-[#FFE100]/40" placeholder="sk-ant-... или sk-..."/>
+              <input type="password" id="ai-key-input" class="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-xs py-2.5 px-4 rounded-xl font-mono focus:outline-none focus:border-[#0000CD]/40" placeholder="sk-ant-... или sk-..."/>
               <button onclick="var i=document.getElementById('ai-key-input');i.type=i.type==='password'?'text':'password'" class="px-3 bg-[#1C1B1B] border border-white/5 rounded-xl text-white/40 hover:text-white transition-all">
                 <span class="material-symbols-outlined text-base">visibility</span>
               </button>
@@ -734,19 +734,19 @@ body { min-width: 860px; }
           <div>
             <div class="flex justify-between mb-2">
               <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Порог уверенности</label>
-              <span class="text-xs font-bold text-[#FFE100]" id="ai-threshold-val">85%</span>
+              <span class="text-xs font-bold text-[#0000CD]" id="ai-threshold-val">85%</span>
             </div>
-            <input type="range" min="50" max="99" value="85" class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#FFE100]" oninput="document.getElementById('ai-threshold-val').textContent=this.value+'%'"/>
+            <input type="range" min="50" max="99" value="85" class="w-full h-1 bg-[#2A2A2A] rounded-lg appearance-none cursor-pointer accent-[#0000CD]" oninput="document.getElementById('ai-threshold-val').textContent=this.value+'%'"/>
             <div class="flex justify-between text-[10px] text-white/20 mt-1"><span>50% (мягко)</span><span>99% (строго)</span></div>
           </div>
           <div class="grid grid-cols-2 gap-6">
             <div>
               <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Что проверять</label>
               <div class="space-y-2">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Спам и флуд</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Реклама и ссылки</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Запрещённые слова</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/40">Токсичность (beta)</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Спам и флуд</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Реклама и ссылки</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Запрещённые слова</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/40">Токсичность (beta)</span></label>
               </div>
             </div>
             <div>
@@ -757,9 +757,9 @@ body { min-width: 860px; }
               </div>
               <label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Автонаказания</label>
               <div class="space-y-2">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Спам → Предупреждение</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Реклама → Мут 1ч</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="w-3.5 h-3.5 accent-[#FFE100]"/><span class="text-xs text-white/70">Повтор ×3 → Мут 24ч</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Спам → Предупреждение</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" checked class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Реклама → Мут 1ч</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="w-3.5 h-3.5 accent-[#0000CD]"/><span class="text-xs text-white/70">Повтор ×3 → Мут 24ч</span></label>
               </div>
             </div>
           </div>
@@ -768,7 +768,7 @@ body { min-width: 860px; }
       <div class="p-5"><label class="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-2">Блокировать после N неудачных входов</label><input class="w-32 bg-[#1C1B1B] border border-white/10 text-white text-sm py-2 px-3 rounded-lg focus:outline-none" type="number" value="5"/></div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -779,12 +779,12 @@ body { min-width: 860px; }
       <p class="text-white/40 text-sm mt-1">Шаблоны и каналы доставки уведомлений.</p>
     </div>
     <div class="bg-[#111] rounded-xl border border-white/5 divide-y divide-white/5">
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Уведомление о победителе в Telegram</div><div class="text-xs text-white/40 mt-0.5">Публикация в канал</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
-      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Объявление в Twitch чате</div><div class="text-xs text-white/40 mt-0.5">Бот пишет @победитель в чат</div></div><div class="w-10 h-5 bg-[#FFE100]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Уведомление о победителе в Telegram</div><div class="text-xs text-white/40 mt-0.5">Публикация в канал</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
+      <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Объявление в Twitch чате</div><div class="text-xs text-white/40 mt-0.5">Бот пишет @победитель в чат</div></div><div class="w-10 h-5 bg-[#0000CD]/80 rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow"></div></div></div>
       <div class="flex items-center justify-between p-5"><div><div class="text-sm font-medium text-white">Email уведомления</div><div class="text-xs text-white/40 mt-0.5">Для пользователей с email</div></div><div class="w-10 h-5 bg-[#2A2A2A] rounded-full relative cursor-pointer"><div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white/20 rounded-full shadow"></div></div></div>
     </div>
     <div class="flex justify-end">
-      <button class="bg-[#FFE100] text-[#211C00] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#FFE330] transition-all active:scale-95">Сохранить</button>
+      <button class="bg-[#0000CD] text-[#FFFFFF] font-bold px-8 py-3 rounded-lg text-xs uppercase tracking-widest hover:bg-[#1A1AE8] transition-all active:scale-95">Сохранить</button>
     </div>
   </div>
 
@@ -794,9 +794,9 @@ body { min-width: 860px; }
 
 <style>
 .settings-nav-item.active {
-  color: #FFE100 !important;
+  color: #0000CD !important;
   background: #1C1B1B !important;
-  border-left: 2px solid #FFE100 !important;
+  border-left: 2px solid #0000CD !important;
   font-weight: 700 !important;
 }
 </style>
@@ -832,11 +832,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function selectPreset(el, accent, bg) {
   document.querySelectorAll('.preset-card').forEach(c => {
-    c.classList.remove('border-[#FFE100]');
+    c.classList.remove('border-[#0000CD]');
     c.classList.add('border-transparent');
   });
   el.classList.remove('border-transparent');
-  el.classList.add('border-[#FFE100]');
+  el.classList.add('border-[#0000CD]');
   document.getElementById('accent-picker').value = accent;
   document.getElementById('accent-hex').value = accent;
 }
@@ -871,8 +871,8 @@ function showConfirm(opts) {
     wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
     btn.style.background = '#EF4444'; btn.style.color = '#fff';
   } else {
-    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
-    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#0000CD'; icon.textContent = 'help';
+    btn.style.background = '#0000CD'; btn.style.color = '#FFFFFF';
   }
   btn.textContent = opts.confirmLabel || 'Подтвердить';
   btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };

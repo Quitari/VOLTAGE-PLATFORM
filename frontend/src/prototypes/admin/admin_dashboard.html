@@ -125,7 +125,7 @@
 /* Keep active indicator visible */
 #main-sidebar.collapsed .border-l-2,
 #main-sidebar.collapsed .border-l-4 {
-  border-left: 2px solid #FFE100 !important;
+  border-left: 2px solid #0000CD !important;
 }
 /* Show tooltip on hover when collapsed */
 #main-sidebar.collapsed nav a {
@@ -173,13 +173,13 @@ body { min-width: 860px; }
 <!-- SideNavBar (Shared Component Authority) -->
 <aside id="main-sidebar" style="width:256px" class="fixed left-0 top-0 h-screen w-64 bg-[#0E0E0E] flex flex-col z-50 transition-all duration-250">
 <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
-  <h1 class="text-xl font-black tracking-tighter text-[#FFE100] font-headline uppercase sidebar-text">VOLTAGE</h1>
+  <h1 class="text-xl font-black tracking-tighter text-[#0000CD] font-headline uppercase sidebar-text">VOLTAGE</h1>
   <button id="sidebar-toggle" onclick="sidebarCollapse()" class="w-8 h-8 flex items-center justify-center rounded-lg text-white/30 hover:text-white hover:bg-[#1C1B1B] transition-all flex-shrink-0" title="Свернуть меню">
     <span class="material-symbols-outlined text-lg">menu</span>
   </button>
 </div>
 <div class="px-4 mb-4 flex items-center gap-3 flex-shrink-0 sidebar-text">
-  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#FFE100] font-bold text-sm flex-shrink-0">АД</div>
+  <div class="w-9 h-9 rounded-xl bg-[#1C1B1B] flex items-center justify-center text-[#0000CD] font-bold text-sm flex-shrink-0">АД</div>
   <div class="flex flex-col min-w-0 overflow-hidden">
     <span class="text-sm font-extrabold uppercase leading-tight text-white truncate">Admin User</span>
     <span class="text-[10px] text-gray-500 font-medium tracking-widest uppercase">Owner</span>
@@ -193,7 +193,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 rotate-90">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5">
-    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#FFE100] border-l-4 border-[#FFE100] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
+    <a data-label="Дашборд" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[#0000CD] border-l-4 border-[#0000CD] bg-[#1C1B1B] font-bold w-full text-left" href="#"><span class="material-symbols-outlined text-xl">dashboard</span><span class="text-sm">Дашборд</span></a><a data-label="Пользователи" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">group</span><span class="text-sm">Пользователи</span></a><a data-label="Журнал аудита" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">history</span><span class="text-sm">Журнал аудита</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -209,7 +209,7 @@ body { min-width: 860px; }
     <span class="material-symbols-outlined text-sm transition-transform duration-200 ">chevron_right</span>
   </button>
   <div class="sidebar-group-items space-y-0.5 hidden">
-    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#FFE100]/15 text-[#FFE100] px-1.5 py-0.5 rounded-full">3</span></a>
+    <a data-label="Наказания" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">gavel</span><span class="text-sm">Наказания</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">12</span></a><a data-label="Апелляции" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">balance</span><span class="text-sm">Апелляции</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">5</span></a><a data-label="Тикеты" class="flex items-center gap-3 px-4 py-2.5 text-gray-400 font-medium hover:text-white hover:bg-[#1C1B1B] transition-colors duration-150 rounded-lg w-full text-left" href="#"><span class="material-symbols-outlined text-xl">support_agent</span><span class="text-sm">Тикеты</span><span class="ml-auto text-[9px] font-black bg-[#0000CD]/15 text-[#0000CD] px-1.5 py-0.5 rounded-full">3</span></a>
   </div>
 </div><div class="sidebar-group">
   <button class="sidebar-group-header w-full flex items-center justify-between px-4 py-2 text-[10px] font-bold text-gray-600 tracking-[0.2em] uppercase hover:text-gray-400 transition-colors" onclick="toggleGroup(this)">
@@ -231,16 +231,16 @@ body { min-width: 860px; }
 <!-- TopNavBar (Shared Component Authority) -->
 <header class="fixed top-0 right-0 w-[calc(100%-256px)] z-50 bg-[#0A0A0A]/70 backdrop-blur-xl border-b border-[#4C4732]/15 flex justify-between items-center h-16 px-8">
 <div class="flex items-center gap-8">
-<h2 class="text-xl font-black text-[#FFE100] uppercase font-headline">Панель управления</h2>
+<h2 class="text-xl font-black text-[#0000CD] uppercase font-headline">Панель управления</h2>
 <nav class="hidden md:flex items-center gap-6">
-<a class="text-[#FFE100] font-bold text-xs font-headline uppercase tracking-widest" href="#">LIVE STATUS</a>
-<a class="text-white/60 font-bold text-xs font-headline uppercase tracking-widest hover:text-[#FFE100] transition-opacity" href="#">BOT ACTIVE</a>
+<a class="text-[#0000CD] font-bold text-xs font-headline uppercase tracking-widest" href="#">LIVE STATUS</a>
+<a class="text-white/60 font-bold text-xs font-headline uppercase tracking-widest hover:text-[#0000CD] transition-opacity" href="#">BOT ACTIVE</a>
 </nav>
 </div>
 <div class="flex items-center gap-6">
 <div class="relative">
-<span class="material-symbols-outlined text-white/60 cursor-pointer hover:text-[#FFE100]" data-icon="notifications">notifications</span>
-<span class="absolute -top-1 -right-1 w-2 h-2 bg-[#FFE100] rounded-full"></span>
+<span class="material-symbols-outlined text-white/60 cursor-pointer hover:text-[#0000CD]" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-[#0000CD] rounded-full"></span>
 </div>
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-white/60" data-icon="account_circle">account_circle</span>
@@ -484,8 +484,8 @@ function showConfirm(opts) {
     wrap.style.background = 'rgba(239,68,68,0.1)'; icon.style.color = '#F87171'; icon.textContent = 'warning';
     btn.style.background = '#EF4444'; btn.style.color = '#fff';
   } else {
-    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#FFE100'; icon.textContent = 'help';
-    btn.style.background = '#FFE100'; btn.style.color = '#211C00';
+    wrap.style.background = 'rgba(255,225,0,0.1)'; icon.style.color = '#0000CD'; icon.textContent = 'help';
+    btn.style.background = '#0000CD'; btn.style.color = '#FFFFFF';
   }
   btn.textContent = opts.confirmLabel || 'Подтвердить';
   btn.onclick = function() { closeConfirm(); if (opts.onConfirm) opts.onConfirm(); };

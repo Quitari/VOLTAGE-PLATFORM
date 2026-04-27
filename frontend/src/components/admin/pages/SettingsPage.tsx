@@ -95,7 +95,7 @@ export default function SettingsPage() {
               onClick={() => setSection(item.id)}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors text-left ${
                 section === item.id
-                  ? "bg-[#FFE100]/10 text-[#FFE100] border-l-2 border-[#FFE100]"
+                  ? "bg-[#0000CD]/10 text-[#0000CD] border-l-2 border-[#0000CD]"
                   : "text-white/40 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -135,7 +135,7 @@ export default function SettingsPage() {
                   value={settings?.streamer_name || ""}
                   onChange={(e) => set("streamer_name", e.target.value)}
                   placeholder="Имя стримера"
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               </div>
               <div>
@@ -147,7 +147,7 @@ export default function SettingsPage() {
                   onChange={(e) => set("streamer_description", e.target.value)}
                   placeholder="Краткое описание для главной страницы"
                   rows={3}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
                 />
               </div>
 
@@ -199,7 +199,7 @@ export default function SettingsPage() {
                         set("streamer_avatar_url", e.target.value);
                       }}
                       placeholder="https://example.com/avatar.png"
-                      className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                     />
                   </div>
                   <div className="flex items-center gap-3">
@@ -256,7 +256,7 @@ export default function SettingsPage() {
                           e.target.value = "";
                         }
                       }}
-                      className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#FFE100] file:text-[#211C00] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#0000CD] file:text-[#FFFFFF] file:font-bold file:text-xs file:uppercase cursor-pointer"
                     />
                     {uploadingAvatar && (
                       <p className="text-xs text-white/40 mt-1 animate-pulse">
@@ -282,7 +282,7 @@ export default function SettingsPage() {
                                 onClick={() =>
                                   set("streamer_avatar_position", pos)
                                 }
-                                className={`w-9 h-9 rounded-lg border transition-colors ${(settings?.streamer_avatar_position || "center center") === pos ? "bg-[#FFE100] border-[#FFE100]" : "bg-[#1C1B1B] border-white/10 hover:border-white/30"}`}
+                                className={`w-9 h-9 rounded-lg border transition-colors ${(settings?.streamer_avatar_position || "center center") === pos ? "bg-[#0000CD] border-[#0000CD]" : "bg-[#1C1B1B] border-white/10 hover:border-white/30"}`}
                               />
                             ))}
                         </div>
@@ -308,7 +308,7 @@ export default function SettingsPage() {
                       key={i}
                       className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
                     >
-                      <div className="w-2 h-2 rounded-full bg-[#FFE100] flex-shrink-0" />
+                      <div className="w-2 h-2 rounded-full bg-[#0000CD] flex-shrink-0" />
                       <span className="text-sm text-white flex-1">{text}</span>
                       <button
                         onClick={() => removeFeature(i)}
@@ -333,7 +333,7 @@ export default function SettingsPage() {
                     }
                   }}
                   placeholder="Розыгрыши каждый стрим"
-                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
                 <button
                   onClick={addFeature}
@@ -382,7 +382,7 @@ export default function SettingsPage() {
                     value={settings?.[item.field] || ""}
                     onChange={(e) => set(item.field, e.target.value)}
                     placeholder={item.placeholder}
-                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                    className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                   />
                 </div>
               ))}
@@ -444,7 +444,7 @@ export default function SettingsPage() {
                   </div>
                   <button
                     onClick={() => set(item.field, !settings?.[item.field])}
-                    className={`w-10 h-5 rounded-full relative transition-colors ${settings?.[item.field] ? "bg-[#FFE100]/80" : "bg-[#2A2A2A]"}`}
+                    className={`w-10 h-5 rounded-full relative transition-colors ${settings?.[item.field] ? "bg-[#0000CD]/80" : "bg-[#2A2A2A]"}`}
                   >
                     <div
                       className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all ${settings?.[item.field] ? "right-0.5" : "left-0.5 opacity-30"}`}
@@ -473,7 +473,7 @@ export default function SettingsPage() {
                       key={i}
                       className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
                     >
-                      <span className="text-sm font-bold text-[#FFE100] w-24">
+                      <span className="text-sm font-bold text-[#0000CD] w-24">
                         {item.day}
                       </span>
                       <span className="text-sm text-white">{item.time}</span>
@@ -501,7 +501,7 @@ export default function SettingsPage() {
                     setNewScheduleItem((p) => ({ ...p, day: e.target.value }))
                   }
                   placeholder="Пн / Вторник"
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
                 <input
                   value={newScheduleItem.time}
@@ -509,7 +509,7 @@ export default function SettingsPage() {
                     setNewScheduleItem((p) => ({ ...p, time: e.target.value }))
                   }
                   placeholder="20:00"
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
                 <input
                   value={newScheduleItem.note}
@@ -517,7 +517,7 @@ export default function SettingsPage() {
                     setNewScheduleItem((p) => ({ ...p, note: e.target.value }))
                   }
                   placeholder="CS2, Just Chatting..."
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               </div>
               <button
@@ -548,7 +548,7 @@ export default function SettingsPage() {
                   value={settings?.welcome_new || ""}
                   onChange={(e) => set("welcome_new", e.target.value)}
                   rows={3}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none font-mono"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none font-mono"
                 />
                 <p className="text-[10px] text-white/20 mt-1">
                   Переменные: {"{name}"}
@@ -562,7 +562,7 @@ export default function SettingsPage() {
                   value={settings?.welcome_back || ""}
                   onChange={(e) => set("welcome_back", e.target.value)}
                   rows={2}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none font-mono"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none font-mono"
                 />
               </div>
               <div>
@@ -572,7 +572,7 @@ export default function SettingsPage() {
                 <input
                   value={settings?.join_button_text || ""}
                   onChange={(e) => set("join_button_text", e.target.value)}
-                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               </div>
             </div>
@@ -606,7 +606,7 @@ export default function SettingsPage() {
                       value={settings?.[item.field] || ""}
                       onChange={(e) => set(item.field, e.target.value)}
                       placeholder={item.placeholder}
-                      className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                     />
                   </div>
                 ))}
@@ -632,7 +632,7 @@ export default function SettingsPage() {
                   key={i}
                   className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
                 >
-                  <span className="text-[#FFE100] font-black text-sm w-6">
+                  <span className="text-[#0000CD] font-black text-sm w-6">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-sm text-white flex-1">{text}</span>
@@ -657,7 +657,7 @@ export default function SettingsPage() {
                 <input
                   id="chat-rule-input"
                   placeholder="Новое правило чата"
-                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                   onKeyDown={(e) => {
                     if (e.key !== "Enter") return;
                     const val = (e.target as HTMLInputElement).value.trim();
@@ -697,7 +697,7 @@ export default function SettingsPage() {
                     key={i}
                     className="flex items-center gap-3 bg-[#1C1B1B] rounded-xl px-4 py-3"
                   >
-                    <span className="material-symbols-outlined text-[#FFE100] text-base">
+                    <span className="material-symbols-outlined text-[#0000CD] text-base">
                       check_circle
                     </span>
                     <span className="text-sm text-white flex-1">{text}</span>
@@ -723,7 +723,7 @@ export default function SettingsPage() {
                 <input
                   id="giveaway-rule-input"
                   placeholder="Новое правило розыгрыша"
-                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                   onKeyDown={(e) => {
                     if (e.key !== "Enter") return;
                     const val = (e.target as HTMLInputElement).value.trim();
@@ -778,7 +778,7 @@ export default function SettingsPage() {
                           ? "bg-red-600 text-white"
                           : row.type === "Mute"
                             ? "bg-orange-500 text-black"
-                            : "bg-[#FFE100] text-[#211C00]"
+                            : "bg-[#0000CD] text-[#FFFFFF]"
                       }`}
                     >
                       {row.type}
@@ -808,11 +808,11 @@ export default function SettingsPage() {
                 <input
                   id="p-violation"
                   placeholder="Нарушение"
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
                 <select
                   id="p-type"
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 >
                   <option value="Warning">Warning</option>
                   <option value="Mute">Mute</option>
@@ -821,7 +821,7 @@ export default function SettingsPage() {
                 <input
                   id="p-duration"
                   placeholder="Срок"
-                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="bg-[#1C1B1B] border border-white/5 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               </div>
               <button
@@ -862,7 +862,7 @@ export default function SettingsPage() {
                 value={settings?.rules_appeals_text || ""}
                 onChange={(e) => set("rules_appeals_text", e.target.value)}
                 rows={3}
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white text-sm px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
               />
             </div>
           </>
@@ -871,7 +871,7 @@ export default function SettingsPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full py-3 bg-[#FFE100] text-[#211C00] font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-[#FFE330] transition-colors disabled:opacity-50"
+          className="w-full py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase tracking-widest text-sm hover:bg-[#1A1AE8] transition-colors disabled:opacity-50"
         >
           {saving ? "Сохраняем..." : "Сохранить"}
         </button>

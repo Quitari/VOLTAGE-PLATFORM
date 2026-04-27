@@ -87,17 +87,17 @@ export default function SchedulePage() {
             </div>
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-[#FFE100]/20 text-[#FFE100] text-xs font-black px-3 py-1 rounded-lg uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-2 h-2 bg-[#FFE100] rounded-full animate-pulse" />
+                <span className="bg-[#0000CD]/20 text-[#0000CD] text-xs font-black px-3 py-1 rounded-lg uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#0000CD] rounded-full animate-pulse" />
                   Расписание стримов
                 </span>
               </div>
               <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
-                ГРАФИК <span className="text-[#FFE100]">ТРАНСЛЯЦИЙ</span>
+                ГРАФИК <span className="text-[#0000CD]">ТРАНСЛЯЦИЙ</span>
               </h1>
               <button
                 onClick={handleNotify}
-                className="bg-[#FFE100] text-[#211C00] px-8 py-4 rounded-xl font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-[#FFE330] transition-all active:scale-95"
+                className="bg-[#0000CD] text-[#FFFFFF] px-8 py-4 rounded-xl font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-[#1A1AE8] transition-all active:scale-95"
               >
                 <span className="material-symbols-outlined">
                   notifications_active
@@ -114,7 +114,7 @@ export default function SchedulePage() {
                   Нужно{" "}
                   <button
                     onClick={() => navigate("/dashboard/connections")}
-                    className="text-[#FFE100] hover:underline"
+                    className="text-[#0000CD] hover:underline"
                   >
                     привязать Telegram
                   </button>
@@ -127,7 +127,7 @@ export default function SchedulePage() {
           <section className="space-y-6">
             <div className="flex justify-between items-end">
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
-                РАСПИСАНИЕ <span className="text-[#FFE100]">НЕДЕЛИ</span>
+                РАСПИСАНИЕ <span className="text-[#0000CD]">НЕДЕЛИ</span>
               </h2>
             </div>
 
@@ -163,7 +163,7 @@ export default function SchedulePage() {
                         {day}
                       </span>
                       {item && (
-                        <span className="text-xs font-bold text-[#FFE100] bg-[#FFE100]/10 px-2 py-1 rounded-lg">
+                        <span className="text-xs font-bold text-[#0000CD] bg-[#0000CD]/10 px-2 py-1 rounded-lg">
                           {item.time}
                         </span>
                       )}
@@ -200,7 +200,7 @@ export default function SchedulePage() {
           {/* Прошедшие стримы — заглушка */}
           <section className="space-y-6">
             <h2 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-3">
-              <span className="material-symbols-outlined text-[#FFE100]">
+              <span className="material-symbols-outlined text-[#0000CD]">
                 history
               </span>
               Прошедшие стримы
@@ -223,14 +223,14 @@ export default function SchedulePage() {
       {/* Footer */}
       <footer className="bg-[#0E0E0E] py-10 border-t border-white/5">
         <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-lg font-black text-[#FFE100] uppercase tracking-tighter">
+          <div className="text-lg font-black text-[#0000CD] uppercase tracking-tighter">
             {streamerName}
           </div>
           <div className="flex items-center gap-8 text-xs uppercase tracking-widest font-medium">
             {settings?.show_rules && (
               <a
                 href="/rules"
-                className="text-white/40 hover:text-[#FFE100] transition-colors"
+                className="text-white/40 hover:text-[#0000CD] transition-colors"
               >
                 Правила
               </a>
@@ -240,7 +240,7 @@ export default function SchedulePage() {
                 href={settings.telegram_url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-white/40 hover:text-[#FFE100] transition-colors flex items-center gap-1"
+                className="text-white/40 hover:text-[#0000CD] transition-colors flex items-center gap-1"
               >
                 <span className="material-symbols-outlined text-sm">send</span>{" "}
                 Telegram
@@ -251,7 +251,7 @@ export default function SchedulePage() {
                 href={settings.twitch_url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-white/40 hover:text-[#FFE100] transition-colors flex items-center gap-1"
+                className="text-white/40 hover:text-[#0000CD] transition-colors flex items-center gap-1"
               >
                 <span className="material-symbols-outlined text-sm">
                   live_tv

@@ -114,7 +114,7 @@ export default function CommandsPage() {
                     }))
                   }
                   placeholder="discord"
-                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                  className="flex-1 bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
                 />
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function CommandsPage() {
                 }
                 placeholder="Наш Discord: discord.gg/example"
                 rows={3}
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40 resize-none"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40 resize-none"
               />
             </div>
 
@@ -149,7 +149,7 @@ export default function CommandsPage() {
                     cooldown: parseInt(e.target.value) || 0,
                   }))
                 }
-                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#FFE100]/40"
+                className="w-full bg-[#1C1B1B] border border-white/5 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-[#0000CD]/40"
               />
             </div>
 
@@ -163,7 +163,7 @@ export default function CommandsPage() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 py-3 bg-[#FFE100] text-[#211C00] font-bold rounded-xl uppercase tracking-widest text-xs disabled:opacity-50"
+                className="flex-1 py-3 bg-[#0000CD] text-[#FFFFFF] font-bold rounded-xl uppercase tracking-widest text-xs disabled:opacity-50"
               >
                 {saving ? "Сохраняем..." : editId ? "Сохранить" : "Создать"}
               </button>
@@ -183,7 +183,7 @@ export default function CommandsPage() {
         </div>
         <button
           onClick={openCreate}
-          className="px-6 py-2.5 bg-[#FFE100] text-[#211C00] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#FFE330] transition-colors"
+          className="px-6 py-2.5 bg-[#0000CD] text-[#FFFFFF] font-bold text-xs rounded-xl uppercase tracking-widest hover:bg-[#1A1AE8] transition-colors"
         >
           + Добавить команду
         </button>
@@ -207,7 +207,7 @@ export default function CommandsPage() {
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[#FFE100] font-black text-sm font-mono">
+                  <span className="text-[#0000CD] font-black text-sm font-mono">
                     !{cmd.name}
                   </span>
                   <span className="text-[10px] text-white/20 font-mono">

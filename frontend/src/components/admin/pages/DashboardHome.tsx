@@ -15,8 +15,8 @@ const ACTION_ICON: Record<string, { icon: string; color: string }> = {
   "punishment.issue": { icon: "gavel", color: "text-red-400" },
   "punishment.revoke": { icon: "undo", color: "text-green-400" },
   "appeal.resolve": { icon: "balance", color: "text-blue-400" },
-  "giveaway.create": { icon: "redeem", color: "text-[#FFE100]" },
-  "giveaway.draw": { icon: "casino", color: "text-[#FFE100]" },
+  "giveaway.create": { icon: "redeem", color: "text-[#0000CD]" },
+  "giveaway.draw": { icon: "casino", color: "text-[#0000CD]" },
   "giveaway.cancel": { icon: "cancel", color: "text-white/40" },
   "role.assign": { icon: "shield", color: "text-purple-400" },
   "role.revoke": { icon: "shield_off", color: "text-white/40" },
@@ -74,7 +74,7 @@ export default function DashboardHome() {
 
       {/* Метрики */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-[#111] border border-white/5 rounded-2xl p-6 border-l-4 border-l-[#FFE100]">
+        <div className="bg-[#111] border border-white/5 rounded-2xl p-6 border-l-4 border-l-[#0000CD]">
           <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">
             Новых сегодня
           </p>
@@ -122,7 +122,7 @@ export default function DashboardHome() {
             </h2>
             <button
               onClick={() => navigate("/admin/giveaways")}
-              className="text-xs font-bold text-[#FFE100] uppercase hover:underline"
+              className="text-xs font-bold text-[#0000CD] uppercase hover:underline"
             >
               Все розыгрыши
             </button>
@@ -200,7 +200,7 @@ export default function DashboardHome() {
                     )}
                     <button
                       onClick={() => handleDraw(g.id)}
-                      className="bg-[#FFE100] text-[#211C00] px-4 py-1.5 rounded-lg text-[10px] font-black uppercase hover:bg-[#FFE330] transition-all"
+                      className="bg-[#0000CD] text-[#FFFFFF] px-4 py-1.5 rounded-lg text-[10px] font-black uppercase hover:bg-[#1A1AE8] transition-all"
                     >
                       Подвести итоги
                     </button>
@@ -243,7 +243,7 @@ export default function DashboardHome() {
                         key={log.id}
                         className="p-4 flex gap-3 items-start hover:bg-white/[0.02] transition-colors"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
+                        <div className="w-8 h-8 min-w-[2rem] rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
                           <span
                             className={`material-symbols-outlined text-base ${meta.color}`}
                           >
@@ -252,7 +252,7 @@ export default function DashboardHome() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-xs leading-relaxed text-white/70">
-                            <span className="font-black text-[#FFE100]">
+                            <span className="font-black text-[#0000CD]">
                               {log.actor}
                             </span>{" "}
                             {log.action}

@@ -1,0 +1,119 @@
+# ╔══════════════════════════════════════════════════════════════════════════════╗
+# ║                    VOLTAGE Platform — Caddyfile.example                      ║
+# ║  Скопируй: cp caddy/Caddyfile.example caddy/Caddyfile                        ║
+# ║  Для локальной разработки используй вариант 1                                ║
+# ║  Для production используй вариант 2                                          ║
+# ╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ВАРИАНТ 1 — Локальная разработка (http://localhost)
+# ──────────────────────────────────────────────────────────────────────────────
+:80 {
+    # Обработка CORS preflight запросов
+    @options method OPTIONS
+    handle @options {
+        header Access-Control-Allow-Origin "*"
+        header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        header Access-Control-Allow-Headers "Content-Type, Authorization"
+        respond 204
+    }
+
+    # API бэкенда
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Медиафайлы (аватары, фото призов)
+    handle /media/* {
+        reverse_proxy backend:8000
+    }
+
+    # Twitch OAuth callback
+    handle /oauth* {
+        reverse_proxy twitch_bot:4343
+    }
+
+    # Фронтенд — React SPA
+    handle {
+        root * /srv/frontend
+        try_files {path} /index.html
+        file_server
+    }
+}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ВАРИАНТ 2 — Production (автоматический HTTPS через Let's Encrypt)
+# Замени your-domain.com на свой домен
+# ──────────────────────────────────────────────────────────────────────────────
+
+# your-domain.com {
+#     # Обработка CORS preflight запросов
+#     @options method OPTIONS
+#     handle @options {
+#         header Access-Control-Allow-Origin "*"
+#         header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+#         header Access-Control-Allow-Headers "Content-Type, Authorization"
+#         respond 204
+#     }
+#
+#     # API бэкенда
+#     handle /api/* {
+#         reverse_proxy backend:8000
+#     }
+#
+#     # Медиафайлы
+#     handle /media/* {
+#         reverse_proxy backend:8000
+#     }
+#
+#     # Twitch OAuth callback
+#     handle /oauth* {
+#         reverse_proxy twitch_bot:4343
+#     }
+#
+#     # Фронтенд — React SPA
+#     handle {
+#         root * /srv/frontend
+#         try_files {path} /index.html
+#         file_server
+#     }
+# }
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ВАРИАНТ 3 — Production с отдельными поддоменами
+# ──────────────────────────────────────────────────────────────────────────────
+
+# Основной сайт + Dashboard пользователя
+# your-domain.com {
+#     handle /api/* {
+#         reverse_proxy backend:8000
+#     }
+#     handle /media/* {
+#         reverse_proxy backend:8000
+#     }
+#     handle {
+#         root * /srv/frontend
+#         try_files {path} /index.html
+#         file_server
+#     }
+# }
+
+# Панель администратора на отдельном поддомене
+# admin.your-domain.com {
+#     handle /api/* {
+#         reverse_proxy backend:8000
+#     }
+#     handle {
+#         root * /srv/frontend
+#         try_files {path} /index.html
+#         file_server
+#     }
+# }
+
+# Twitch OAuth на отдельном поддомене
+# twitch.your-domain.com {
+#     reverse_proxy twitch_bot:4343
+# }

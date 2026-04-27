@@ -207,7 +207,7 @@ export default function UserProfilePage() {
                     onClick={() => setPunishType(t.value)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                       punishType === t.value
-                        ? "bg-[#FFE100] text-[#211C00]"
+                        ? "bg-[#0000CD] text-[#FFFFFF]"
                         : "bg-[#111] text-white/40 hover:text-white"
                     }`}
                   >
@@ -337,7 +337,7 @@ export default function UserProfilePage() {
           Пользователи
         </button>
         <span className="material-symbols-outlined text-sm">chevron_right</span>
-        <span className="text-[#FFE100]">{user.username}</span>
+        <span className="text-[#0000CD]">{user.username}</span>
       </nav>
 
       {/* Профиль */}
@@ -345,7 +345,7 @@ export default function UserProfilePage() {
         <div className="flex items-start justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="relative">
-              <div className="w-20 h-20 rounded-2xl bg-[#1C1B1B] flex items-center justify-center text-2xl font-black text-[#FFE100]">
+              <div className="w-20 h-20 rounded-2xl bg-[#1C1B1B] flex items-center justify-center text-2xl font-black text-[#0000CD]">
                 {initials}
               </div>
               <div
@@ -501,7 +501,7 @@ export default function UserProfilePage() {
             label: "Побед",
             value: stats.wins,
             sub: "получено призов",
-            color: "text-[#FFE100]",
+            color: "text-[#0000CD]",
           },
           {
             label: "Нарушений",
@@ -544,7 +544,7 @@ export default function UserProfilePage() {
             onClick={() => setTab(t.id as any)}
             className={`pb-3 text-sm font-bold uppercase tracking-widest transition-colors border-b-2 ${
               tab === t.id
-                ? "text-[#FFE100] border-[#FFE100]"
+                ? "text-[#0000CD] border-[#0000CD]"
                 : "text-white/40 border-transparent hover:text-white"
             }`}
           >
@@ -583,7 +583,7 @@ export default function UserProfilePage() {
                 >
                   <div className="w-10 h-10 rounded-lg bg-[#1C1B1B] flex items-center justify-center flex-shrink-0">
                     <span
-                      className={`material-symbols-outlined ${p.status === "cancelled" ? "text-white/20" : "text-[#FFE100]"}`}
+                      className={`material-symbols-outlined ${p.status === "cancelled" ? "text-white/20" : "text-[#0000CD]"}`}
                     >
                       {p.status === "cancelled" ? "close" : "emoji_events"}
                     </span>
@@ -609,7 +609,7 @@ export default function UserProfilePage() {
                     </span>
                   </div>
                   {p.status === "pending" && (
-                    <button className="text-xs text-[#FFE100] hover:text-yellow-300 transition-colors font-bold uppercase tracking-widest flex-shrink-0">
+                    <button className="text-xs text-[#0000CD] hover:text-yellow-300 transition-colors font-bold uppercase tracking-widest flex-shrink-0">
                       Напомнить
                     </button>
                   )}
@@ -788,7 +788,7 @@ export default function UserProfilePage() {
                 >
                   {topRole?.role.name || "Участник"}
                 </span>
-                <button className="text-xs text-[#FFE100] font-bold uppercase tracking-widest hover:underline">
+                <button className="text-xs text-[#0000CD] font-bold uppercase tracking-widest hover:underline">
                   Изменить роль
                 </button>
               </div>

@@ -49,13 +49,13 @@ export default function LoginPage() {
       <header className="fixed top-0 w-full z-50 bg-[#0A0A0A]/70 backdrop-blur-xl flex justify-between items-center px-8 h-20">
         <button
           onClick={() => navigate("/")}
-          className="text-2xl font-black tracking-tighter text-[#FFE100] uppercase"
+          className="text-2xl font-black tracking-tighter text-[#0000CD] uppercase"
         >
           {settings?.streamer_name || "VOLTAGE"}
         </button>
         <button
           onClick={() => navigate("/register")}
-          className="bg-[#FFE100] text-[#211C00] px-6 py-2 font-bold rounded-lg hover:bg-[#FFE330] transition-all uppercase text-sm"
+          className="bg-[#0000CD] text-[#FFFFFF] px-6 py-2 font-bold rounded-lg hover:bg-[#1A1AE8] transition-all uppercase text-sm"
         >
           РЕГИСТРАЦИЯ
         </button>
@@ -65,7 +65,7 @@ export default function LoginPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Левая часть — форма */}
           <section className="bg-[#111] p-8 lg:p-12 rounded-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-1 h-full bg-[#FFE100]" />
+            <div className="absolute top-0 left-0 w-1 h-full bg-[#0000CD]" />
             <h1 className="text-4xl font-black uppercase tracking-tighter mb-8">
               Войти
             </h1>
@@ -88,7 +88,7 @@ export default function LoginPage() {
                   onChange={(e) => setForm({ ...form, login: e.target.value })}
                   placeholder="username или email@example.com"
                   required
-                  className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
+                  className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 placeholder:text-white/20 outline-none transition-colors"
                 />
               </div>
 
@@ -106,7 +106,7 @@ export default function LoginPage() {
                     }
                     placeholder="••••••••"
                     required
-                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#FFE100] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
+                    className="w-full bg-[#0E0E0E] border-0 border-b-2 border-white/10 focus:border-[#0000CD] text-white py-4 pr-12 placeholder:text-white/20 outline-none transition-colors"
                   />
                   <button
                     type="button"
@@ -123,7 +123,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#FFE100] text-[#211C00] py-4 rounded-xl font-black uppercase tracking-tight hover:bg-[#FFE330] transition-all active:scale-[0.98] disabled:opacity-50"
+                className="w-full bg-[#0000CD] text-[#FFFFFF] py-4 rounded-xl font-black uppercase tracking-tight hover:bg-[#1A1AE8] transition-all active:scale-[0.98] disabled:opacity-50"
               >
                 {loading ? "Входим..." : "Войти"}
               </button>
@@ -140,7 +140,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => navigate("/register")}
-                  className="text-[#FFE100] font-bold hover:underline"
+                  className="text-[#0000CD] font-bold hover:underline"
                 >
                   Зарегистрироваться
                 </button>
@@ -150,9 +150,9 @@ export default function LoginPage() {
 
           {/* Правая часть — информация */}
           <section className="bg-[#111] p-8 lg:p-12 rounded-2xl relative overflow-hidden flex flex-col justify-center min-h-[400px]">
-            <div className="absolute top-0 right-0 w-1 h-full bg-[#FFE100]" />
+            <div className="absolute top-0 right-0 w-1 h-full bg-[#0000CD]" />
             <div className="text-center">
-              <div className="w-24 h-24 bg-[#FFE100]/10 rounded-full flex items-center justify-center mx-auto mb-8">
+              <div className="w-24 h-24 bg-[#0000CD]/10 rounded-full flex items-center justify-center mx-auto mb-8">
                 <span className="text-5xl">⚡</span>
               </div>
               <h2 className="text-4xl font-black uppercase tracking-tighter mb-4">
@@ -172,15 +172,15 @@ export default function LoginPage() {
                     ]
                 ).map((text: string) => (
                   <div key={text} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#FFE100]/20 flex items-center justify-center flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-[#FFE100]" />
+                    <div className="w-5 h-5 rounded-full bg-[#0000CD]/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-[#0000CD]" />
                     </div>
                     <p className="text-sm text-white/60">{text}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-[#FFE100]/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-[#0000CD]/5 rounded-full blur-3xl pointer-events-none" />
           </section>
         </div>
       </main>

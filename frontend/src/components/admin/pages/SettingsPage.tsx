@@ -256,7 +256,7 @@ export default function SettingsPage() {
                           e.target.value = "";
                         }
                       }}
-                      className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#9caffc] file:text-[#FFFFFF] file:font-bold file:text-xs file:uppercase cursor-pointer"
+                      className="w-full bg-[#1C1B1B] border border-white/5 text-white/60 px-4 py-3 rounded-xl file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#9caffc] file:text-[#0a0a0a] file:font-bold file:text-xs file:uppercase cursor-pointer"
                     />
                     {uploadingAvatar && (
                       <p className="text-xs text-white/40 mt-1 animate-pulse">

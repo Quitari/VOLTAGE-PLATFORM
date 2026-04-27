@@ -1,8 +1,10 @@
 localhost {
     reverse_proxy /api/* backend:8000
-    reverse_proxy /admin/* backend:8000
-
+    reverse_proxy /media/* backend:8000
+    reverse_proxy /oauth* twitch_bot:4343
     handle {
-        respond "Voltage Platform — coming soon" 200
+        root * /srv/frontend
+        try_files {path} /index.html
+        file_server
     }
 }

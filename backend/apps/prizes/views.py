@@ -10,8 +10,12 @@ from apps.users.permissions import _user_has_permission
 def my_prizes(request, telegram_id):
     """
     GET /api/prizes/my/<telegram_id>/
-    Призы пользователя по Telegram ID
+    Призы пользователя по Telegram ID — только для внутренних ботов
     """
+    from django.conf import settings as django_settings
+    secret = request.headers.get('X-Internal-Secret', '')
+    if secret != django_settings.INTERNAL_API_SECRET or not secret:
+        return Response({'error': 'Unauthorized'}, status=401)
     from apps.users.models import User
     try:
         user = User.objects.get(telegram_id=telegram_id)

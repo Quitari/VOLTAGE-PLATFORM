@@ -70,6 +70,7 @@ async def _get_headers():
     return {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {_access_token}' if _access_token else '',
+        'X-Internal-Secret': os.getenv('INTERNAL_API_SECRET', ''),
     }
 
 

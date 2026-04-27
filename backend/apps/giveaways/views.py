@@ -1,4 +1,6 @@
 import random
+import os
+from django.conf import settings as django_settings
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -428,6 +430,10 @@ def join_giveaway_telegram(request, pk):
     POST /api/giveaways/<id>/join/telegram/
     Участие через Telegram бота по telegram_id
     """
+    secret = request.headers.get('X-Internal-Secret', '')
+    if secret != django_settings.INTERNAL_API_SECRET or not secret:
+        return Response({'error': 'Unauthorized'}, status=401)
+
     telegram_id = request.data.get('telegram_id')
 
     if not telegram_id:
@@ -491,6 +497,9 @@ def join_giveaway_twitch(request, pk):
     POST /api/giveaways/<id>/join/twitch/
     Участие через Twitch бота по twitch_username
     """
+    secret = request.headers.get('X-Internal-Secret', '')
+    if secret != django_settings.INTERNAL_API_SECRET or not secret:
+        return Response({'error': 'Unauthorized'}, status=401)
     twitch_username = request.data.get('twitch_username')
     if not twitch_username:
         return Response(
@@ -581,9 +590,6 @@ def upload_giveaway_image(request):
 
     if image.size > 5 * 1024 * 1024:
         return Response({'error': 'Файл не должен превышать 5 MB'}, status=400)
-
-    import os
-    from django.conf import settings as django_settings
 
     upload_dir = os.path.join(django_settings.MEDIA_ROOT, 'giveaways')
     os.makedirs(upload_dir, exist_ok=True)

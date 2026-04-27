@@ -45,6 +45,9 @@ def bot_settings(request):
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def bot_settings_update(request):
+    from apps.users.permissions import _user_has_permission
+    if not _user_has_permission(request.user, 'settings.edit'):
+        return Response({'error': 'Нет доступа'}, status=403)
     settings = BotSettings.get()
     allowed = [
         'welcome_new', 'welcome_back', 'giveaway_post_template',

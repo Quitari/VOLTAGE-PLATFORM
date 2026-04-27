@@ -35,6 +35,7 @@ async def _get_headers():
     return {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {_access_token}',
+        'X-Internal-Secret': os.getenv('INTERNAL_API_SECRET', ''),
     }
 
 

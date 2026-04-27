@@ -29,8 +29,6 @@ services:
     volumes:
       - ./backend:/app
       - media_data:/app/mediafiles
-    ports:
-      - "8000:8000"
     env_file:
       - .env
     depends_on:
@@ -77,8 +75,6 @@ services:
       - backend
       - redis
     command: python -c "from apps.bots.twitch.bot import run; run()"
-    ports:
-      - "4343:4343"
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped

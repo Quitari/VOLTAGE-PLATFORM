@@ -52,6 +52,17 @@ services:
       - backend
       - redis
     command: celery -A config worker --loglevel=info
+  celery_beat:
+    build: ./backend
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - redis
+    command: celery -A config beat --loglevel=info
 
   telegram_bot:
     build: ./backend

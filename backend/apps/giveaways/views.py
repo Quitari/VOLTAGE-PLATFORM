@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from apps.prizes.models import Prize as PrizeModel
 from .models import Giveaway, Participant, Winner
 from .serializers import (
     GiveawayListSerializer,
@@ -320,11 +321,8 @@ def giveaway_reroll(request, pk):
     )
 
     if not eligible.exists():
-        # Все участники исчерпаны
-        giveaway.status = Giveaway.Status.CANCELLED
-        giveaway.save()
         return Response(
-            {'error': 'Все участники исчерпаны. Розыгрыш отменён.'},
+            {'error': 'Все участники исчерпаны. Выберите победителя вручную или отмените розыгрыш.'},
             status=status.HTTP_400_BAD_REQUEST
         )
 
@@ -381,14 +379,14 @@ def confirm_winner(request, pk):
     giveaway.status = Giveaway.Status.FINISHED
     giveaway.save()
 
-    # Создаём запись приза
-    from apps.prizes.models import Prize
-    prize = Prize.objects.create(
+    delivery = PrizeModel.DeliveryMethod.LISSKINS if giveaway.prize_type == Giveaway.PrizeType.SKIN else PrizeModel.DeliveryMethod.MANUAL
+
+    prize = PrizeModel.objects.create(
         winner=winner,
         recipient=winner.user,
         name=giveaway.title,
         steam_trade_url=winner.user.steam_trade_url or '',
-        delivery_method=Prize.DeliveryMethod.LISSKINS
+        delivery_method=delivery
     )
 
     return Response({

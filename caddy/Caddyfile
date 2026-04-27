@@ -1,7 +1,35 @@
-localhost {
-    reverse_proxy /api/* backend:8000
-    reverse_proxy /media/* backend:8000
-    reverse_proxy /oauth* twitch_bot:4343
+#localhost {
+#    reverse_proxy /api/* backend:8000
+#    reverse_proxy /media/* backend:8000
+#    reverse_proxy /oauth* twitch_bot:4343
+#    handle {
+#        root * /srv/frontend
+#        try_files {path} /index.html
+#        file_server
+#    }
+#}
+
+:80 {
+    @options method OPTIONS
+    handle @options {
+        header Access-Control-Allow-Origin "*"
+        header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+        header Access-Control-Allow-Headers "Content-Type, Authorization"
+        respond 204
+    }
+
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    handle /media/* {
+        reverse_proxy backend:8000
+    }
+
+    handle /oauth* {
+        reverse_proxy twitch_bot:4343
+    }
+
     handle {
         root * /srv/frontend
         try_files {path} /index.html

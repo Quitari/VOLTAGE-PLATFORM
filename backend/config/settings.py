@@ -3,6 +3,7 @@ import os
 from decouple import config
 from pathlib import Path
 from datetime import timedelta
+from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -114,6 +115,17 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5176",
     "http://localhost",
 ]
+
+CELERY_BEAT_SCHEDULE = {
+    'auto-draw-expired-giveaways': {
+        'task': 'apps.giveaways.tasks.auto_draw_expired_giveaways',
+        'schedule': 60.0,  # каждую минуту
+    },
+    'auto-revoke-expired-punishments': {
+        'task': 'apps.moderation.tasks.auto_revoke_expired_punishments',
+        'schedule': 60.0,  # каждую минуту
+    },
+}
 
 CORS_URLS_REGEX = r'^.*$'
 
